@@ -1,0 +1,1886 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>NexoraFlash ⚡ — La tech au meilleur prix</title>
+<meta name="description" content="Smartphones, tablettes, maison connectée au meilleur prix. Livraison rapide 3-7 jours.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f7f8fa;
+  --surface: #ffffff;
+  --surface2: #f0f2f5;
+  --border: #e8eaed;
+  --border2: #d1d5db;
+  --text: #0d0f12;
+  --text2: #4b5563;
+  --text3: #9ca3af;
+  --accent: #1a56db;
+  --accent-hover: #1447c0;
+  --accent-light: #eff4ff;
+  --green: #0ea569;
+  --green-light: #ecfdf5;
+  --red: #e53935;
+  --red-light: #fff5f5;
+  --orange: #f59e0b;
+  --orange-light: #fffbeb;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+  --shadow: 0 4px 16px rgba(0,0,0,.08), 0 2px 6px rgba(0,0,0,.04);
+  --shadow-lg: 0 12px 40px rgba(0,0,0,.12), 0 4px 12px rgba(0,0,0,.06);
+  --radius: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --font: 'DM Sans', sans-serif;
+  --mono: 'DM Mono', monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;-webkit-tap-highlight-color:transparent;}
+body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:15px;line-height:1.6;overflow-x:hidden;}
+img{max-width:100%;display:block;}
+button{cursor:pointer;border:none;outline:none;font-family:var(--font);}
+input{font-family:var(--font);outline:none;}
+a{text-decoration:none;color:inherit;}
+
+/* ── TOPBAR ── */
+.topbar{background:var(--accent);color:#fff;text-align:center;padding:9px 16px;font-size:13px;font-weight:500;letter-spacing:.01em;position:relative;}
+.topbar strong{font-weight:700;background:rgba(255,255,255,.2);padding:2px 8px;border-radius:4px;margin:0 4px;}
+.topbar-close{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;color:#fff;opacity:.7;font-size:18px;cursor:pointer;padding:4px;}
+
+/* ── NAVBAR ── */
+.nav{position:sticky;top:0;z-index:200;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--border);height:60px;display:flex;align-items:center;padding:0 20px;gap:12px;}
+.nav-logo{font-size:20px;font-weight:700;color:var(--text);white-space:nowrap;display:flex;align-items:center;gap:6px;}
+.nav-logo span{color:var(--accent);}
+.nav-search{flex:1;max-width:480px;position:relative;margin:0 12px;}
+.nav-search input{width:100%;height:38px;background:var(--surface2);border:1.5px solid transparent;border-radius:10px;padding:0 40px 0 14px;font-size:14px;color:var(--text);transition:.2s;}
+.nav-search input:focus{background:#fff;border-color:var(--accent);box-shadow:0 0 0 3px rgba(26,86,219,.1);}
+.nav-search input::placeholder{color:var(--text3);}
+.nav-search-icon{position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--text3);pointer-events:none;}
+.nav-search-results{position:absolute;top:calc(100% + 6px);left:0;right:0;background:#fff;border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow-lg);z-index:300;overflow:hidden;display:none;}
+.nav-search-results.open{display:block;}
+.search-result-item{display:flex;align-items:center;gap:10px;padding:10px 14px;cursor:pointer;transition:.15s;}
+.search-result-item:hover{background:var(--surface2);}
+.search-result-img{width:36px;height:36px;border-radius:8px;object-fit:contain;background:var(--surface2);}
+.search-result-name{font-size:13px;font-weight:500;}
+.search-result-price{font-size:12px;color:var(--accent);font-weight:600;}
+.nav-actions{display:flex;align-items:center;gap:6px;margin-left:auto;}
+.nav-btn{display:flex;align-items:center;gap:6px;padding:7px 12px;border-radius:9px;font-size:14px;font-weight:500;background:none;color:var(--text2);transition:.2s;white-space:nowrap;}
+.nav-btn:hover{background:var(--surface2);color:var(--text);}
+.nav-btn.cart-btn{background:var(--accent);color:#fff;padding:7px 14px;}
+.nav-btn.cart-btn:hover{background:var(--accent-hover);}
+.cart-count{background:#fff;color:var(--accent);border-radius:20px;font-size:11px;font-weight:700;padding:1px 6px;min-width:18px;text-align:center;}
+
+/* ── HERO ── */
+.hero{background:linear-gradient(135deg, #1a56db 0%, #1447c0 40%, #0d3a9e 100%);padding:48px 20px 52px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);color:#fff;font-size:12px;font-weight:600;padding:5px 12px;border-radius:20px;margin-bottom:16px;letter-spacing:.04em;text-transform:uppercase;}
+.hero h1{font-size:clamp(26px,5vw,44px);font-weight:700;color:#fff;line-height:1.15;margin-bottom:12px;letter-spacing:-.02em;}
+.hero h1 em{font-style:normal;color:rgba(255,255,255,.75);}
+.hero-sub{color:rgba(255,255,255,.8);font-size:16px;margin-bottom:28px;max-width:500px;margin-left:auto;margin-right:auto;}
+.hero-ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+.hero-cta{padding:13px 26px;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;transition:.2s;border:none;}
+.hero-cta.primary{background:#fff;color:var(--accent);}
+.hero-cta.primary:hover{background:#f0f4ff;transform:translateY(-1px);}
+.hero-cta.secondary{background:rgba(255,255,255,.15);color:#fff;border:1.5px solid rgba(255,255,255,.3);}
+.hero-cta.secondary:hover{background:rgba(255,255,255,.22);}
+.hero-stats{display:flex;justify-content:center;gap:32px;margin-top:36px;padding-top:28px;border-top:1px solid rgba(255,255,255,.15);}
+.hero-stat-val{font-size:22px;font-weight:700;color:#fff;display:block;}
+.hero-stat-label{font-size:12px;color:rgba(255,255,255,.65);text-transform:uppercase;letter-spacing:.05em;}
+
+/* ── TRUST BAND ── */
+.trust-band{background:var(--surface);border-bottom:1px solid var(--border);padding:14px 20px;display:flex;justify-content:center;gap:28px;flex-wrap:wrap;}
+.trust-item{display:flex;align-items:center;gap:7px;font-size:13px;font-weight:500;color:var(--text2);}
+.trust-item svg{color:var(--green);}
+
+/* ── MAIN LAYOUT ── */
+.main{max-width:1280px;margin:0 auto;padding:32px 20px 100px;}
+
+/* ── SECTION HEADERS ── */
+.section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;}
+.section-title{font-size:20px;font-weight:700;color:var(--text);display:flex;align-items:center;gap:8px;}
+.section-see-all{font-size:13px;font-weight:600;color:var(--accent);display:flex;align-items:center;gap:4px;cursor:pointer;}
+.section-see-all:hover{text-decoration:underline;}
+
+/* ── FILTERS ── */
+.filters-row{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap;align-items:center;}
+.filter-chip{padding:7px 14px;border-radius:20px;font-size:13px;font-weight:500;cursor:pointer;border:1.5px solid var(--border);background:var(--surface);color:var(--text2);transition:.2s;white-space:nowrap;}
+.filter-chip:hover{border-color:var(--accent);color:var(--accent);}
+.filter-chip.active{background:var(--accent);color:#fff;border-color:var(--accent);}
+.sort-select{margin-left:auto;padding:7px 12px;border-radius:8px;border:1.5px solid var(--border);font-size:13px;font-weight:500;color:var(--text2);background:var(--surface);cursor:pointer;}
+
+/* ── PRODUCT GRID ── */
+.product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;}
+@media(min-width:900px){.product-grid{grid-template-columns:repeat(4,1fr);}}
+@media(max-width:600px){.product-grid{grid-template-columns:repeat(2,1fr);gap:12px;}}
+
+/* ── PRODUCT CARD ── */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;cursor:pointer;transition:box-shadow .2s, transform .2s;position:relative;}
+.card:hover{box-shadow:var(--shadow);transform:translateY(-2px);}
+.card:active{transform:translateY(0);}
+.card-img-wrap{position:relative;aspect-ratio:1;overflow:hidden;background:var(--surface2);}
+.card-img-wrap img{width:100%;height:100%;object-fit:contain;transition:transform .3s;}
+.card:hover .card-img-wrap img{transform:scale(1.04);}
+.card-badge{position:absolute;top:10px;left:10px;font-size:11px;font-weight:700;padding:3px 8px;border-radius:6px;letter-spacing:.02em;text-transform:uppercase;}
+.card-badge.new{background:var(--accent);color:#fff;}
+.card-badge.promo{background:var(--red);color:#fff;}
+.card-badge.cmd{background:var(--text);color:#fff;}
+.card-wishlist{position:absolute;top:10px;right:10px;width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.9);border:none;display:flex;align-items:center;justify-content:center;color:var(--text3);transition:.2s;cursor:pointer;backdrop-filter:blur(4px);}
+.card-wishlist:hover,.card-wishlist.active{color:var(--red);}
+.card-body{padding:12px 14px 14px;}
+.card-name{font-size:13px;font-weight:600;color:var(--text);line-height:1.35;margin-bottom:4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.card-short{font-size:11px;color:var(--text3);margin-bottom:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.card-stars{display:flex;align-items:center;gap:4px;margin-bottom:8px;}
+.card-stars-val{font-size:12px;font-weight:600;color:var(--text);}
+.card-stars-count{font-size:11px;color:var(--text3);}
+.stars-row{color:#f59e0b;font-size:11px;letter-spacing:1px;}
+.card-price-row{display:flex;align-items:baseline;gap:6px;flex-wrap:wrap;}
+.card-price{font-size:17px;font-weight:700;color:var(--text);}
+.card-old{font-size:12px;color:var(--text3);text-decoration:line-through;}
+.card-save{font-size:11px;font-weight:600;color:var(--green);background:var(--green-light);padding:2px 6px;border-radius:4px;}
+.card-add{width:100%;margin-top:10px;padding:9px;background:var(--accent);color:#fff;border-radius:8px;font-size:13px;font-weight:600;border:none;cursor:pointer;transition:.2s;display:flex;align-items:center;justify-content:center;gap:6px;}
+.card-add:hover{background:var(--accent-hover);}
+.card-viewers{font-size:11px;color:var(--text3);margin-top:6px;text-align:center;}
+
+/* ── PROMO BANNER ── */
+.promo-banner{background:linear-gradient(135deg,#1a56db,#7c3aed);border-radius:var(--radius-xl);padding:28px 32px;color:#fff;display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:40px;overflow:hidden;position:relative;}
+.promo-banner::before{content:'';position:absolute;right:-40px;top:-40px;width:180px;height:180px;background:rgba(255,255,255,.06);border-radius:50%;}
+.promo-banner::after{content:'';position:absolute;right:40px;bottom:-60px;width:120px;height:120px;background:rgba(255,255,255,.04);border-radius:50%;}
+.promo-banner-text h2{font-size:22px;font-weight:700;margin-bottom:6px;}
+.promo-banner-text p{font-size:14px;opacity:.85;}
+.promo-code{font-family:var(--mono);background:rgba(255,255,255,.2);border:1.5px solid rgba(255,255,255,.35);padding:8px 16px;border-radius:8px;font-size:16px;font-weight:700;letter-spacing:.08em;cursor:pointer;transition:.2s;white-space:nowrap;}
+.promo-code:hover{background:rgba(255,255,255,.3);}
+
+/* ── CART DRAWER ── */
+.cart-overlay{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:400;opacity:0;pointer-events:none;transition:.25s;backdrop-filter:blur(2px);}
+.cart-overlay.open{opacity:1;pointer-events:all;}
+.cart-drawer{position:fixed;top:0;right:0;bottom:0;width:min(420px,100vw);background:#fff;z-index:401;transform:translateX(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;box-shadow:var(--shadow-lg);}
+.cart-drawer.open{transform:translateX(0);}
+.cart-head{padding:20px 20px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.cart-head h2{font-size:18px;font-weight:700;}
+.cart-close-btn{width:36px;height:36px;border-radius:50%;background:var(--surface2);border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px;color:var(--text2);}
+.cart-items{flex:1;overflow-y:auto;padding:16px 20px;}
+.cart-empty{text-align:center;padding:48px 20px;color:var(--text3);}
+.cart-empty-icon{font-size:48px;margin-bottom:12px;}
+.cart-empty p{font-size:15px;font-weight:500;}
+.cart-item{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--border);}
+.cart-item-img{width:64px;height:64px;border-radius:10px;object-fit:contain;background:var(--surface2);flex-shrink:0;}
+.cart-item-info{flex:1;}
+.cart-item-name{font-size:13px;font-weight:600;line-height:1.35;margin-bottom:4px;}
+.cart-item-price{font-size:14px;font-weight:700;color:var(--accent);}
+.cart-item-qty{display:flex;align-items:center;gap:8px;margin-top:6px;}
+.qty-btn{width:26px;height:26px;border-radius:6px;border:1.5px solid var(--border);background:var(--surface);font-size:15px;font-weight:600;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text);}
+.qty-val{font-size:14px;font-weight:600;min-width:20px;text-align:center;}
+.cart-rm{margin-left:auto;color:var(--text3);background:none;border:none;cursor:pointer;font-size:18px;padding:4px;}
+.cart-rm:hover{color:var(--red);}
+.cart-footer{padding:16px 20px 24px;border-top:1px solid var(--border);}
+.cart-promo{display:flex;gap:8px;margin-bottom:16px;}
+.cart-promo input{flex:1;height:40px;border:1.5px solid var(--border);border-radius:8px;padding:0 12px;font-size:13px;}
+.cart-promo input:focus{border-color:var(--accent);}
+.cart-promo button{padding:0 16px;background:var(--accent);color:#fff;border-radius:8px;font-size:13px;font-weight:600;border:none;cursor:pointer;}
+.cart-totals{margin-bottom:16px;}
+.cart-total-row{display:flex;justify-content:space-between;font-size:14px;color:var(--text2);padding:4px 0;}
+.cart-total-row.total{font-size:16px;font-weight:700;color:var(--text);border-top:1px solid var(--border);padding-top:10px;margin-top:4px;}
+.cart-checkout{width:100%;padding:14px;background:var(--accent);color:#fff;border-radius:10px;font-size:15px;font-weight:700;border:none;cursor:pointer;transition:.2s;}
+.cart-checkout:hover{background:var(--accent-hover);}
+
+/* ── TOAST ── */
+.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--text);color:#fff;padding:10px 20px;border-radius:10px;font-size:13px;font-weight:500;z-index:500;opacity:0;transition:.25s;pointer-events:none;white-space:nowrap;box-shadow:var(--shadow-lg);}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* ── BOTTOM NAV (mobile) ── */
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,.97);border-top:1px solid var(--border);display:flex;z-index:300;padding-bottom:env(safe-area-inset-bottom);backdrop-filter:blur(10px);}
+.bn-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:9px 4px 7px;cursor:pointer;color:var(--text3);transition:.2s;position:relative;font-size:10px;font-weight:500;}
+.bn-item.active,.bn-item:hover{color:var(--accent);}
+.bn-item svg{width:22px;height:22px;}
+.bn-badge{position:absolute;top:6px;right:50%;transform:translateX(8px);background:var(--accent);color:#fff;font-size:9px;font-weight:700;min-width:16px;height:16px;border-radius:8px;display:flex;align-items:center;justify-content:center;padding:0 4px;}
+@media(min-width:900px){.bottom-nav{display:none;}}
+
+/* ── DESKTOP NAV EXTRAS ── */
+@media(min-width:900px){
+  .nav-cats{display:flex;gap:4px;}
+  .nav-cat{padding:6px 12px;border-radius:8px;font-size:13px;font-weight:500;color:var(--text2);cursor:pointer;transition:.2s;}
+  .nav-cat:hover,.nav-cat.active{background:var(--surface2);color:var(--text);}
+}
+@media(max-width:899px){
+  .nav-cats{display:none;}
+  .nav-search{display:none;}
+  .nav-btn:not(.cart-btn){display:none;}
+}
+
+/* ── SKELETON ── */
+.skeleton-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;}
+@media(min-width:900px){.skeleton-grid{grid-template-columns:repeat(4,1fr);}}
+@media(max-width:600px){.skeleton-grid{grid-template-columns:repeat(2,1fr);gap:12px;}}
+.skel-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;}
+.skel-img{aspect-ratio:1;background:linear-gradient(90deg,var(--surface2) 25%,var(--border) 50%,var(--surface2) 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;}
+.skel-body{padding:12px 14px 14px;}
+.skel-line{height:12px;border-radius:6px;background:linear-gradient(90deg,var(--surface2) 25%,var(--border) 50%,var(--surface2) 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;margin-bottom:8px;}
+.skel-line.short{width:60%;}
+.skel-line.xshort{width:40%;}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+
+/* ── SECTIONS ── */
+.section{margin-bottom:48px;}
+.section-divider{height:1px;background:var(--border);margin:40px 0;}
+
+/* ── UPSELL ROW ── */
+.upsell-row{display:flex;gap:12px;overflow-x:auto;scrollbar-width:none;padding-bottom:4px;}
+.upsell-row::-webkit-scrollbar{display:none;}
+.upsell-card{flex-shrink:0;width:160px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;cursor:pointer;transition:.15s;}
+.upsell-card:hover{box-shadow:var(--shadow-sm);transform:translateY(-1px);}
+.upsell-img{height:100px;overflow:hidden;background:var(--surface2);}
+.upsell-img img{width:100%;height:100%;object-fit:contain;}
+.upsell-info{padding:8px 10px;}
+.upsell-name{font-size:11px;font-weight:600;line-height:1.3;margin-bottom:3px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.upsell-price{font-size:12px;font-weight:700;color:var(--accent);}
+
+/* ── RECENTLY VIEWED ── */
+.rv-section{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-xl);padding:24px;margin-bottom:40px;display:none;}
+.rv-section.visible{display:block;}
+
+/* ── GUARANTEE ICONS ── */
+.guarantees{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-xl);padding:24px;margin-bottom:40px;}
+@media(max-width:600px){.guarantees{grid-template-columns:repeat(2,1fr);}}
+.guarantee-item{text-align:center;padding:8px;}
+.guarantee-icon{font-size:28px;margin-bottom:8px;}
+.guarantee-title{font-size:13px;font-weight:700;margin-bottom:3px;}
+.guarantee-desc{font-size:11px;color:var(--text3);}
+
+/* ── AVIS SECTION ── */
+.reviews-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;}
+.review-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:18px;}
+.review-top{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.review-av{width:38px;height:38px;border-radius:50%;background:var(--accent-light);color:var(--accent);font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.review-nm{font-size:14px;font-weight:600;}
+.review-loc{font-size:12px;color:var(--text3);display:flex;align-items:center;gap:3px;}
+.review-stars{color:#f59e0b;font-size:13px;margin-left:auto;}
+.review-text{font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:8px;}
+.review-product{font-size:11px;font-weight:600;color:var(--accent);}
+.review-check{font-size:11px;color:var(--green);font-weight:500;margin-top:4px;}
+
+/* ── FOOTER ── */
+.footer{background:var(--text);color:rgba(255,255,255,.7);padding:48px 20px 80px;}
+.footer-grid{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;}
+@media(max-width:700px){.footer-grid{grid-template-columns:1fr 1fr;gap:32px;}}
+@media(max-width:400px){.footer-grid{grid-template-columns:1fr;}}
+.footer-brand p{font-size:13px;margin-top:10px;line-height:1.7;}
+.footer-logo{font-size:20px;font-weight:700;color:#fff;}
+.footer-col h4{font-size:13px;font-weight:700;color:#fff;margin-bottom:14px;text-transform:uppercase;letter-spacing:.06em;}
+.footer-col a{display:block;font-size:13px;margin-bottom:8px;color:rgba(255,255,255,.6);cursor:pointer;transition:.15s;}
+.footer-col a:hover{color:#fff;}
+.footer-bottom{max-width:1280px;margin:32px auto 0;padding-top:24px;border-top:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:space-between;flex-wrap:gap;gap:16px;}
+.footer-bottom p{font-size:12px;}
+.payment-icons{display:flex;gap:8px;}
+.pay-icon{background:rgba(255,255,255,.1);padding:4px 10px;border-radius:5px;font-size:11px;font-weight:700;color:#fff;}
+.footer-social{display:flex;gap:10px;margin-top:14px;}
+.social-icon{width:34px;height:34px;border-radius:8px;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.7);transition:.2s;cursor:pointer;font-size:15px;}
+.social-icon:hover{background:rgba(255,255,255,.2);color:#fff;}
+
+/* ── MOBILE SEARCH MODAL ── */
+.mobile-search-modal{position:fixed;inset:0;background:#fff;z-index:500;padding:16px 20px;transform:translateY(-100%);transition:.25s;display:none;}
+.mobile-search-modal.open{transform:translateY(0);display:block;}
+.mobile-search-header{display:flex;gap:12px;align-items:center;margin-bottom:16px;}
+.mobile-search-header input{flex:1;height:44px;background:var(--surface2);border:none;border-radius:10px;padding:0 14px;font-size:15px;}
+.mobile-search-cancel{font-size:14px;font-weight:600;color:var(--accent);cursor:pointer;white-space:nowrap;}
+
+/* ── COMPARE ── */
+.compare-bar{position:fixed;bottom:56px;left:0;right:0;background:var(--text);color:#fff;padding:12px 20px;display:flex;align-items:center;gap:12px;z-index:290;transform:translateY(100%);transition:.25s;}
+.compare-bar.visible{transform:translateY(0);}
+.compare-bar-items{display:flex;gap:8px;flex:1;overflow-x:auto;}
+.compare-chip{background:rgba(255,255,255,.15);padding:5px 10px;border-radius:6px;font-size:12px;font-weight:500;white-space:nowrap;display:flex;align-items:center;gap:6px;}
+.compare-chip-rm{cursor:pointer;opacity:.7;}
+.compare-btn{background:var(--accent);padding:8px 16px;border-radius:8px;font-size:13px;font-weight:600;border:none;color:#fff;cursor:pointer;white-space:nowrap;}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.fade-up{animation:fadeUp .35s ease both;}
+.card{animation:fadeUp .3s ease both;}
+
+/* ── MISC ── */
+.badge-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px;}
+.badge-pill{display:inline-flex;align-items:center;gap:4px;padding:5px 12px;border-radius:20px;font-size:12px;font-weight:600;}
+.badge-pill.green{background:var(--green-light);color:var(--green);}
+.badge-pill.blue{background:var(--accent-light);color:var(--accent);}
+.badge-pill.orange{background:var(--orange-light);color:var(--orange);}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar" id="topbar">
+  🎉 Code <strong>NEXORA10</strong> — -10% sur votre 1ère commande · Livraison gratuite dès 10€ 🚀
+  <button class="topbar-close" onclick="document.getElementById('topbar').style.display='none'">×</button>
+</div>
+
+<!-- NAVBAR -->
+<nav class="nav">
+  <div class="nav-logo" onclick="showPage('home')" style="cursor:pointer">
+    NexoraFlash<span>⚡</span>
+  </div>
+  <div class="nav-cats" id="navCats">
+    <div class="nav-cat active" onclick="filterCat('')">Tout</div>
+    <div class="nav-cat" onclick="filterCat('Smartphones')">📱 Smartphones</div>
+    <div class="nav-cat" onclick="filterCat('Maison')">🏠 Maison</div>
+    <div class="nav-cat" onclick="filterCat('Batteries')">🔋 Batteries</div>
+    <div class="nav-cat" onclick="filterCat('Tablettes')">📟 Tablettes</div>
+  </div>
+  <div class="nav-search">
+    <input type="text" placeholder="Rechercher un produit..." id="navSearchInput" oninput="liveSearch(this.value)" onfocus="showSearchResults()" onblur="setTimeout(hideSearchResults,200)">
+    <svg class="nav-search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <div class="nav-search-results" id="searchResults"></div>
+  </div>
+  <div class="nav-actions">
+    <button class="nav-btn" onclick="toggleMobileSearch()" style="display:flex" id="mobileSearchBtn">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    </button>
+    <button class="nav-btn cart-btn" onclick="openCart()">
+      🛒 Panier <span class="cart-count" id="cartCount">0</span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE SEARCH -->
+<div class="mobile-search-modal" id="mobileSearch">
+  <div class="mobile-search-header">
+    <input type="text" placeholder="Rechercher..." id="mobileSearchInput" oninput="liveSearch(this.value,'mobile')">
+    <span class="mobile-search-cancel" onclick="toggleMobileSearch()">Annuler</span>
+  </div>
+  <div id="mobileSearchResults"></div>
+</div>
+
+<!-- CART DRAWER -->
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-head">
+    <h2>Mon panier 🛒</h2>
+    <button class="cart-close-btn" onclick="closeCart()">×</button>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-footer" id="cartFooter" style="display:none">
+    <div class="cart-promo">
+      <input type="text" placeholder="Code promo" id="promoInput" value="NEXORA10">
+      <button onclick="applyPromo()">Appliquer</button>
+    </div>
+    <div class="cart-totals" id="cartTotals"></div>
+    <button class="cart-checkout" onclick="showPage('confirm')">Commander maintenant →</button>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">⚡ Livraison 3-7 jours · Stock EU</div>
+  <h1>La tech premium<br><em>au meilleur prix</em></h1>
+  <p class="hero-sub">Smartphones, tablettes, maison connectée — sélectionnés pour vous.</p>
+  <div class="hero-ctas">
+    <button class="hero-cta primary" onclick="document.querySelector('.main').scrollIntoView({behavior:'smooth'})">Voir les produits</button>
+    <button class="hero-cta secondary" onclick="filterCat('Smartphones')">📱 Smartphones</button>
+  </div>
+  <div class="hero-stats">
+    <div><span class="hero-stat-val">17+</span><span class="hero-stat-label">Produits</span></div>
+    <div><span class="hero-stat-val">4.9★</span><span class="hero-stat-label">Note moyenne</span></div>
+    <div><span class="hero-stat-val">10k+</span><span class="hero-stat-label">Clients</span></div>
+    <div><span class="hero-stat-val">3-7j</span><span class="hero-stat-label">Livraison</span></div>
+  </div>
+</section>
+
+<!-- TRUST BAND -->
+<div class="trust-band">
+  <div class="trust-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg>Livraison 3-7 jours</div>
+  <div class="trust-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg>Retour 30 jours</div>
+  <div class="trust-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg>Paiement sécurisé</div>
+  <div class="trust-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg>Support 7j/7</div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- PROMO BANNER -->
+  <div class="promo-banner">
+    <div class="promo-banner-text">
+      <h2>🎉 -10% sur votre 1ère commande</h2>
+      <p>Inscrivez-vous et recevez votre code exclusif immédiatement</p>
+    </div>
+    <div class="promo-code" onclick="copyPromo()" title="Cliquer pour copier">NEXORA10</div>
+  </div>
+
+  <!-- RECENTLY VIEWED -->
+  <div class="rv-section" id="rvSection">
+    <div class="section-header">
+      <div class="section-title">🕐 Récemment consultés</div>
+    </div>
+    <div class="upsell-row" id="rvRow"></div>
+  </div>
+
+  <!-- GUARANTEES -->
+  <div class="guarantees">
+    <div class="guarantee-item">
+      <div class="guarantee-icon">🚚</div>
+      <div class="guarantee-title">Livraison rapide</div>
+      <div class="guarantee-desc">3-7 jours ouvrés · Suivi inclus</div>
+    </div>
+    <div class="guarantee-item">
+      <div class="guarantee-icon">🔒</div>
+      <div class="guarantee-title">Paiement sécurisé</div>
+      <div class="guarantee-desc">Stripe · SSL · 3D Secure</div>
+    </div>
+    <div class="guarantee-item">
+      <div class="guarantee-icon">↩️</div>
+      <div class="guarantee-title">Retour 30 jours</div>
+      <div class="guarantee-desc">Satisfait ou remboursé</div>
+    </div>
+    <div class="guarantee-item">
+      <div class="guarantee-icon">💬</div>
+      <div class="guarantee-title">Support 7j/7</div>
+      <div class="guarantee-desc">Réponse en moins de 24h</div>
+    </div>
+  </div>
+
+  <!-- PRODUITS -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">🛍️ Tous les produits <span id="productCount" style="font-size:14px;font-weight:500;color:var(--text3)"></span></div>
+    </div>
+    <div class="filters-row" id="filtersRow">
+      <div class="filter-chip active" onclick="filterCat('',this)">Tout</div>
+      <div class="filter-chip" onclick="filterCat('Smartphones',this)">📱 Smartphones</div>
+      <div class="filter-chip" onclick="filterCat('Tablettes',this)">📟 Tablettes</div>
+      <div class="filter-chip" onclick="filterCat('Maison',this)">🏠 Maison</div>
+      <div class="filter-chip" onclick="filterCat('Batteries',this)">🔋 Batteries</div>
+      <div class="filter-chip" onclick="filterCat('Câbles',this)">🔌 Câbles</div>
+      <div class="filter-chip" onclick="filterCat('Robotique',this)">🤖 Robotique</div>
+      <div class="filter-chip" onclick="filterCat('Accessoires',this)">🕶️ Accessoires</div>
+      <select class="sort-select" onchange="sortProducts(this.value)">
+        <option value="">Trier par</option>
+        <option value="price_asc">Prix ↑</option>
+        <option value="price_desc">Prix ↓</option>
+        <option value="stars">Mieux notés</option>
+        <option value="reviews">Plus d'avis</option>
+      </select>
+    </div>
+    <div class="product-grid" id="productGrid">
+      <!-- Skeleton -->
+      <div class="skel-card"><div class="skel-img"></div><div class="skel-body"><div class="skel-line"></div><div class="skel-line short"></div><div class="skel-line xshort"></div></div></div>
+      <div class="skel-card"><div class="skel-img"></div><div class="skel-body"><div class="skel-line"></div><div class="skel-line short"></div><div class="skel-line xshort"></div></div></div>
+      <div class="skel-card"><div class="skel-img"></div><div class="skel-body"><div class="skel-line"></div><div class="skel-line short"></div><div class="skel-line xshort"></div></div></div>
+      <div class="skel-card"><div class="skel-img"></div><div class="skel-body"><div class="skel-line"></div><div class="skel-line short"></div><div class="skel-line xshort"></div></div></div>
+    </div>
+  </div>
+
+  <!-- AVIS -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">❤️ Ce que disent nos clients</div>
+      <div class="section-see-all">4.9/5 · Avis vérifiés</div>
+    </div>
+    <div class="reviews-grid" id="reviewsGrid"></div>
+  </div>
+
+</div><!-- /main -->
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="footer-logo">NexoraFlash ⚡</div>
+      <p>La tech et la maison de qualité au meilleur prix, livrés en 3 à 7 jours.</p>
+      <div class="footer-social">
+        <div class="social-icon">𝕏</div>
+        <div class="social-icon">📘</div>
+        <div class="social-icon">📸</div>
+        <div class="social-icon">🎵</div>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Boutique</h4>
+      <a onclick="filterCat('')">Tous les produits</a>
+      <a onclick="filterCat('Smartphones')">Smartphones</a>
+      <a onclick="filterCat('Maison')">Maison</a>
+      <a onclick="filterCat('Batteries')">Batteries</a>
+    </div>
+    <div class="footer-col">
+      <h4>Aide</h4>
+      <a>Contact</a>
+      <a>Suivi commande</a>
+      <a>FAQ</a>
+      <a>Retours</a>
+    </div>
+    <div class="footer-col">
+      <h4>Légal</h4>
+      <a>CGV</a>
+      <a>Mentions légales</a>
+      <a>Confidentialité</a>
+      <a>Cookies</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 NexoraFlash. Tous droits réservés.</p>
+    <div class="payment-icons">
+      <span class="pay-icon">VISA</span>
+      <span class="pay-icon">MC</span>
+      <span class="pay-icon">PayPal</span>
+      <span class="pay-icon">Apple Pay</span>
+    </div>
+  </div>
+</footer>
+
+<!-- BOTTOM NAV -->
+<nav class="bottom-nav">
+  <div class="bn-item active" onclick="filterCat('')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    Accueil
+  </div>
+  <div class="bn-item" onclick="filterCat('Smartphones')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+    Promos
+  </div>
+  <div class="bn-item" onclick="filterCat('')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+    Boutique
+  </div>
+  <div class="bn-item" onclick="openCart()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+    Panier
+    <span class="bn-badge" id="bnCartCount" style="display:none">0</span>
+  </div>
+  <div class="bn-item" onclick="toggleMobileSearch()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    Recherche
+  </div>
+</nav>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+
+<script>
+
+var P = [
+  {id:1,name:"Xiaomi Redmi Note 15 Pro 5G",short:"8Go/256Go · 200MP · 6580mAh · 5G",cat:"Smartphones",
+   price:"325,99",pn:325.99,fold:"389,99",fon:389.99,badge:"new",bt:"Nouveau",stars:5.0,rev:55,isPromo:false,
+   imgs:["p1_1","p1_2","p1_3"],
+   desc:"Le Redmi Note 15 Pro 5G repousse les limites avec son écran AMOLED 6,83\" 1,5K, son appareil photo de 200 MP et sa batterie XXL de 6 580 mAh. Propulsé par le Dimensity 7300 Ultra.",
+   specs:["6,83\" AMOLED 1,5K","200 MP","6580 mAh","5G · Dimensity","8 Go RAM","256 Go"],
+   revs:[{av:"AL",nm:"Alexandre L.",dt:"20 fév. 2025",st:"★★★★★",tx:"Impressionnant ! L\'écran est magnifique, la photo de nuit bluffante. Livré en 6 jours."},{av:"CM",nm:"Clara M.",dt:"8 mars 2025",st:"★★★★★",tx:"Énorme upgrade ! La batterie tient 2 jours. Emballage soigné."}]},
+  {id:2,name:"Xiaomi Redmi Note 15 5G",short:"6,77\" AMOLED 120Hz · 108MP · IP65",cat:"Smartphones",
+   price:"263,99",pn:263.99,fold:"319,99",fon:319.99,badge:"promo",bt:"-17%",stars:5.0,rev:26,isPromo:true,
+   imgs:["p2_1","p2_2"],
+   desc:"Écran AMOLED FHD+ 6,77\" à 120 Hz, 108 MP, batterie 5 520 mAh, IP65. La combinaison parfaite performance / autonomie.",
+   specs:["6,77\" AMOLED 120Hz","108 MP","5520 mAh","IP65","5G · NFC"],
+   revs:[{av:"TB",nm:"Thomas B.",dt:"1 mars 2025",st:"★★★★★",tx:"Rapport qualité-prix imbattable. Écran 120Hz super fluide. Livré en 5 jours."}]},
+  {id:3,name:"Xiaomi Pad 7 — Tablette 11\"",short:"Snapdragon 7+ Gen 3 · 144Hz · HyperOS 2",cat:"Tablettes",
+   price:"266,99",pn:266.99,fold:"329,99",fon:329.99,badge:"new",bt:"Nouveau",stars:4.9,rev:499,isPromo:false,
+   imgs:["p3_1","p3_2","p3_3","p3_4"],
+   desc:"Snapdragon 7+ Gen 3, écran 144Hz crystal-clear, Xiaomi HyperOS 2. Idéale pour créateurs, gamers et multimédia ultra qualité.",
+   specs:["11\" 144Hz","Snapdragon 7+ Gen 3","HyperOS 2","13 MP","8850 mAh"],
+   revs:[{av:"SV",nm:"Sophie V.",dt:"15 fév. 2025",st:"★★★★★",tx:"Absolument parfaite ! Écran sublime, processeur ultra rapide."},{av:"RP",nm:"Romain P.",dt:"22 fév. 2025",st:"★★★★★",tx:"Meilleure tablette que j\'ai eue. 144Hz se ressent vraiment."}]},
+  {id:4,name:"Câble USB-C 6A Charge Rapide",short:"1m · 2m · 3m · 5m · 8m · Tressé",cat:"Câbles",
+   price:"1,99",pn:1.99,fold:"4,99",fon:4.99,badge:"promo",bt:"-60%",stars:4.8,rev:50000,isPromo:true,
+   imgs:["p4_1","p4_2"],
+   desc:"Câble USB-C 6A tressé haute résistance pour charge rapide. Compatible Huawei, Xiaomi, Vivo, Samsung. 1m à 8m disponibles.",
+   specs:["6A charge rapide","Longueur au choix","Tressé renforcé","Multi-marques"],
+   revs:[{av:"MK",nm:"Marc K.",dt:"10 fév. 2025",st:"★★★★★",tx:"Excellent câble, charge vraiment rapide. Pris le 3m, parfait !"}]},
+  {id:5,name:"Xiaomi TV Box S 3rd Gen",short:"4K UHD · Google TV · Wi-Fi 6 · Dolby",cat:"TV Box",
+   price:"74,99",pn:74.99,fold:"99,99",fon:99.99,badge:"promo",bt:"-25%",stars:4.9,rev:10000,isPromo:true,
+   imgs:["p5_1","p5_2","p5_3","p5_4"],
+   desc:"Transformez votre TV en smart TV 4K UHD avec Google TV, Dolby Vision, Dolby Atmos et Wi-Fi 6. Netflix, YouTube, Prime Video intégrés.",
+   specs:["4K UHD","Google TV","Dolby Vision","Dolby Atmos","Wi-Fi 6","2Go · 32Go"],
+   revs:[{av:"JD",nm:"Julie D.",dt:"5 mars 2025",st:"★★★★★",tx:"Image 4K magnifique, Google TV très intuitif. Livré en 4 jours !"},{av:"NB",nm:"Nicolas B.",dt:"18 fév. 2025",st:"★★★★★",tx:"Son Dolby Atmos bluffant, Wi-Fi 6 ultra stable."}]},
+  {id:6,name:"Essager Batterie 20000mAh 65W",short:"PD 65W · Affichage LED · Bi-directionnel",cat:"Batteries",
+   price:"33,99",pn:33.99,fold:"49,99",fon:49.99,badge:"promo",bt:"N°1 vente",stars:4.8,rev:10000,isPromo:true,
+   imgs:["p6_1","p6_2"],
+   desc:"20000mAh avec charge PD 65W bidirectionnelle. Recharge un laptop entier ou 3 smartphones. Affichage LED précis.",
+   specs:["20000 mAh","65W PD bi-direct.","Affichage LED","USB-C + USB-A"],
+   revs:[{av:"EF",nm:"Emma F.",dt:"28 fév. 2025",st:"★★★★★",tx:"Rechargé mon laptop et téléphone en voyage. Solide."}]},
+  {id:7,name:"PowerBank Magnétique MagSafe",short:"15W Sans fil · Compatible iPhone & Android",cat:"Batteries",
+   price:"11,49",pn:11.49,fold:"19,99",fon:19.99,badge:"promo",bt:"-43%",stars:3.6,rev:5000,isPromo:true,
+   imgs:["p7_1","p7_2"],
+   desc:"Batterie magnétique sans fil 15W Fast Charging, compatible MagSafe iPhone 13/14/15 et Android. Snap magnétique 10N.",
+   specs:["15W sans fil","Compatible MagSafe","10N magnétique","6 coloris"],
+   revs:[{av:"LR",nm:"Lucas R.",dt:"14 mars 2025",st:"★★★★☆",tx:"Pratique pour les recharges. Tient bien sur iPhone."}]},
+  {id:8,name:"Lunettes Rétro Carrées Premium",short:"UV400 · Style vintage · 7 coloris",cat:"Accessoires",
+   price:"19,90",pn:19.90,fold:"39,90",fon:39.90,badge:"new",bt:"Nouveau",stars:4.9,rev:185,isPromo:false,
+   imgs:["n1"],
+   desc:"Lunettes de soleil rétro carrées haut de gamme. Montures épaisses tendance, verres UV400. Style classique et polyvalent pour homme et femme. 7 coloris disponibles.",
+   specs:["UV400","7 coloris","Style rétro","Unisexe","Verres polarisés"],
+   revs:[{av:"LM",nm:"Léa M.",dt:"12 fév. 2025",st:"★★★★★",tx:"Superbes lunettes ! Qualité premium pour le prix. Reçues en 5 jours."}]},
+  {id:9,name:"Chargeur Xiaomi 67W Turbo",short:"GaN · Prise EU · Câble USB-C inclus",cat:"Câbles",
+   price:"24,99",pn:24.99,fold:"39,99",fon:39.99,badge:"new",bt:"Nouveau",stars:4.9,rev:2000,isPromo:false,
+   imgs:["n2"],
+   desc:"Chargeur d\'origine Xiaomi 67W Turbo Charge GaN ultra compact. Compatible Poco X6 Pro, X5, F5, Mi 14. Câble USB-C inclus. Prise EU.",
+   specs:["67W Turbo Charge","Technologie GaN","Câble inclus","Prise EU","Compatible Xiaomi"],
+   revs:[{av:"PD",nm:"Pierre D.",dt:"3 mars 2025",st:"★★★★★",tx:"Charge ultra rapide, compact et léger. Parfait pour voyager."}]},
+  {id:10,name:"Mini Aspirateur Voiture 9000Pa",short:"Sans fil · 1200mAh · Lavable · USB",cat:"Maison",
+   price:"19,99",pn:19.99,fold:"34,99",fon:34.99,badge:"promo",bt:"-43%",stars:4.0,rev:10000,isPromo:true,
+   imgs:["n3"],
+   desc:"Aspirateur portable sans fil 9000Pa, parfait pour voiture et maison. Batterie 1200mAh, filtre lavable, 3 accessoires inclus. Charge USB.",
+   specs:["9000Pa aspiration","1200mAh","Sans fil","Filtre lavable","3 accessoires","USB charge"],
+   revs:[{av:"RC",nm:"Romain C.",dt:"8 mars 2025",st:"★★★★☆",tx:"Pratique pour la voiture, aspiration correcte. Bon rapport qualité-prix."}]},
+  {id:11,name:"Veilleuse LED Barre Capteur",short:"Motion sensor · Blanc/Chaud · USB-C",cat:"Maison",
+   price:"11,99",pn:11.99,fold:"22,99",fon:22.99,badge:"new",bt:"Nouveau",stars:4.9,rev:100,isPromo:false,
+   imgs:["n4a","n4b"],
+   desc:"Veilleuse LED rechargeable sans fil avec capteur de mouvement infrarouge. 3 modes : détection jour/nuit/lumière constante. Fixation adhésive ou magnétique. Blanc froid ou chaud.",
+   specs:["Capteur IR","3 modes","USB-C","Blanc/Chaud","Sans fil","Fixation magnet."],
+   revs:[{av:"AM",nm:"Anna M.",dt:"20 fév. 2025",st:"★★★★★",tx:"Parfaite pour le couloir ! S\'allume instantanément."}]},
+  {id:12,name:"Veilleuse LED Barre Métallique",short:"3 températures · Alu · Capteur mvt",cat:"Maison",
+   price:"9,99",pn:9.99,fold:"18,99",fon:18.99,badge:"promo",bt:"-47%",stars:4.9,rev:409,isPromo:true,
+   imgs:["n5a","n5b"],
+   desc:"Barre LED métallique ultra-fine avec capteur de mouvement. 3 températures de couleur (3000K/4000K/6000K). Design aluminium premium. Rechargeable USB-C.",
+   specs:["3 températures","Design alu","Capteur mvt","USB-C recharge","Ultra-fine","Fixation magnet."],
+   revs:[{av:"BL",nm:"Baptiste L.",dt:"15 mars 2025",st:"★★★★★",tx:"Design élégant, lumière parfaite. Installée sous mes placards."}]},
+  {id:13,name:"Aspirateur Balai Laresar X11",short:"550W · 55000Pa · Auto-vide · LED",cat:"Maison",
+   price:"159,99",pn:159.99,fold:"249,99",fon:249.99,badge:"promo",bt:"-36%",stars:4.9,rev:10000,isPromo:true,
+   imgs:["n6a","n6b"],
+   desc:"Aspirateur balai sans fil 550W, 55000Pa d\'aspiration, bac auto-vidangeur, affichage LED batterie. Inclus 6 accessoires. Parfait pour sol dur et moquette.",
+   specs:["550W · 55000Pa","Auto-vidange","Affichage LED","6 accessoires","Sans fil","Stock EU"],
+   revs:[{av:"CD",nm:"Camille D.",dt:"2 mars 2025",st:"★★★★★",tx:"Incroyable ! Mon appartement n\'a jamais été aussi propre."}]},
+  {id:14,name:"Aspirateur Robot ILIFE A30 PRO",short:"5000Pa · LiDAR · Auto-vidange 60j · App",cat:"Maison",
+   price:"164,99",pn:164.99,fold:"259,99",fon:259.99,badge:"promo",bt:"-37%",stars:4.9,rev:10000,isPromo:true,
+   imgs:["n7a","n7b"],
+   desc:"Robot aspirateur et laveur ILIFE A30 PRO avec navigation LiDAR, auto-vidange 60 jours, aspiration 5000Pa. Contrôle via app. Livré depuis la Pologne.",
+   specs:["5000Pa","Navigation LiDAR","Auto-vidange 60j","Aspire + Lave","App Control","Stock Pologne"],
+   revs:[{av:"FD",nm:"Fabrice D.",dt:"25 fév. 2025",st:"★★★★★",tx:"Bluffant ! La navigation LiDAR est parfaite. Jamais dans les meubles."}]},
+  {id:15,name:"Robot Humanoïde IA Avatar",short:"Sur commande · Recherche & Éducation",cat:"Robotique",
+   price:"18000,00",pn:18000,fold:"22000,00",fon:22000,badge:"cmd",bt:"Sur commande",stars:5.0,rev:1,isPromo:false,isCmd:true,
+   imgs:["n8"],
+   desc:"Robot Avatar IA Humanoïde de dernière génération pour l\'éducation et la recherche commerciale. Mouvements avancés, IA embarquée. Article sur commande uniquement.",
+   specs:["IA embarquée","Mouvements avancés","Usage recherche","Éducation","Sur commande"],
+   revs:[{av:"NX",nm:"NexoraFlash",dt:"2025",st:"★★★★★",tx:"Article d\'exception disponible sur commande. Contactez-nous pour un devis personnalisé."}]},
+  {id:16,name:"Fer à Vapeur Vertical 2800W",short:"Haute pression · Réglable · Cintre inclus",cat:"Maison",
+   price:"59,99",pn:59.99,fold:"89,99",fon:89.99,badge:"promo",bt:"-33%",stars:4.9,rev:600,isPromo:true,
+   imgs:["n9a","n9b"],
+   desc:"Fer à vapeur vertical 2800W haute puissance avec réglage de température multi-tissus, tige télescopique 3 sections, cintre inclus. Pour vêtements et rideaux.",
+   specs:["2800W","Tige 3 sections","Multi-tissus","Cintre inclus","Grande cuve","Roues mobiles"],
+   revs:[{av:"MF",nm:"Marie F.",dt:"10 mars 2025",st:"★★★★★",tx:"Puissant et efficace ! Mes chemises sont impeccables en 2 min."}]},
+  {id:17,name:"Robot Chien AI RC Smart Dog",short:"Danse · Chant · App · Télécommande",cat:"Robotique",
+   price:"69,99",pn:69.99,fold:"109,99",fon:109.99,badge:"promo",bt:"-36%",stars:4.7,rev:3000,isPromo:true,
+   imgs:["n10a","n10b"],
+   desc:"Robot chien intelligent AI RC avec dialogue vocal, contrôle app et télécommande, danse et chant intégrés, programmation d\'actions. Parfait cadeau tech pour enfants et adultes.",
+   specs:["Dialogue vocal","App Control","Télécommande","Danse & Chant","Programmable","3+ ans"],
+   revs:[{av:"JL",nm:"Julie L.",dt:"5 mars 2025",st:"★★★★★",tx:"Mes enfants sont fous du robot ! Qualité top, livré en 4 jours."}]},
+];
+
+</script>
+<script>
+// ── CART ──
+var cart = JSON.parse(localStorage.getItem('nxf_cart')||'[]');
+var promoApplied = false;
+const PROMO_CODE = 'NEXORA10';
+const PROMO_PCT = 10;
+var recentlyViewed = JSON.parse(localStorage.getItem('nxf_rv')||'[]');
+var wishlist = JSON.parse(localStorage.getItem('nxf_wl')||'[]');
+var currentFilter = '';
+var currentSort = '';
+
+function saveCart(){ localStorage.setItem('nxf_cart', JSON.stringify(cart)); }
+function updateCartCount(){
+  var t = cart.reduce((s,x)=>s+(x.qty||1),0);
+  var el = document.getElementById('cartCount'); if(el) el.textContent = t;
+  var bn = document.getElementById('bnCartCount');
+  if(bn){ bn.textContent = t; bn.style.display = t>0?'flex':'none'; }
+}
+
+function addCart(id, e){
+  if(e){ e.stopPropagation(); }
+  var p = P.find(x=>x.id===id); if(!p||p.isCmd) return;
+  var ex = cart.find(x=>x.id===id);
+  if(ex){ ex.qty=(ex.qty||1)+1; } else { cart.push({id:id,qty:1}); }
+  saveCart(); updateCartCount();
+  showToast('🛒 '+p.name.substring(0,22)+'... ajouté !');
+}
+
+function rmCart(id){ cart = cart.filter(x=>x.id!==id); saveCart(); updateCartCount(); renderCart(); }
+function changeQty(id, delta){
+  var ex = cart.find(x=>x.id===id);
+  if(!ex) return;
+  ex.qty = (ex.qty||1) + delta;
+  if(ex.qty <= 0){ rmCart(id); return; }
+  saveCart(); updateCartCount(); renderCart();
+}
+
+function openCart(){ document.getElementById('cartOverlay').classList.add('open'); document.getElementById('cartDrawer').classList.add('open'); renderCart(); }
+function closeCart(){ document.getElementById('cartOverlay').classList.remove('open'); document.getElementById('cartDrawer').classList.remove('open'); }
+
+function renderCart(){
+  var el = document.getElementById('cartItems');
+  var footer = document.getElementById('cartFooter');
+  if(!el) return;
+  if(cart.length===0){
+    el.innerHTML = '<div class="cart-empty"><div class="cart-empty-icon">🛒</div><p>Votre panier est vide</p></div>';
+    if(footer) footer.style.display='none'; return;
+  }
+  if(footer) footer.style.display='block';
+  el.innerHTML = cart.map(item=>{
+    var p = P.find(x=>x.id===item.id); if(!p) return '';
+    return `<div class="cart-item">
+      <img class="cart-item-img" src="${p.imgs[0]}" alt="${p.name}">
+      <div class="cart-item-info">
+        <div class="cart-item-name">${p.name}</div>
+        <div class="cart-item-price">${p.price}€</div>
+        <div class="cart-item-qty">
+          <button class="qty-btn" onclick="changeQty(${p.id},-1)">−</button>
+          <span class="qty-val">${item.qty||1}</span>
+          <button class="qty-btn" onclick="changeQty(${p.id},1)">+</button>
+        </div>
+      </div>
+      <button class="cart-rm" onclick="rmCart(${p.id})">×</button>
+    </div>`;
+  }).join('');
+  renderCartTotals();
+}
+
+function renderCartTotals(){
+  var subtotal = cart.reduce((s,item)=>{ var p=P.find(x=>x.id===item.id); return s+(p?p.pn*(item.qty||1):0); },0);
+  var discount = promoApplied ? subtotal*(PROMO_PCT/100) : 0;
+  var shipping = subtotal >= 10 ? 0 : 3.99;
+  var total = subtotal - discount + shipping;
+  var el = document.getElementById('cartTotals'); if(!el) return;
+  el.innerHTML = `
+    <div class="cart-total-row"><span>Sous-total</span><span>${subtotal.toFixed(2).replace('.',',')}€</span></div>
+    ${promoApplied?`<div class="cart-total-row" style="color:var(--green)"><span>Code NEXORA10</span><span>−${discount.toFixed(2).replace('.',',')}€</span></div>`:''}
+    <div class="cart-total-row"><span>Livraison</span><span>${shipping===0?'<span style="color:var(--green)">Gratuite</span>':shipping.toFixed(2).replace('.',',')+'€'}</span></div>
+    <div class="cart-total-row total"><span>Total</span><span>${total.toFixed(2).replace('.',',')}€</span></div>`;
+}
+
+function applyPromo(){
+  var v = document.getElementById('promoInput').value.trim().toUpperCase();
+  if(v===PROMO_CODE){ promoApplied=true; showToast('🎉 -10% appliqué !'); renderCartTotals(); }
+  else showToast('❌ Code invalide');
+}
+
+// ── PRODUCTS ──
+function s5(n){ return '★'.repeat(Math.floor(n))+(n%1>=.5?'½':'')+'☆'.repeat(5-Math.ceil(n)); }
+
+function cardHTML(p){
+  var saveAmt = (p.fon-p.pn).toFixed(0);
+  var savePct = Math.round((p.fon-p.pn)/p.fon*100);
+  var inWL = wishlist.includes(p.id);
+  return `<div class="card" onclick="openProduct(${p.id})">
+    <div class="card-img-wrap">
+      <img src="${p.imgs[0]}" alt="${p.name}" loading="lazy">
+      <span class="card-badge ${p.badge==='new'?'new':p.isCmd?'cmd':'promo'}">${p.bt}</span>
+      <button class="card-wishlist ${inWL?'active':''}" onclick="toggleWishlist(${p.id},event)" title="Favoris">${inWL?'❤️':'🤍'}</button>
+    </div>
+    <div class="card-body">
+      <div class="card-name">${p.name}</div>
+      <div class="card-short">${p.short}</div>
+      <div class="card-stars">
+        <span class="stars-row">${'★'.repeat(Math.round(p.stars))}</span>
+        <span class="card-stars-val">${p.stars}</span>
+        <span class="card-stars-count">(${p.rev.toLocaleString('fr')})</span>
+      </div>
+      <div class="card-price-row">
+        <span class="card-price">${p.price}€</span>
+        <span class="card-old">${p.fold}€</span>
+        <span class="card-save">−${savePct}%</span>
+      </div>
+      ${!p.isCmd?`<button class="card-add" onclick="addCart(${p.id},event)">🛒 Ajouter au panier</button>`:'<button class="card-add" style="background:var(--text2)">Sur commande</button>'}
+      <div class="card-viewers" id="viewers-${p.id}"></div>
+    </div>
+  </div>`;
+}
+
+function renderGrid(products){
+  var grid = document.getElementById('productGrid'); if(!grid) return;
+  var count = document.getElementById('productCount');
+  if(count) count.textContent = products.length + ' articles';
+  if(products.length===0){
+    grid.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:48px;color:var(--text3)">Aucun produit trouvé</div>'; return;
+  }
+  grid.innerHTML = products.map(cardHTML).join('');
+  updateViewers();
+}
+
+function filterCat(cat, chip){
+  currentFilter = cat;
+  document.querySelectorAll('.filter-chip').forEach(c=>c.classList.remove('active'));
+  document.querySelectorAll('.nav-cat').forEach(c=>c.classList.remove('active'));
+  if(chip) chip.classList.add('active');
+  var filtered = cat ? P.filter(p=>p.cat===cat&&!p._disabled) : P.filter(p=>!p._disabled);
+  if(currentSort) filtered = sortArr(filtered, currentSort);
+  renderGrid(filtered);
+}
+
+function sortArr(arr, val){
+  var a = [...arr];
+  if(val==='price_asc') a.sort((x,y)=>x.pn-y.pn);
+  else if(val==='price_desc') a.sort((x,y)=>y.pn-x.pn);
+  else if(val==='stars') a.sort((x,y)=>y.stars-x.stars);
+  else if(val==='reviews') a.sort((x,y)=>y.rev-x.rev);
+  return a;
+}
+
+function sortProducts(val){
+  currentSort = val;
+  var arr = currentFilter ? P.filter(p=>p.cat===currentFilter&&!p._disabled) : P.filter(p=>!p._disabled);
+  renderGrid(sortArr(arr, val));
+}
+
+function openProduct(id){
+  try{ sessionStorage.setItem('nxf_product', String(id)); }catch(e){}
+  addRecentlyViewed(id);
+  window.location.href = 'produit.html?id='+id;
+}
+
+// ── SEARCH ──
+function liveSearch(q, target){
+  q = q.toLowerCase().trim();
+  var results = q.length>1 ? P.filter(p=>p.name.toLowerCase().includes(q)||p.cat.toLowerCase().includes(q)).slice(0,6) : [];
+  if(target==='mobile'){
+    var el = document.getElementById('mobileSearchResults');
+    if(!el) return;
+    el.innerHTML = results.length ? results.map(p=>`
+      <div class="search-result-item" onclick="openProduct(${p.id})">
+        <img class="search-result-img" src="${p.imgs[0]}" alt="">
+        <div><div class="search-result-name">${p.name}</div><div class="search-result-price">${p.price}€</div></div>
+      </div>`).join('') : (q.length>1?'<div style="padding:16px;color:var(--text3);font-size:14px">Aucun résultat</div>':'');
+  } else {
+    var el2 = document.getElementById('searchResults');
+    if(!el2) return;
+    el2.innerHTML = results.map(p=>`
+      <div class="search-result-item" onclick="openProduct(${p.id})">
+        <img class="search-result-img" src="${p.imgs[0]}" alt="">
+        <div><div class="search-result-name">${p.name}</div><div class="search-result-price">${p.price}€</div></div>
+      </div>`).join('');
+    if(results.length) el2.classList.add('open');
+  }
+}
+function showSearchResults(){ var el=document.getElementById('searchResults'); if(el&&el.children.length) el.classList.add('open'); }
+function hideSearchResults(){ var el=document.getElementById('searchResults'); if(el) el.classList.remove('open'); }
+
+function toggleMobileSearch(){
+  var m = document.getElementById('mobileSearch');
+  if(!m) return;
+  var isOpen = m.classList.contains('open');
+  if(isOpen){ m.classList.remove('open'); m.style.display='none'; }
+  else{ m.style.display='block'; setTimeout(()=>{ m.classList.add('open'); var inp=document.getElementById('mobileSearchInput'); if(inp) inp.focus(); },10); }
+}
+
+// ── WISHLIST ──
+function toggleWishlist(id, e){
+  if(e) e.stopPropagation();
+  var idx = wishlist.indexOf(id);
+  if(idx>-1){ wishlist.splice(idx,1); showToast('💔 Retiré des favoris'); }
+  else{ wishlist.push(id); showToast('❤️ Ajouté aux favoris !'); }
+  localStorage.setItem('nxf_wl', JSON.stringify(wishlist));
+  var btn = document.querySelector(`.card-wishlist[onclick*="toggleWishlist(${id},"]`);
+  if(btn){ btn.classList.toggle('active'); btn.textContent = wishlist.includes(id)?'❤️':'🤍'; }
+}
+
+// ── RECENTLY VIEWED ──
+function addRecentlyViewed(id){
+  recentlyViewed = recentlyViewed.filter(x=>x!==id);
+  recentlyViewed.unshift(id);
+  recentlyViewed = recentlyViewed.slice(0,8);
+  localStorage.setItem('nxf_rv', JSON.stringify(recentlyViewed));
+}
+function renderRecentlyViewed(){
+  var rv = recentlyViewed.slice(0,6);
+  if(rv.length<2) return;
+  var section = document.getElementById('rvSection');
+  var row = document.getElementById('rvRow');
+  if(!section||!row) return;
+  section.classList.add('visible');
+  row.innerHTML = rv.map(id=>{ var p=P.find(x=>x.id===id); if(!p) return '';
+    return `<div class="upsell-card" onclick="openProduct(${p.id})">
+      <div class="upsell-img"><img src="${p.imgs[0]}" alt="${p.name}" loading="lazy"></div>
+      <div class="upsell-info"><div class="upsell-name">${p.name}</div><div class="upsell-price">${p.price}€</div></div>
+    </div>`; }).join('');
+}
+
+// ── REVIEWS ──
+function renderReviews(){
+  var el = document.getElementById('reviewsGrid'); if(!el) return;
+  var allRevs = [];
+  P.forEach(p=>{ if(p.revs) p.revs.forEach(r=>allRevs.push({...r,product:p.name,pid:p.id})); });
+  allRevs = allRevs.sort(()=>Math.random()-.5).slice(0,6);
+  el.innerHTML = allRevs.map(r=>`
+    <div class="review-card">
+      <div class="review-top">
+        <div class="review-av">${r.av}</div>
+        <div><div class="review-nm">${r.nm}</div><div class="review-loc">📍 France</div></div>
+        <div class="review-stars">${r.st}</div>
+      </div>
+      <div class="review-text">"${r.tx}"</div>
+      <div class="review-product">✓ ${r.product}</div>
+      <div class="review-check">✓ Achat vérifié</div>
+    </div>`).join('');
+}
+
+// ── SOCIAL PROOF ──
+function updateViewers(){
+  document.querySelectorAll('[id^="viewers-"]').forEach(el=>{
+    var n = Math.floor(Math.random()*12+1);
+    el.textContent = n+' pers. regardent';
+  });
+}
+setInterval(updateViewers, 6000);
+
+// ── TOAST ──
+var toastTimer;
+function showToast(msg){
+  var t = document.getElementById('toast'); if(!t) return;
+  t.textContent = msg; t.classList.add('show');
+  clearTimeout(toastTimer); toastTimer = setTimeout(()=>t.classList.remove('show'), 2500);
+}
+
+// ── PROMO COPY ──
+function copyPromo(){
+  try{ navigator.clipboard.writeText('NEXORA10'); }catch(e){}
+  showToast('✅ Code NEXORA10 copié !');
+}
+
+// ── INIT ──
+window.addEventListener('load', function(){
+  renderGrid(P.filter(p=>!p._disabled));
+  renderReviews();
+  renderRecentlyViewed();
+  updateCartCount();
+  renderCart();
+});
+</script>
+</body>
+</html>E html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>NexoraFlash ⚡ — La tech au meilleur prix</title>
+<meta name="description" content="Smartphones, tablettes, maison connectée au meilleur prix. Livraison rapide 3-7 jours.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f7f8fa;
+  --surface: #ffffff;
+  --surface2: #f0f2f5;
+  --border: #e8eaed;
+  --border2: #d1d5db;
+  --text: #0d0f12;
+  --text2: #4b5563;
+  --text3: #9ca3af;
+  --accent: #1a56db;
+  --accent-hover: #1447c0;
+  --accent-light: #eff4ff;
+  --green: #0ea569;
+  --green-light: #ecfdf5;
+  --red: #e53935;
+  --red-light: #fff5f5;
+  --orange: #f59e0b;
+  --orange-light: #fffbeb;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+  --shadow: 0 4px 16px rgba(0,0,0,.08), 0 2px 6px rgba(0,0,0,.04);
+  --shadow-lg: 0 12px 40px rgba(0,0,0,.12), 0 4px 12px rgba(0,0,0,.06);
+  --radius: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --font: 'DM Sans', sans-serif;
+  --mono: 'DM Mono', monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;-webkit-tap-highlight-color:transparent;}
+body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:15px;line-height:1.6;overflow-x:hidden;}
+img{max-width:100%;display:block;}
+button{cursor:pointer;border:none;outline:none;font-family:var(--font);}
+input{font-family:var(--font);outline:none;}
+a{text-decoration:none;color:inherit;}
+
+/* ── TOPBAR ── */
+.topbar{background:var(--accent);color:#fff;text-align:center;padding:9px 16px;font-size:13px;font-weight:500;letter-spacing:.01em;position:relative;}
+.topbar strong{font-weight:700;background:rgba(255,255,255,.2);padding:2px 8px;border-radius:4px;margin:0 4px;}
+.topbar-close{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;color:#fff;opacity:.7;font-size:18px;cursor:pointer;padding:4px;}
+
+/* ── NAVBAR ── */
+.nav{position:sticky;top:0;z-index:200;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--border);height:60px;display:flex;align-items:center;padding:0 20px;gap:12px;}
+.nav-logo{font-size:20px;font-weight:700;color:var(--text);white-space:nowrap;display:flex;align-items:center;gap:6px;}
+.nav-logo span{color:var(--accent);}
+.nav-search{flex:1;max-width:480px;position:relative;margin:0 12px;}
+.nav-search input{width:100%;height:38px;background:var(--surface2);border:1.5px solid transparent;border-radius:10px;padding:0 40px 0 14px;font-size:14px;color:var(--text);transition:.2s;}
+.nav-search input:focus{background:#fff;border-color:var(--accent);box-shadow:0 0 0 3px rgba(26,86,219,.1);}
+.nav-search input::placeholder{color:var(--text3);}
+.nav-search-icon{position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--text3);pointer-events:none;}
+.nav-search-results{position:absolute;top:calc(100% + 6px);left:0;right:0;background:#fff;border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow-lg);z-index:300;overflow:hidden;display:none;}
+.nav-search-results.open{display:block;}
+.search-result-item{display:flex;align-items:center;gap:10px;padding:10px 14px;cursor:pointer;transition:.15s;}
+.search-result-item:hover{background:var(--surface2);}
+.search-result-img{width:36px;height:36px;border-radius:8px;object-fit:contain;background:var(--surface2);}
+.search-result-name{font-size:13px;font-weight:500;}
+.search-result-price{font-size:12px;color:var(--accent);font-weight:600;}
+.nav-actions{display:flex;align-items:center;gap:6px;margin-left:auto;}
+.nav-btn{display:flex;align-items:center;gap:6px;padding:7px 12px;border-radius:9px;font-size:14px;font-weight:500;background:none;color:var(--text2);transition:.2s;white-space:nowrap;}
+.nav-btn:hover{background:var(--surface2);color:var(--text);}
+.nav-btn.cart-btn{background:var(--accent);color:#fff;padding:7px 14px;}
+.nav-btn.cart-btn:hover{background:var(--accent-hover);}
+.cart-count{background:#fff;color:var(--accent);border-radius:20px;font-size:11px;font-weight:700;padding:1px 6px;min-width:18px;text-align:center;}
+
+/* ── HERO ── */
+.hero{background:linear-gradient(135deg, #1a56db 0%, #1447c0 40%, #0d3a9e 100%);padding:48px 20px 52px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);color:#fff;font-size:12px;font-weight:600;padding:5px 12px;border-radius:20px;margin-bottom:16px;letter-spacing:.04em;text-transform:uppercase;}
+.hero h1{font-size:clamp(26px,5vw,44px);font-weight:700;color:#fff;line-height:1.15;margin-bottom:12px;letter-spacing:-.02em;}
+.hero h1 em{font-style:normal;color:rgba(255,255,255,.75);}
+.hero-sub{color:rgba(255,255,255,.8);font-size:16px;margin-bottom:28px;max-width:500px;margin-left:auto;margin-right:auto;}
+.hero-ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+.hero-cta{padding:13px 26px;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;transition:.2s;border:none;}
+.hero-cta.primary{background:#fff;color:var(--accent);}
+.hero-cta.primary:hover{background:#f0f4ff;transform:translateY(-1px);}
+.hero-cta.secondary{background:rgba(255,255,255,.15);color:#fff;border:1.5px solid rgba(255,255,255,.3);}
+.hero-cta.secondary:hover{background:rgba(255,255,255,.22);}
+.hero-stats{display:flex;justify-content:center;gap:32px;margin-top:36px;padding-top:28px;border-top:1px solid rgba(255,255,255,.15);}
+.hero-stat-val{font-size:22px;font-weight:700;color:#fff;display:block;}
+.hero-stat-label{font-size:12px;color:rgba(255,255,255,.65);text-transform:uppercase;letter-spacing:.05em;}
+
+/* ── TRUST BAND ── */
+.trust-band{background:var(--surface);border-bottom:1px solid var(--border);padding:14px 20px;display:flex;justify-content:center;gap:28px;flex-wrap:wrap;}
+.trust-item{display:flex;align-items:center;gap:7px;font-size:13px;font-weight:500;color:var(--text2);}
+.trust-item svg{color:var(--green);}
+
+/* ── MAIN LAYOUT ── */
+.main{max-width:1280px;margin:0 auto;padding:32px 20px 100px;}
+
+/* ── SECTION HEADERS ── */
+.section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;}
+.section-title{font-size:20px;font-weight:700;color:var(--text);display:flex;align-items:center;gap:8px;}
+.section-see-all{font-size:13px;font-weight:600;color:var(--accent);display:flex;align-items:center;gap:4px;cursor:pointer;}
+.section-see-all:hover{text-decoration:underline;}
+
+/* ── FILTERS ── */
+.filters-row{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap;align-items:center;}
+.filter-chip{padding:7px 14px;border-radius:20px;font-size:13px;font-weight:500;cursor:pointer;border:1.5px solid var(--border);background:var(--surface);color:var(--text2);transition:.2s;white-space:nowrap;}
+.filter-chip:hover{border-color:var(--accent);color:var(--accent);}
+.filter-chip.active{background:var(--accent);color:#fff;border-color:var(--accent);}
+.sort-select{margin-left:auto;padding:7px 12px;border-radius:8px;border:1.5px solid var(--border);font-size:13px;font-weight:500;color:var(--text2);background:var(--surface);cursor:pointer;}
+
+/* ── PRODUCT GRID ── */
+.product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;}
+@media(min-width:900px){.product-grid{grid-template-columns:repeat(4,1fr);}}
+@media(max-width:600px){.product-grid{grid-template-columns:repeat(2,1fr);gap:12px;}}
+
+/* ── PRODUCT CARD ── */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;cursor:pointer;transition:box-shadow .2s, transform .2s;position:relative;}
+.card:hover{box-shadow:var(--shadow);transform:translateY(-2px);}
+.card:active{transform:translateY(0);}
+.card-img-wrap{position:relative;aspect-ratio:1;overflow:hidden;background:var(--surface2);}
+.card-img-wrap img{width:100%;height:100%;object-fit:contain;transition:transform .3s;}
+.card:hover .card-img-wrap img{transform:scale(1.04);}
+.card-badge{position:absolute;top:10px;left:10px;font-size:11px;font-weight:700;padding:3px 8px;border-radius:6px;letter-spacing:.02em;text-transform:uppercase;}
+.card-badge.new{background:var(--accent);color:#fff;}
+.card-badge.promo{background:var(--red);color:#fff;}
+.card-badge.cmd{background:var(--text);color:#fff;}
+.card-wishlist{position:absolute;top:10px;right:10px;width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.9);border:none;display:flex;align-items:center;justify-content:center;color:var(--text3);transition:.2s;cursor:pointer;backdrop-filter:blur(4px);}
+.card-wishlist:hover,.card-wishlist.active{color:var(--red);}
+.card-body{padding:12px 14px 14px;}
+.card-name{font-size:13px;font-weight:600;color:var(--text);line-height:1.35;margin-bottom:4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.card-short{font-size:11px;color:var(--text3);margin-bottom:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.card-stars{display:flex;align-items:center;gap:4px;margin-bottom:8px;}
+.card-stars-val{font-size:12px;font-weight:600;color:var(--text);}
+.card-stars-count{font-size:11px;color:var(--text3);}
+.stars-row{color:#f59e0b;font-size:11px;letter-spacing:1px;}
+.card-price-row{display:flex;align-items:baseline;gap:6px;flex-wrap:wrap;}
+.card-price{font-size:17px;font-weight:700;color:var(--text);}
+.card-old{font-size:12px;color:var(--text3);text-decoration:line-through;}
+.card-save{font-size:11px;font-weight:600;color:var(--green);background:var(--green-light);padding:2px 6px;border-radius:4px;}
+.card-add{width:100%;margin-top:10px;padding:9px;background:var(--accent);color:#fff;border-radius:8px;font-size:13px;font-weight:600;border:none;cursor:pointer;transition:.2s;display:flex;align-items:center;justify-content:center;gap:6px;}
+.card-add:hover{background:var(--accent-hover);}
+.card-viewers{font-size:11px;color:var(--text3);margin-top:6px;text-align:center;}
+
+/* ── PROMO BANNER ── */
+.promo-banner{background:linear-gradient(135deg,#1a56db,#7c3aed);border-radius:var(--radius-xl);padding:28px 32px;color:#fff;display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:40px;overflow:hidden;position:relative;}
+.promo-banner::before{content:'';position:absolute;right:-40px;top:-40px;width:180px;height:180px;background:rgba(255,255,255,.06);border-radius:50%;}
+.promo-banner::after{content:'';position:absolute;right:40px;bottom:-60px;width:120px;height:120px;background:rgba(255,255,255,.04);border-radius:50%;}
+.promo-banner-text h2{font-size:22px;font-weight:700;margin-bottom:6px;}
+.promo-banner-text p{font-size:14px;opacity:.85;}
+.promo-code{font-family:var(--mono);background:rgba(255,255,255,.2);border:1.5px solid rgba(255,255,255,.35);padding:8px 16px;border-radius:8px;font-size:16px;font-weight:700;letter-spacing:.08em;cursor:pointer;transition:.2s;white-space:nowrap;}
+.promo-code:hover{background:rgba(255,255,255,.3);}
+
+/* ── CART DRAWER ── */
+.cart-overlay{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:400;opacity:0;pointer-events:none;transition:.25s;backdrop-filter:blur(2px);}
+.cart-overlay.open{opacity:1;pointer-events:all;}
+.cart-drawer{position:fixed;top:0;right:0;bottom:0;width:min(420px,100vw);background:#fff;z-index:401;transform:translateX(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;box-shadow:var(--shadow-lg);}
+.cart-drawer.open{transform:translateX(0);}
+.cart-head{padding:20px 20px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.cart-head h2{font-size:18px;font-weight:700;}
+.cart-close-btn{width:36px;height:36px;border-radius:50%;background:var(--surface2);border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px;color:var(--text2);}
+.cart-items{flex:1;overflow-y:auto;padding:16px 20px;}
+.cart-empty{text-align:center;padding:48px 20px;color:var(--text3);}
+.cart-empty-icon{font-size:48px;margin-bottom:12px;}
+.cart-empty p{font-size:15px;font-weight:500;}
+.cart-item{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--border);}
+.cart-item-img{width:64px;height:64px;border-radius:10px;object-fit:contain;background:var(--surface2);flex-shrink:0;}
+.cart-item-info{flex:1;}
+.cart-item-name{font-size:13px;font-weight:600;line-height:1.35;margin-bottom:4px;}
+.cart-item-price{font-size:14px;font-weight:700;color:var(--accent);}
+.cart-item-qty{display:flex;align-items:center;gap:8px;margin-top:6px;}
+.qty-btn{width:26px;height:26px;border-radius:6px;border:1.5px solid var(--border);background:var(--surface);font-size:15px;font-weight:600;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text);}
+.qty-val{font-size:14px;font-weight:600;min-width:20px;text-align:center;}
+.cart-rm{margin-left:auto;color:var(--text3);background:none;border:none;cursor:pointer;font-size:18px;padding:4px;}
+.cart-rm:hover{color:var(--red);}
+.cart-footer{padding:16px 20px 24px;border-top:1px solid var(--border);}
+.cart-promo{display:flex;gap:8px;margin-bottom:16px;}
+.cart-promo input{flex:1;height:40px;border:1.5px solid var(--border);border-radius:8px;padding:0 12px;font-size:13px;}
+.cart-promo input:focus{border-color:var(--accent);}
+.cart-promo button{padding:0 16px;background:var(--accent);color:#fff;border-radius:8px;font-size:13px;font-weight:600;border:none;cursor:pointer;}
+.cart-totals{margin-bottom:16px;}
+.cart-total-row{display:flex;justify-content:space-between;font-size:14px;color:var(--text2);padding:4px 0;}
+.cart-total-row.total{font-size:16px;font-weight:700;color:var(--text);border-top:1px solid var(--border);padding-top:10px;margin-top:4px;}
+.cart-checkout{width:100%;padding:14px;background:var(--accent);color:#fff;border-radius:10px;font-size:15px;font-weight:700;border:none;cursor:pointer;transition:.2s;}
+.cart-checkout:hover{background:var(--accent-hover);}
+
+/* ── TOAST ── */
+.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--text);color:#fff;padding:10px 20px;border-radius:10px;font-size:13px;font-weight:500;z-index:500;opacity:0;transition:.25s;pointer-events:none;white-space:nowrap;box-shadow:var(--shadow-lg);}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* ── BOTTOM NAV (mobile) ── */
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,.97);border-top:1px solid var(--border);display:flex;z-index:300;padding-bottom:env(safe-area-inset-bottom);backdrop-filter:blur(10px);}
+.bn-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:9px 4px 7px;cursor:pointer;color:var(--text3);transition:.2s;position:relative;font-size:10px;font-weight:500;}
+.bn-item.active,.bn-item:hover{color:var(--accent);}
+.bn-item svg{width:22px;height:22px;}
+.bn-badge{position:absolute;top:6px;right:50%;transform:translateX(8px);background:var(--accent);color:#fff;font-size:9px;font-weight:700;min-width:16px;height:16px;border-radius:8px;display:flex;align-items:center;justify-content:center;padding:0 4px;}
+@media(min-width:900px){.bottom-nav{display:none;}}
+
+/* ── DESKTOP NAV EXTRAS ── */
+@media(min-width:900px){
+  .nav-cats{display:flex;gap:4px;}
+  .nav-cat{padding:6px 12px;border-radius:8px;font-size:13px;font-weight:500;color:var(--text2);cursor:pointer;transition:.2s;}
+  .nav-cat:hover,.nav-cat.active{background:var(--surface2);color:var(--text);}
+}
+@media(max-width:899px){
+  .nav-cats{display:none;}
+  .nav-search{display:none;}
+  .nav-btn:not(.cart-btn){display:none;}
+}
+
+/* ── SKELETON ── */
+.skeleton-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;}
+@media(min-width:900px){.skeleton-grid{grid-template-columns:repeat(4,1fr);}}
+@media(max-width:600px){.skeleton-grid{grid-template-columns:repeat(2,1fr);gap:12px;}}
+.skel-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;}
+.skel-img{aspect-ratio:1;background:linear-gradient(90deg,var(--surface2) 25%,var(--border) 50%,var(--surface2) 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;}
+.skel-body{padding:12px 14px 14px;}
+.skel-line{height:12px;border-radius:6px;background:linear-gradient(90deg,var(--surface2) 25%,var(--border) 50%,var(--surface2) 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;margin-bottom:8px;}
+.skel-line.short{width:60%;}
+.skel-line.xshort{width:40%;}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+
+/* ── SECTIONS ── */
+.section{margin-bottom:48px;}
+.section-divider{height:1px;background:var(--border);margin:40px 0;}
+
+/* ── UPSELL ROW ── */
+.upsell-row{display:flex;gap:12px;overflow-x:auto;scrollbar-width:none;padding-bottom:4px;}
+.upsell-row::-webkit-scrollbar{display:none;}
+.upsell-card{flex-shrink:0;width:160px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;cursor:pointer;transition:.15s;}
+.upsell-card:hover{box-shadow:var(--shadow-sm);transform:translateY(-1px);}
+.upsell-img{height:100px;overflow:hidden;background:var(--surface2);}
+.upsell-img img{width:100%;height:100%;object-fit:contain;}
+.upsell-info{padding:8px 10px;}
+.upsell-name{font-size:11px;font-weight:600;line-height:1.3;margin-bottom:3px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.upsell-price{font-size:12px;font-weight:700;color:var(--accent);}
+
+/* ── RECENTLY VIEWED ── */
+.rv-section{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-xl);padding:24px;margin-bottom:40px;display:none;}
+.rv-section.visible{display:block;}
+
+/* ── GUARANTEE ICONS ── */
+.guarantees{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-xl);padding:24px;margin-bottom:40px;}
+@media(max-width:600px){.guarantees{grid-template-columns:repeat(2,1fr);}}
+.guarantee-item{text-align:center;padding:8px;}
+.guarantee-icon{font-size:28px;margin-bottom:8px;}
+.guarantee-title{font-size:13px;font-weight:700;margin-bottom:3px;}
+.guarantee-desc{font-size:11px;color:var(--text3);}
+
+/* ── AVIS SECTION ── */
+.reviews-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;}
+.review-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:18px;}
+.review-top{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.review-av{width:38px;height:38px;border-radius:50%;background:var(--accent-light);color:var(--accent);font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.review-nm{font-size:14px;font-weight:600;}
+.review-loc{font-size:12px;color:var(--text3);display:flex;align-items:center;gap:3px;}
+.review-stars{color:#f59e0b;font-size:13px;margin-left:auto;}
+.review-text{font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:8px;}
+.review-product{font-size:11px;font-weight:600;color:var(--accent);}
+.review-check{font-size:11px;color:var(--green);font-weight:500;margin-top:4px;}
+
+/* ── FOOTER ── */
+.footer{background:var(--text);color:rgba(255,255,255,.7);padding:48px 20px 80px;}
+.footer-grid{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;}
+@media(max-width:700px){.footer-grid{grid-template-columns:1fr 1fr;gap:32px;}}
+@media(max-width:400px){.footer-grid{grid-template-columns:1fr;}}
+.footer-brand p{font-size:13px;margin-top:10px;line-height:1.7;}
+.footer-logo{font-size:20px;font-weight:700;color:#fff;}
+.footer-col h4{font-size:13px;font-weight:700;color:#fff;margin-bottom:14px;text-transform:uppercase;letter-spacing:.06em;}
+.footer-col a{display:block;font-size:13px;margin-bottom:8px;color:rgba(255,255,255,.6);cursor:pointer;transition:.15s;}
+.footer-col a:hover{color:#fff;}
+.footer-bottom{max-width:1280px;margin:32px auto 0;padding-top:24px;border-top:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:space-between;flex-wrap:gap;gap:16px;}
+.footer-bottom p{font-size:12px;}
+.payment-icons{display:flex;gap:8px;}
+.pay-icon{background:rgba(255,255,255,.1);padding:4px 10px;border-radius:5px;font-size:11px;font-weight:700;color:#fff;}
+.footer-social{display:flex;gap:10px;margin-top:14px;}
+.social-icon{width:34px;height:34px;border-radius:8px;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.7);transition:.2s;cursor:pointer;font-size:15px;}
+.social-icon:hover{background:rgba(255,255,255,.2);color:#fff;}
+
+/* ── MOBILE SEARCH MODAL ── */
+.mobile-search-modal{position:fixed;inset:0;background:#fff;z-index:500;padding:16px 20px;transform:translateY(-100%);transition:.25s;display:none;}
+.mobile-search-modal.open{transform:translateY(0);display:block;}
+.mobile-search-header{display:flex;gap:12px;align-items:center;margin-bottom:16px;}
+.mobile-search-header input{flex:1;height:44px;background:var(--surface2);border:none;border-radius:10px;padding:0 14px;font-size:15px;}
+.mobile-search-cancel{font-size:14px;font-weight:600;color:var(--accent);cursor:pointer;white-space:nowrap;}
+
+/* ── COMPARE ── */
+.compare-bar{position:fixed;bottom:56px;left:0;right:0;background:var(--text);color:#fff;padding:12px 20px;display:flex;align-items:center;gap:12px;z-index:290;transform:translateY(100%);transition:.25s;}
+.compare-bar.visible{transform:translateY(0);}
+.compare-bar-items{display:flex;gap:8px;flex:1;overflow-x:auto;}
+.compare-chip{background:rgba(255,255,255,.15);padding:5px 10px;border-radius:6px;font-size:12px;font-weight:500;white-space:nowrap;display:flex;align-items:center;gap:6px;}
+.compare-chip-rm{cursor:pointer;opacity:.7;}
+.compare-btn{background:var(--accent);padding:8px 16px;border-radius:8px;font-size:13px;font-weight:600;border:none;color:#fff;cursor:pointer;white-space:nowrap;}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.fade-up{animation:fadeUp .35s ease both;}
+.card{animation:fadeUp .3s ease both;}
+
+/* ── MISC ── */
+.badge-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px;}
+.badge-pill{display:inline-flex;align-items:center;gap:4px;padding:5px 12px;border-radius:20px;font-size:12px;font-weight:600;}
+.badge-pill.green{background:var(--green-light);color:var(--green);}
+.badge-pill.blue{background:var(--accent-light);color:var(--accent);}
+.badge-pill.orange{background:var(--orange-light);color:var(--orange);}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar" id="topbar">
+  🎉 Code <strong>NEXORA10</strong> — -10% sur votre 1ère commande · Livraison gratuite dès 10€ 🚀
+  <button class="topbar-close" onclick="document.getElementById('topbar').style.display='none'">×</button>
+</div>
+
+<!-- NAVBAR -->
+<nav class="nav">
+  <div class="nav-logo" onclick="showPage('home')" style="cursor:pointer">
+    NexoraFlash<span>⚡</span>
+  </div>
+  <div class="nav-cats" id="navCats">
+    <div class="nav-cat active" onclick="filterCat('')">Tout</div>
+    <div class="nav-cat" onclick="filterCat('Smartphones')">📱 Smartphones</div>
+    <div class="nav-cat" onclick="filterCat('Maison')">🏠 Maison</div>
+    <div class="nav-cat" onclick="filterCat('Batteries')">🔋 Batteries</div>
+    <div class="nav-cat" onclick="filterCat('Tablettes')">📟 Tablettes</div>
+  </div>
+  <div class="nav-search">
+    <input type="text" placeholder="Rechercher un produit..." id="navSearchInput" oninput="liveSearch(this.value)" onfocus="showSearchResults()" onblur="setTimeout(hideSearchResults,200)">
+    <svg class="nav-search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <div class="nav-search-results" id="searchResults"></div>
+  </div>
+  <div class="nav-actions">
+    <button class="nav-btn" onclick="toggleMobileSearch()" style="display:flex" id="mobileSearchBtn">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    </button>
+    <button class="nav-btn cart-btn" onclick="openCart()">
+      🛒 Panier <span class="cart-count" id="cartCount">0</span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE SEARCH -->
+<div class="mobile-search-modal" id="mobileSearch">
+  <div class="mobile-search-header">
+    <input type="text" placeholder="Rechercher..." id="mobileSearchInput" oninput="liveSearch(this.value,'mobile')">
+    <span class="mobile-search-cancel" onclick="toggleMobileSearch()">Annuler</span>
+  </div>
+  <div id="mobileSearchResults"></div>
+</div>
+
+<!-- CART DRAWER -->
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-head">
+    <h2>Mon panier 🛒</h2>
+    <button class="cart-close-btn" onclick="closeCart()">×</button>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-footer" id="cartFooter" style="display:none">
+    <div class="cart-promo">
+      <input type="text" placeholder="Code promo" id="promoInput" value="NEXORA10">
+      <button onclick="applyPromo()">Appliquer</button>
+    </div>
+    <div class="cart-totals" id="cartTotals"></div>
+    <button class="cart-checkout" onclick="showPage('confirm')">Commander maintenant →</button>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">⚡ Livraison 3-7 jours · Stock EU</div>
+  <h1>La tech premium<br><em>au meilleur prix</em></h1>
+  <p class="hero-sub">Smartphones, tablettes, maison connectée — sélectionnés pour vous.</p>
+  <div class="hero-ctas">
+    <button class="hero-cta primary" onclick="document.querySelector('.main').scrollIntoView({behavior:'smooth'})">Voir les produits</button>
+    <button class="hero-cta secondary" onclick="filterCat('Smartphones')">📱 Smartphones</button>
+  </div>
+  <div class="hero-stats">
+    <div><span class="hero-stat-val">17+</span><span class="hero-stat-label">Produits</span></div>
+    <div><span class="hero-stat-val">4.9★</span><span class="hero-stat-label">Note moyenne</span></div>
+    <div><span class="hero-stat-val">10k+</span><span class="hero-stat-label">Clients</span></div>
+    <div><span class="hero-stat-val">3-7j</span><span class="hero-stat-label">Livraison</span></div>
+  </div>
+</section>
+
+<!-- TRUST BAND -->
+<div class="trust-band">
+  <div class="trust-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg>Livraison 3-7 jours</div>
+  <div class="trust-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg>Retour 30 jours</div>
+  <div class="trust-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg>Paiement sécurisé</div>
+  <div class="trust-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg>Support 7j/7</div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- PROMO BANNER -->
+  <div class="promo-banner">
+    <div class="promo-banner-text">
+      <h2>🎉 -10% sur votre 1ère commande</h2>
+      <p>Inscrivez-vous et recevez votre code exclusif immédiatement</p>
+    </div>
+    <div class="promo-code" onclick="copyPromo()" title="Cliquer pour copier">NEXORA10</div>
+  </div>
+
+  <!-- RECENTLY VIEWED -->
+  <div class="rv-section" id="rvSection">
+    <div class="section-header">
+      <div class="section-title">🕐 Récemment consultés</div>
+    </div>
+    <div class="upsell-row" id="rvRow"></div>
+  </div>
+
+  <!-- GUARANTEES -->
+  <div class="guarantees">
+    <div class="guarantee-item">
+      <div class="guarantee-icon">🚚</div>
+      <div class="guarantee-title">Livraison rapide</div>
+      <div class="guarantee-desc">3-7 jours ouvrés · Suivi inclus</div>
+    </div>
+    <div class="guarantee-item">
+      <div class="guarantee-icon">🔒</div>
+      <div class="guarantee-title">Paiement sécurisé</div>
+      <div class="guarantee-desc">Stripe · SSL · 3D Secure</div>
+    </div>
+    <div class="guarantee-item">
+      <div class="guarantee-icon">↩️</div>
+      <div class="guarantee-title">Retour 30 jours</div>
+      <div class="guarantee-desc">Satisfait ou remboursé</div>
+    </div>
+    <div class="guarantee-item">
+      <div class="guarantee-icon">💬</div>
+      <div class="guarantee-title">Support 7j/7</div>
+      <div class="guarantee-desc">Réponse en moins de 24h</div>
+    </div>
+  </div>
+
+  <!-- PRODUITS -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">🛍️ Tous les produits <span id="productCount" style="font-size:14px;font-weight:500;color:var(--text3)"></span></div>
+    </div>
+    <div class="filters-row" id="filtersRow">
+      <div class="filter-chip active" onclick="filterCat('',this)">Tout</div>
+      <div class="filter-chip" onclick="filterCat('Smartphones',this)">📱 Smartphones</div>
+      <div class="filter-chip" onclick="filterCat('Tablettes',this)">📟 Tablettes</div>
+      <div class="filter-chip" onclick="filterCat('Maison',this)">🏠 Maison</div>
+      <div class="filter-chip" onclick="filterCat('Batteries',this)">🔋 Batteries</div>
+      <div class="filter-chip" onclick="filterCat('Câbles',this)">🔌 Câbles</div>
+      <div class="filter-chip" onclick="filterCat('Robotique',this)">🤖 Robotique</div>
+      <div class="filter-chip" onclick="filterCat('Accessoires',this)">🕶️ Accessoires</div>
+      <select class="sort-select" onchange="sortProducts(this.value)">
+        <option value="">Trier par</option>
+        <option value="price_asc">Prix ↑</option>
+        <option value="price_desc">Prix ↓</option>
+        <option value="stars">Mieux notés</option>
+        <option value="reviews">Plus d'avis</option>
+      </select>
+    </div>
+    <div class="product-grid" id="productGrid">
+      <!-- Skeleton -->
+      <div class="skel-card"><div class="skel-img"></div><div class="skel-body"><div class="skel-line"></div><div class="skel-line short"></div><div class="skel-line xshort"></div></div></div>
+      <div class="skel-card"><div class="skel-img"></div><div class="skel-body"><div class="skel-line"></div><div class="skel-line short"></div><div class="skel-line xshort"></div></div></div>
+      <div class="skel-card"><div class="skel-img"></div><div class="skel-body"><div class="skel-line"></div><div class="skel-line short"></div><div class="skel-line xshort"></div></div></div>
+      <div class="skel-card"><div class="skel-img"></div><div class="skel-body"><div class="skel-line"></div><div class="skel-line short"></div><div class="skel-line xshort"></div></div></div>
+    </div>
+  </div>
+
+  <!-- AVIS -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">❤️ Ce que disent nos clients</div>
+      <div class="section-see-all">4.9/5 · Avis vérifiés</div>
+    </div>
+    <div class="reviews-grid" id="reviewsGrid"></div>
+  </div>
+
+</div><!-- /main -->
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="footer-logo">NexoraFlash ⚡</div>
+      <p>La tech et la maison de qualité au meilleur prix, livrés en 3 à 7 jours.</p>
+      <div class="footer-social">
+        <div class="social-icon">𝕏</div>
+        <div class="social-icon">📘</div>
+        <div class="social-icon">📸</div>
+        <div class="social-icon">🎵</div>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Boutique</h4>
+      <a onclick="filterCat('')">Tous les produits</a>
+      <a onclick="filterCat('Smartphones')">Smartphones</a>
+      <a onclick="filterCat('Maison')">Maison</a>
+      <a onclick="filterCat('Batteries')">Batteries</a>
+    </div>
+    <div class="footer-col">
+      <h4>Aide</h4>
+      <a>Contact</a>
+      <a>Suivi commande</a>
+      <a>FAQ</a>
+      <a>Retours</a>
+    </div>
+    <div class="footer-col">
+      <h4>Légal</h4>
+      <a>CGV</a>
+      <a>Mentions légales</a>
+      <a>Confidentialité</a>
+      <a>Cookies</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 NexoraFlash. Tous droits réservés.</p>
+    <div class="payment-icons">
+      <span class="pay-icon">VISA</span>
+      <span class="pay-icon">MC</span>
+      <span class="pay-icon">PayPal</span>
+      <span class="pay-icon">Apple Pay</span>
+    </div>
+  </div>
+</footer>
+
+<!-- BOTTOM NAV -->
+<nav class="bottom-nav">
+  <div class="bn-item active" onclick="filterCat('')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    Accueil
+  </div>
+  <div class="bn-item" onclick="filterCat('Smartphones')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+    Promos
+  </div>
+  <div class="bn-item" onclick="filterCat('')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+    Boutique
+  </div>
+  <div class="bn-item" onclick="openCart()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+    Panier
+    <span class="bn-badge" id="bnCartCount" style="display:none">0</span>
+  </div>
+  <div class="bn-item" onclick="toggleMobileSearch()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    Recherche
+  </div>
+</nav>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script src="products.js"></script>
+<script>const IMGS={};function getImg(k){return k.startsWith("http")?k:(IMGS[k]||"");}P=P.map(p=>({...p,imgs:p.imgs.map(i=>getImg(i))}));</script>
+<script>
+
+var P = [
+  {id:1,name:"Xiaomi Redmi Note 15 Pro 5G",short:"8Go/256Go · 200MP · 6580mAh · 5G",cat:"Smartphones",
+   price:"325,99",pn:325.99,fold:"389,99",fon:389.99,badge:"new",bt:"Nouveau",stars:5.0,rev:55,isPromo:false,
+   imgs:["p1_1","p1_2","p1_3"],
+   desc:"Le Redmi Note 15 Pro 5G repousse les limites avec son écran AMOLED 6,83\" 1,5K, son appareil photo de 200 MP et sa batterie XXL de 6 580 mAh. Propulsé par le Dimensity 7300 Ultra.",
+   specs:["6,83\" AMOLED 1,5K","200 MP","6580 mAh","5G · Dimensity","8 Go RAM","256 Go"],
+   revs:[{av:"AL",nm:"Alexandre L.",dt:"20 fév. 2025",st:"★★★★★",tx:"Impressionnant ! L\'écran est magnifique, la photo de nuit bluffante. Livré en 6 jours."},{av:"CM",nm:"Clara M.",dt:"8 mars 2025",st:"★★★★★",tx:"Énorme upgrade ! La batterie tient 2 jours. Emballage soigné."}]},
+  {id:2,name:"Xiaomi Redmi Note 15 5G",short:"6,77\" AMOLED 120Hz · 108MP · IP65",cat:"Smartphones",
+   price:"263,99",pn:263.99,fold:"319,99",fon:319.99,badge:"promo",bt:"-17%",stars:5.0,rev:26,isPromo:true,
+   imgs:["p2_1","p2_2"],
+   desc:"Écran AMOLED FHD+ 6,77\" à 120 Hz, 108 MP, batterie 5 520 mAh, IP65. La combinaison parfaite performance / autonomie.",
+   specs:["6,77\" AMOLED 120Hz","108 MP","5520 mAh","IP65","5G · NFC"],
+   revs:[{av:"TB",nm:"Thomas B.",dt:"1 mars 2025",st:"★★★★★",tx:"Rapport qualité-prix imbattable. Écran 120Hz super fluide. Livré en 5 jours."}]},
+  {id:3,name:"Xiaomi Pad 7 — Tablette 11\"",short:"Snapdragon 7+ Gen 3 · 144Hz · HyperOS 2",cat:"Tablettes",
+   price:"266,99",pn:266.99,fold:"329,99",fon:329.99,badge:"new",bt:"Nouveau",stars:4.9,rev:499,isPromo:false,
+   imgs:["p3_1","p3_2","p3_3","p3_4"],
+   desc:"Snapdragon 7+ Gen 3, écran 144Hz crystal-clear, Xiaomi HyperOS 2. Idéale pour créateurs, gamers et multimédia ultra qualité.",
+   specs:["11\" 144Hz","Snapdragon 7+ Gen 3","HyperOS 2","13 MP","8850 mAh"],
+   revs:[{av:"SV",nm:"Sophie V.",dt:"15 fév. 2025",st:"★★★★★",tx:"Absolument parfaite ! Écran sublime, processeur ultra rapide."},{av:"RP",nm:"Romain P.",dt:"22 fév. 2025",st:"★★★★★",tx:"Meilleure tablette que j\'ai eue. 144Hz se ressent vraiment."}]},
+  {id:4,name:"Câble USB-C 6A Charge Rapide",short:"1m · 2m · 3m · 5m · 8m · Tressé",cat:"Câbles",
+   price:"1,99",pn:1.99,fold:"4,99",fon:4.99,badge:"promo",bt:"-60%",stars:4.8,rev:50000,isPromo:true,
+   imgs:["p4_1","p4_2"],
+   desc:"Câble USB-C 6A tressé haute résistance pour charge rapide. Compatible Huawei, Xiaomi, Vivo, Samsung. 1m à 8m disponibles.",
+   specs:["6A charge rapide","Longueur au choix","Tressé renforcé","Multi-marques"],
+   revs:[{av:"MK",nm:"Marc K.",dt:"10 fév. 2025",st:"★★★★★",tx:"Excellent câble, charge vraiment rapide. Pris le 3m, parfait !"}]},
+  {id:5,name:"Xiaomi TV Box S 3rd Gen",short:"4K UHD · Google TV · Wi-Fi 6 · Dolby",cat:"TV Box",
+   price:"74,99",pn:74.99,fold:"99,99",fon:99.99,badge:"promo",bt:"-25%",stars:4.9,rev:10000,isPromo:true,
+   imgs:["p5_1","p5_2","p5_3","p5_4"],
+   desc:"Transformez votre TV en smart TV 4K UHD avec Google TV, Dolby Vision, Dolby Atmos et Wi-Fi 6. Netflix, YouTube, Prime Video intégrés.",
+   specs:["4K UHD","Google TV","Dolby Vision","Dolby Atmos","Wi-Fi 6","2Go · 32Go"],
+   revs:[{av:"JD",nm:"Julie D.",dt:"5 mars 2025",st:"★★★★★",tx:"Image 4K magnifique, Google TV très intuitif. Livré en 4 jours !"},{av:"NB",nm:"Nicolas B.",dt:"18 fév. 2025",st:"★★★★★",tx:"Son Dolby Atmos bluffant, Wi-Fi 6 ultra stable."}]},
+  {id:6,name:"Essager Batterie 20000mAh 65W",short:"PD 65W · Affichage LED · Bi-directionnel",cat:"Batteries",
+   price:"33,99",pn:33.99,fold:"49,99",fon:49.99,badge:"promo",bt:"N°1 vente",stars:4.8,rev:10000,isPromo:true,
+   imgs:["p6_1","p6_2"],
+   desc:"20000mAh avec charge PD 65W bidirectionnelle. Recharge un laptop entier ou 3 smartphones. Affichage LED précis.",
+   specs:["20000 mAh","65W PD bi-direct.","Affichage LED","USB-C + USB-A"],
+   revs:[{av:"EF",nm:"Emma F.",dt:"28 fév. 2025",st:"★★★★★",tx:"Rechargé mon laptop et téléphone en voyage. Solide."}]},
+  {id:7,name:"PowerBank Magnétique MagSafe",short:"15W Sans fil · Compatible iPhone & Android",cat:"Batteries",
+   price:"11,49",pn:11.49,fold:"19,99",fon:19.99,badge:"promo",bt:"-43%",stars:3.6,rev:5000,isPromo:true,
+   imgs:["p7_1","p7_2"],
+   desc:"Batterie magnétique sans fil 15W Fast Charging, compatible MagSafe iPhone 13/14/15 et Android. Snap magnétique 10N.",
+   specs:["15W sans fil","Compatible MagSafe","10N magnétique","6 coloris"],
+   revs:[{av:"LR",nm:"Lucas R.",dt:"14 mars 2025",st:"★★★★☆",tx:"Pratique pour les recharges. Tient bien sur iPhone."}]},
+  {id:8,name:"Lunettes Rétro Carrées Premium",short:"UV400 · Style vintage · 7 coloris",cat:"Accessoires",
+   price:"19,90",pn:19.90,fold:"39,90",fon:39.90,badge:"new",bt:"Nouveau",stars:4.9,rev:185,isPromo:false,
+   imgs:["n1"],
+   desc:"Lunettes de soleil rétro carrées haut de gamme. Montures épaisses tendance, verres UV400. Style classique et polyvalent pour homme et femme. 7 coloris disponibles.",
+   specs:["UV400","7 coloris","Style rétro","Unisexe","Verres polarisés"],
+   revs:[{av:"LM",nm:"Léa M.",dt:"12 fév. 2025",st:"★★★★★",tx:"Superbes lunettes ! Qualité premium pour le prix. Reçues en 5 jours."}]},
+  {id:9,name:"Chargeur Xiaomi 67W Turbo",short:"GaN · Prise EU · Câble USB-C inclus",cat:"Câbles",
+   price:"24,99",pn:24.99,fold:"39,99",fon:39.99,badge:"new",bt:"Nouveau",stars:4.9,rev:2000,isPromo:false,
+   imgs:["n2"],
+   desc:"Chargeur d\'origine Xiaomi 67W Turbo Charge GaN ultra compact. Compatible Poco X6 Pro, X5, F5, Mi 14. Câble USB-C inclus. Prise EU.",
+   specs:["67W Turbo Charge","Technologie GaN","Câble inclus","Prise EU","Compatible Xiaomi"],
+   revs:[{av:"PD",nm:"Pierre D.",dt:"3 mars 2025",st:"★★★★★",tx:"Charge ultra rapide, compact et léger. Parfait pour voyager."}]},
+  {id:10,name:"Mini Aspirateur Voiture 9000Pa",short:"Sans fil · 1200mAh · Lavable · USB",cat:"Maison",
+   price:"19,99",pn:19.99,fold:"34,99",fon:34.99,badge:"promo",bt:"-43%",stars:4.0,rev:10000,isPromo:true,
+   imgs:["n3"],
+   desc:"Aspirateur portable sans fil 9000Pa, parfait pour voiture et maison. Batterie 1200mAh, filtre lavable, 3 accessoires inclus. Charge USB.",
+   specs:["9000Pa aspiration","1200mAh","Sans fil","Filtre lavable","3 accessoires","USB charge"],
+   revs:[{av:"RC",nm:"Romain C.",dt:"8 mars 2025",st:"★★★★☆",tx:"Pratique pour la voiture, aspiration correcte. Bon rapport qualité-prix."}]},
+  {id:11,name:"Veilleuse LED Barre Capteur",short:"Motion sensor · Blanc/Chaud · USB-C",cat:"Maison",
+   price:"11,99",pn:11.99,fold:"22,99",fon:22.99,badge:"new",bt:"Nouveau",stars:4.9,rev:100,isPromo:false,
+   imgs:["n4a","n4b"],
+   desc:"Veilleuse LED rechargeable sans fil avec capteur de mouvement infrarouge. 3 modes : détection jour/nuit/lumière constante. Fixation adhésive ou magnétique. Blanc froid ou chaud.",
+   specs:["Capteur IR","3 modes","USB-C","Blanc/Chaud","Sans fil","Fixation magnet."],
+   revs:[{av:"AM",nm:"Anna M.",dt:"20 fév. 2025",st:"★★★★★",tx:"Parfaite pour le couloir ! S\'allume instantanément."}]},
+  {id:12,name:"Veilleuse LED Barre Métallique",short:"3 températures · Alu · Capteur mvt",cat:"Maison",
+   price:"9,99",pn:9.99,fold:"18,99",fon:18.99,badge:"promo",bt:"-47%",stars:4.9,rev:409,isPromo:true,
+   imgs:["n5a","n5b"],
+   desc:"Barre LED métallique ultra-fine avec capteur de mouvement. 3 températures de couleur (3000K/4000K/6000K). Design aluminium premium. Rechargeable USB-C.",
+   specs:["3 températures","Design alu","Capteur mvt","USB-C recharge","Ultra-fine","Fixation magnet."],
+   revs:[{av:"BL",nm:"Baptiste L.",dt:"15 mars 2025",st:"★★★★★",tx:"Design élégant, lumière parfaite. Installée sous mes placards."}]},
+  {id:13,name:"Aspirateur Balai Laresar X11",short:"550W · 55000Pa · Auto-vide · LED",cat:"Maison",
+   price:"159,99",pn:159.99,fold:"249,99",fon:249.99,badge:"promo",bt:"-36%",stars:4.9,rev:10000,isPromo:true,
+   imgs:["n6a","n6b"],
+   desc:"Aspirateur balai sans fil 550W, 55000Pa d\'aspiration, bac auto-vidangeur, affichage LED batterie. Inclus 6 accessoires. Parfait pour sol dur et moquette.",
+   specs:["550W · 55000Pa","Auto-vidange","Affichage LED","6 accessoires","Sans fil","Stock EU"],
+   revs:[{av:"CD",nm:"Camille D.",dt:"2 mars 2025",st:"★★★★★",tx:"Incroyable ! Mon appartement n\'a jamais été aussi propre."}]},
+  {id:14,name:"Aspirateur Robot ILIFE A30 PRO",short:"5000Pa · LiDAR · Auto-vidange 60j · App",cat:"Maison",
+   price:"164,99",pn:164.99,fold:"259,99",fon:259.99,badge:"promo",bt:"-37%",stars:4.9,rev:10000,isPromo:true,
+   imgs:["n7a","n7b"],
+   desc:"Robot aspirateur et laveur ILIFE A30 PRO avec navigation LiDAR, auto-vidange 60 jours, aspiration 5000Pa. Contrôle via app. Livré depuis la Pologne.",
+   specs:["5000Pa","Navigation LiDAR","Auto-vidange 60j","Aspire + Lave","App Control","Stock Pologne"],
+   revs:[{av:"FD",nm:"Fabrice D.",dt:"25 fév. 2025",st:"★★★★★",tx:"Bluffant ! La navigation LiDAR est parfaite. Jamais dans les meubles."}]},
+  {id:15,name:"Robot Humanoïde IA Avatar",short:"Sur commande · Recherche & Éducation",cat:"Robotique",
+   price:"18000,00",pn:18000,fold:"22000,00",fon:22000,badge:"cmd",bt:"Sur commande",stars:5.0,rev:1,isPromo:false,isCmd:true,
+   imgs:["n8"],
+   desc:"Robot Avatar IA Humanoïde de dernière génération pour l\'éducation et la recherche commerciale. Mouvements avancés, IA embarquée. Article sur commande uniquement.",
+   specs:["IA embarquée","Mouvements avancés","Usage recherche","Éducation","Sur commande"],
+   revs:[{av:"NX",nm:"NexoraFlash",dt:"2025",st:"★★★★★",tx:"Article d\'exception disponible sur commande. Contactez-nous pour un devis personnalisé."}]},
+  {id:16,name:"Fer à Vapeur Vertical 2800W",short:"Haute pression · Réglable · Cintre inclus",cat:"Maison",
+   price:"59,99",pn:59.99,fold:"89,99",fon:89.99,badge:"promo",bt:"-33%",stars:4.9,rev:600,isPromo:true,
+   imgs:["n9a","n9b"],
+   desc:"Fer à vapeur vertical 2800W haute puissance avec réglage de température multi-tissus, tige télescopique 3 sections, cintre inclus. Pour vêtements et rideaux.",
+   specs:["2800W","Tige 3 sections","Multi-tissus","Cintre inclus","Grande cuve","Roues mobiles"],
+   revs:[{av:"MF",nm:"Marie F.",dt:"10 mars 2025",st:"★★★★★",tx:"Puissant et efficace ! Mes chemises sont impeccables en 2 min."}]},
+  {id:17,name:"Robot Chien AI RC Smart Dog",short:"Danse · Chant · App · Télécommande",cat:"Robotique",
+   price:"69,99",pn:69.99,fold:"109,99",fon:109.99,badge:"promo",bt:"-36%",stars:4.7,rev:3000,isPromo:true,
+   imgs:["n10a","n10b"],
+   desc:"Robot chien intelligent AI RC avec dialogue vocal, contrôle app et télécommande, danse et chant intégrés, programmation d\'actions. Parfait cadeau tech pour enfants et adultes.",
+   specs:["Dialogue vocal","App Control","Télécommande","Danse & Chant","Programmable","3+ ans"],
+   revs:[{av:"JL",nm:"Julie L.",dt:"5 mars 2025",st:"★★★★★",tx:"Mes enfants sont fous du robot ! Qualité top, livré en 4 jours."}]},
+];
+
+</script>
+<script>
+// ── CART ──
+var cart = JSON.parse(localStorage.getItem('nxf_cart')||'[]');
+var promoApplied = false;
+const PROMO_CODE = 'NEXORA10';
+const PROMO_PCT = 10;
+var recentlyViewed = JSON.parse(localStorage.getItem('nxf_rv')||'[]');
+var wishlist = JSON.parse(localStorage.getItem('nxf_wl')||'[]');
+var currentFilter = '';
+var currentSort = '';
+
+function saveCart(){ localStorage.setItem('nxf_cart', JSON.stringify(cart)); }
+function updateCartCount(){
+  var t = cart.reduce((s,x)=>s+(x.qty||1),0);
+  var el = document.getElementById('cartCount'); if(el) el.textContent = t;
+  var bn = document.getElementById('bnCartCount');
+  if(bn){ bn.textContent = t; bn.style.display = t>0?'flex':'none'; }
+}
+
+function addCart(id, e){
+  if(e){ e.stopPropagation(); }
+  var p = P.find(x=>x.id===id); if(!p||p.isCmd) return;
+  var ex = cart.find(x=>x.id===id);
+  if(ex){ ex.qty=(ex.qty||1)+1; } else { cart.push({id:id,qty:1}); }
+  saveCart(); updateCartCount();
+  showToast('🛒 '+p.name.substring(0,22)+'... ajouté !');
+}
+
+function rmCart(id){ cart = cart.filter(x=>x.id!==id); saveCart(); updateCartCount(); renderCart(); }
+function changeQty(id, delta){
+  var ex = cart.find(x=>x.id===id);
+  if(!ex) return;
+  ex.qty = (ex.qty||1) + delta;
+  if(ex.qty <= 0){ rmCart(id); return; }
+  saveCart(); updateCartCount(); renderCart();
+}
+
+function openCart(){ document.getElementById('cartOverlay').classList.add('open'); document.getElementById('cartDrawer').classList.add('open'); renderCart(); }
+function closeCart(){ document.getElementById('cartOverlay').classList.remove('open'); document.getElementById('cartDrawer').classList.remove('open'); }
+
+function renderCart(){
+  var el = document.getElementById('cartItems');
+  var footer = document.getElementById('cartFooter');
+  if(!el) return;
+  if(cart.length===0){
+    el.innerHTML = '<div class="cart-empty"><div class="cart-empty-icon">🛒</div><p>Votre panier est vide</p></div>';
+    if(footer) footer.style.display='none'; return;
+  }
+  if(footer) footer.style.display='block';
+  el.innerHTML = cart.map(item=>{
+    var p = P.find(x=>x.id===item.id); if(!p) return '';
+    return `<div class="cart-item">
+      <img class="cart-item-img" src="${p.imgs[0]}" alt="${p.name}">
+      <div class="cart-item-info">
+        <div class="cart-item-name">${p.name}</div>
+        <div class="cart-item-price">${p.price}€</div>
+        <div class="cart-item-qty">
+          <button class="qty-btn" onclick="changeQty(${p.id},-1)">−</button>
+          <span class="qty-val">${item.qty||1}</span>
+          <button class="qty-btn" onclick="changeQty(${p.id},1)">+</button>
+        </div>
+      </div>
+      <button class="cart-rm" onclick="rmCart(${p.id})">×</button>
+    </div>`;
+  }).join('');
+  renderCartTotals();
+}
+
+function renderCartTotals(){
+  var subtotal = cart.reduce((s,item)=>{ var p=P.find(x=>x.id===item.id); return s+(p?p.pn*(item.qty||1):0); },0);
+  var discount = promoApplied ? subtotal*(PROMO_PCT/100) : 0;
+  var shipping = subtotal >= 10 ? 0 : 3.99;
+  var total = subtotal - discount + shipping;
+  var el = document.getElementById('cartTotals'); if(!el) return;
+  el.innerHTML = `
+    <div class="cart-total-row"><span>Sous-total</span><span>${subtotal.toFixed(2).replace('.',',')}€</span></div>
+    ${promoApplied?`<div class="cart-total-row" style="color:var(--green)"><span>Code NEXORA10</span><span>−${discount.toFixed(2).replace('.',',')}€</span></div>`:''}
+    <div class="cart-total-row"><span>Livraison</span><span>${shipping===0?'<span style="color:var(--green)">Gratuite</span>':shipping.toFixed(2).replace('.',',')+'€'}</span></div>
+    <div class="cart-total-row total"><span>Total</span><span>${total.toFixed(2).replace('.',',')}€</span></div>`;
+}
+
+function applyPromo(){
+  var v = document.getElementById('promoInput').value.trim().toUpperCase();
+  if(v===PROMO_CODE){ promoApplied=true; showToast('🎉 -10% appliqué !'); renderCartTotals(); }
+  else showToast('❌ Code invalide');
+}
+
+// ── PRODUCTS ──
+function s5(n){ return '★'.repeat(Math.floor(n))+(n%1>=.5?'½':'')+'☆'.repeat(5-Math.ceil(n)); }
+
+function cardHTML(p){
+  var saveAmt = (p.fon-p.pn).toFixed(0);
+  var savePct = Math.round((p.fon-p.pn)/p.fon*100);
+  var inWL = wishlist.includes(p.id);
+  return `<div class="card" onclick="openProduct(${p.id})">
+    <div class="card-img-wrap">
+      <img src="${p.imgs[0]}" alt="${p.name}" loading="lazy">
+      <span class="card-badge ${p.badge==='new'?'new':p.isCmd?'cmd':'promo'}">${p.bt}</span>
+      <button class="card-wishlist ${inWL?'active':''}" onclick="toggleWishlist(${p.id},event)" title="Favoris">${inWL?'❤️':'🤍'}</button>
+    </div>
+    <div class="card-body">
+      <div class="card-name">${p.name}</div>
+      <div class="card-short">${p.short}</div>
+      <div class="card-stars">
+        <span class="stars-row">${'★'.repeat(Math.round(p.stars))}</span>
+        <span class="card-stars-val">${p.stars}</span>
+        <span class="card-stars-count">(${p.rev.toLocaleString('fr')})</span>
+      </div>
+      <div class="card-price-row">
+        <span class="card-price">${p.price}€</span>
+        <span class="card-old">${p.fold}€</span>
+        <span class="card-save">−${savePct}%</span>
+      </div>
+      ${!p.isCmd?`<button class="card-add" onclick="addCart(${p.id},event)">🛒 Ajouter au panier</button>`:'<button class="card-add" style="background:var(--text2)">Sur commande</button>'}
+      <div class="card-viewers" id="viewers-${p.id}"></div>
+    </div>
+  </div>`;
+}
+
+function renderGrid(products){
+  var grid = document.getElementById('productGrid'); if(!grid) return;
+  var count = document.getElementById('productCount');
+  if(count) count.textContent = products.length + ' articles';
+  if(products.length===0){
+    grid.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:48px;color:var(--text3)">Aucun produit trouvé</div>'; return;
+  }
+  grid.innerHTML = products.map(cardHTML).join('');
+  updateViewers();
+}
+
+function filterCat(cat, chip){
+  currentFilter = cat;
+  document.querySelectorAll('.filter-chip').forEach(c=>c.classList.remove('active'));
+  document.querySelectorAll('.nav-cat').forEach(c=>c.classList.remove('active'));
+  if(chip) chip.classList.add('active');
+  var filtered = cat ? P.filter(p=>p.cat===cat&&!p._disabled) : P.filter(p=>!p._disabled);
+  if(currentSort) filtered = sortArr(filtered, currentSort);
+  renderGrid(filtered);
+}
+
+function sortArr(arr, val){
+  var a = [...arr];
+  if(val==='price_asc') a.sort((x,y)=>x.pn-y.pn);
+  else if(val==='price_desc') a.sort((x,y)=>y.pn-x.pn);
+  else if(val==='stars') a.sort((x,y)=>y.stars-x.stars);
+  else if(val==='reviews') a.sort((x,y)=>y.rev-x.rev);
+  return a;
+}
+
+function sortProducts(val){
+  currentSort = val;
+  var arr = currentFilter ? P.filter(p=>p.cat===currentFilter&&!p._disabled) : P.filter(p=>!p._disabled);
+  renderGrid(sortArr(arr, val));
+}
+
+function openProduct(id){
+  try{ sessionStorage.setItem('nxf_product', String(id)); }catch(e){}
+  addRecentlyViewed(id);
+  window.location.href = 'produit.html?id='+id;
+}
+
+// ── SEARCH ──
+function liveSearch(q, target){
+  q = q.toLowerCase().trim();
+  var results = q.length>1 ? P.filter(p=>p.name.toLowerCase().includes(q)||p.cat.toLowerCase().includes(q)).slice(0,6) : [];
+  if(target==='mobile'){
+    var el = document.getElementById('mobileSearchResults');
+    if(!el) return;
+    el.innerHTML = results.length ? results.map(p=>`
+      <div class="search-result-item" onclick="openProduct(${p.id})">
+        <img class="search-result-img" src="${p.imgs[0]}" alt="">
+        <div><div class="search-result-name">${p.name}</div><div class="search-result-price">${p.price}€</div></div>
+      </div>`).join('') : (q.length>1?'<div style="padding:16px;color:var(--text3);font-size:14px">Aucun résultat</div>':'');
+  } else {
+    var el2 = document.getElementById('searchResults');
+    if(!el2) return;
+    el2.innerHTML = results.map(p=>`
+      <div class="search-result-item" onclick="openProduct(${p.id})">
+        <img class="search-result-img" src="${p.imgs[0]}" alt="">
+        <div><div class="search-result-name">${p.name}</div><div class="search-result-price">${p.price}€</div></div>
+      </div>`).join('');
+    if(results.length) el2.classList.add('open');
+  }
+}
+function showSearchResults(){ var el=document.getElementById('searchResults'); if(el&&el.children.length) el.classList.add('open'); }
+function hideSearchResults(){ var el=document.getElementById('searchResults'); if(el) el.classList.remove('open'); }
+
+function toggleMobileSearch(){
+  var m = document.getElementById('mobileSearch');
+  if(!m) return;
+  var isOpen = m.classList.contains('open');
+  if(isOpen){ m.classList.remove('open'); m.style.display='none'; }
+  else{ m.style.display='block'; setTimeout(()=>{ m.classList.add('open'); var inp=document.getElementById('mobileSearchInput'); if(inp) inp.focus(); },10); }
+}
+
+// ── WISHLIST ──
+function toggleWishlist(id, e){
+  if(e) e.stopPropagation();
+  var idx = wishlist.indexOf(id);
+  if(idx>-1){ wishlist.splice(idx,1); showToast('💔 Retiré des favoris'); }
+  else{ wishlist.push(id); showToast('❤️ Ajouté aux favoris !'); }
+  localStorage.setItem('nxf_wl', JSON.stringify(wishlist));
+  var btn = document.querySelector(`.card-wishlist[onclick*="toggleWishlist(${id},"]`);
+  if(btn){ btn.classList.toggle('active'); btn.textContent = wishlist.includes(id)?'❤️':'🤍'; }
+}
+
+// ── RECENTLY VIEWED ──
+function addRecentlyViewed(id){
+  recentlyViewed = recentlyViewed.filter(x=>x!==id);
+  recentlyViewed.unshift(id);
+  recentlyViewed = recentlyViewed.slice(0,8);
+  localStorage.setItem('nxf_rv', JSON.stringify(recentlyViewed));
+}
+function renderRecentlyViewed(){
+  var rv = recentlyViewed.slice(0,6);
+  if(rv.length<2) return;
+  var section = document.getElementById('rvSection');
+  var row = document.getElementById('rvRow');
+  if(!section||!row) return;
+  section.classList.add('visible');
+  row.innerHTML = rv.map(id=>{ var p=P.find(x=>x.id===id); if(!p) return '';
+    return `<div class="upsell-card" onclick="openProduct(${p.id})">
+      <div class="upsell-img"><img src="${p.imgs[0]}" alt="${p.name}" loading="lazy"></div>
+      <div class="upsell-info"><div class="upsell-name">${p.name}</div><div class="upsell-price">${p.price}€</div></div>
+    </div>`; }).join('');
+}
+
+// ── REVIEWS ──
+function renderReviews(){
+  var el = document.getElementById('reviewsGrid'); if(!el) return;
+  var allRevs = [];
+  P.forEach(p=>{ if(p.revs) p.revs.forEach(r=>allRevs.push({...r,product:p.name,pid:p.id})); });
+  allRevs = allRevs.sort(()=>Math.random()-.5).slice(0,6);
+  el.innerHTML = allRevs.map(r=>`
+    <div class="review-card">
+      <div class="review-top">
+        <div class="review-av">${r.av}</div>
+        <div><div class="review-nm">${r.nm}</div><div class="review-loc">📍 France</div></div>
+        <div class="review-stars">${r.st}</div>
+      </div>
+      <div class="review-text">"${r.tx}"</div>
+      <div class="review-product">✓ ${r.product}</div>
+      <div class="review-check">✓ Achat vérifié</div>
+    </div>`).join('');
+}
+
+// ── SOCIAL PROOF ──
+function updateViewers(){
+  document.querySelectorAll('[id^="viewers-"]').forEach(el=>{
+    var n = Math.floor(Math.random()*12+1);
+    el.textContent = n+' pers. regardent';
+  });
+}
+setInterval(updateViewers, 6000);
+
+// ── TOAST ──
+var toastTimer;
+function showToast(msg){
+  var t = document.getElementById('toast'); if(!t) return;
+  t.textContent = msg; t.classList.add('show');
+  clearTimeout(toastTimer); toastTimer = setTimeout(()=>t.classList.remove('show'), 2500);
+}
+
+// ── PROMO COPY ──
+function copyPromo(){
+  try{ navigator.clipboard.writeText('NEXORA10'); }catch(e){}
+  showToast('✅ Code NEXORA10 copié !');
+}
+
+// ── INIT ──
+window.addEventListener('load', function(){
+  renderGrid(P.filter(p=>!p._disabled));
+  renderReviews();
+  renderRecentlyViewed();
+  updateCartCount();
+  renderCart();
+});
+</script>
+</body>
+</html>

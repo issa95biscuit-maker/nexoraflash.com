@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Produit — NexoraFlash ⚡</title>
+<meta name="description" content="Découvrez nos produits tech au meilleur prix.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f7f8fa;--surface:#ffffff;--surface2:#f0f2f5;--border:#e8eaed;--border2:#d1d5db;
+  --text:#0d0f12;--text2:#4b5563;--text3:#9ca3af;
+  --accent:#1a56db;--accent-hover:#1447c0;--accent-light:#eff4ff;
+  --green:#0ea569;--green-light:#ecfdf5;--red:#e53935;--red-light:#fff5f5;
+  --orange:#f59e0b;--shadow-sm:0 1px 3px rgba(0,0,0,.06);
+  --shadow:0 4px 16px rgba(0,0,0,.08),0 2px 6px rgba(0,0,0,.04);
+  --shadow-lg:0 12px 40px rgba(0,0,0,.12),0 4px 12px rgba(0,0,0,.06);
+  --radius:12px;--radius-lg:20px;--font:'DM Sans',sans-serif;--mono:'DM Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{-webkit-tap-highlight-color:transparent;}
+body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:15px;line-height:1.6;overflow-x:hidden;}
+img{max-width:100%;display:block;}
+button{cursor:pointer;border:none;outline:none;font-family:var(--font);}
+
+/* ── NAV ── */
+.nav{position:sticky;top:0;z-index:200;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);height:60px;display:flex;align-items:center;padding:0 20px;gap:12px;}
+.nav-back{display:flex;align-items:center;gap:6px;font-size:14px;font-weight:600;color:var(--text2);cursor:pointer;padding:7px 12px;border-radius:9px;transition:.2s;}
+.nav-back:hover{background:var(--surface2);color:var(--text);}
+.nav-logo{font-size:18px;font-weight:700;cursor:pointer;}
+.nav-logo span{color:var(--accent);}
+.nav-actions{display:flex;align-items:center;gap:6px;margin-left:auto;}
+.nav-btn{display:flex;align-items:center;gap:6px;padding:7px 14px;border-radius:9px;font-size:14px;font-weight:600;background:var(--accent);color:#fff;cursor:pointer;transition:.2s;}
+.nav-btn:hover{background:var(--accent-hover);}
+.cart-count{background:#fff;color:var(--accent);border-radius:20px;font-size:11px;font-weight:700;padding:1px 6px;}
+
+/* ── BREADCRUMB ── */
+.breadcrumb{padding:12px 20px;font-size:12px;color:var(--text3);display:flex;align-items:center;gap:6px;max-width:1100px;margin:0 auto;}
+.breadcrumb a{cursor:pointer;color:var(--accent);}
+.breadcrumb-sep{color:var(--border2);}
+
+/* ── PRODUCT LAYOUT ── */
+.product-wrap{max-width:1100px;margin:0 auto;padding:0 20px 40px;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start;}
+@media(max-width:768px){.product-wrap{grid-template-columns:1fr;gap:20px;padding:0 0 100px;}}
+
+/* ── GALLERY ── */
+.gallery{position:sticky;top:76px;}
+.gallery-main{border-radius:var(--radius-lg);overflow:hidden;background:var(--surface);border:1px solid var(--border);aspect-ratio:1;display:flex;align-items:center;justify-content:center;cursor:zoom-in;position:relative;}
+.gallery-main img{width:100%;height:100%;object-fit:contain;transition:transform .4s;}
+.gallery-main:hover img{transform:scale(1.06);}
+.gallery-main.zoomed img{transform:scale(1.8);cursor:zoom-out;}
+.gallery-thumbs{display:flex;gap:10px;margin-top:12px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px;}
+.gallery-thumbs::-webkit-scrollbar{display:none;}
+.gallery-thumb{flex-shrink:0;width:72px;height:72px;border-radius:10px;overflow:hidden;background:var(--surface);border:2px solid var(--border);cursor:pointer;transition:.15s;}
+.gallery-thumb.active{border-color:var(--accent);}
+.gallery-thumb img{width:100%;height:100%;object-fit:contain;}
+/* Swipe on mobile */
+.gallery-main-wrap{position:relative;overflow:hidden;border-radius:var(--radius-lg);}
+.gallery-nav{position:absolute;top:50%;transform:translateY(-50%);width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.9);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:2;font-size:16px;transition:.15s;}
+.gallery-nav:hover{background:#fff;box-shadow:var(--shadow-sm);}
+.gallery-nav.prev{left:10px;}
+.gallery-nav.next{right:10px;}
+@media(min-width:769px){.gallery-nav{display:none;}}
+
+/* ── PRODUCT INFO ── */
+.product-info{padding:4px 0;}
+@media(max-width:768px){.product-info{padding:16px 20px 0;}}
+.product-badges{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;}
+.pbadge{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:6px;font-size:12px;font-weight:600;}
+.pbadge.new{background:var(--accent-light);color:var(--accent);}
+.pbadge.promo{background:#fff5f5;color:var(--red);}
+.pbadge.stock{background:var(--green-light);color:var(--green);}
+.product-title{font-size:clamp(20px,3vw,28px);font-weight:700;line-height:1.2;margin-bottom:8px;letter-spacing:-.02em;}
+.product-short{font-size:14px;color:var(--text2);margin-bottom:16px;}
+.rating-row{display:flex;align-items:center;gap:10px;margin-bottom:20px;flex-wrap:wrap;}
+.rating-stars{color:#f59e0b;font-size:18px;letter-spacing:1px;}
+.rating-score{font-size:16px;font-weight:700;}
+.rating-count{font-size:13px;color:var(--text3);}
+.rating-verified{font-size:12px;color:var(--green);font-weight:600;background:var(--green-light);padding:3px 8px;border-radius:20px;}
+
+/* ── PRICE ── */
+.price-block{background:var(--accent-light);border:1px solid rgba(26,86,219,.15);border-radius:var(--radius-lg);padding:16px 18px;margin-bottom:20px;}
+.price-main{font-size:32px;font-weight:700;color:var(--text);letter-spacing:-.02em;}
+.price-old{font-size:16px;color:var(--text3);text-decoration:line-through;margin-left:8px;}
+.price-save{display:inline-flex;align-items:center;gap:4px;background:var(--green-light);color:var(--green);font-size:13px;font-weight:700;padding:4px 10px;border-radius:20px;margin-top:6px;}
+.price-delivery{font-size:13px;color:var(--text2);margin-top:8px;display:flex;align-items:center;gap:6px;}
+.price-delivery strong{color:var(--green);}
+
+/* ── SPECS ── */
+.specs-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;}
+.spec-chip{padding:6px 12px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;font-size:12px;font-weight:600;color:var(--text);}
+
+/* ── QUANTITY ── */
+.qty-row{display:flex;align-items:center;gap:12px;margin-bottom:16px;}
+.qty-label{font-size:14px;font-weight:600;color:var(--text2);}
+.qty-control{display:flex;align-items:center;gap:0;border:1.5px solid var(--border);border-radius:10px;overflow:hidden;}
+.qty-btn{width:38px;height:38px;background:var(--surface2);border:none;font-size:18px;font-weight:600;color:var(--text);cursor:pointer;transition:.15s;}
+.qty-btn:hover{background:var(--border);}
+.qty-num{width:44px;text-align:center;font-size:16px;font-weight:700;border:none;outline:none;font-family:var(--font);}
+.stock-indicator{font-size:12px;font-weight:600;color:var(--orange);background:#fffbeb;padding:3px 8px;border-radius:6px;}
+
+/* ── CTA BUTTONS ── */
+.cta-row{display:flex;gap:10px;margin-bottom:20px;}
+.btn-add{flex:1;padding:14px 20px;background:var(--accent);color:#fff;border-radius:12px;font-size:16px;font-weight:700;border:none;cursor:pointer;transition:.2s;display:flex;align-items:center;justify-content:center;gap:8px;}
+.btn-add:hover{background:var(--accent-hover);transform:translateY(-1px);}
+.btn-add:active{transform:translateY(0);}
+.btn-wishlist{width:50px;height:50px;border-radius:12px;background:var(--surface);border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:20px;cursor:pointer;transition:.2s;flex-shrink:0;}
+.btn-wishlist:hover,.btn-wishlist.active{border-color:var(--red);color:var(--red);}
+.btn-share{width:50px;height:50px;border-radius:12px;background:var(--surface);border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:18px;cursor:pointer;transition:.2s;flex-shrink:0;}
+.btn-share:hover{border-color:var(--accent);}
+
+/* ── GUARANTEES ROW ── */
+.mini-guarantees{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px;}
+.mini-g{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:10px;text-align:center;}
+.mini-g-icon{font-size:20px;margin-bottom:4px;}
+.mini-g-text{font-size:11px;font-weight:600;color:var(--text2);}
+
+/* ── DESCRIPTION TABS ── */
+.tabs{margin-bottom:0;}
+.tab-headers{display:flex;border-bottom:2px solid var(--border);margin-bottom:20px;gap:0;overflow-x:auto;scrollbar-width:none;}
+.tab-headers::-webkit-scrollbar{display:none;}
+.tab-header{padding:12px 18px;font-size:14px;font-weight:600;color:var(--text3);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;transition:.15s;white-space:nowrap;}
+.tab-header.active{color:var(--accent);border-bottom-color:var(--accent);}
+.tab-panel{display:none;}
+.tab-panel.active{display:block;}
+.product-desc{font-size:14px;color:var(--text2);line-height:1.8;}
+
+/* ── REVIEWS ── */
+.reviews-summary{display:flex;align-items:center;gap:24px;padding:20px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);margin-bottom:20px;}
+.reviews-big-score{text-align:center;}
+.reviews-big-score .score{font-size:48px;font-weight:700;line-height:1;}
+.reviews-big-score .stars{color:#f59e0b;font-size:20px;}
+.reviews-big-score .count{font-size:12px;color:var(--text3);margin-top:4px;}
+.reviews-bars{flex:1;}
+.rbar-row{display:flex;align-items:center;gap:8px;margin-bottom:4px;}
+.rbar-label{font-size:12px;color:var(--text2);width:14px;text-align:right;}
+.rbar-track{flex:1;height:6px;background:var(--surface2);border-radius:3px;overflow:hidden;}
+.rbar-fill{height:100%;background:#f59e0b;border-radius:3px;}
+.review-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:18px;margin-bottom:12px;}
+.review-top{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.review-av{width:38px;height:38px;border-radius:50%;background:var(--accent-light);color:var(--accent);font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.review-nm{font-size:14px;font-weight:600;}
+.review-dt{font-size:12px;color:var(--text3);}
+.review-stars{color:#f59e0b;font-size:14px;margin-left:auto;}
+.review-text{font-size:13px;color:var(--text2);line-height:1.6;}
+.review-check{font-size:11px;color:var(--green);font-weight:500;margin-top:6px;}
+
+/* ── RELATED PRODUCTS ── */
+.related-section{max-width:1100px;margin:0 auto;padding:0 20px 40px;}
+@media(max-width:768px){.related-section{padding:0 0 100px;}}
+.related-title{font-size:20px;font-weight:700;margin-bottom:16px;padding:0 0 0 0;}
+@media(max-width:768px){.related-title{padding:0 20px;}}
+.related-row{display:flex;gap:12px;overflow-x:auto;scrollbar-width:none;padding:4px 0 12px;}
+.related-row::-webkit-scrollbar{display:none;}
+@media(max-width:768px){.related-row{padding:4px 20px 12px;}}
+.related-card{flex-shrink:0;width:180px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;cursor:pointer;transition:.2s;}
+.related-card:hover{box-shadow:var(--shadow-sm);transform:translateY(-2px);}
+.related-img{height:120px;background:var(--surface2);overflow:hidden;}
+.related-img img{width:100%;height:100%;object-fit:contain;}
+.related-info{padding:10px 12px 12px;}
+.related-name{font-size:12px;font-weight:600;line-height:1.3;margin-bottom:4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.related-price{font-size:13px;font-weight:700;color:var(--accent);}
+.related-old{font-size:11px;color:var(--text3);text-decoration:line-through;}
+
+/* ── STICKY BUY ── */
+.sticky-buy{position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,.97);border-top:1px solid var(--border);padding:12px 20px calc(12px + env(safe-area-inset-bottom));display:flex;align-items:center;gap:12px;z-index:290;transform:translateY(100%);transition:.3s cubic-bezier(.4,0,.2,1);backdrop-filter:blur(10px);}
+.sticky-buy.visible{transform:translateY(0);}
+.sticky-price-block{}
+.sticky-price{font-size:20px;font-weight:700;}
+.sticky-old{font-size:13px;color:var(--text3);text-decoration:line-through;}
+.sticky-btn{flex:1;max-width:280px;padding:13px 20px;background:var(--accent);color:#fff;border-radius:12px;font-size:15px;font-weight:700;border:none;cursor:pointer;transition:.2s;}
+.sticky-btn:hover{background:var(--accent-hover);}
+
+/* ── CART DRAWER ── */
+.cart-overlay{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:400;opacity:0;pointer-events:none;transition:.25s;backdrop-filter:blur(2px);}
+.cart-overlay.open{opacity:1;pointer-events:all;}
+.cart-drawer{position:fixed;top:0;right:0;bottom:0;width:min(420px,100vw);background:#fff;z-index:401;transform:translateX(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;box-shadow:var(--shadow-lg);}
+.cart-drawer.open{transform:translateX(0);}
+.cart-head{padding:20px 20px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.cart-head h2{font-size:18px;font-weight:700;}
+.cart-close-btn{width:36px;height:36px;border-radius:50%;background:var(--surface2);border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px;color:var(--text2);}
+.cart-items{flex:1;overflow-y:auto;padding:16px 20px;}
+.cart-empty{text-align:center;padding:48px 20px;color:var(--text3);}
+.cart-empty-icon{font-size:48px;margin-bottom:12px;}
+.cart-item{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--border);}
+.cart-item-img{width:64px;height:64px;border-radius:10px;object-fit:contain;background:var(--surface2);flex-shrink:0;}
+.cart-item-info{flex:1;}
+.cart-item-name{font-size:13px;font-weight:600;line-height:1.35;margin-bottom:4px;}
+.cart-item-price{font-size:14px;font-weight:700;color:var(--accent);}
+.cart-item-qty{display:flex;align-items:center;gap:8px;margin-top:6px;}
+.cqty-btn{width:26px;height:26px;border-radius:6px;border:1.5px solid var(--border);background:var(--surface);font-size:15px;font-weight:600;display:flex;align-items:center;justify-content:center;cursor:pointer;}
+.cqty-val{font-size:14px;font-weight:600;min-width:20px;text-align:center;}
+.cart-rm{margin-left:auto;color:var(--text3);background:none;border:none;cursor:pointer;font-size:18px;padding:4px;}
+.cart-rm:hover{color:var(--red);}
+.cart-footer{padding:16px 20px 24px;border-top:1px solid var(--border);}
+.cart-promo{display:flex;gap:8px;margin-bottom:16px;}
+.cart-promo input{flex:1;height:40px;border:1.5px solid var(--border);border-radius:8px;padding:0 12px;font-size:13px;font-family:var(--font);}
+.cart-promo input:focus{border-color:var(--accent);outline:none;}
+.cart-promo button{padding:0 16px;background:var(--accent);color:#fff;border-radius:8px;font-size:13px;font-weight:600;border:none;cursor:pointer;}
+.cart-total-row{display:flex;justify-content:space-between;font-size:14px;color:var(--text2);padding:4px 0;}
+.cart-total-row.total{font-size:16px;font-weight:700;color:var(--text);border-top:1px solid var(--border);padding-top:10px;margin-top:4px;}
+.cart-checkout{width:100%;padding:14px;background:var(--accent);color:#fff;border-radius:10px;font-size:15px;font-weight:700;border:none;cursor:pointer;margin-top:12px;}
+.cart-checkout:hover{background:var(--accent-hover);}
+
+/* ── TOAST ── */
+.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--text);color:#fff;padding:10px 20px;border-radius:10px;font-size:13px;font-weight:500;z-index:500;opacity:0;transition:.25s;pointer-events:none;white-space:nowrap;box-shadow:var(--shadow-lg);}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* ── BOTTOM NAV ── */
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,.97);border-top:1px solid var(--border);display:flex;z-index:280;padding-bottom:env(safe-area-inset-bottom);backdrop-filter:blur(10px);}
+.bn-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:9px 4px 7px;cursor:pointer;color:var(--text3);transition:.2s;font-size:10px;font-weight:500;}
+.bn-item.active,.bn-item:hover{color:var(--accent);}
+.bn-item svg{width:22px;height:22px;}
+.bn-badge{position:absolute;top:6px;right:50%;transform:translateX(8px);background:var(--accent);color:#fff;font-size:9px;font-weight:700;min-width:16px;height:16px;border-radius:8px;display:flex;align-items:center;justify-content:center;padding:0 4px;}
+@media(min-width:900px){.bottom-nav{display:none;}.sticky-buy{display:none;}}
+
+/* ── CHRONO ── */
+.chrono-block{background:linear-gradient(135deg,var(--red),#c62828);color:#fff;border-radius:10px;padding:10px 14px;margin-bottom:16px;display:flex;align-items:center;gap:10px;display:none;}
+.chrono-block.visible{display:flex;}
+.chrono-time{font-family:var(--mono);font-size:18px;font-weight:700;}
+.chrono-label{font-size:12px;opacity:.9;}
+
+/* ── SHARE MODAL ── */
+.share-modal{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:500;display:flex;align-items:flex-end;justify-content:center;opacity:0;pointer-events:none;transition:.2s;}
+.share-modal.open{opacity:1;pointer-events:all;}
+.share-panel{background:#fff;border-radius:20px 20px 0 0;padding:24px 20px 36px;width:100%;max-width:480px;}
+.share-title{font-size:16px;font-weight:700;margin-bottom:16px;}
+.share-options{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+.share-opt{text-align:center;cursor:pointer;}
+.share-opt-icon{width:52px;height:52px;border-radius:14px;background:var(--surface2);display:flex;align-items:center;justify-content:center;font-size:24px;margin:0 auto 6px;}
+.share-opt-label{font-size:11px;font-weight:500;color:var(--text2);}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.fade-up{animation:fadeUp .3s ease both;}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-back" onclick="window.location.href='index.html'">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    Retour
+  </div>
+  <div class="nav-logo" onclick="window.location.href='index.html'">NexoraFlash<span>⚡</span></div>
+  <div class="nav-actions">
+    <button class="nav-btn" onclick="openCart()">🛒 <span id="cartCount">0</span></button>
+  </div>
+</nav>
+
+<!-- CART DRAWER -->
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-head">
+    <h2>Mon panier 🛒</h2>
+    <button class="cart-close-btn" onclick="closeCart()">×</button>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-footer" id="cartFooter" style="display:none">
+    <div class="cart-promo">
+      <input type="text" placeholder="Code promo" id="promoInput" value="NEXORA10">
+      <button onclick="applyPromo()">Appliquer</button>
+    </div>
+    <div id="cartTotals"></div>
+    <button class="cart-checkout">Commander →</button>
+  </div>
+</div>
+
+<!-- SHARE MODAL -->
+<div class="share-modal" id="shareModal" onclick="closeShare()">
+  <div class="share-panel" onclick="event.stopPropagation()">
+    <div class="share-title">Partager ce produit</div>
+    <div class="share-options">
+      <div class="share-opt" onclick="shareWA()"><div class="share-opt-icon">💬</div><div class="share-opt-label">WhatsApp</div></div>
+      <div class="share-opt" onclick="copyLink()"><div class="share-opt-icon">🔗</div><div class="share-opt-label">Copier lien</div></div>
+      <div class="share-opt" onclick="shareFB()"><div class="share-opt-icon">📘</div><div class="share-opt-label">Facebook</div></div>
+      <div class="share-opt" onclick="closeShare()"><div class="share-opt-icon">✕</div><div class="share-opt-label">Fermer</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <a onclick="window.location.href='index.html'">Accueil</a>
+  <span class="breadcrumb-sep">›</span>
+  <span id="breadcrumbCat">Produits</span>
+  <span class="breadcrumb-sep">›</span>
+  <span id="breadcrumbName" style="color:var(--text2)">Produit</span>
+</div>
+
+<!-- PRODUCT -->
+<div class="product-wrap fade-up">
+
+  <!-- GALLERY -->
+  <div class="gallery">
+    <div class="gallery-main-wrap">
+      <div class="gallery-main" id="galleryMain" onclick="toggleZoom()">
+        <img id="mainImg" src="" alt="">
+      </div>
+      <button class="gallery-nav prev" id="galPrev" onclick="galleryNav(-1)">‹</button>
+      <button class="gallery-nav next" id="galNext" onclick="galleryNav(1)">›</button>
+    </div>
+    <div class="gallery-thumbs" id="galleryThumbs"></div>
+  </div>
+
+  <!-- INFO -->
+  <div class="product-info">
+    <div class="product-badges" id="productBadges"></div>
+    <h1 class="product-title" id="productTitle">Chargement...</h1>
+    <p class="product-short" id="productShort"></p>
+
+    <div class="rating-row">
+      <span class="rating-stars" id="ratingStars">★★★★★</span>
+      <span class="rating-score" id="ratingScore">5.0</span>
+      <span class="rating-count" id="ratingCount">0 avis</span>
+      <span class="rating-verified">✓ Avis vérifiés</span>
+    </div>
+
+    <!-- CHRONO -->
+    <div class="chrono-block" id="chronoBlock">
+      <div>🔥</div>
+      <div>
+        <div class="chrono-label">Offre expire dans</div>
+        <div class="chrono-time" id="chronoTime">--:--:--</div>
+      </div>
+    </div>
+
+    <!-- PRICE -->
+    <div class="price-block">
+      <div>
+        <span class="price-main" id="priceMain">--</span>
+        <span class="price-old" id="priceOld">--</span>
+      </div>
+      <div class="price-save" id="priceSave">💸 Vous économisez --€</div>
+      <div class="price-delivery">🚚 <strong>Livraison gratuite</strong> · Estimée dans 3-7 jours</div>
+    </div>
+
+    <!-- SPECS -->
+    <div class="specs-row" id="specsRow"></div>
+
+    <!-- STOCK -->
+    <div style="margin-bottom:14px;">
+      <span class="stock-indicator" id="stockIndicator">⚡ Plus que quelques unités</span>
+    </div>
+
+    <!-- QTY -->
+    <div class="qty-row" id="qtyRow">
+      <span class="qty-label">Quantité :</span>
+      <div class="qty-control">
+        <button class="qty-btn" onclick="changeLocalQty(-1)">−</button>
+        <span class="qty-num" id="localQty">1</span>
+        <button class="qty-btn" onclick="changeLocalQty(1)">+</button>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-row" id="ctaRow">
+      <button class="btn-add" id="addBtn" onclick="addToCart()">🛒 Ajouter au panier</button>
+      <button class="btn-wishlist" id="wlBtn" onclick="toggleWishlist()" title="Favoris">🤍</button>
+      <button class="btn-share" onclick="openShare()" title="Partager">↗️</button>
+    </div>
+
+    <!-- CMD BOX -->
+    <div id="cmdBox" style="display:none;background:var(--surface2);border:1.5px solid var(--border);border-radius:12px;padding:16px;margin-bottom:16px;">
+      <div style="font-weight:700;margin-bottom:6px;">📋 Article sur commande</div>
+      <div style="font-size:13px;color:var(--text2);margin-bottom:12px;">Cet article est disponible sur commande uniquement. Contactez-nous pour un devis personnalisé.</div>
+      <button style="width:100%;padding:12px;background:var(--text);color:#fff;border-radius:10px;font-size:14px;font-weight:600;border:none;cursor:pointer;">📧 Demander un devis</button>
+    </div>
+
+    <!-- MINI GUARANTEES -->
+    <div class="mini-guarantees">
+      <div class="mini-g"><div class="mini-g-icon">🚚</div><div class="mini-g-text">3-7 jours</div></div>
+      <div class="mini-g"><div class="mini-g-icon">↩️</div><div class="mini-g-text">Retour 30j</div></div>
+      <div class="mini-g"><div class="mini-g-icon">🔒</div><div class="mini-g-text">Sécurisé</div></div>
+    </div>
+
+    <!-- TABS -->
+    <div class="tabs">
+      <div class="tab-headers">
+        <div class="tab-header active" onclick="openTab('desc',this)">Description</div>
+        <div class="tab-header" onclick="openTab('reviews',this)">Avis (<span id="tabRevCount">0</span>)</div>
+        <div class="tab-header" onclick="openTab('delivery',this)">Livraison</div>
+      </div>
+      <div class="tab-panel active" id="tab-desc">
+        <p class="product-desc" id="productDesc"></p>
+      </div>
+      <div class="tab-panel" id="tab-reviews">
+        <div class="reviews-summary" id="reviewsSummary"></div>
+        <div id="reviewsList"></div>
+      </div>
+      <div class="tab-panel" id="tab-delivery">
+        <div style="font-size:14px;color:var(--text2);line-height:1.8;">
+          <p style="margin-bottom:12px;">🚚 <strong>Livraison standard</strong> : 3-7 jours ouvrés · Gratuite dès 10€</p>
+          <p style="margin-bottom:12px;">📦 <strong>Suivi inclus</strong> : Numéro de suivi envoyé par email</p>
+          <p style="margin-bottom:12px;">↩️ <strong>Retours</strong> : 30 jours pour changer d'avis, remboursement complet</p>
+          <p>🔒 <strong>Paiement</strong> : Stripe · 3D Secure · SSL · Données protégées</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RELATED -->
+<div class="related-section">
+  <div class="related-title">🔥 Vous pourriez aussi aimer</div>
+  <div class="related-row" id="relatedRow"></div>
+</div>
+
+<!-- STICKY BUY -->
+<div class="sticky-buy" id="stickyBuy">
+  <div class="sticky-price-block">
+    <div class="sticky-price" id="stickyPrice">--€</div>
+    <div class="sticky-old" id="stickyOld">--€</div>
+  </div>
+  <button class="sticky-btn" id="stickyBtn">🛒 Ajouter au panier</button>
+</div>
+
+<!-- BOTTOM NAV -->
+<nav class="bottom-nav">
+  <div class="bn-item" onclick="window.location.href='index.html'">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    Accueil
+  </div>
+  <div class="bn-item active">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+    Produit
+  </div>
+  <div class="bn-item" onclick="openCart()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+    Panier
+  </div>
+  <div class="bn-item" onclick="window.location.href='index.html'">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+    Boutique
+  </div>
+  <div class="bn-item" onclick="toggleWishlist()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+    Favoris
+  </div>
+</nav>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script src="products.js"></script>
+<script>const IMGS={};P=P.map(p=>({...p,imgs:p.imgs}));</script>
+<script>
+
+var P = [
+  {id:1,name:"Xiaomi Redmi Note 15 Pro 5G",short:"8Go/256Go · 200MP · 6580mAh · 5G",cat:"Smartphones",
+   price:"325,99",pn:325.99,fold:"389,99",fon:389.99,badge:"new",bt:"Nouveau",stars:5.0,rev:55,isPromo:false,
+   imgs:["p1_1","p1_2","p1_3"],
+   desc:"Le Redmi Note 15 Pro 5G repousse les limites avec son écran AMOLED 6,83\" 1,5K, son appareil photo de 200 MP et sa batterie XXL de 6 580 mAh. Propulsé par le Dimensity 7300 Ultra.",
+   specs:["6,83\" AMOLED 1,5K","200 MP","6580 mAh","5G · Dimensity","8 Go RAM","256 Go"],
+   revs:[{av:"AL",nm:"Alexandre L.",dt:"20 fév. 2025",st:"★★★★★",tx:"Impressionnant ! L\'écran est magnifique, la photo de nuit bluffante. Livré en 6 jours."},{av:"CM",nm:"Clara M.",dt:"8 mars 2025",st:"★★★★★",tx:"Énorme upgrade ! La batterie tient 2 jours. Emballage soigné."}]},
+  {id:2,name:"Xiaomi Redmi Note 15 5G",short:"6,77\" AMOLED 120Hz · 108MP · IP65",cat:"Smartphones",
+   price:"263,99",pn:263.99,fold:"319,99",fon:319.99,badge:"promo",bt:"-17%",stars:5.0,rev:26,isPromo:true,
+   imgs:["p2_1","p2_2"],
+   desc:"Écran AMOLED FHD+ 6,77\" à 120 Hz, 108 MP, batterie 5 520 mAh, IP65. La combinaison parfaite performance / autonomie.",
+   specs:["6,77\" AMOLED 120Hz","108 MP","5520 mAh","IP65","5G · NFC"],
+   revs:[{av:"TB",nm:"Thomas B.",dt:"1 mars 2025",st:"★★★★★",tx:"Rapport qualité-prix imbattable. Écran 120Hz super fluide. Livré en 5 jours."}]},
+  {id:3,name:"Xiaomi Pad 7 — Tablette 11\"",short:"Snapdragon 7+ Gen 3 · 144Hz · HyperOS 2",cat:"Tablettes",
+   price:"266,99",pn:266.99,fold:"329,99",fon:329.99,badge:"new",bt:"Nouveau",stars:4.9,rev:499,isPromo:false,
+   imgs:["p3_1","p3_2","p3_3","p3_4"],
+   desc:"Snapdragon 7+ Gen 3, écran 144Hz crystal-clear, Xiaomi HyperOS 2. Idéale pour créateurs, gamers et multimédia ultra qualité.",
+   specs:["11\" 144Hz","Snapdragon 7+ Gen 3","HyperOS 2","13 MP","8850 mAh"],
+   revs:[{av:"SV",nm:"Sophie V.",dt:"15 fév. 2025",st:"★★★★★",tx:"Absolument parfaite ! Écran sublime, processeur ultra rapide."},{av:"RP",nm:"Romain P.",dt:"22 fév. 2025",st:"★★★★★",tx:"Meilleure tablette que j\'ai eue. 144Hz se ressent vraiment."}]},
+  {id:4,name:"Câble USB-C 6A Charge Rapide",short:"1m · 2m · 3m · 5m · 8m · Tressé",cat:"Câbles",
+   price:"1,99",pn:1.99,fold:"4,99",fon:4.99,badge:"promo",bt:"-60%",stars:4.8,rev:50000,isPromo:true,
+   imgs:["p4_1","p4_2"],
+   desc:"Câble USB-C 6A tressé haute résistance pour charge rapide. Compatible Huawei, Xiaomi, Vivo, Samsung. 1m à 8m disponibles.",
+   specs:["6A charge rapide","Longueur au choix","Tressé renforcé","Multi-marques"],
+   revs:[{av:"MK",nm:"Marc K.",dt:"10 fév. 2025",st:"★★★★★",tx:"Excellent câble, charge vraiment rapide. Pris le 3m, parfait !"}]},
+  {id:5,name:"Xiaomi TV Box S 3rd Gen",short:"4K UHD · Google TV · Wi-Fi 6 · Dolby",cat:"TV Box",
+   price:"74,99",pn:74.99,fold:"99,99",fon:99.99,badge:"promo",bt:"-25%",stars:4.9,rev:10000,isPromo:true,
+   imgs:["p5_1","p5_2","p5_3","p5_4"],
+   desc:"Transformez votre TV en smart TV 4K UHD avec Google TV, Dolby Vision, Dolby Atmos et Wi-Fi 6. Netflix, YouTube, Prime Video intégrés.",
+   specs:["4K UHD","Google TV","Dolby Vision","Dolby Atmos","Wi-Fi 6","2Go · 32Go"],
+   revs:[{av:"JD",nm:"Julie D.",dt:"5 mars 2025",st:"★★★★★",tx:"Image 4K magnifique, Google TV très intuitif. Livré en 4 jours !"},{av:"NB",nm:"Nicolas B.",dt:"18 fév. 2025",st:"★★★★★",tx:"Son Dolby Atmos bluffant, Wi-Fi 6 ultra stable."}]},
+  {id:6,name:"Essager Batterie 20000mAh 65W",short:"PD 65W · Affichage LED · Bi-directionnel",cat:"Batteries",
+   price:"33,99",pn:33.99,fold:"49,99",fon:49.99,badge:"promo",bt:"N°1 vente",stars:4.8,rev:10000,isPromo:true,
+   imgs:["p6_1","p6_2"],
+   desc:"20000mAh avec charge PD 65W bidirectionnelle. Recharge un laptop entier ou 3 smartphones. Affichage LED précis.",
+   specs:["20000 mAh","65W PD bi-direct.","Affichage LED","USB-C + USB-A"],
+   revs:[{av:"EF",nm:"Emma F.",dt:"28 fév. 2025",st:"★★★★★",tx:"Rechargé mon laptop et téléphone en voyage. Solide."}]},
+  {id:7,name:"PowerBank Magnétique MagSafe",short:"15W Sans fil · Compatible iPhone & Android",cat:"Batteries",
+   price:"11,49",pn:11.49,fold:"19,99",fon:19.99,badge:"promo",bt:"-43%",stars:3.6,rev:5000,isPromo:true,
+   imgs:["p7_1","p7_2"],
+   desc:"Batterie magnétique sans fil 15W Fast Charging, compatible MagSafe iPhone 13/14/15 et Android. Snap magnétique 10N.",
+   specs:["15W sans fil","Compatible MagSafe","10N magnétique","6 coloris"],
+   revs:[{av:"LR",nm:"Lucas R.",dt:"14 mars 2025",st:"★★★★☆",tx:"Pratique pour les recharges. Tient bien sur iPhone."}]},
+  {id:8,name:"Lunettes Rétro Carrées Premium",short:"UV400 · Style vintage · 7 coloris",cat:"Accessoires",
+   price:"19,90",pn:19.90,fold:"39,90",fon:39.90,badge:"new",bt:"Nouveau",stars:4.9,rev:185,isPromo:false,
+   imgs:["n1"],
+   desc:"Lunettes de soleil rétro carrées haut de gamme. Montures épaisses tendance, verres UV400. Style classique et polyvalent pour homme et femme. 7 coloris disponibles.",
+   specs:["UV400","7 coloris","Style rétro","Unisexe","Verres polarisés"],
+   revs:[{av:"LM",nm:"Léa M.",dt:"12 fév. 2025",st:"★★★★★",tx:"Superbes lunettes ! Qualité premium pour le prix. Reçues en 5 jours."}]},
+  {id:9,name:"Chargeur Xiaomi 67W Turbo",short:"GaN · Prise EU · Câble USB-C inclus",cat:"Câbles",
+   price:"24,99",pn:24.99,fold:"39,99",fon:39.99,badge:"new",bt:"Nouveau",stars:4.9,rev:2000,isPromo:false,
+   imgs:["n2"],
+   desc:"Chargeur d\'origine Xiaomi 67W Turbo Charge GaN ultra compact. Compatible Poco X6 Pro, X5, F5, Mi 14. Câble USB-C inclus. Prise EU.",
+   specs:["67W Turbo Charge","Technologie GaN","Câble inclus","Prise EU","Compatible Xiaomi"],
+   revs:[{av:"PD",nm:"Pierre D.",dt:"3 mars 2025",st:"★★★★★",tx:"Charge ultra rapide, compact et léger. Parfait pour voyager."}]},
+  {id:10,name:"Mini Aspirateur Voiture 9000Pa",short:"Sans fil · 1200mAh · Lavable · USB",cat:"Maison",
+   price:"19,99",pn:19.99,fold:"34,99",fon:34.99,badge:"promo",bt:"-43%",stars:4.0,rev:10000,isPromo:true,
+   imgs:["n3"],
+   desc:"Aspirateur portable sans fil 9000Pa, parfait pour voiture et maison. Batterie 1200mAh, filtre lavable, 3 accessoires inclus. Charge USB.",
+   specs:["9000Pa aspiration","1200mAh","Sans fil","Filtre lavable","3 accessoires","USB charge"],
+   revs:[{av:"RC",nm:"Romain C.",dt:"8 mars 2025",st:"★★★★☆",tx:"Pratique pour la voiture, aspiration correcte. Bon rapport qualité-prix."}]},
+  {id:11,name:"Veilleuse LED Barre Capteur",short:"Motion sensor · Blanc/Chaud · USB-C",cat:"Maison",
+   price:"11,99",pn:11.99,fold:"22,99",fon:22.99,badge:"new",bt:"Nouveau",stars:4.9,rev:100,isPromo:false,
+   imgs:["n4a","n4b"],
+   desc:"Veilleuse LED rechargeable sans fil avec capteur de mouvement infrarouge. 3 modes : détection jour/nuit/lumière constante. Fixation adhésive ou magnétique. Blanc froid ou chaud.",
+   specs:["Capteur IR","3 modes","USB-C","Blanc/Chaud","Sans fil","Fixation magnet."],
+   revs:[{av:"AM",nm:"Anna M.",dt:"20 fév. 2025",st:"★★★★★",tx:"Parfaite pour le couloir ! S\'allume instantanément."}]},
+  {id:12,name:"Veilleuse LED Barre Métallique",short:"3 températures · Alu · Capteur mvt",cat:"Maison",
+   price:"9,99",pn:9.99,fold:"18,99",fon:18.99,badge:"promo",bt:"-47%",stars:4.9,rev:409,isPromo:true,
+   imgs:["n5a","n5b"],
+   desc:"Barre LED métallique ultra-fine avec capteur de mouvement. 3 températures de couleur (3000K/4000K/6000K). Design aluminium premium. Rechargeable USB-C.",
+   specs:["3 températures","Design alu","Capteur mvt","USB-C recharge","Ultra-fine","Fixation magnet."],
+   revs:[{av:"BL",nm:"Baptiste L.",dt:"15 mars 2025",st:"★★★★★",tx:"Design élégant, lumière parfaite. Installée sous mes placards."}]},
+  {id:13,name:"Aspirateur Balai Laresar X11",short:"550W · 55000Pa · Auto-vide · LED",cat:"Maison",
+   price:"159,99",pn:159.99,fold:"249,99",fon:249.99,badge:"promo",bt:"-36%",stars:4.9,rev:10000,isPromo:true,
+   imgs:["n6a","n6b"],
+   desc:"Aspirateur balai sans fil 550W, 55000Pa d\'aspiration, bac auto-vidangeur, affichage LED batterie. Inclus 6 accessoires. Parfait pour sol dur et moquette.",
+   specs:["550W · 55000Pa","Auto-vidange","Affichage LED","6 accessoires","Sans fil","Stock EU"],
+   revs:[{av:"CD",nm:"Camille D.",dt:"2 mars 2025",st:"★★★★★",tx:"Incroyable ! Mon appartement n\'a jamais été aussi propre."}]},
+  {id:14,name:"Aspirateur Robot ILIFE A30 PRO",short:"5000Pa · LiDAR · Auto-vidange 60j · App",cat:"Maison",
+   price:"164,99",pn:164.99,fold:"259,99",fon:259.99,badge:"promo",bt:"-37%",stars:4.9,rev:10000,isPromo:true,
+   imgs:["n7a","n7b"],
+   desc:"Robot aspirateur et laveur ILIFE A30 PRO avec navigation LiDAR, auto-vidange 60 jours, aspiration 5000Pa. Contrôle via app. Livré depuis la Pologne.",
+   specs:["5000Pa","Navigation LiDAR","Auto-vidange 60j","Aspire + Lave","App Control","Stock Pologne"],
+   revs:[{av:"FD",nm:"Fabrice D.",dt:"25 fév. 2025",st:"★★★★★",tx:"Bluffant ! La navigation LiDAR est parfaite. Jamais dans les meubles."}]},
+  {id:15,name:"Robot Humanoïde IA Avatar",short:"Sur commande · Recherche & Éducation",cat:"Robotique",
+   price:"18000,00",pn:18000,fold:"22000,00",fon:22000,badge:"cmd",bt:"Sur commande",stars:5.0,rev:1,isPromo:false,isCmd:true,
+   imgs:["n8"],
+   desc:"Robot Avatar IA Humanoïde de dernière génération pour l\'éducation et la recherche commerciale. Mouvements avancés, IA embarquée. Article sur commande uniquement.",
+   specs:["IA embarquée","Mouvements avancés","Usage recherche","Éducation","Sur commande"],
+   revs:[{av:"NX",nm:"NexoraFlash",dt:"2025",st:"★★★★★",tx:"Article d\'exception disponible sur commande. Contactez-nous pour un devis personnalisé."}]},
+  {id:16,name:"Fer à Vapeur Vertical 2800W",short:"Haute pression · Réglable · Cintre inclus",cat:"Maison",
+   price:"59,99",pn:59.99,fold:"89,99",fon:89.99,badge:"promo",bt:"-33%",stars:4.9,rev:600,isPromo:true,
+   imgs:["n9a","n9b"],
+   desc:"Fer à vapeur vertical 2800W haute puissance avec réglage de température multi-tissus, tige télescopique 3 sections, cintre inclus. Pour vêtements et rideaux.",
+   specs:["2800W","Tige 3 sections","Multi-tissus","Cintre inclus","Grande cuve","Roues mobiles"],
+   revs:[{av:"MF",nm:"Marie F.",dt:"10 mars 2025",st:"★★★★★",tx:"Puissant et efficace ! Mes chemises sont impeccables en 2 min."}]},
+  {id:17,name:"Robot Chien AI RC Smart Dog",short:"Danse · Chant · App · Télécommande",cat:"Robotique",
+   price:"69,99",pn:69.99,fold:"109,99",fon:109.99,badge:"promo",bt:"-36%",stars:4.7,rev:3000,isPromo:true,
+   imgs:["n10a","n10b"],
+   desc:"Robot chien intelligent AI RC avec dialogue vocal, contrôle app et télécommande, danse et chant intégrés, programmation d\'actions. Parfait cadeau tech pour enfants et adultes.",
+   specs:["Dialogue vocal","App Control","Télécommande","Danse & Chant","Programmable","3+ ans"],
+   revs:[{av:"JL",nm:"Julie L.",dt:"5 mars 2025",st:"★★★★★",tx:"Mes enfants sont fous du robot ! Qualité top, livré en 4 jours."}]},
+];
+
+</script>
+<script>
+// ── STATE ──
+var cart = JSON.parse(localStorage.getItem('nxf_cart')||'[]');
+var wishlist = JSON.parse(localStorage.getItem('nxf_wl')||'[]');
+var promoApplied = false;
+var currentProduct = null;
+var currentImgIdx = 0;
+var localQty = 1;
+const PROMO_CODE = 'NEXORA10';
+const PROMO_PCT = 10;
+const CHRONOEND = new Date().setHours(23,59,59,999);
+
+// ── UTILS ──
+var toastTimer;
+function showToast(msg){ var t=document.getElementById('toast');if(!t)return;t.textContent=msg;t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),2500); }
+function s5(n){ return '★'.repeat(Math.floor(n))+(n%1>=.5?'½':''); }
+function formatTime(ms){ if(ms<0)return'00:00:00';var s=Math.floor(ms/1000),h=Math.floor(s/3600),m=Math.floor((s%3600)/60),ss=s%60;return[h,m,ss].map(x=>String(x).padStart(2,'0')).join(':'); }
+
+// ── CART ──
+function saveCart(){ localStorage.setItem('nxf_cart',JSON.stringify(cart)); }
+function updateCartCount(){ var t=cart.reduce((s,x)=>s+(x.qty||1),0); var el=document.getElementById('cartCount');if(el)el.textContent=t; }
+function openCart(){ document.getElementById('cartOverlay').classList.add('open');document.getElementById('cartDrawer').classList.add('open');renderCart(); }
+function closeCart(){ document.getElementById('cartOverlay').classList.remove('open');document.getElementById('cartDrawer').classList.remove('open'); }
+
+function addToCart(){
+  if(!currentProduct||currentProduct.isCmd) return;
+  var ex=cart.find(x=>x.id===currentProduct.id);
+  if(ex){ ex.qty=(ex.qty||1)+localQty; } else { cart.push({id:currentProduct.id,qty:localQty}); }
+  saveCart(); updateCartCount();
+  showToast('🛒 '+currentProduct.name.substring(0,22)+'... ajouté !');
+  var btn=document.getElementById('addBtn');
+  if(btn){ btn.textContent='✓ Ajouté !'; btn.style.background='var(--green)'; setTimeout(()=>{ btn.innerHTML='🛒 Ajouter au panier'; btn.style.background=''; },1500); }
+}
+
+function rmCart(id){ cart=cart.filter(x=>x.id!==id);saveCart();updateCartCount();renderCart(); }
+function changeQty(id,d){ var ex=cart.find(x=>x.id===id);if(!ex)return;ex.qty=(ex.qty||1)+d;if(ex.qty<=0){rmCart(id);return;}saveCart();updateCartCount();renderCart(); }
+
+function renderCart(){
+  var el=document.getElementById('cartItems'),footer=document.getElementById('cartFooter');if(!el)return;
+  if(cart.length===0){ el.innerHTML='<div class="cart-empty"><div class="cart-empty-icon">🛒</div><p>Votre panier est vide</p></div>';if(footer)footer.style.display='none';return; }
+  if(footer)footer.style.display='block';
+  el.innerHTML=cart.map(item=>{ var p=P.find(x=>x.id===item.id);if(!p)return'';
+    return`<div class="cart-item"><img class="cart-item-img" src="${p.imgs[0]}" alt=""><div class="cart-item-info"><div class="cart-item-name">${p.name}</div><div class="cart-item-price">${p.price}€</div><div class="cart-item-qty"><button class="cqty-btn" onclick="changeQty(${p.id},-1)">−</button><span class="cqty-val">${item.qty||1}</span><button class="cqty-btn" onclick="changeQty(${p.id},1)">+</button></div></div><button class="cart-rm" onclick="rmCart(${p.id})">×</button></div>`; }).join('');
+  renderCartTotals();
+}
+function renderCartTotals(){
+  var sub=cart.reduce((s,i)=>{var p=P.find(x=>x.id===i.id);return s+(p?p.pn*(i.qty||1):0);},0);
+  var disc=promoApplied?sub*(PROMO_PCT/100):0;
+  var ship=sub>=10?0:3.99;
+  var tot=sub-disc+ship;
+  var el=document.getElementById('cartTotals');if(!el)return;
+  el.innerHTML=`<div class="cart-total-row"><span>Sous-total</span><span>${sub.toFixed(2).replace('.',',')}€</span></div>${promoApplied?`<div class="cart-total-row" style="color:var(--green)"><span>NEXORA10</span><span>−${disc.toFixed(2).replace('.',',')}€</span></div>`:''}<div class="cart-total-row"><span>Livraison</span><span>${ship===0?'<span style="color:var(--green)">Gratuite</span>':ship.toFixed(2).replace('.',',')+'€'}</span></div><div class="cart-total-row total"><span>Total</span><span>${tot.toFixed(2).replace('.',',')}€</span></div>`;
+}
+function applyPromo(){ var v=document.getElementById('promoInput').value.trim().toUpperCase();if(v===PROMO_CODE){promoApplied=true;showToast('🎉 -10% appliqué !');renderCartTotals();}else showToast('❌ Code invalide'); }
+
+// ── LOCAL QTY ──
+function changeLocalQty(d){ localQty=Math.max(1,localQty+d);document.getElementById('localQty').textContent=localQty; }
+
+// ── GALLERY ──
+function setMainImg(key, idx){
+  var img=document.getElementById('mainImg');if(img)img.src=IMGS[key];
+  currentImgIdx=idx;
+  document.querySelectorAll('.gallery-thumb').forEach((t,i)=>t.classList.toggle('active',i===idx));
+}
+function galleryNav(d){
+  if(!currentProduct)return;
+  var imgs=currentProduct.imgs;
+  currentImgIdx=(currentImgIdx+d+imgs.length)%imgs.length;
+  setMainImg(imgs[currentImgIdx],currentImgIdx);
+}
+var zoomOn=false;
+function toggleZoom(){ zoomOn=!zoomOn;var m=document.getElementById('galleryMain');if(m)m.classList.toggle('zoomed',zoomOn); }
+
+// ── TABS ──
+function openTab(id, el){
+  document.querySelectorAll('.tab-header').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(t=>t.classList.remove('active'));
+  if(el)el.classList.add('active');
+  var panel=document.getElementById('tab-'+id);if(panel)panel.classList.add('active');
+}
+
+// ── WISHLIST ──
+function toggleWishlist(){
+  if(!currentProduct)return;
+  var id=currentProduct.id,idx=wishlist.indexOf(id);
+  if(idx>-1){wishlist.splice(idx,1);showToast('💔 Retiré des favoris');}
+  else{wishlist.push(id);showToast('❤️ Ajouté aux favoris !');}
+  localStorage.setItem('nxf_wl',JSON.stringify(wishlist));
+  var btn=document.getElementById('wlBtn');if(btn){btn.textContent=wishlist.includes(id)?'❤️':'🤍';btn.classList.toggle('active',wishlist.includes(id));}
+}
+
+// ── SHARE ──
+function openShare(){ document.getElementById('shareModal').classList.add('open'); }
+function closeShare(){ document.getElementById('shareModal').classList.remove('open'); }
+function shareWA(){ if(currentProduct)window.open('https://wa.me/?text='+encodeURIComponent(currentProduct.name+' — NexoraFlash ⚡ nexoraflash.com')); closeShare(); }
+function shareFB(){ window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent('https://nexoraflash.com')); closeShare(); }
+function copyLink(){ try{navigator.clipboard.writeText('https://nexoraflash.com/produit.html?id='+(currentProduct?currentProduct.id:1));}catch(e){}showToast('🔗 Lien copié !');closeShare(); }
+
+// ── STICKY BUY ──
+function showStickyBuy(p){
+  var el=document.getElementById('stickyBuy');if(!el)return;
+  var sp=document.getElementById('stickyPrice');if(sp)sp.textContent=p.price+'€';
+  var so=document.getElementById('stickyOld');if(so)so.textContent=p.fold+'€';
+  var sb=document.getElementById('stickyBtn');if(sb)sb.onclick=addToCart;
+  el.classList.add('visible');
+}
+
+// ── OPEN PRODUCT ──
+function openProduct(id){
+  var p=P.find(x=>x.id===id)||P[0]; if(!p) return;
+  currentProduct=p; localQty=1;
+  document.getElementById('localQty').textContent=1;
+
+  // Title/meta
+  document.title=p.name+' — NexoraFlash ⚡';
+  var bc=document.getElementById('breadcrumbCat');if(bc)bc.textContent=p.cat;
+  var bn=document.getElementById('breadcrumbName');if(bn)bn.textContent=p.name.substring(0,30)+(p.name.length>30?'…':'');
+  var t=document.getElementById('productTitle');if(t)t.textContent=p.name;
+  var s=document.getElementById('productShort');if(s)s.textContent=p.short;
+  var d=document.getElementById('productDesc');if(d)d.textContent=p.desc;
+
+  // Badges
+  var badges=document.getElementById('productBadges');
+  if(badges) badges.innerHTML=`<span class="pbadge ${p.badge==='new'?'new':'promo'}">${p.bt}</span><span class="pbadge stock">✓ En stock</span>`;
+
+  // Rating
+  var rs=document.getElementById('ratingStars');if(rs)rs.textContent=s5(p.stars);
+  var rsc=document.getElementById('ratingScore');if(rsc)rsc.textContent=p.stars;
+  var rc=document.getElementById('ratingCount');if(rc)rc.textContent=p.rev.toLocaleString('fr')+' avis';
+
+  // Chrono
+  var cb=document.getElementById('chronoBlock');if(cb)cb.classList.toggle('visible',!!p.isPromo);
+
+  // Price
+  var pm=document.getElementById('priceMain');if(pm)pm.textContent=p.price+'€';
+  var po=document.getElementById('priceOld');if(po)po.textContent=p.fold+'€';
+  var ps=document.getElementById('priceSave');
+  if(ps){ var save=(p.fon-p.pn).toFixed(2).replace('.',',');var pct=Math.round((p.fon-p.pn)/p.fon*100);ps.textContent='💸 Vous économisez '+save+'€ (−'+pct+'%)'; }
+
+  // Specs
+  var sr=document.getElementById('specsRow');
+  if(sr)sr.innerHTML=(p.specs||[]).map(s=>`<span class="spec-chip">${s}</span>`).join('');
+
+  // Stock
+  var si=document.getElementById('stockIndicator');
+  if(si){var n=Math.floor(Math.random()*8+1);si.textContent='⚡ Plus que '+n+' en stock';}
+
+  // Gallery
+  var thumbs=document.getElementById('galleryThumbs');
+  if(thumbs) thumbs.innerHTML=p.imgs.map((k,i)=>`<div class="gallery-thumb ${i===0?'active':''}" onclick="setMainImg('${k}',${i})"><img src="${k}" alt="" loading="lazy"></div>`).join('');
+  setMainImg(p.imgs[0],0);
+
+  // CTA
+  var cta=document.getElementById('ctaRow'),cmd=document.getElementById('cmdBox'),qrow=document.getElementById('qtyRow');
+  if(p.isCmd){ if(cta)cta.style.display='none';if(cmd)cmd.style.display='block';if(qrow)qrow.style.display='none'; }
+  else{ if(cta)cta.style.display='flex';if(cmd)cmd.style.display='none';if(qrow)qrow.style.display='flex'; }
+
+  // Wishlist btn
+  var wl=document.getElementById('wlBtn');if(wl){wl.textContent=wishlist.includes(p.id)?'❤️':'🤍';wl.classList.toggle('active',wishlist.includes(p.id));}
+
+  // Reviews
+  var tc=document.getElementById('tabRevCount');if(tc)tc.textContent=p.rev.toLocaleString('fr');
+  renderReviews(p);
+
+  // Sticky
+  if(!p.isCmd) showStickyBuy(p);
+
+  // Related
+  renderRelated(p);
+}
+
+function renderReviews(p){
+  var summary=document.getElementById('reviewsSummary');
+  if(summary) summary.innerHTML=`<div class="reviews-big-score"><div class="score">${p.stars}</div><div class="stars">${s5(p.stars)}</div><div class="count">${p.rev.toLocaleString('fr')} avis</div></div><div class="reviews-bars">${[5,4,3,2,1].map(n=>`<div class="rbar-row"><span class="rbar-label">${n}</span><div class="rbar-track"><div class="rbar-fill" style="width:${n===Math.round(p.stars)?75:n===Math.round(p.stars)-1?15:5}%"></div></div></div>`).join('')}</div>`;
+  var list=document.getElementById('reviewsList');
+  if(list) list.innerHTML=(p.revs||[]).map(r=>`<div class="review-card"><div class="review-top"><div class="review-av">${r.av}</div><div><div class="review-nm">${r.nm}</div><div class="review-dt">${r.dt}</div></div><div class="review-stars">${r.st}</div></div><div class="review-text">"${r.tx}"</div><div class="review-check">✓ Achat vérifié</div></div>`).join('');
+}
+
+function renderRelated(p){
+  var row=document.getElementById('relatedRow');if(!row)return;
+  var related=P.filter(x=>x.id!==p.id&&!x._disabled&&(x.cat===p.cat||Math.random()>.5)).slice(0,8);
+  row.innerHTML=related.map(r=>`<div class="related-card" onclick="openProduct(${r.id})"><div class="related-img"><img src="${r.imgs[0]}" alt="${r.name}" loading="lazy"></div><div class="related-info"><div class="related-name">${r.name}</div><div><span class="related-price">${r.price}€</span> <span class="related-old">${r.fold}€</span></div></div></div>`).join('');
+}
+
+// ── CHRONO ──
+setInterval(function(){
+  var el=document.getElementById('chronoTime');
+  if(el&&currentProduct&&currentProduct.isPromo) el.textContent=formatTime(CHRONOEND-Date.now());
+},1000);
+
+// ── SWIPE ──
+var touchStartX=0,touchEndX=0;
+document.addEventListener('touchstart',function(e){touchStartX=e.changedTouches[0].clientX;},{passive:true});
+document.addEventListener('touchend',function(e){
+  touchEndX=e.changedTouches[0].clientX;
+  var diff=touchStartX-touchEndX;
+  if(Math.abs(diff)>50&&e.target.closest('.gallery-main-wrap')){diff>0?galleryNav(1):galleryNav(-1);}
+},{passive:true});
+
+// ── INIT ──
+window.addEventListener('load',function(){
+  var sk=document.getElementById('skel');if(sk){sk.style.display='none';sk.classList.add('hidden');}
+  var pid=1;
+  try{var params=new URLSearchParams(window.location.search);if(params.get('id'))pid=parseInt(params.get('id'));}catch(e){}
+  try{if(pid===1&&sessionStorage.getItem('nxf_product'))pid=parseInt(sessionStorage.getItem('nxf_product'));}catch(e){}
+  openProduct(pid);
+  updateCartCount();
+  renderCart();
+  window.scrollTo(0,0);
+  document.documentElement.scrollTop=0;
+  document.body.scrollTop=0;
+});
+</script>
+</body>
+</html>
