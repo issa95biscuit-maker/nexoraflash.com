@@ -724,7 +724,7 @@ body{overflow-x:hidden;width:100%;max-width:100vw;}
 </style>
 
   <script src="https://js.stripe.com/v3/"></script>
-  <script src="https://www.paypal.com/sdk/js?client-id=YOUR_PAYPAL_CLIENT_ID&currency=EUR&locale=fr_FR" defer></script>
+  <script src="https://www.paypal.com/sdk/js?client-id=YOUR_PAYPAL_CLIENT_ID&currency=EUR&locale=fr_FR&components=buttons" defer></script>
 </head>
 
 <body>
@@ -744,24 +744,14 @@ body{overflow-x:hidden;width:100%;max-width:100vw;}
   <div class="cd-item" onclick="filterCat('Accessoires');closeCatMenu()"><div class="cd-icon">🕶️</div><div class="cd-info"><h4>Mode & Accessoires</h4><p>Lunettes rétro premium</p></div><span class="cd-pill">1</span><span class="cd-arrow">›</span></div>
   <div class="cd-item" onclick="filterCat('');closeCatMenu()" style="background:rgba(26,120,255,.05);border-top:2px solid rgba(26,120,255,.2);"><div class="cd-icon" style="background:rgba(26,120,255,.2);">🛍️</div><div class="cd-info"><h4 style="color:var(--bl);">Tous les produits</h4><p>Voir la collection complète</p></div><span class="cd-pill" style="background:rgba(26,120,255,.3)">17</span><span class="cd-arrow">›</span></div>
 </div>
-<div class="skel" id="skel" style="display:none">
+<div class="skel" style="display:none" id="skel">
   <div class="skel-logo">NexoraFlash ⚡</div>
   <div class="skel-bar"><div class="sbi"></div></div>
   <div class="skcs"><div class="skc"></div><div class="skc"></div><div class="skc"></div></div>
 </div>
 
 <!-- Newsletter popup -->
-<div class="nl-overlay" id="nlOverlay">
-  <div class="nl-box">
-    <button class="nl-close" onclick="closeNL()">✕</button>
-    <div class="nl-icon">📧</div>
-    <h3>-10% sur votre 1ère commande</h3>
-    <p>Inscrivez-vous à notre newsletter et recevez votre code promo exclusif + les meilleures offres en avant-première !</p>
-    <input class="nl-inp" type="email" id="nlEmail" placeholder="votre@email.fr">
-    <button class="nl-btn" onclick="subscribeNL()">Obtenir mon code promo →</button>
-    <span class="nl-skip" onclick="closeNL()">Non merci, je préfère payer plein tarif</span>
-  </div>
-</div>
+
 
 <div class="promo" id="promoBanner">
   🎉 Code <span class="code">NEXORA10</span> — -10% sur votre 1ère commande · Livraison gratuite dès 10€ 🚀
@@ -849,10 +839,299 @@ body{overflow-x:hidden;width:100%;max-width:100vw;}
     <div class="rev-list" id="rList"></div>
   </div>
 </div>
+<!-- STICKY BUY MOBILE -->
+<div class="sticky-buy" id="stickyBuy">
+  <div><div class="sb-price" id="stickyPrice">--€</div><div class="sb-old" id="stickyOld">--€</div></div>
+  <button class="sb-btn" id="stickyBtn">🛒 Ajouter au panier</button>
+</div>
+<div class="toast" id="toast"></div>
+<button class="stbtn" id="stbtn" onclick="window.scrollTo(0,0)">↑</button>
+
+<!-- CHATBOT -->
+<button class="cb-btn" id="cbBtn" onclick="toggleChat()">💬</button>
+<div class="cb-win" id="cbWin">
+  <div class="cb-head"><div class="cb-av">⚡</div><div class="cb-hi"><h4>NexoraFlash Support</h4><p>Répond en quelques secondes</p></div><div class="cb-on"></div></div>
+  <div class="cb-msgs" id="cbMsgs"></div>
+  <div class="cb-quick" id="cbQuick"></div>
+  <div class="cb-ir"><input class="cb-inp" id="cbInp" type="text" placeholder="Posez votre question..." onkeydown="if(event.key==='Enter')cbSend()"><button class="cb-send" onclick="cbSend()">➤</button></div>
+</div>
+
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
 <script src="products.js"></script>
-<script>function getImg(k){return(k&&k.startsWith("http"))?k:(typeof IMGS!=="undefined"&&IMGS[k]?IMGS[k]:"");}</script>
+<script>
+function getImg(k){return(k&&k.startsWith('http'))?k:(typeof IMGS!=='undefined'&&IMGS[k]?IMGS[k]:'');}
 
+
+let cart=[];
+let promoApplied=false;
+const PROMO_CODE='NEXORA10';
+const PROMO_PCT=10;
+
+function s5(n){return'★'.repeat(Math.round(n))+'☆'.repeat(5-Math.round(n));}
+
+// CHRONO tick
+setInterval(()=>{
+  const rem = CHRONOEND - Date.now();
+  const txt = formatTime(rem);
+  document.querySelectorAll('.ct').forEach(el=>el.textContent=txt);
+  document.querySelectorAll('.bp-chrono-t').forEach(el=>el.textContent=txt);
+  if(rem<=0) document.querySelectorAll('.chrono-badge,.d-chrono').forEach(el=>el.style.display='none');
+},1000);
+
+function cardHTML(p){
+  if(p._disabled) return '';
+  const promo = p.isPromo;
+  const chronoHTML = promo ? `<div class="chrono-badge">⏱️ <span class="ct">${formatTime(CHRONOEND-Date.now())}</span></div>` : '';
+  const mainImg = IMGS[p.imgs[0]]||'';
+  const addBtn = p.isCmd
+    ? `<button class="cmd-btn" onclick="event.stopPropagation();showPage('contact')">Devis →</button>`
+    : `<button class="addbtn" onclick="event.stopPropagation();addCart(${p.id})">+</button>`;
+  return `<div class="pcard" onclick="openProduct(${p.id})">
+    <div class="pimg">
+      <img src="${mainImg}" loading="lazy" decoding="async" alt="${p.name}" loading="lazy">
+      ${p.badge?`<div class="pbadge ${p.badge}">${p.bt}</div>`:''}
+      ${chronoHTML}
+    </div>
+    <div class="pinfo">
+      <div class="pname">${p.name}</div>
+      <div class="pspecs">${p.short}</div>
+      <div class="mstars"><span class="sy">${s5(p.stars)}</span><span class="sc">${p.stars} (${p.rev.toLocaleString('fr')})</span></div>
+      <div class="pftr">
+        <div><div class="pp">${p.price}€</div><div class="pold">${p.fold}€</div></div>
+        ${addBtn}
+      </div>
+    </div>
+  </div>`;
+}
+
+function bpCardHTML(p){
+  const save = Math.round((1 - p.pn/p.fon)*100);
+  return `<div class="bp-card" onclick="openProduct(${p.id})">
+    <div class="bp-top">
+      <img src="${IMGS[p.imgs[0]]}" alt="${p.name}" loading="lazy">
+      <div class="bp-save">-${save}%</div>
+    </div>
+    <div class="bp-info">
+      <div class="bp-name">${p.name}</div>
+      <div class="bp-prices"><span class="bp-new">${p.price}€</span><span class="bp-old">${p.fold}€</span></div>
+      <div class="bp-chrono">⏱️ Offre expire dans : <span class="bp-chrono-t">${formatTime(CHRONOEND-Date.now())}</span></div>
+      <button class="bp-addbtn" onclick="event.stopPropagation();addCart(${p.id})">🛒 Ajouter au panier</button>
+    </div>
+  </div>`;
+}
+
+function renderGrids(){
+  const promos = P.filter(p=>p.isPromo);
+  document.getElementById('homeGrid').innerHTML = P.slice(0,6).map(cardHTML).join('');
+  document.getElementById('shopGrid').innerHTML = P.map(cardHTML).join('');
+  document.getElementById('bpGrid').innerHTML = promos.map(bpCardHTML).join('');
+  setTimeout(addSocialProof,150);
+  document.getElementById('bpCount').textContent = promos.length + ' offres';
+}
+
+function openProduct(id){
+  var p=P.find(x=>x.id===id)||P[0];if(!p)return;
+  window._curP=p;
+  var e;
+  e=document.getElementById('mImg');if(e)e.innerHTML='<img src="'+getImg(p.imgs[0])+'" alt="'+p.name+'" style="width:100%;height:100%;object-fit:contain;">';
+  e=document.getElementById('tRow');if(e)e.innerHTML=p.imgs.map(function(k,i){return '<div class="thumb '+(i===0?'active':'')+'" onclick="selThumb(this,\''+k+'\')"><img src="'+getImg(k)+'" alt="" loading="lazy"></div>';}).join('');
+  e=document.getElementById('dBadge');if(e)e.textContent=p.badge?p.bt:'Top vente';
+  e=document.getElementById('dName');if(e)e.textContent=p.name;
+  e=document.getElementById('dStars');if(e)e.textContent=s5(p.stars);
+  e=document.getElementById('dScore');if(e)e.textContent=p.stars;
+  e=document.getElementById('dRevs');if(e)e.textContent=p.rev.toLocaleString('fr')+' avis';
+  var save=(p.fon-p.pn).toFixed(2).replace('.',',');
+  e=document.getElementById('dPr');if(e)e.innerHTML=p.price+'€ <span class="dold">'+p.fold+'€</span>';
+  e=document.getElementById('dSave');if(e)e.textContent='Vous économisez '+save+'€';
+  e=document.getElementById('dDesc');if(e)e.textContent=p.desc;
+  e=document.getElementById('dSpecs');if(e)e.innerHTML=(p.specs||[]).map(function(s){return '<span class="chip">'+s+'</span>';}).join('');
+  var dc=document.getElementById('dChrono');if(dc)dc.style.display=p.isPromo?'flex':'none';
+  var cmdBox=document.getElementById('cmdBox'),dacts=document.getElementById('dacts');
+  if(p.isCmd){if(cmdBox)cmdBox.style.display='block';if(dacts)dacts.style.display='none';}
+  else{if(cmdBox)cmdBox.style.display='none';if(dacts)dacts.style.display='flex';
+    var btn=document.getElementById('dAddBtn');if(btn)btn.onclick=function(){addCartProd(p.id);};}
+  e=document.getElementById('rScore');if(e)e.textContent=p.stars;
+  e=document.getElementById('rCnt');if(e)e.textContent='Basé sur '+p.rev.toLocaleString('fr')+' avis';
+  e=document.getElementById('rTitle');if(e)e.textContent='Avis ('+p.rev.toLocaleString('fr')+')';
+  e=document.getElementById('rList');if(e)e.innerHTML=(p.revs||[]).map(function(r){return '<div class="rcard"><div class="rtop"><div class="rav">'+r.av+'</div><div><div class="rnm">'+r.nm+'</div><div class="rdt">'+r.dt+'</div></div><div class="rstar">'+r.st+'</div></div><div class="rtxt">'+r.tx+'</div></div>';}).join('');
+  document.title=p.name+' — NexoraFlash';
+  var sp=document.getElementById('stickyPrice');if(sp)sp.textContent=p.price+'€';
+  var so=document.getElementById('stickyOld');if(so)so.textContent=p.fold+'€';
+  var sb=document.getElementById('stickyBuy');if(sb&&!p.isCmd)sb.classList.add('visible');
+  var sbtn=document.getElementById('stickyBtn');if(sbtn)sbtn.onclick=function(){addCartProd(p.id);showToast('Ajouté !');};
+}
+
+function selThumb(el,k){
+  document.querySelectorAll('.thumb').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('mImg').innerHTML=`<img src="${IMGS[k]}" alt="">`;
+}
+
+function addCartProd(id){
+  var p=P.find(x=>x.id===id);if(!p||p.isCmd)return;
+  var c=JSON.parse(localStorage.getItem('nxf_cart')||'[]');
+  var ex=c.find(x=>x.id===id);if(ex){ex.qty=(ex.qty||1)+1;}else{c.push({id:id,qty:1});}
+  localStorage.setItem('nxf_cart',JSON.stringify(c));
+  var t=c.reduce((s,x)=>s+(x.qty||1),0);
+  var el=document.getElementById('cartCount');if(el)el.textContent=t;
+  showToast('Ajouté au panier !');
+}
+function addCart(id){addCartProd(id);}
+
+function applyPromo(){
+  const inp=document.getElementById('promoInp');
+  const val=inp.value.trim().toUpperCase();
+  if(localStorage.getItem('nxf_promo_used')){
+    inp.classList.add('invalid');
+    showToast('❌ Code déjà utilisé sur ce compte');
+    return;
+  }
+  if(val===PROMO_CODE){
+    promoApplied=true;
+    inp.classList.add('valid');
+    inp.classList.remove('invalid');
+    showToast('🎉 Code NEXORA10 appliqué ! -10%');
+    renderCartSummary();
+  } else {
+    inp.classList.add('invalid');
+    inp.classList.remove('valid');
+    showToast('❌ Code invalide');
+  }
+}
+
+function renderCart(){
+  const ci=document.getElementById('cartItems');
+  if(!cart.length){
+    ci.innerHTML=`<div class="empty-c"><div class="empty-ic">🛒</div><h3>Panier vide</h3><p>Ajoutez des produits depuis la boutique</p><button class="btnp" onclick="showPage('shop')">Explorer →</button></div>`;
+    document.getElementById('cartSummary').style.display='none';
+    return;
+  }
+  document.getElementById('cartSummary').style.display='block';
+  let total=0;
+  ci.innerHTML=cart.map((p,i)=>{total+=p.pn;return`<div class="citem">
+    <div class="cimg"><img src="${IMGS[p.imgs[0]]}" alt="${p.name}"></div>
+    <div class="cinfo"><div class="cnm">${p.name}</div><div class="csb">${p.short}</div></div>
+    <div class="crgt"><div class="cpr">${p.price}€</div><button class="crm" onclick="rmCart(${i})">🗑️</button></div>
+  </div>`;}). join('');
+  renderCartSummary();
+}
+
+function renderCartSummary(){
+  let total=cart.reduce((s,p)=>s+p.pn,0);
+  const liv=total>=10?0:2.9;
+  let disc=0;
+  if(promoApplied){disc=total*PROMO_PCT/100;}
+  const tf=total-disc+liv;
+  document.getElementById('cartSubtotal').textContent=total.toFixed(2).replace('.',',')+'€';
+  document.getElementById('cartLiv').textContent=liv>=10?'Gratuite':'2,90€';
+  document.getElementById('cartLiv').style.color=total>=10?'var(--green)':'var(--white)';
+  const discRow=document.getElementById('discRow');
+  if(promoApplied){discRow.style.display='flex';document.getElementById('cartDisc').textContent='-'+disc.toFixed(2).replace('.',',')+'€';}
+  else discRow.style.display='none';
+  document.getElementById('cartTotal').textContent=tf.toFixed(2).replace('.',',')+'€';
+}
+
+function rmCart(i){cart.splice(i,1);document.getElementById('cartCount').textContent=cart.length;renderCart();}
+function checkout(){
+  const oid='#NXF-2025-'+Math.floor(Math.random()*9000+1000);
+  document.getElementById('orderNum').textContent=oid;
+  if(typeof admOrders!=='undefined'&&cart.length){
+    const tot=cart.reduce((s,p)=>s+p.pn,0)*(promoApplied?0.9:1);
+    admOrders.unshift({id:oid,items:[...cart],total:tot,status:'pending',date:new Date().toLocaleDateString('fr-FR')});
+  }
+  if(promoApplied)localStorage.setItem('nxf_promo_used','1');
+  cart=[];promoApplied=false;
+  document.getElementById('cartCount').textContent=0;
+  if(typeof renderAdmStats!=='undefined')renderAdmStats();
+  openPay();
+}
+function changeQty(d){const e=document.getElementById('qty');let v=parseInt(e.textContent)+d;if(v<1)v=1;e.textContent=v;}
+
+function handleSearch(val){
+  const w=document.getElementById('searchWrap'),d=document.getElementById('searchDrop');
+  if(!val.trim()){closeSearch();return;}
+  w.classList.add('open');
+  const r=P.filter(p=>p.name.toLowerCase().includes(val.toLowerCase())||p.cat.toLowerCase().includes(val.toLowerCase())).slice(0,5);
+  d.innerHTML=r.length?r.map(p=>`<div class="sri" onclick="openProduct(${p.id})"><img src="${IMGS[p.imgs[0]]}" alt=""><span class="sri-nm">${p.name}</span><span class="sri-pr">${p.price}€</span></div>`).join(''):`<div class="no-res">Aucun résultat pour "${val}"</div>`;
+}
+function openSearch(){if(document.getElementById('searchInput').value)document.getElementById('searchWrap').classList.add('open');}
+function closeSearch(){document.getElementById('searchWrap').classList.remove('open');}
+document.addEventListener('click',e=>{if(!document.getElementById('searchWrap').contains(e.target))closeSearch();});
+
+function showPage(pg){
+  if(pg!=='product') hideStickyBuy();
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('active'));
+  document.querySelectorAll('.mni').forEach(a=>a.classList.remove('active'));
+  document.getElementById('page-'+pg).classList.add('active');
+  const n=document.getElementById('nav-'+pg);if(n)n.classList.add('active');
+  const mn=document.getElementById('mn-'+pg);if(mn)mn.classList.add('active');
+  window.scrollTo(0,0);
+  if(pg==='cart')renderCart();
+  closeSearch();
+}
+
+function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2600);}
+window.addEventListener('scroll',()=>{document.getElementById('stbtn').classList.toggle('vis',scrollY>300);});
+
+// Newsletter
+function closeNL(){document.getElementById('nlOverlay').classList.add('hidden');}
+function subscribeNL(){
+  const em=document.getElementById('nlEmail').value;
+  if(!em||!em.includes('@')){showToast('❌ Email invalide');return;}
+  closeNL();
+  showToast('🎉 Bienvenue ! Code NEXORA10 dans votre boîte mail');
+}
+setTimeout(()=>{
+  if(!sessionStorage.getItem('nl_shown')){
+    document.getElementById('nlOverlay').classList.remove('hidden');
+    sessionStorage.setItem('nl_shown','1');
+  }
+},4000);
+
+// CHATBOT
+const FAQ=[
+  {keys:["livraison","délai","combien","quand","recevoir","expédition"],q:"📦 Délais ?",a:"Délai <strong>3–7 jours ouvrés</strong>. Email de suivi envoyé dès expédition. 🚀"},
+  {keys:["gratuit","frais","port"],q:"🆓 Livraison gratuite ?",a:"<strong>Gratuite dès 10€</strong> d'achat, sinon 2,90€. 😊"},
+  {keys:["retour","remboursement","renvoyer","échange"],q:"↩️ Retours ?",a:"<strong>30 jours</strong> pour retourner. Retours gratuits si défectueux. Remboursement sous 5 jours. ✅"},
+  {keys:["paiement","carte","paypal","apple pay","sécurisé"],q:"💳 Paiement ?",a:"Visa, Mastercard, PayPal, Apple Pay. Paiements <strong>100% sécurisés</strong> 🔒"},
+  {keys:["promo","code","nexora10","réduction","remise"],q:"🎁 Code promo ?",a:"Code <strong style='color:#ffd700'>NEXORA10</strong> = <strong>-10%</strong> sur votre 1ère commande ! 🎉"},
+  {keys:["commande","suivi","tracking","où est"],q:"📍 Suivi commande ?",a:"Email de suivi envoyé dans les 24h après confirmation. 📧"},
+  {keys:["garantie","sav","problème","défectueux","panne"],q:"🛡️ Garantie ?",a:"<strong>2 ans</strong> de garantie légale. Email : contact@nexoraflash.fr 🙏"},
+  {keys:["robot","humanoïde","avatar","commande","devis"],q:"🤖 Robot humanoïde ?",a:"Article disponible sur commande. Contactez-nous pour un devis : <strong>contact@nexoraflash.fr</strong> 🤖"},
+];
+const QB=["📦 Livraison","↩️ Retours","💳 Paiement","🎁 Code promo","🛡️ Garantie"];
+let chatOpen=false,chatInit=false,typEl=null;
+function toggleChat(){
+  chatOpen=!chatOpen;
+  const w=document.getElementById('cbWin'),b=document.getElementById('cbBtn');
+  w.classList.toggle('open',chatOpen);b.classList.toggle('open',chatOpen);
+  b.textContent=chatOpen?'✕':'💬';
+  if(chatOpen&&!chatInit){initChat();chatInit=true;}
+  if(chatOpen)setTimeout(()=>document.getElementById('cbInp').focus(),300);
+}
+function initChat(){addBot("Bonjour ! 👋 Je suis l'assistant NexoraFlash. Comment puis-je vous aider ?",true);renderQB();}
+function renderQB(){document.getElementById('cbQuick').innerHTML=QB.map(l=>`<button class="cb-q" onclick="quickAsk('${l}')">${l}</button>`).join('');}
+function quickAsk(l){addUser(l);document.getElementById('cbQuick').innerHTML='';typing(()=>{addBot(findAns(l.toLowerCase()));setTimeout(renderQB,400);});}
+function cbSend(){const inp=document.getElementById('cbInp');const v=inp.value.trim();if(!v)return;addUser(v);inp.value='';document.getElementById('cbQuick').innerHTML='';typing(()=>{addBot(findAns(v.toLowerCase()));setTimeout(renderQB,400);});}
+function findAns(t){for(const f of FAQ)if(f.keys.some(k=>t.includes(k)))return f.a;return "Je ne suis pas sûr 😅<br>Contactez-nous : <strong>contact@nexoraflash.fr</strong>";}
+function addUser(t){const m=document.createElement('div');m.className='cb-msg user';m.textContent=t;document.getElementById('cbMsgs').appendChild(m);scrollCB();}
+function addBot(h,noT){const now=new Date().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'});const m=document.createElement('div');m.className='cb-msg bot';m.innerHTML=h+(noT?'':`<div class="cb-time">NexoraFlash · ${now}</div>`);document.getElementById('cbMsgs').appendChild(m);scrollCB();}
+function scrollCB(){const m=document.getElementById('cbMsgs');m.scrollTop=m.scrollHeight;}
+function typing(cb){const m=document.getElementById('cbMsgs');typEl=document.createElement('div');typEl.className='cb-msg bot';typEl.innerHTML='<div class="cb-typing"><span></span><span></span><span></span></div>';m.appendChild(typEl);scrollCB();setTimeout(()=>{if(typEl){typEl.remove();typEl=null;}cb();},700+Math.random()*300);}
+
+window.addEventListener('load',function(){
+  var sk=document.getElementById('skel');if(sk)sk.style.display='none';
+  var pid=1;
+  try{var params=new URLSearchParams(window.location.search);if(params.get('id'))pid=parseInt(params.get('id'));}catch(e){}
+  try{if(pid===1&&sessionStorage.getItem('nxf_product'))pid=parseInt(sessionStorage.getItem('nxf_product'));}catch(e){}
+  openProduct(pid);
+  updateCartCount();
+  window.scrollTo(0,0);
+  document.documentElement.scrollTop=0;
+});
+
+</script>
 <script>
 // ── Chrono header sync ──
 setInterval(()=>{
@@ -925,340 +1204,6 @@ function hideStickyBuy(){
   if(el) el.classList.remove('visible');
 }
 </script>
-
-<!-- ═══════════ ADMIN FAB ═══════════ -->
-<button class="admin-fab" onclick="openAdminLogin()" title="Panel Admin">⚙️</button>
-
-<!-- ADMIN LOGIN -->
-<div class="adm-overlay hidden" id="admLogin">
-  <div class="adm-box">
-    <!-- Step 1: Email + Password -->
-    <div class="adm-step active" id="admStep1">
-      <h2>🔐 Admin NexoraFlash</h2>
-      <p>Accès réservé aux administrateurs</p>
-      <div class="adm-err" id="admErr1">Email ou mot de passe incorrect</div>
-      <input class="adm-fi" type="email" id="admEmail" placeholder="issa95biscuit@gmail.com">
-      <input class="adm-fi" type="password" id="admPass" placeholder="Mot de passe" onkeydown="if(event.key==='Enter')checkAdmLogin()">
-      <button class="adm-btn" onclick="checkAdmLogin()">Connexion →</button>
-      <button class="adm-cancel" onclick="closeAdminLogin()">Annuler</button>
-    </div>
-    <!-- Step 2: 2FA Code -->
-    <div class="adm-step" id="admStep2">
-      <h2>🔑 Vérification 2FA</h2>
-      <p>Entrez le code à 6 chiffres de votre application d'authentification</p>
-      <div class="otp-hint">💡 Code actuel (simulé) : <strong id="otpDisplay">------</strong></div>
-      <div class="otp-wrap">
-  <input class="otp-inp" id="otp0" maxlength="1" inputmode="numeric" oninput="otpNext(this,1)" onkeydown="otpKey(event,this,null,document.getElementById('otp1'))">
-  <input class="otp-inp" id="otp1" maxlength="1" inputmode="numeric" oninput="otpNext(this,2)" onkeydown="otpKey(event,this,document.getElementById('otp0'),document.getElementById('otp2'))">
-  <input class="otp-inp" id="otp2" maxlength="1" inputmode="numeric" oninput="otpNext(this,3)" onkeydown="otpKey(event,this,document.getElementById('otp1'),document.getElementById('otp3'))">
-  <input class="otp-inp" id="otp3" maxlength="1" inputmode="numeric" oninput="otpNext(this,4)" onkeydown="otpKey(event,this,document.getElementById('otp2'),document.getElementById('otp4'))">
-  <input class="otp-inp" id="otp4" maxlength="1" inputmode="numeric" oninput="otpNext(this,5)" onkeydown="otpKey(event,this,document.getElementById('otp3'),document.getElementById('otp5'))">
-  <input class="otp-inp" id="otp5" maxlength="1" inputmode="numeric" oninput="checkOTP()" onkeydown="otpKey(event,this,document.getElementById('otp4'),null)">
-</div>
-      <div class="adm-err" id="admErr2">Code incorrect</div>
-      <button class="adm-btn" onclick="checkOTP()">Vérifier →</button>
-      <button class="adm-cancel" onclick="backToStep1()">← Retour</button>
-    </div>
-  </div>
-</div>
-
-<!-- ADMIN PANEL -->
-<div class="adm-panel hidden" id="admPanel">
-
-  <!-- TOPBAR -->
-  <div class="adm-topbar">
-    <div class="logo-adm">Nexora<span>Flash</span> <span style="font-size:13px">⚡</span></div>
-    <span class="adm-badge">● Admin connecté</span>
-    <div class="adm-topbar-right">
-      <span style="font-size:11px;color:#475569" id="admDate"></span>
-      <button class="adm-close" onclick="closeAdminPanel()">✕ Quitter</button>
-    </div>
-  </div>
-
-  <!-- LAYOUT -->
-  <div class="adm-layout">
-
-    <!-- SIDEBAR -->
-    <div class="adm-sidebar">
-      <div class="adm-sidebar-section">Principal</div>
-      <div class="adm-si active" onclick="admTab('dashboard')"><span class="asi">📊</span><span class="si-label">Dashboard</span></div>
-      <div class="adm-si" onclick="admTab('products')"><span class="asi">🛍️</span><span class="si-label">Produits</span></div>
-      <div class="adm-si" onclick="admTab('addprod')"><span class="asi">➕</span><span class="si-label">Ajouter produit</span></div>
-      <div class="adm-si" onclick="admTab('orders')"><span class="asi">📦</span><span class="si-label">Commandes</span></div>
-      <div class="adm-sidebar-section">Marketing</div>
-      <div class="adm-si" onclick="admTab('promo')"><span class="asi">🎁</span><span class="si-label">Promo & Livraison</span></div>
-      <div class="adm-si" onclick="admTab('reviews')"><span class="asi">⭐</span><span class="si-label">Avis clients</span></div>
-      <div class="adm-sidebar-section">Config</div>
-      <div class="adm-si" onclick="admTab('settings')"><span class="asi">🔧</span><span class="si-label">Paramètres</span></div>
-      <div class="adm-sidebar-bottom">
-        <div style="font-size:10px;color:#334155;text-align:center">NexoraFlash Admin v2.0</div>
-      </div>
-    </div>
-
-    <!-- CONTENU -->
-    <div class="adm-content">
-
-      <!-- ─── DASHBOARD ─── -->
-      <div class="adm-tab active" id="atab-dashboard">
-        <div class="adm-ph"><h2>📊 Dashboard</h2><p>Vue d'ensemble de votre boutique</p></div>
-
-        <div class="adm-stats">
-          <div class="adm-stat">
-            <div class="adm-stat-icon">🛍️</div>
-            <div class="adm-stat-v" id="sStat">17</div>
-            <div class="adm-stat-l">Produits actifs</div>
-            <div class="adm-stat-trend">↑ Boutique en ligne</div>
-          </div>
-          <div class="adm-stat">
-            <div class="adm-stat-icon">📦</div>
-            <div class="adm-stat-v" id="oStat">0</div>
-            <div class="adm-stat-l">Commandes session</div>
-            <div class="adm-stat-trend" id="oTrend">Aucune commande</div>
-          </div>
-          <div class="adm-stat">
-            <div class="adm-stat-icon">💶</div>
-            <div class="adm-stat-v" id="rStat">0€</div>
-            <div class="adm-stat-l">Chiffre d'affaires</div>
-            <div class="adm-stat-trend">Session en cours</div>
-          </div>
-          <div class="adm-stat">
-            <div class="adm-stat-icon">🎁</div>
-            <div class="adm-stat-v" id="pStat" style="font-size:16px;color:#a78bfa">NEXORA10</div>
-            <div class="adm-stat-l">Code promo actif</div>
-            <div class="adm-stat-trend" style="color:#a78bfa">-10% activé</div>
-          </div>
-        </div>
-
-        <div class="adm-quick-grid">
-          <div class="adm-quick-btn" onclick="admTab('addprod')"><div class="qi">➕</div><div class="ql">Nouveau produit</div></div>
-          <div class="adm-quick-btn" onclick="admTab('orders')"><div class="qi">📦</div><div class="ql">Commandes</div></div>
-          <div class="adm-quick-btn" onclick="admTab('promo')"><div class="qi">🎁</div><div class="ql">Modifier promo</div></div>
-          <div class="adm-quick-btn" onclick="exportJSON()"><div class="qi">💾</div><div class="ql">Exporter données</div></div>
-        </div>
-
-        <div class="adm-card">
-          <div class="adm-card-title">📈 Activité récente</div>
-          <div id="admActivity" style="font-size:12px;color:#475569;text-align:center;padding:16px">Aucune activité pour le moment</div>
-        </div>
-      </div>
-
-      <!-- ─── PRODUITS ─── -->
-      <div class="adm-tab" id="atab-products">
-        <div class="adm-ph">
-          <h2>🛍️ Gestion des produits</h2>
-          <p>Modifiez, activez ou supprimez vos produits</p>
-        </div>
-        <div class="adm-card" style="padding:12px;margin-bottom:12px">
-          <input class="edit-fi" type="text" placeholder="🔍 Rechercher un produit..." oninput="filterAdmProds(this.value)" style="margin:0">
-        </div>
-        <div class="adm-prod-list" id="admProdList"></div>
-      </div>
-
-      <!-- ─── AJOUTER PRODUIT ─── -->
-      <div class="adm-tab" id="atab-addprod">
-        <div class="adm-ph"><h2>➕ Ajouter un produit</h2><p>Remplissez les informations du nouveau produit</p></div>
-
-        <div style="display:grid;gap:14px">
-          <div class="adm-card">
-            <div class="adm-card-title">📝 Informations générales</div>
-            <label class="edit-fl">Nom du produit *</label>
-            <input class="edit-fi" id="npName" placeholder="Ex: Samsung Galaxy S24">
-            <label class="edit-fl">Sous-titre / specs courtes</label>
-            <input class="edit-fi" id="npShort" placeholder="Ex: 8Go/256Go · 50MP · 5G">
-            <label class="edit-fl">Description</label>
-            <textarea class="edit-fi" id="npDesc" placeholder="Description détaillée..."></textarea>
-            <label class="edit-fl">Catégorie</label>
-            <select class="edit-fi" id="npCat">
-              <option value="Smartphones">📱 Smartphones</option>
-              <option value="Tablettes">📟 Tablettes</option>
-              <option value="Batteries">🔋 Batteries & Power</option>
-              <option value="Câbles">🔌 Câbles & Chargeurs</option>
-              <option value="Maison">🏠 Maison & Aspirateurs</option>
-              <option value="Robotique">🤖 Robotique & IA</option>
-              <option value="Accessoires">✨ Accessoires</option>
-            </select>
-            <label class="edit-fl">Specs (séparées par des virgules)</label>
-            <input class="edit-fi" id="npSpecs" placeholder="Ex: 6.1 pouces, 50MP, 5000mAh">
-          </div>
-
-          <div class="adm-card">
-            <div class="adm-card-title">💶 Prix</div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-              <div>
-                <label class="edit-fl">Prix de vente (€) *</label>
-                <input class="edit-fi" type="number" id="npPrice" step="0.01" placeholder="99.99">
-              </div>
-              <div>
-                <label class="edit-fl">Prix barré (€)</label>
-                <input class="edit-fi" type="number" id="npFold" step="0.01" placeholder="149.99">
-              </div>
-            </div>
-            <label class="edit-fl">Badge</label>
-            <select class="edit-fi" id="npBadge">
-              <option value="">Aucun</option>
-              <option value="new">🆕 Nouveau</option>
-              <option value="promo">🔥 Promo</option>
-              <option value="cmd">📋 Sur commande</option>
-            </select>
-            <label class="edit-fl">Texte du badge</label>
-            <input class="edit-fi" id="npBt" placeholder="Ex: Nouveau, -20%">
-          </div>
-
-          <div class="adm-card">
-            <div class="adm-card-title">📸 Image principale</div>
-            <input type="file" id="npImg" accept="image/*" onchange="previewNewProd(this)" style="display:none">
-            <div style="display:flex;align-items:center;gap:14px">
-              <div id="npPreview" onclick="document.getElementById('npImg').click()" style="width:90px;height:90px;background:#0f1420;border:2px dashed rgba(255,255,255,.1);border-radius:12px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:11px;color:#475569;text-align:center;overflow:hidden;flex-shrink:0">
-                <span>📸<br>Choisir</span>
-              </div>
-              <div>
-                <button class="adm-edit-btn" onclick="document.getElementById('npImg').click()" style="margin-bottom:8px;display:block">📁 Parcourir...</button>
-                <div style="font-size:10px;color:#475569">JPG, PNG ou WebP<br>Recommandé : 500×500px</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="adm-card">
-            <div class="adm-card-title">⚙️ Options</div>
-            <div class="tgl-row"><span>En promo (timer actif)</span><div class="tgl" id="npPromoTgl" onclick="this.classList.toggle('on')"></div></div>
-            <div class="tgl-row"><span>Sur commande uniquement</span><div class="tgl" id="npCmdTgl" onclick="this.classList.toggle('on')"></div></div>
-            <div class="tgl-row"><span>Visible dans la boutique</span><div class="tgl on" id="npVisibleTgl" onclick="this.classList.toggle('on')"></div></div>
-          </div>
-
-          <button class="adm-btn" onclick="addNewProduct()">✅ Publier le produit</button>
-          <div id="npMsg" style="display:none;padding:12px;border-radius:10px;font-size:12px;text-align:center"></div>
-        </div>
-      </div>
-
-      <!-- ─── COMMANDES ─── -->
-      <div class="adm-tab" id="atab-orders">
-        <div class="adm-ph"><h2>📦 Commandes</h2><p>Historique de la session en cours</p></div>
-        <div class="adm-card">
-          <div class="adm-card-title">Commandes reçues</div>
-          <div class="adm-orders-list" id="admOrders">
-            <div style="text-align:center;padding:28px;color:#475569;font-size:12px">
-              <div style="font-size:32px;margin-bottom:10px">📭</div>
-              Aucune commande pour le moment
-            </div>
-          </div>
-        </div>
-        <div class="adm-card" style="background:rgba(37,99,235,.05);border-color:rgba(37,99,235,.15)">
-          <div class="adm-card-title" style="color:#60a5fa">💡 Info</div>
-          <p style="font-size:11px;color:#475569;line-height:1.7">Pour un historique permanent des commandes et des paiements réels, connectez <strong style="color:#60a5fa">Stripe</strong> après la mise en ligne du site.</p>
-        </div>
-      </div>
-
-      <!-- ─── PROMO ─── -->
-      <div class="adm-tab" id="atab-promo">
-        <div class="adm-ph"><h2>🎁 Promo & Livraison</h2><p>Gérez vos codes et frais de livraison</p></div>
-        <div class="adm-card">
-          <div class="adm-card-title">Code promo</div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-            <div><label class="edit-fl">Code</label><input class="edit-fi" id="aPromoCode" value="NEXORA10"></div>
-            <div><label class="edit-fl">Réduction (%)</label><input class="edit-fi" type="number" id="aPromoPct" value="10" min="1" max="90"></div>
-          </div>
-          <div class="tgl-row" style="margin-top:12px"><span>Code activé</span><div class="tgl on" id="promoTgl" onclick="this.classList.toggle('on')"></div></div>
-          <div class="tgl-row"><span>Usage unique par client</span><div class="tgl on" onclick="this.classList.toggle('on')"></div></div>
-          <div class="promo-preview" id="pprev">Aperçu : NEXORA10 — -10%</div>
-          <button class="adm-btn" style="margin-top:12px" onclick="savePromoSettings()">💾 Sauvegarder</button>
-        </div>
-        <div class="adm-card">
-          <div class="adm-card-title">🚚 Livraison</div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-            <div><label class="edit-fl">Livraison gratuite dès (€)</label><input class="edit-fi" type="number" id="aFreeShip" value="10"></div>
-            <div><label class="edit-fl">Frais de port (€)</label><input class="edit-fi" type="number" id="aShipFee" value="2.90" step="0.1"></div>
-          </div>
-          <button class="adm-btn" style="margin-top:12px" onclick="saveShipSettings()">💾 Sauvegarder</button>
-        </div>
-      </div>
-
-      <!-- ─── AVIS ─── -->
-      <div class="adm-tab" id="atab-reviews">
-        <div class="adm-ph"><h2>⭐ Avis clients</h2><p>Gérez les témoignages de vos clients</p></div>
-        <div class="adm-card">
-          <div class="adm-card-title">Ajouter un avis</div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-            <div><label class="edit-fl">Initiales</label><input class="edit-fi" id="rAv" placeholder="AB" maxlength="2"></div>
-            <div><label class="edit-fl">Nom</label><input class="edit-fi" id="rNm" placeholder="Jean D."></div>
-          </div>
-          <label class="edit-fl">Produit</label><select class="edit-fi" id="rProd"></select>
-          <label class="edit-fl">Note</label>
-          <select class="edit-fi" id="rStars">
-            <option>★★★★★</option><option>★★★★☆</option><option>★★★☆☆</option>
-          </select>
-          <label class="edit-fl">Commentaire</label>
-          <textarea class="edit-fi" id="rTxt" placeholder="Super produit..."></textarea>
-          <button class="adm-btn" style="margin-top:12px" onclick="addRev()">➕ Publier l'avis</button>
-        </div>
-        <div class="adm-card">
-          <div class="adm-card-title">Avis publiés</div>
-          <div id="admRevList"></div>
-        </div>
-      </div>
-
-      <!-- ─── PARAMÈTRES ─── -->
-      <div class="adm-tab" id="atab-settings">
-        <div class="adm-ph"><h2>🔧 Paramètres</h2><p>Configuration de votre espace admin</p></div>
-        <div class="adm-card">
-          <div class="adm-card-title">🔐 Sécurité</div>
-          <label class="edit-fl">Email administrateur</label>
-          <input class="edit-fi" type="email" id="sEmail" value="issa95biscuit@gmail.com">
-          <label class="edit-fl">Nouveau mot de passe</label>
-          <input class="edit-fi" type="password" id="sPass" placeholder="Laisser vide pour ne pas changer">
-          <label class="edit-fl">Code 2FA (6 chiffres)</label>
-          <input class="edit-fi" type="text" id="sOTP" value="123456" maxlength="6">
-          <button class="adm-btn" style="margin-top:12px" onclick="saveSettings()">💾 Sauvegarder</button>
-        </div>
-        <div class="adm-card">
-          <div class="adm-card-title">📢 Bannière promo</div>
-          <label class="edit-fl">Texte de la bannière</label>
-          <input class="edit-fi" id="sBanner" value="🎉 Code NEXORA10 — -10% sur votre 1ère commande · Livraison gratuite dès 10€ 🚀">
-          <div class="tgl-row" style="margin-top:10px"><span>Bannière visible</span><div class="tgl on" onclick="togBanner(this)"></div></div>
-          <button class="adm-btn" style="margin-top:12px" onclick="saveBanner()">💾 Appliquer</button>
-        </div>
-        <div class="adm-card" style="border-color:rgba(239,68,68,.2)">
-          <div class="adm-card-title" style="color:#f87171">⚠️ Zone dangereuse</div>
-          <p style="font-size:11px;color:#475569;margin-bottom:12px">Ces actions sont irréversibles.</p>
-          <button onclick="if(confirm('Réinitialiser toutes les données ?')){localStorage.clear();location.reload()}" style="background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.25);border-radius:8px;padding:9px 16px;color:#f87171;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit">🗑️ Réinitialiser les données</button>
-        </div>
-      </div>
-
-    </div><!-- /adm-content -->
-  </div><!-- /adm-layout -->
-</div><!-- /adm-panel -->
-
-<!-- PRODUCT EDIT MODAL -->
-<div class="adm-edit-overlay hidden" id="admEditOverlay">
-  <div class="adm-edit-box">
-    <h3>✏️ Modifier le produit</h3>
-    <input type="hidden" id="editProdId">
-    <label class="adm-fl">Nom du produit</label>
-    <input class="adm-input" id="editName">
-    <label class="adm-fl">Sous-titre / specs courtes</label>
-    <input class="adm-input" id="editShort">
-    <label class="adm-fl">Description</label>
-    <textarea class="adm-input" id="editDesc"></textarea>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
-      <div><label class="adm-fl">Prix de vente (€)</label><input class="adm-input" type="number" id="editPrice" step="0.01"></div>
-      <div><label class="adm-fl">Prix barré (€)</label><input class="adm-input" type="number" id="editFold" step="0.01"></div>
-    </div>
-    <label class="adm-fl">Badge</label>
-    <select class="adm-input" id="editBadge">
-      <option value="">Aucun</option>
-      <option value="new">Nouveau</option>
-      <option value="promo">Promo</option>
-      <option value="cmd">Sur commande</option>
-    </select>
-    <label class="adm-fl">Texte du badge</label>
-    <input class="adm-input" id="editBt">
-    <div class="adm-edit-btns">
-      <button class="adm-edit-cancel" onclick="closeEditModal()">Annuler</button>
-      <button class="adm-edit-save" onclick="saveProductEdit()">💾 Sauvegarder</button>
-    </div>
-  </div>
-</div>
-
-
 <script>
 // ═══════════════ ADMIN SYSTEM ═══════════════
 let admOrders = [];
@@ -1569,8 +1514,6 @@ function exportData(){
 
 // disabled products handled inside cardHTML
 </script>
-
-
 <script>
 // Accès admin : visible uniquement depuis l'IP autorisée
 var ADMIN_IP = '194.11.196.245';
@@ -1621,8 +1564,6 @@ document.addEventListener('DOMContentLoaded', function(){
   });
 });
 </script>
-
-
 <script>
 // ── AJOUT DE PRODUIT ADMIN ────────────────────────────────────────
 var npImgData = null;
@@ -1718,8 +1659,6 @@ function addNewProduct(){
   setTimeout(function(){ msg.style.display='none'; }, 4000);
 }
 </script>
-
-
 <script>
 // ── SUPPRESSION PRODUIT ───────────────────────────────────────────
 function deleteProd(id){
@@ -1736,8 +1675,6 @@ function deleteProd(id){
   toast('🗑️ "' + p.name.substring(0,25) + '" supprimé');
 }
 </script>
-
-
 <script>
 // ── Fonctions admin manquantes ─────────────────────────────────────
 function togBanner(el){
@@ -1816,60 +1753,101 @@ function openAdminPanel(){
 }
 </script>
 
-<div id="checkoutOverlay" onclick="closeCheckout()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:600;"></div>
-<div id="checkoutModal" style="display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:min(460px,95vw);max-height:90vh;overflow-y:auto;background:#fff;border-radius:16px;z-index:601;padding:24px;box-shadow:0 20px 60px rgba(0,0,0,.2);">
+<!-- MODAL PAIEMENT -->
+<div id="payOverlay" onclick="closePay()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:600;"></div>
+<div id="payModal" style="display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:min(460px,95vw);max-height:90vh;overflow-y:auto;background:#fff;border-radius:16px;z-index:601;padding:24px;box-shadow:0 20px 60px rgba(0,0,0,.2);">
   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;">
-    <h3 style="font-size:17px;font-weight:700;">🔒 Paiement sécurisé</h3>
-    <button onclick="closeCheckout()" style="width:30px;height:30px;border-radius:50%;background:#f3f4f6;border:none;font-size:16px;cursor:pointer;">×</button>
+    <h3 style="font-size:17px;font-weight:700;color:#111;">Paiement sécurisé</h3>
+    <button onclick="closePay()" style="width:32px;height:32px;border-radius:50%;background:#f3f4f6;border:none;font-size:18px;cursor:pointer;color:#555;">×</button>
   </div>
-  <div id="coSummary" style="background:#f8fafc;border-radius:10px;padding:12px;margin-bottom:16px;font-size:13px;"></div>
-  <div id="paypal-button-container" style="margin-bottom:14px;"></div>
-  <div style="text-align:center;font-size:12px;color:#9ca3af;margin:10px 0;">— ou par carte bancaire —</div>
-  <input id="coName" type="text" placeholder="Nom complet" style="width:100%;height:40px;border:1.5px solid #e5e7eb;border-radius:8px;padding:0 12px;font-size:13px;margin-bottom:8px;box-sizing:border-box;font-family:inherit;">
-  <input id="coEmail" type="email" placeholder="Email" style="width:100%;height:40px;border:1.5px solid #e5e7eb;border-radius:8px;padding:0 12px;font-size:13px;margin-bottom:8px;box-sizing:border-box;font-family:inherit;">
-  <div id="stripe-card-element" style="border:1.5px solid #e5e7eb;border-radius:8px;padding:11px;margin-bottom:8px;background:#fff;"></div>
-  <div id="stripe-errors" style="color:#ef4444;font-size:12px;margin-bottom:8px;"></div>
-  <button onclick="payStripe()" id="payBtn" style="width:100%;padding:13px;background:#1a56db;color:#fff;border-radius:10px;font-size:15px;font-weight:700;border:none;cursor:pointer;margin-bottom:12px;">🔒 Payer par carte</button>
-  <div style="text-align:center;font-size:11px;color:#9ca3af;">Sécurisé par <b style="color:#635bff">Stripe</b> · <b style="color:#003087">PayPal</b> · SSL 256-bit</div>
+  <div id="paySummary" style="background:#f8fafc;border-radius:10px;padding:12px 14px;margin-bottom:16px;font-size:14px;color:#333;"></div>
+
+  <!-- PayPal -->
+  <div id="paypal-button-container" style="margin-bottom:16px;min-height:45px;"></div>
+
+  <div style="text-align:center;font-size:12px;color:#aaa;margin:12px 0;display:flex;align-items:center;gap:8px;"><div style="flex:1;height:1px;background:#e5e7eb;"></div>ou carte bancaire<div style="flex:1;height:1px;background:#e5e7eb;"></div></div>
+
+  <!-- Stripe -->
+  <input id="sName" type="text" placeholder="Nom complet" style="width:100%;height:42px;border:1.5px solid #e5e7eb;border-radius:8px;padding:0 12px;font-size:14px;margin-bottom:10px;box-sizing:border-box;font-family:inherit;color:#111;">
+  <input id="sEmail" type="email" placeholder="Email" style="width:100%;height:42px;border:1.5px solid #e5e7eb;border-radius:8px;padding:0 12px;font-size:14px;margin-bottom:10px;box-sizing:border-box;font-family:inherit;color:#111;">
+  <div id="stripe-card-el" style="border:1.5px solid #e5e7eb;border-radius:8px;padding:12px;margin-bottom:10px;background:#fff;min-height:42px;"></div>
+  <div id="stripe-err" style="color:#ef4444;font-size:12px;margin-bottom:10px;min-height:16px;"></div>
+  <button onclick="payStripe()" id="stripePayBtn" style="width:100%;padding:13px;background:#1a56db;color:#fff;border-radius:10px;font-size:15px;font-weight:700;border:none;cursor:pointer;margin-bottom:14px;">Payer par carte</button>
+
+  <!-- Crypto Solana -->
+  <div style="border:1.5px solid #e5e7eb;border-radius:10px;padding:14px;margin-bottom:14px;">
+    <div style="font-size:13px;font-weight:700;color:#333;margin-bottom:8px;">Crypto · USDC / USDT sur Solana</div>
+    <div style="font-size:12px;color:#666;margin-bottom:8px;">Envoyez le montant exact en USDC ou USDT (réseau Solana)</div>
+    <div id="cryptoAmount" style="font-size:16px;font-weight:700;color:#9945FF;margin-bottom:8px;"></div>
+    <div style="background:#f3f4f6;border-radius:8px;padding:8px 10px;font-size:11px;font-family:monospace;word-break:break-all;color:#333;margin-bottom:8px;" id="solanaAddr">VOTRE_ADRESSE_SOLANA_ICI</div>
+    <button onclick="copySolana()" style="width:100%;padding:9px;background:#9945FF;color:#fff;border-radius:8px;font-size:13px;font-weight:600;border:none;cursor:pointer;">Copier l'adresse Solana</button>
+    <div style="font-size:11px;color:#aaa;margin-top:8px;text-align:center;">Réseau : Solana · USDC ou USDT uniquement · Envoyez le montant exact</div>
+  </div>
+
+  <div style="text-align:center;font-size:11px;color:#aaa;">Sécurisé par <b style="color:#635bff">Stripe</b> · <b style="color:#003087">PayPal</b> · <b style="color:#9945FF">Solana</b></div>
 </div>
+
 <script>
 var _stripe=null,_card=null,_stripeInit=false;
-function openCheckout(){
+var SOLANA_ADDR='VOTRE_ADRESSE_SOLANA_ICI';
+
+function openPay(){
   var p=window._curP;if(!p)return;
-  document.getElementById('checkoutOverlay').style.display='block';
-  document.getElementById('checkoutModal').style.display='block';
-  var s=document.getElementById('coSummary');
-  if(s)s.innerHTML='<b>'+p.name+'</b><br><span style="color:#1a56db;font-size:16px;font-weight:700;">'+p.price+'€</span>';
+  document.getElementById('payOverlay').style.display='block';
+  document.getElementById('payModal').style.display='block';
+  var s=document.getElementById('paySummary');
+  if(s)s.innerHTML='<div style="display:flex;justify-content:space-between;align-items:center;"><span style="font-weight:600;">'+p.name.substring(0,35)+'...</span><span style="color:#1a56db;font-weight:700;font-size:16px;">'+p.price+'€</span></div>';
+  var ca=document.getElementById('cryptoAmount');
+  if(ca)ca.textContent=p.price+' USDC / USDT';
   if(!_stripeInit&&typeof Stripe!='undefined'){
-    try{_stripe=Stripe('pk_test_REMPLACEZ_PAR_VOTRE_CLE_STRIPE');
-    _card=_stripe.elements().create('card',{style:{base:{fontSize:'13px'}}});
-    _card.mount('#stripe-card-element');
-    _card.on('change',e=>{var el=document.getElementById('stripe-errors');if(el)el.textContent=e.error?e.error.message:'';});
-    _stripeInit=true;}catch(e){}
+    try{
+      _stripe=Stripe('pk_test_VOTRE_CLE_STRIPE_TEST');
+      _card=_stripe.elements().create('card',{style:{base:{fontSize:'14px',color:'#111',fontFamily:'inherit'}}});
+      _card.mount('#stripe-card-el');
+      _card.on('change',function(e){var el=document.getElementById('stripe-err');if(el)el.textContent=e.error?e.error.message:'';});
+      _stripeInit=true;
+    }catch(e){console.log('Stripe:',e);}
   }
   if(typeof paypal!='undefined'){
     var c=document.getElementById('paypal-button-container');
     if(c&&!c.hasChildNodes()){
-      try{paypal.Buttons({
-        createOrder:(d,a)=>a.order.create({purchase_units:[{amount:{value:String(p.pn),currency_code:'EUR'},description:p.name}]}),
-        onApprove:(d,a)=>a.order.capture().then(det=>{closeCheckout();showToast('🎉 Paiement PayPal confirmé !');})
-      }).render('#paypal-button-container');}catch(e){}
+      try{
+        paypal.Buttons({
+          style:{layout:'vertical',color:'gold',shape:'rect',label:'paypal'},
+          createOrder:function(d,a){return a.order.create({purchase_units:[{amount:{value:String(p.pn),currency_code:'EUR'},description:p.name}]});},
+          onApprove:function(d,a){return a.order.capture().then(function(det){closePay();showToast('PayPal confirmé ! Merci '+det.payer.name.given_name);});},
+          onError:function(err){showToast('Erreur PayPal, réessayez.');}
+        }).render('#paypal-button-container');
+      }catch(e){console.log('PayPal:',e);}
     }
   }
 }
-function closeCheckout(){
-  document.getElementById('checkoutOverlay').style.display='none';
-  document.getElementById('checkoutModal').style.display='none';
+
+function closePay(){
+  document.getElementById('payOverlay').style.display='none';
+  document.getElementById('payModal').style.display='none';
 }
+
 async function payStripe(){
-  if(!_stripe||!_card){showToast('❌ Stripe non disponible');return;}
-  var name=document.getElementById('coName').value.trim();
-  var email=document.getElementById('coEmail').value.trim();
-  if(!name||!email){showToast('❌ Remplissez nom et email');return;}
-  var btn=document.getElementById('payBtn');btn.textContent='⏳...';btn.disabled=true;
-  var r=await _stripe.createPaymentMethod({type:'card',card:_card,billing_details:{name,email}});
-  if(r.error){document.getElementById('stripe-errors').textContent=r.error.message;btn.textContent='🔒 Payer par carte';btn.disabled=false;}
-  else{closeCheckout();showToast('🎉 Commande confirmée ! Vous recevrez un email.');}
+  if(!_stripe||!_card){showToast('Stripe non disponible');return;}
+  var name=document.getElementById('sName').value.trim();
+  var email=document.getElementById('sEmail').value.trim();
+  if(!name||!email){showToast('Remplissez nom et email');return;}
+  var btn=document.getElementById('stripePayBtn');
+  btn.textContent='Traitement...';btn.disabled=true;
+  var r=await _stripe.createPaymentMethod({type:'card',card:_card,billing_details:{name:name,email:email}});
+  if(r.error){
+    document.getElementById('stripe-err').textContent=r.error.message;
+    btn.textContent='Payer par carte';btn.disabled=false;
+  }else{
+    closePay();
+    showToast('Commande confirmée ! Email envoyé.');
+  }
+}
+
+function copySolana(){
+  try{navigator.clipboard.writeText(SOLANA_ADDR);}catch(e){}
+  showToast('Adresse Solana copiée !');
 }
 </script>
 </body>
