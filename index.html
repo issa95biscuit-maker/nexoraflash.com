@@ -723,13 +723,8 @@ body{overflow-x:hidden;width:100%;max-width:100vw;}
 
 </style>
 
-  <!-- Google AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
-
   <script src="https://js.stripe.com/v3/"></script>
-  <script src="https://www.paypal.com/sdk/js?client-id=YOUR_PAYPAL_CLIENT_ID&currency=EUR&locale=fr_FR" defer></script>
-
-  <style>.ad-native{grid-column:1/-1;background:#f0f4ff;border:1px solid #dbe4ff;border-radius:12px;padding:12px 16px;text-align:center;font-size:12px;color:#6b7280;}</style>
 </head>
 
 <body>
@@ -749,95 +744,14 @@ body{overflow-x:hidden;width:100%;max-width:100vw;}
   <div class="cd-item" onclick="filterCat('Accessoires');closeCatMenu()"><div class="cd-icon">🕶️</div><div class="cd-info"><h4>Mode & Accessoires</h4><p>Lunettes rétro premium</p></div><span class="cd-pill">1</span><span class="cd-arrow">›</span></div>
   <div class="cd-item" onclick="filterCat('');closeCatMenu()" style="background:rgba(26,120,255,.05);border-top:2px solid rgba(26,120,255,.2);"><div class="cd-icon" style="background:rgba(26,120,255,.2);">🛍️</div><div class="cd-info"><h4 style="color:var(--bl);">Tous les produits</h4><p>Voir la collection complète</p></div><span class="cd-pill" style="background:rgba(26,120,255,.3)">17</span><span class="cd-arrow">›</span></div>
 </div>
-<div class="skel" id="skel" style="display:none">
+<div class="skel" style="display:none" id="skel">
   <div class="skel-logo">NexoraFlash ⚡</div>
   <div class="skel-bar"><div class="sbi"></div></div>
   <div class="skcs"><div class="skc"></div><div class="skc"></div><div class="skc"></div></div>
 </div>
 
 <!-- Newsletter popup -->
-<div class="nl-overlay" id="nlOverlay">
-  <div class="nl-box">
-    <button class="nl-close" onclick="closeNL()">✕</button>
-    <div class="nl-icon">📧</div>
-    <h3>-10% sur votre 1ère commande</h3>
-    <p>Inscrivez-vous à notre newsletter et recevez votre code promo exclusif + les meilleures offres en avant-première !</p>
-    <input class="nl-inp" type="email" id="nlEmail" placeholder="votre@email.fr">
-    <button class="nl-btn" onclick="subscribeNL()">Obtenir mon code promo →</button>
-    <span class="nl-skip" onclick="closeNL()">Non merci, je préfère payer plein tarif</span>
-  </div>
-</div>
 
-<div class="promo" id="promoBanner">
-  🎉 Code <span class="code">NEXORA10</span> — -10% sur votre 1ère commande · Livraison gratuite dès 10€ 🚀
-  <button class="promo-x" onclick="this.parentElement.style.display='none'">✕</button>
-</div>
-
-<nav>
-  <div class="nav-in">
-    <div class="logo" onclick="showPage('home')">NexoraFlash<em>⚡</em></div>
-    <button class="cat-menu-btn" onclick="openCatMenu()"><span class="cm-ic">☰</span><span class="cat-menu-text">Catégories</span></button>
-    <ul class="nav-links">
-      <li><a onclick="showPage('home')" id="nav-home" class="active">Accueil</a></li>
-      <li><a onclick="showPage('bonsplans')" id="nav-bonsplans">🔥 Bons Plans</a></li>
-      <li><a onclick="showPage('shop')" id="nav-shop">Boutique</a></li>
-      <li><a onclick="showPage('cart')" id="nav-cart">Panier</a></li>
-      <li><a onclick="showPage('contact')" id="nav-contact">Contact</a></li>
-      <li><a onclick="showPage('cgv')" id="nav-cgv">CGV</a></li>
-    </ul>
-    <div class="nsw" id="searchWrap">
-      <div class="ns"><span style="font-size:13px">🔍</span><input type="text" placeholder="Rechercher..." id="searchInput" oninput="handleSearch(this.value)" onfocus="openSearch()" autocomplete="off"></div>
-      <div class="sdrop" id="searchDrop"></div>
-    </div>
-    <div class="cb2" onclick="showPage('cart')">🛒<div class="cn" id="cartCount">0</div></div>
-    <button class="btnp" onclick="showPage('shop')">Shop →</button>
-  </div>
-</nav>
-
-<div class="mnav" id="mobileNav">
-  <div class="mni active" id="mn-home" onclick="showPage('home')"><span class="mi">🏠</span>Accueil</div>
-  <div class="mni" id="mn-bonsplans" onclick="showPage('bonsplans')"><span class="mi">🔥</span>Bons Plans</div>
-  <div class="mni" id="mn-shop" onclick="showPage('shop')"><span class="mi">🛍️</span>Boutique</div>
-  <div class="mni" id="mn-cart" onclick="showPage('cart')"><span class="mi">🛒</span>Panier</div>
-  <div class="mni" id="mn-contact" onclick="showPage('contact')"><span class="mi">💬</span>Contact</div>
-</div>
-
-
-<!-- ACCUEIL -->
-<!-- CATEGORY DRAWER -->
-<div class="cat-drawer-overlay" id="catOverlay" onclick="closeCatMenu()"></div>
-<div class="cat-drawer" id="catDrawer">
-  <div class="cd-head">
-    <h3>🛍️ Nos catégories</h3>
-    <button class="cd-close" onclick="closeCatMenu()">✕</button>
-  </div>
-  <div class="cd-item" onclick="filterCat('Smartphones');closeCatMenu()"><div class="cd-icon">📱</div><div class="cd-info"><h4>Smartphones</h4><p>Redmi Note 15 Pro, Note 15</p></div><span class="cd-pill">2</span><span class="cd-arrow">›</span></div>
-  <div class="cd-item" onclick="filterCat('Tablettes');closeCatMenu()"><div class="cd-icon">📟</div><div class="cd-info"><h4>Tablettes</h4><p>Xiaomi Pad 7</p></div><span class="cd-pill">1</span><span class="cd-arrow">›</span></div>
-  <div class="cd-item" onclick="filterCat('Batteries');closeCatMenu()"><div class="cd-icon">🔋</div><div class="cd-info"><h4>Batteries & Power</h4><p>PowerBank, Chargeur, MagSafe</p></div><span class="cd-pill">3</span><span class="cd-arrow">›</span></div>
-  <div class="cd-item" onclick="filterCat('Maison');closeCatMenu()"><div class="cd-icon">🏠</div><div class="cd-info"><h4>Maison & Aspirateurs</h4><p>Robot, Balai, LED, Vapeur...</p></div><span class="cd-pill">6</span><span class="cd-arrow">›</span></div>
-  <div class="cd-item" onclick="filterCat('Robotique');closeCatMenu()"><div class="cd-icon">🤖</div><div class="cd-info"><h4>Robotique & IA</h4><p>Robot chien, Humanoïde</p></div><span class="cd-pill">2</span><span class="cd-arrow">›</span></div>
-  <div class="cd-item" onclick="filterCat('Câbles');closeCatMenu()"><div class="cd-icon">🔌</div><div class="cd-info"><h4>Câbles & Chargeurs</h4><p>USB-C 6A, Xiaomi 67W</p></div><span class="cd-pill">2</span><span class="cd-arrow">›</span></div>
-  <div class="cd-item" onclick="filterCat('Accessoires');closeCatMenu()"><div class="cd-icon">🕶️</div><div class="cd-info"><h4>Mode & Accessoires</h4><p>Lunettes rétro premium</p></div><span class="cd-pill">1</span><span class="cd-arrow">›</span></div>
-  <div class="cd-item" onclick="filterCat('');closeCatMenu()" style="background:rgba(26,120,255,.05);border-top:2px solid rgba(26,120,255,.2);"><div class="cd-icon" style="background:rgba(26,120,255,.2);">🛍️</div><div class="cd-info"><h4 style="color:var(--bl);">Tous les produits</h4><p>Voir la collection complète</p></div><span class="cd-pill" style="background:rgba(26,120,255,.3)">17</span><span class="cd-arrow">›</span></div>
-</div>
-<div class="skel" id="skel">
-  <div class="skel-logo">NexoraFlash ⚡</div>
-  <div class="skel-bar"><div class="sbi"></div></div>
-  <div class="skcs"><div class="skc"></div><div class="skc"></div><div class="skc"></div></div>
-</div>
-
-<!-- Newsletter popup -->
-<div class="nl-overlay" id="nlOverlay">
-  <div class="nl-box">
-    <button class="nl-close" onclick="closeNL()">✕</button>
-    <div class="nl-icon">📧</div>
-    <h3>-10% sur votre 1ère commande</h3>
-    <p>Inscrivez-vous à notre newsletter et recevez votre code promo exclusif + les meilleures offres en avant-première !</p>
-    <input class="nl-inp" type="email" id="nlEmail" placeholder="votre@email.fr">
-    <button class="nl-btn" onclick="subscribeNL()">Obtenir mon code promo →</button>
-    <span class="nl-skip" onclick="closeNL()">Non merci, je préfère payer plein tarif</span>
-  </div>
-</div>
 
 <div class="promo" id="promoBanner">
   🎉 Code <span class="code">NEXORA10</span> — -10% sur votre 1ère commande · Livraison gratuite dès 10€ 🚀
@@ -2087,6 +2001,2481 @@ function openAdminPanel(){
   var d = document.getElementById('admDate');
   if(d) d.textContent = new Date().toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long'});
 }
+</script>
+
+<script>
+
+let cart=[];
+let promoApplied=false;
+const PROMO_CODE='NEXORA10';
+const PROMO_PCT=10;
+
+function s5(n){return'★'.repeat(Math.round(n))+'☆'.repeat(5-Math.round(n));}
+
+// CHRONO tick
+setInterval(()=>{
+  const rem = CHRONOEND - Date.now();
+  const txt = formatTime(rem);
+  document.querySelectorAll('.ct').forEach(el=>el.textContent=txt);
+  document.querySelectorAll('.bp-chrono-t').forEach(el=>el.textContent=txt);
+  if(rem<=0) document.querySelectorAll('.chrono-badge,.d-chrono').forEach(el=>el.style.display='none');
+},1000);
+
+function cardHTML(p){
+  if(p._disabled) return '';
+  const promo = p.isPromo;
+  const chronoHTML = promo ? `<div class="chrono-badge">⏱️ <span class="ct">${formatTime(CHRONOEND-Date.now())}</span></div>` : '';
+  const mainImg = IMGS[p.imgs[0]]||'';
+  const addBtn = p.isCmd
+    ? `<button class="cmd-btn" onclick="event.stopPropagation();showPage('contact')">Devis →</button>`
+    : `<button class="addbtn" onclick="event.stopPropagation();addCart(${p.id})">+</button>`;
+  return `<div class="pcard" onclick="openProduct(${p.id})">
+    <div class="pimg">
+      <img src="${mainImg}" loading="lazy" decoding="async" alt="${p.name}" loading="lazy">
+      ${p.badge?`<div class="pbadge ${p.badge}">${p.bt}</div>`:''}
+      ${chronoHTML}
+    </div>
+    <div class="pinfo">
+      <div class="pname">${p.name}</div>
+      <div class="pspecs">${p.short}</div>
+      <div class="mstars"><span class="sy">${s5(p.stars)}</span><span class="sc">${p.stars} (${p.rev.toLocaleString('fr')})</span></div>
+      <div class="pftr">
+        <div><div class="pp">${p.price}€</div><div class="pold">${p.fold}€</div></div>
+        ${addBtn}
+      </div>
+    </div>
+  </div>`;
+}
+
+function bpCardHTML(p){
+  const save = Math.round((1 - p.pn/p.fon)*100);
+  return `<div class="bp-card" onclick="openProduct(${p.id})">
+    <div class="bp-top">
+      <img src="${IMGS[p.imgs[0]]}" alt="${p.name}" loading="lazy">
+      <div class="bp-save">-${save}%</div>
+    </div>
+    <div class="bp-info">
+      <div class="bp-name">${p.name}</div>
+      <div class="bp-prices"><span class="bp-new">${p.price}€</span><span class="bp-old">${p.fold}€</span></div>
+      <div class="bp-chrono">⏱️ Offre expire dans : <span class="bp-chrono-t">${formatTime(CHRONOEND-Date.now())}</span></div>
+      <button class="bp-addbtn" onclick="event.stopPropagation();addCart(${p.id})">🛒 Ajouter au panier</button>
+    </div>
+  </div>`;
+}
+
+function renderGrids(){
+  const promos = P.filter(p=>p.isPromo);
+  document.getElementById('homeGrid').innerHTML = P.slice(0,6).map(cardHTML).join('');
+  document.getElementById('shopGrid').innerHTML = P.map(cardHTML).join('');
+  document.getElementById('bpGrid').innerHTML = promos.map(bpCardHTML).join('');
+  setTimeout(addSocialProof,150);
+  document.getElementById('bpCount').textContent = promos.length + ' offres';
+}
+
+function openProduct(id){
+  try{sessionStorage.setItem('nxf_product',String(id));}catch(e){}
+  window.location.href='produit.html?id='+id;
+}
+
+function selThumb(el,k){
+  document.querySelectorAll('.thumb').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('mImg').innerHTML=`<img src="${IMGS[k]}" alt="">`;
+}
+
+function addCart(id,ev){
+  if(ev)ev.stopPropagation();
+  var p=P.find(x=>x.id===id);if(!p||p.isCmd)return;
+  var c=JSON.parse(localStorage.getItem('nxf_cart')||'[]');
+  var ex=c.find(x=>x.id===id);if(ex){ex.qty=(ex.qty||1)+1;}else{c.push({id:id,qty:1});}
+  localStorage.setItem('nxf_cart',JSON.stringify(c));
+  var t=c.reduce((s,x)=>s+(x.qty||1),0);
+  var el=document.getElementById('cartCount');if(el)el.textContent=t;
+  showToast('Ajouté au panier !');
+}
+
+function applyPromo(){
+  const inp=document.getElementById('promoInp');
+  const val=inp.value.trim().toUpperCase();
+  if(localStorage.getItem('nxf_promo_used')){
+    inp.classList.add('invalid');
+    showToast('❌ Code déjà utilisé sur ce compte');
+    return;
+  }
+  if(val===PROMO_CODE){
+    promoApplied=true;
+    inp.classList.add('valid');
+    inp.classList.remove('invalid');
+    showToast('🎉 Code NEXORA10 appliqué ! -10%');
+    renderCartSummary();
+  } else {
+    inp.classList.add('invalid');
+    inp.classList.remove('valid');
+    showToast('❌ Code invalide');
+  }
+}
+
+function renderCart(){
+  const ci=document.getElementById('cartItems');
+  if(!cart.length){
+    ci.innerHTML=`<div class="empty-c"><div class="empty-ic">🛒</div><h3>Panier vide</h3><p>Ajoutez des produits depuis la boutique</p><button class="btnp" onclick="showPage('shop')">Explorer →</button></div>`;
+    document.getElementById('cartSummary').style.display='none';
+    return;
+  }
+  document.getElementById('cartSummary').style.display='block';
+  let total=0;
+  ci.innerHTML=cart.map((p,i)=>{total+=p.pn;return`<div class="citem">
+    <div class="cimg"><img src="${IMGS[p.imgs[0]]}" alt="${p.name}"></div>
+    <div class="cinfo"><div class="cnm">${p.name}</div><div class="csb">${p.short}</div></div>
+    <div class="crgt"><div class="cpr">${p.price}€</div><button class="crm" onclick="rmCart(${i})">🗑️</button></div>
+  </div>`;}). join('');
+  renderCartSummary();
+}
+
+function renderCartSummary(){
+  let total=cart.reduce((s,p)=>s+p.pn,0);
+  const liv=total>=10?0:2.9;
+  let disc=0;
+  if(promoApplied){disc=total*PROMO_PCT/100;}
+  const tf=total-disc+liv;
+  document.getElementById('cartSubtotal').textContent=total.toFixed(2).replace('.',',')+'€';
+  document.getElementById('cartLiv').textContent=liv>=10?'Gratuite':'2,90€';
+  document.getElementById('cartLiv').style.color=total>=10?'var(--green)':'var(--white)';
+  const discRow=document.getElementById('discRow');
+  if(promoApplied){discRow.style.display='flex';document.getElementById('cartDisc').textContent='-'+disc.toFixed(2).replace('.',',')+'€';}
+  else discRow.style.display='none';
+  document.getElementById('cartTotal').textContent=tf.toFixed(2).replace('.',',')+'€';
+}
+
+function rmCart(id){
+  var c=JSON.parse(localStorage.getItem('nxf_cart')||'[]').filter(x=>x.id!==id);
+  localStorage.setItem('nxf_cart',JSON.stringify(c));
+  var t=c.reduce((s,x)=>s+(x.qty||1),0);
+  var el=document.getElementById('cartCount');if(el)el.textContent=t;
+  renderCart();
+}
+function changeQty(d){const e=document.getElementById('qty');let v=parseInt(e.textContent)+d;if(v<1)v=1;e.textContent=v;}
+
+function handleSearch(val){
+  const w=document.getElementById('searchWrap'),d=document.getElementById('searchDrop');
+  if(!val.trim()){closeSearch();return;}
+  w.classList.add('open');
+  const r=P.filter(p=>p.name.toLowerCase().includes(val.toLowerCase())||p.cat.toLowerCase().includes(val.toLowerCase())).slice(0,5);
+  d.innerHTML=r.length?r.map(p=>`<div class="sri" onclick="openProduct(${p.id})"><img src="${IMGS[p.imgs[0]]}" alt=""><span class="sri-nm">${p.name}</span><span class="sri-pr">${p.price}€</span></div>`).join(''):`<div class="no-res">Aucun résultat pour "${val}"</div>`;
+}
+function openSearch(){if(document.getElementById('searchInput').value)document.getElementById('searchWrap').classList.add('open');}
+function closeSearch(){document.getElementById('searchWrap').classList.remove('open');}
+document.addEventListener('click',e=>{if(!document.getElementById('searchWrap').contains(e.target))closeSearch();});
+
+function showPage(pg){
+  if(pg!=='product') hideStickyBuy();
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('active'));
+  document.querySelectorAll('.mni').forEach(a=>a.classList.remove('active'));
+  document.getElementById('page-'+pg).classList.add('active');
+  const n=document.getElementById('nav-'+pg);if(n)n.classList.add('active');
+  const mn=document.getElementById('mn-'+pg);if(mn)mn.classList.add('active');
+  window.scrollTo(0,0);
+  if(pg==='cart')renderCart();
+  closeSearch();
+}
+
+function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2600);}
+window.addEventListener('scroll',()=>{document.getElementById('stbtn').classList.toggle('vis',scrollY>300);});
+
+// Newsletter
+function closeNL(){document.getElementById('nlOverlay').classList.add('hidden');}
+function subscribeNL(){
+  const em=document.getElementById('nlEmail').value;
+  if(!em||!em.includes('@')){showToast('❌ Email invalide');return;}
+  closeNL();
+  showToast('🎉 Bienvenue ! Code NEXORA10 dans votre boîte mail');
+}
+setTimeout(()=>{
+  if(!sessionStorage.getItem('nl_shown')){
+    document.getElementById('nlOverlay').classList.remove('hidden');
+    sessionStorage.setItem('nl_shown','1');
+  }
+},4000);
+
+// CHATBOT
+const FAQ=[
+  {keys:["livraison","délai","combien","quand","recevoir","expédition"],q:"📦 Délais ?",a:"Délai <strong>3–7 jours ouvrés</strong>. Email de suivi envoyé dès expédition. 🚀"},
+  {keys:["gratuit","frais","port"],q:"🆓 Livraison gratuite ?",a:"<strong>Gratuite dès 10€</strong> d'achat, sinon 2,90€. 😊"},
+  {keys:["retour","remboursement","renvoyer","échange"],q:"↩️ Retours ?",a:"<strong>30 jours</strong> pour retourner. Retours gratuits si défectueux. Remboursement sous 5 jours. ✅"},
+  {keys:["paiement","carte","paypal","apple pay","sécurisé"],q:"💳 Paiement ?",a:"Visa, Mastercard, PayPal, Apple Pay. Paiements <strong>100% sécurisés</strong> 🔒"},
+  {keys:["promo","code","nexora10","réduction","remise"],q:"🎁 Code promo ?",a:"Code <strong style='color:#ffd700'>NEXORA10</strong> = <strong>-10%</strong> sur votre 1ère commande ! 🎉"},
+  {keys:["commande","suivi","tracking","où est"],q:"📍 Suivi commande ?",a:"Email de suivi envoyé dans les 24h après confirmation. 📧"},
+  {keys:["garantie","sav","problème","défectueux","panne"],q:"🛡️ Garantie ?",a:"<strong>2 ans</strong> de garantie légale. Email : contact@nexoraflash.fr 🙏"},
+  {keys:["robot","humanoïde","avatar","commande","devis"],q:"🤖 Robot humanoïde ?",a:"Article disponible sur commande. Contactez-nous pour un devis : <strong>contact@nexoraflash.fr</strong> 🤖"},
+];
+const QB=["📦 Livraison","↩️ Retours","💳 Paiement","🎁 Code promo","🛡️ Garantie"];
+let chatOpen=false,chatInit=false,typEl=null;
+function toggleChat(){
+  chatOpen=!chatOpen;
+  const w=document.getElementById('cbWin'),b=document.getElementById('cbBtn');
+  w.classList.toggle('open',chatOpen);b.classList.toggle('open',chatOpen);
+  b.textContent=chatOpen?'✕':'💬';
+  if(chatOpen&&!chatInit){initChat();chatInit=true;}
+  if(chatOpen)setTimeout(()=>document.getElementById('cbInp').focus(),300);
+}
+function initChat(){addBot("Bonjour ! 👋 Je suis l'assistant NexoraFlash. Comment puis-je vous aider ?",true);renderQB();}
+function renderQB(){document.getElementById('cbQuick').innerHTML=QB.map(l=>`<button class="cb-q" onclick="quickAsk('${l}')">${l}</button>`).join('');}
+function quickAsk(l){addUser(l);document.getElementById('cbQuick').innerHTML='';typing(()=>{addBot(findAns(l.toLowerCase()));setTimeout(renderQB,400);});}
+function cbSend(){const inp=document.getElementById('cbInp');const v=inp.value.trim();if(!v)return;addUser(v);inp.value='';document.getElementById('cbQuick').innerHTML='';typing(()=>{addBot(findAns(v.toLowerCase()));setTimeout(renderQB,400);});}
+function findAns(t){for(const f of FAQ)if(f.keys.some(k=>t.includes(k)))return f.a;return "Je ne suis pas sûr 😅<br>Contactez-nous : <strong>contact@nexoraflash.fr</strong>";}
+function addUser(t){const m=document.createElement('div');m.className='cb-msg user';m.textContent=t;document.getElementById('cbMsgs').appendChild(m);scrollCB();}
+function addBot(h,noT){const now=new Date().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'});const m=document.createElement('div');m.className='cb-msg bot';m.innerHTML=h+(noT?'':`<div class="cb-time">NexoraFlash · ${now}</div>`);document.getElementById('cbMsgs').appendChild(m);scrollCB();}
+function scrollCB(){const m=document.getElementById('cbMsgs');m.scrollTop=m.scrollHeight;}
+function typing(cb){const m=document.getElementById('cbMsgs');typEl=document.createElement('div');typEl.className='cb-msg bot';typEl.innerHTML='<div class="cb-typing"><span></span><span></span><span></span></div>';m.appendChild(typEl);scrollCB();setTimeout(()=>{if(typEl){typEl.remove();typEl=null;}cb();},700+Math.random()*300);}
+
+window.addEventListener('load',function(){
+  var sk=document.getElementById('skel');if(sk)sk.style.display='none';
+  var nl=document.getElementById('nlOverlay');if(nl)nl.style.display='none';
+  renderGrids();
+  updateCartCount();
+});
+
+</script>
+</body>
+</htmlE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5">
+<title>NexoraFlash ⚡ — Smartphones, Tablettes & Tech Premium | Livraison France</title>
+<meta name="description" content="NexoraFlash : Achetez les meilleurs smartphones, tablettes, batteries et accessoires tech au meilleur prix. Livraison rapide 3-7 jours en France. Code promo NEXORA10 pour -10%.">
+<meta name="keywords" content="smartphone pas cher, tablette, xiaomi, batterie externe, câble USB-C, tech premium, livraison france, NexoraFlash">
+<meta name="robots" content="index, follow">
+<meta name="author" content="NexoraFlash">
+<meta name="theme-color" content="#0a0e17">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://nexoraflash.fr/">
+<meta property="og:title" content="NexoraFlash ⚡ — Tech & Maison Premium">
+<meta property="og:description" content="Smartphones, tablettes et accessoires tech au meilleur prix. Livraison 3-7j en France. Code NEXORA10 pour -10%.">
+<meta property="og:image" content="https://nexoraflash.fr/og-image.jpg">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="NexoraFlash">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="NexoraFlash ⚡ — Tech Premium">
+<meta name="twitter:description" content="Tech & maison premium au meilleur prix. Livraison 3-7j France.">
+
+<!-- Mobile optimisation -->
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="NexoraFlash">
+<meta name="format-detection" content="telephone=no">
+
+<!-- Performance hints -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="dns-prefetch" href="https://api.ipify.org">
+
+<!-- Structured Data (Google Rich Results) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Store",
+  "name": "NexoraFlash",
+  "description": "Boutique tech premium — Smartphones, tablettes, batteries et accessoires",
+  "url": "https://nexoraflash.fr",
+  "telephone": "",
+  "priceRange": "€€",
+  "currenciesAccepted": "EUR",
+  "paymentAccepted": "Credit Card, PayPal",
+  "areaServed": "FR",
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Tech & Maison Premium"
+  }
+}
+</script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=DM+Sans:wght@300;400;500;600&display=swap');
+:root{--bg:#0d1b2a;--bg2:#112236;--card:#142640;--card2:#1a2f4a;--blue:#1a78ff;--bl:#4d9fff;--cyan:#00d4ff;--green:#00c896;--orange:#ff7043;--red:#e74c3c;--white:#f0f6ff;--muted:#7a9abf;--border:rgba(255,255,255,0.08);--r:16px;}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+html,body{overflow-x:hidden;max-width:100vw;}body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--white);overflow-x:hidden;}
+
+/* PROMO */
+.promo{background:linear-gradient(90deg,#003399,var(--blue),#0099cc);background-size:200%;animation:bS 5s ease infinite;text-align:center;padding:9px 40px 9px 20px;font-size:12px;font-weight:600;position:relative;z-index:200;}
+@keyframes bS{0%,100%{background-position:0%}50%{background-position:100%}}
+.promo .code{color:#ffe066;background:rgba(0,0,0,0.2);padding:1px 7px;border-radius:5px;margin:0 3px;}
+.promo-x{position:absolute;right:14px;top:50%;transform:translateY(-50%);background:none;border:none;color:rgba(255,255,255,.5);cursor:pointer;font-size:15px;}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:rgba(13,27,42,.96);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 16px;}
+.nav-in{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:10px;height:54px;}
+.logo{font-family:'Nunito',sans-serif;font-weight:900;font-size:20px;background:linear-gradient(135deg,var(--bl),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;cursor:pointer;white-space:nowrap;flex-shrink:0;}
+.logo em{font-style:normal;-webkit-text-fill-color:#ffd700;font-size:13px;}
+.nav-links{display:none;gap:2px;list-style:none;}
+@media(min-width:768px){.nav-links{display:flex;}}
+.nav-links a{color:var(--muted);font-size:12px;font-weight:500;padding:5px 10px;border-radius:20px;cursor:pointer;transition:all .2s;white-space:nowrap;}
+.nav-links a:hover,.nav-links a.active{color:var(--white);background:rgba(255,255,255,.07);}
+.nsw{position:relative;flex:1;max-width:260px;}
+.ns{display:flex;align-items:center;gap:7px;background:var(--card);border:1px solid var(--border);border-radius:30px;padding:7px 13px;}
+.ns:focus-within{border-color:rgba(26,120,255,.5);}
+.ns input{background:transparent;border:none;color:var(--white);font-size:12px;font-family:inherit;outline:none;width:100%;}
+.ns input::placeholder{color:var(--muted);}
+.sdrop{position:absolute;top:calc(100%+6px);left:0;right:0;background:var(--card2);border:1px solid var(--border);border-radius:14px;overflow:hidden;display:none;z-index:300;box-shadow:0 16px 50px rgba(0,0,0,.5);}
+.nsw.open .sdrop{display:block;}
+.sri{display:flex;align-items:center;gap:10px;padding:10px 14px;cursor:pointer;font-size:12px;transition:background .15s;}
+.sri:hover{background:rgba(255,255,255,.04);}
+.sri img{width:34px;height:34px;object-fit:contain;border-radius:7px;background:var(--card2);padding:2px;}
+.sri-nm{flex:1;font-weight:600;font-size:11px;}
+.sri-pr{color:var(--bl);font-weight:700;font-size:12px;}
+.no-res{padding:12px;font-size:12px;color:var(--muted);text-align:center;}
+.cb2{position:relative;background:rgba(255,255,255,.06);border:1px solid var(--border);color:var(--white);border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:15px;flex-shrink:0;}
+.cb2:hover{background:rgba(26,120,255,.2);}
+.cn{position:absolute;top:-3px;right:-3px;background:var(--blue);color:#fff;font-size:9px;font-weight:700;width:15px;height:15px;border-radius:50%;display:flex;align-items:center;justify-content:center;}
+.btnp{background:linear-gradient(135deg,var(--blue),#0052cc);color:#fff;border:none;border-radius:20px;padding:7px 16px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;box-shadow:0 4px 16px rgba(26,120,255,.3);transition:all .25s;white-space:nowrap;flex-shrink:0;}
+.btnp:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(26,120,255,.5);}
+
+/* MOBILE NAV */
+.mnav{position:fixed;bottom:0;left:0;right:0;z-index:150;background:rgba(13,27,42,.97);border-top:1px solid var(--border);padding:6px 0 max(6px,env(safe-area-inset-bottom));display:flex;justify-content:space-around;}
+@media(min-width:769px){.mnav{display:none;}}
+.mni{display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;padding:4px 12px;font-size:9px;color:var(--muted);font-weight:600;}
+.mni:hover,.mni.active{color:var(--bl);}
+.mni .mi{font-size:18px;}
+
+/* PAGES */
+.page{display:none;min-height:100vh;padding-bottom:72px;}
+@media(min-width:769px){.page{padding-bottom:0;}}
+.page.active{display:block;animation:fU .3s ease both;}
+@keyframes fU{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+/* HERO */
+.hero{position:relative;min-height:auto;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 16px 36px;overflow:hidden;box-sizing:border-box;width:100%;}
+.hbg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 35%,rgba(26,120,255,.15) 0%,transparent 70%);}
+.ring{display:none;}
+@keyframes rP{0%,100%{transform:translate(-50%,-50%) scale(1);}50%{transform:translate(-50%,-50%) scale(1.04);}}
+.hc{position:relative;z-index:2;max-width:560px;width:100%;margin:0 auto;padding:0 4px;box-sizing:border-box;}
+.htag{display:inline-flex;align-items:center;gap:7px;background:rgba(26,120,255,.1);border:1px solid rgba(26,120,255,.22);border-radius:30px;padding:5px 13px;font-size:11px;color:var(--bl);font-weight:600;margin-bottom:16px;}
+.hero h1{font-family:'Nunito',sans-serif;font-size:clamp(24px,7vw,56px);font-weight:900;line-height:1.1;margin-bottom:12px;letter-spacing:-1px;word-break:break-word;overflow-wrap:break-word;}
+.grad{background:linear-gradient(135deg,#fff 30%,var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.hero p{font-size:13px;color:var(--muted);line-height:1.65;margin-bottom:24px;word-break:break-word;overflow-wrap:break-word;}
+.hbtns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;width:100%;}
+.btns{background:rgba(255,255,255,.06);border:1px solid var(--border);color:var(--white);border-radius:20px;padding:10px 20px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;}
+@media(max-width:480px){
+  .hero{padding:32px 16px 28px;}
+  .hero h1{font-size:clamp(22px,8vw,36px);letter-spacing:-.5px;}
+  .hero p{font-size:12px;}
+  .hbtns{flex-direction:column;align-items:center;}
+  .hbtns button{width:100%;max-width:280px;}
+}
+
+/* NEWSLETTER POPUP */
+.nl-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:500;display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px);}
+.nl-overlay.hidden{display:none;}
+.nl-box{background:var(--card);border:1px solid rgba(26,120,255,.3);border-radius:20px;padding:28px 24px;max-width:400px;width:100%;text-align:center;animation:fU .4s cubic-bezier(.34,1.56,.64,1);}
+.nl-close{float:right;background:none;border:none;color:var(--muted);cursor:pointer;font-size:18px;margin-top:-6px;}
+.nl-icon{font-size:42px;margin-bottom:12px;}
+.nl-box h3{font-family:'Nunito',sans-serif;font-size:22px;font-weight:900;margin-bottom:6px;}
+.nl-box p{color:var(--muted);font-size:12px;margin-bottom:18px;line-height:1.6;}
+.nl-inp{width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:11px 14px;color:var(--white);font-size:13px;font-family:inherit;outline:none;margin-bottom:10px;}
+.nl-inp:focus{border-color:var(--blue);}
+.nl-inp::placeholder{color:var(--muted);}
+.nl-btn{width:100%;background:linear-gradient(135deg,var(--blue),#0052cc);border:none;border-radius:10px;padding:12px;color:#fff;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;}
+.nl-skip{font-size:11px;color:var(--muted);cursor:pointer;margin-top:10px;display:block;}
+.nl-skip:hover{color:var(--white);}
+
+/* STRIP */
+.strip{display:flex;justify-content:center;gap:0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:rgba(255,255,255,.02);overflow-x:auto;scrollbar-width:none;}
+.strip::-webkit-scrollbar{display:none;}
+.si{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted);font-weight:500;padding:12px 16px;white-space:nowrap;flex-shrink:0;}
+
+/* SECTION */
+.sec{padding:28px 16px;max-width:1200px;margin:0 auto;}
+.sh{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:14px;gap:8px;}
+.st{font-family:'Nunito',sans-serif;font-size:22px;font-weight:800;letter-spacing:-.3px;}
+.ssb{color:var(--muted);font-size:11px;margin-top:2px;}
+.sa{font-size:11px;color:var(--bl);font-weight:600;cursor:pointer;}
+
+/* CATS */
+.cats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:28px;}
+@media(min-width:600px){.cats{grid-template-columns:repeat(6,1fr);}}
+.cat{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:14px 8px;text-align:center;cursor:pointer;transition:all .2s;}
+.cat:hover{border-color:rgba(26,120,255,.4);transform:translateY(-3px);}
+.cic{font-size:26px;margin-bottom:5px;}
+.cnm{font-size:11px;font-weight:600;}
+.cct{font-size:9px;color:var(--muted);margin-top:1px;}
+
+/* PRODUCT GRID */
+.pgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
+@media(min-width:600px){.pgrid{grid-template-columns:repeat(3,1fr);}}
+@media(min-width:900px){.pgrid{grid-template-columns:repeat(4,1fr);}}
+@media(min-width:1100px){.pgrid{grid-template-columns:repeat(5,1fr);}}
+
+.pcard{background:var(--card);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;cursor:pointer;transition:all .25s;position:relative;}
+.pcard:hover{border-color:rgba(26,120,255,.3);transform:translateY(-4px);box-shadow:0 10px 35px rgba(26,120,255,.1);}
+.pimg{aspect-ratio:1;background:var(--card2);overflow:hidden;position:relative;}
+.pimg img{width:100%;height:100%;object-fit:contain;padding:6px;transition:transform .3s;}
+.pcard:hover .pimg img{transform:scale(1.06);}
+.pimg::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 60%,rgba(20,38,64,.6));}
+.pbadge{position:absolute;top:7px;left:7px;z-index:1;font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;background:var(--blue);color:#fff;}
+.pbadge.promo{background:var(--orange);}
+.pbadge.new{background:var(--green);}
+.pbadge.cmd{background:#7c3aed;}
+
+/* CHRONO BADGE */
+.chrono-badge{position:absolute;bottom:6px;left:6px;z-index:2;background:rgba(231,76,60,.92);color:#fff;font-size:9px;font-weight:700;padding:3px 8px;border-radius:20px;display:flex;align-items:center;gap:4px;}
+.chrono-badge .ct{font-family:'Nunito',sans-serif;letter-spacing:.5px;}
+
+.pinfo{padding:9px;}
+.pname{font-size:11px;font-weight:700;margin-bottom:2px;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.pspecs{font-size:9px;color:var(--muted);margin-bottom:5px;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden;}
+.mstars{display:flex;align-items:center;gap:3px;margin-bottom:6px;}
+.sy{color:#ffd700;font-size:9px;}
+.sc{font-size:9px;color:var(--muted);}
+.pftr{display:flex;align-items:center;justify-content:space-between;gap:3px;}
+.pp{font-family:'Nunito',sans-serif;font-size:15px;font-weight:800;}
+.pold{font-size:9px;color:var(--muted);text-decoration:line-through;font-weight:400;display:block;}
+.addbtn{background:linear-gradient(135deg,var(--blue),#0052cc);border:none;border-radius:50%;width:28px;height:28px;color:#fff;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s;}
+.addbtn:hover{transform:scale(1.15);}
+.cmd-btn{background:rgba(124,58,237,.2);border:1px solid rgba(124,58,237,.4);border-radius:8px;padding:5px 8px;font-size:9px;color:#a78bfa;font-weight:600;cursor:pointer;white-space:nowrap;}
+
+/* BONS PLANS */
+.bp-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
+@media(min-width:600px){.bp-grid{grid-template-columns:repeat(3,1fr);}}
+@media(min-width:900px){.bp-grid{grid-template-columns:repeat(4,1fr);}}
+.bp-card{background:var(--card);border:1px solid rgba(255,112,67,.25);border-radius:var(--r);overflow:hidden;cursor:pointer;transition:all .25s;position:relative;}
+.bp-card:hover{border-color:rgba(255,112,67,.5);transform:translateY(-4px);}
+.bp-top{background:linear-gradient(135deg,rgba(255,112,67,.15),rgba(255,59,59,.1));padding:10px;text-align:center;position:relative;}
+.bp-top img{width:100%;aspect-ratio:1;object-fit:contain;max-height:120px;}
+.bp-save{position:absolute;top:7px;right:7px;background:var(--orange);color:#fff;font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;}
+.bp-info{padding:9px;}
+.bp-name{font-size:11px;font-weight:700;margin-bottom:4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.bp-prices{display:flex;align-items:center;gap:6px;margin-bottom:7px;}
+.bp-new{font-family:'Nunito',sans-serif;font-size:15px;font-weight:800;color:var(--orange);}
+.bp-old{font-size:10px;color:var(--muted);text-decoration:line-through;}
+.bp-chrono{display:flex;align-items:center;gap:5px;font-size:9px;color:var(--red);font-weight:600;margin-bottom:7px;}
+.bp-addbtn{width:100%;background:linear-gradient(135deg,var(--orange),#e74c3c);border:none;border-radius:9px;padding:8px;color:#fff;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;}
+
+/* SHOP */
+.shop-l{display:block;padding:16px;max-width:1200px;margin:0 auto;}
+@media(min-width:768px){.shop-l{display:grid;grid-template-columns:190px 1fr;gap:18px;}}
+.filters{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:14px;margin-bottom:14px;}
+@media(min-width:768px){.filters{position:sticky;top:58px;height:fit-content;margin-bottom:0;}}
+.ft{font-family:'Nunito',sans-serif;font-size:16px;font-weight:800;margin-bottom:14px;}
+.fg{margin-bottom:14px;}
+.fgt{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:6px;}
+.fo{display:flex;align-items:center;gap:7px;padding:6px 0;cursor:pointer;font-size:14px;color:var(--muted);}
+.fo:hover{color:var(--white);}
+.fo input{width:12px;height:12px;accent-color:var(--blue);}
+.shop-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;gap:8px;}
+.rcnt{color:var(--muted);font-size:10px;}
+.ssel{background:var(--card);border:1px solid var(--border);color:var(--white);border-radius:7px;padding:6px 9px;font-size:10px;font-family:inherit;outline:none;cursor:pointer;}
+
+/* PAGE HDR */
+.phdr{text-align:center;padding:28px 16px 10px;}
+.phdr h1{font-family:'Nunito',sans-serif;font-size:clamp(24px,4vw,36px);font-weight:900;letter-spacing:-.6px;margin-bottom:4px;}
+.phdr p{color:var(--muted);font-size:12px;}
+
+/* DETAIL */
+.detail{max-width:1100px;margin:0 auto;padding:16px;}
+@media(min-width:768px){.detail{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start;padding:28px 36px;}}
+.gallery{margin-bottom:14px;}
+@media(min-width:768px){.gallery{position:sticky;top:60px;}}
+.main-img{background:var(--card);border:1px solid var(--border);border-radius:var(--r);aspect-ratio:1;overflow:hidden;margin-bottom:7px;display:flex;align-items:center;justify-content:center;}
+.main-img img{width:100%;height:100%;object-fit:contain;padding:10px;}
+.thumbs{display:flex;gap:6px;flex-wrap:wrap;}
+.thumb{background:var(--card);border:2px solid transparent;border-radius:8px;width:50px;height:50px;overflow:hidden;cursor:pointer;flex-shrink:0;}
+.thumb img{width:100%;height:100%;object-fit:contain;padding:3px;}
+.thumb.active,.thumb:hover{border-color:var(--blue);}
+
+/* DETAIL CHRONO */
+.d-chrono{display:flex;align-items:center;gap:8px;background:rgba(231,76,60,.1);border:1px solid rgba(231,76,60,.3);border-radius:10px;padding:9px 13px;margin-bottom:14px;}
+.d-chrono .dc-label{font-size:11px;color:var(--red);font-weight:700;}
+.dc-time{font-family:'Nunito',sans-serif;font-size:18px;font-weight:900;color:var(--red);letter-spacing:1px;}
+.dc-unit{font-size:9px;color:var(--muted);}
+
+.dinfo h1{font-family:'Nunito',sans-serif;font-size:clamp(18px,3vw,24px);font-weight:800;margin-bottom:7px;line-height:1.2;}
+.starsb{display:flex;align-items:center;gap:7px;margin-bottom:12px;flex-wrap:wrap;}
+.sbig{color:#ffd700;font-size:13px;}
+.ssc{font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;}
+.stot{color:var(--muted);font-size:10px;}
+.sveri{font-size:10px;color:var(--green);font-weight:600;}
+.dpr{font-family:'Nunito',sans-serif;font-size:clamp(26px,4vw,36px);font-weight:900;margin-bottom:4px;}
+.dold{font-size:13px;color:var(--muted);text-decoration:line-through;font-weight:400;margin-left:5px;}
+.saveb{display:inline-block;background:rgba(0,212,255,.1);border:1px solid rgba(0,212,255,.3);color:var(--cyan);font-size:10px;font-weight:700;padding:2px 9px;border-radius:20px;margin-bottom:12px;}
+.ddesc{color:var(--muted);font-size:12px;line-height:1.7;margin-bottom:14px;}
+.schips{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:14px;}
+.chip{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:6px;padding:3px 9px;font-size:9px;color:var(--muted);}
+.qty-row{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+.ql{font-size:10px;color:var(--muted);}
+.qctrl{display:flex;align-items:center;background:var(--card);border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+.qbtn{background:transparent;border:none;color:var(--white);width:32px;height:32px;font-size:14px;cursor:pointer;}
+.qn{padding:0 10px;font-weight:700;font-size:13px;}
+.sok{font-size:10px;color:var(--green);font-weight:600;}
+.dacts{display:flex;gap:7px;margin-bottom:14px;}
+.btn-cart{flex:1;background:linear-gradient(135deg,var(--blue),#0052cc);border:none;border-radius:10px;padding:12px;color:#fff;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;}
+.btn-wl{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px 13px;color:var(--white);font-size:14px;cursor:pointer;}
+.delvb{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:12px;}
+.delv{display:flex;align-items:center;gap:8px;padding:5px 0;font-size:11px;color:var(--muted);}
+.delv:not(:last-child){border-bottom:1px solid var(--border);}
+.delv strong{color:var(--white);}
+.cmd-box{background:rgba(124,58,237,.1);border:1px solid rgba(124,58,237,.3);border-radius:12px;padding:14px;margin-bottom:14px;}
+.cmd-box h4{font-family:'Nunito',sans-serif;font-size:14px;font-weight:800;color:#a78bfa;margin-bottom:5px;}
+.cmd-box p{font-size:11px;color:var(--muted);line-height:1.6;margin-bottom:10px;}
+.cmd-box button{background:linear-gradient(135deg,#7c3aed,#5b21b6);border:none;border-radius:8px;padding:10px 18px;color:#fff;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;}
+
+/* REVIEWS */
+.revs{max-width:1100px;margin:0 auto;padding:0 16px 32px;}
+@media(min-width:768px){.revs{padding:0 36px 40px;}}
+.rev-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+.rev-title{font-family:'Nunito',sans-serif;font-size:16px;font-weight:800;}
+.rev-sum{display:flex;align-items:center;gap:14px;background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:14px;margin-bottom:14px;flex-wrap:wrap;}
+.bsc{font-family:'Nunito',sans-serif;font-size:44px;font-weight:900;line-height:1;}
+.sstars{color:#ffd700;font-size:16px;margin-bottom:2px;}
+.scnt{color:var(--muted);font-size:10px;}
+.sbars{flex:2;min-width:130px;display:flex;flex-direction:column;gap:3px;}
+.sbr{display:flex;align-items:center;gap:6px;font-size:9px;color:var(--muted);}
+.sbt{flex:1;height:3px;background:var(--card2);border-radius:10px;overflow:hidden;}
+.sbf{height:100%;background:linear-gradient(90deg,var(--blue),var(--cyan));border-radius:10px;}
+.rev-list{display:flex;flex-direction:column;gap:9px;}
+.rcard{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:12px;}
+.rtop{display:flex;align-items:center;gap:9px;margin-bottom:7px;}
+.rav{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--cyan));display:flex;align-items:center;justify-content:center;font-weight:800;font-size:11px;color:var(--bg);flex-shrink:0;}
+.rnm{font-weight:600;font-size:11px;}
+.rdt{font-size:9px;color:var(--muted);}
+.rstar{color:#ffd700;font-size:11px;margin-left:auto;}
+.rtxt{font-size:11px;color:var(--muted);line-height:1.6;}
+.rveri{font-size:9px;color:var(--green);font-weight:600;margin-top:4px;}
+
+/* CART */
+.cwrap{padding:16px;max-width:1200px;margin:0 auto;}
+@media(min-width:768px){.cwrap{display:grid;grid-template-columns:1fr 300px;gap:18px;padding:28px 36px;}}
+.citems{display:flex;flex-direction:column;gap:9px;}
+.citem{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:12px;display:flex;gap:10px;align-items:center;}
+.cimg{width:54px;height:54px;background:var(--card2);border-radius:9px;overflow:hidden;flex-shrink:0;}
+.cimg img{width:100%;height:100%;object-fit:contain;padding:3px;}
+.cinfo{flex:1;min-width:0;}
+.cnm{font-size:12px;font-weight:600;margin-bottom:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.csb{font-size:10px;color:var(--muted);}
+.crgt{display:flex;flex-direction:column;align-items:flex-end;gap:5px;flex-shrink:0;}
+.cpr{font-family:'Nunito',sans-serif;font-size:15px;font-weight:800;}
+.crm{background:transparent;border:none;color:var(--muted);cursor:pointer;font-size:13px;}
+.osum{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:18px;margin-top:14px;}
+@media(min-width:768px){.osum{margin-top:0;height:fit-content;position:sticky;top:60px;}}
+.osumtit{font-family:'Nunito',sans-serif;font-size:14px;font-weight:800;margin-bottom:14px;}
+.orow{display:flex;justify-content:space-between;padding:6px 0;font-size:11px;color:var(--muted);border-bottom:1px solid var(--border);}
+.orow.total{color:var(--white);font-size:13px;font-weight:700;border-bottom:none;margin-top:3px;}
+.orow.total span:last-child{font-family:'Nunito',sans-serif;font-size:17px;font-weight:900;color:var(--cyan);}
+.disc-row{background:rgba(0,200,150,.08);border:1px solid rgba(0,200,150,.2);border-radius:8px;padding:6px 10px;display:flex;justify-content:space-between;font-size:11px;color:var(--green);font-weight:600;margin:6px 0;}
+.promo-row{display:flex;gap:6px;margin:10px 0;}
+.promo-row input{flex:1;background:var(--bg2);border:1px solid var(--border);border-radius:7px;padding:8px 10px;color:var(--white);font-size:11px;font-family:inherit;outline:none;}
+.promo-row input:focus{border-color:var(--blue);}
+.promo-row input::placeholder{color:var(--muted);}
+.promo-row input.valid{border-color:var(--green);}
+.promo-row input.invalid{border-color:var(--red);}
+.chkbtn{width:100%;background:linear-gradient(135deg,var(--blue),#0052cc);border:none;border-radius:10px;padding:13px;color:#fff;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;}
+.trust{display:flex;justify-content:center;gap:8px;margin-top:10px;flex-wrap:wrap;}
+.tb{display:flex;align-items:center;gap:2px;font-size:9px;color:var(--muted);}
+.empty-c{text-align:center;padding:40px 16px;}
+.empty-ic{font-size:50px;margin-bottom:10px;opacity:.4;}
+.empty-c h3{font-family:'Nunito',sans-serif;font-size:18px;font-weight:800;margin-bottom:4px;}
+.empty-c p{color:var(--muted);font-size:11px;margin-bottom:16px;}
+
+/* CONFIRM */
+.conf{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:70vh;padding:36px 16px;text-align:center;}
+.conf-ic{width:74px;height:74px;background:rgba(0,200,150,.12);border:2px solid rgba(0,200,150,.4);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:34px;margin-bottom:18px;animation:cP .6s cubic-bezier(.34,1.56,.64,1);}
+@keyframes cP{from{transform:scale(0)}to{transform:scale(1)}}
+.conf h1{font-family:'Nunito',sans-serif;font-size:26px;font-weight:900;margin-bottom:7px;}
+.conf p{color:var(--muted);font-size:12px;line-height:1.6;max-width:360px;margin-bottom:20px;}
+.oidbox{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px 22px;margin-bottom:20px;}
+.oidlbl{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;}
+.oidval{font-family:'Nunito',sans-serif;font-size:18px;font-weight:900;color:var(--cyan);letter-spacing:2px;}
+
+/* CONTACT */
+.cwrap2{max-width:960px;margin:0 auto;padding:20px 16px;}
+@media(min-width:768px){.cwrap2{display:grid;grid-template-columns:1fr 1.4fr;gap:36px;padding:36px;}}
+.ci2 h2{font-family:'Nunito',sans-serif;font-size:24px;font-weight:800;margin-bottom:6px;}
+.ci2 p{color:var(--muted);font-size:12px;line-height:1.7;margin-bottom:18px;}
+.cmeth{display:flex;align-items:center;gap:10px;padding:11px;background:var(--card);border:1px solid var(--border);border-radius:var(--r);margin-bottom:8px;cursor:pointer;}
+.cmic{width:36px;height:36px;background:rgba(26,120,255,.12);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;}
+.cmi h4{font-size:11px;font-weight:600;margin-bottom:1px;}
+.cmi p{font-size:10px;color:var(--muted);margin:0;}
+.cform{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:18px;margin-top:18px;}
+@media(min-width:768px){.cform{margin-top:0;}}
+.cftit{font-family:'Nunito',sans-serif;font-size:15px;font-weight:800;margin-bottom:14px;}
+.fg2{margin-bottom:10px;}
+.fl{display:block;font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.7px;margin-bottom:4px;}
+.fi{width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:9px 11px;color:var(--white);font-size:12px;font-family:inherit;outline:none;}
+.fi:focus{border-color:var(--blue);}
+.fi::placeholder{color:var(--muted);}
+textarea.fi{resize:vertical;min-height:80px;}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:9px;}
+
+/* CGV */
+.cgvw{max-width:700px;margin:0 auto;padding:28px 16px;}
+@media(min-width:768px){.cgvw{padding:40px 36px;}}
+.cgvw h1{font-family:'Nunito',sans-serif;font-size:28px;font-weight:900;margin-bottom:4px;}
+.cgvd{font-size:10px;color:var(--muted);margin-bottom:18px;}
+.cgvhl{background:rgba(26,120,255,.07);border:1px solid rgba(26,120,255,.15);border-radius:9px;padding:11px 14px;margin-bottom:18px;font-size:11px;color:var(--bl);}
+.cgvs{margin-bottom:18px;}
+.cgvs h2{font-family:'Nunito',sans-serif;font-size:14px;font-weight:800;margin-bottom:7px;padding-bottom:6px;border-bottom:1px solid var(--border);}
+.cgvs p,.cgvs li{font-size:11px;color:var(--muted);line-height:1.8;margin-bottom:4px;}
+.cgvs ul{padding-left:14px;}
+
+/* FOOTER */
+footer{background:var(--bg2);border-top:1px solid var(--border);padding:28px 16px 18px;margin-top:36px;}
+.fg3{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:1200px;margin:0 auto 20px;}
+@media(min-width:768px){.fg3{grid-template-columns:2fr 1fr 1fr 1fr;}}
+.fbl .logo{font-size:17px;display:inline-block;margin-bottom:7px;}
+.fbl p{font-size:10px;color:var(--muted);line-height:1.6;max-width:200px;}
+.fsoc{display:flex;gap:6px;margin-top:10px;}
+.fsb{width:28px;height:28px;background:var(--card);border:1px solid var(--border);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:12px;cursor:pointer;}
+.fc4 h4{font-family:'Nunito',sans-serif;font-size:11px;font-weight:800;margin-bottom:9px;}
+.fc4 ul{list-style:none;display:flex;flex-direction:column;gap:5px;}
+.fc4 ul li a{font-size:10px;color:var(--muted);text-decoration:none;cursor:pointer;}
+.fbot{max-width:1200px;margin:0 auto;padding-top:14px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+.fbot p{font-size:9px;color:var(--muted);}
+.pays{display:flex;gap:4px;}
+.pay{background:var(--card);border:1px solid var(--border);border-radius:5px;padding:2px 7px;font-size:9px;color:var(--muted);font-weight:600;}
+
+/* TOAST SCROLL */
+.toast{position:fixed;bottom:78px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--card2);border:1px solid rgba(26,120,255,.3);color:#fff;padding:9px 18px;border-radius:40px;font-size:11px;font-weight:600;z-index:999;transition:transform .4s cubic-bezier(.34,1.56,.64,1);box-shadow:0 5px 22px rgba(0,0,0,.4);white-space:nowrap;}
+@media(min-width:769px){.toast{bottom:22px;}}
+.toast.show{transform:translateX(-50%) translateY(0);}
+.stbtn{position:fixed;bottom:78px;right:14px;z-index:90;width:34px;height:34px;background:var(--blue);border:none;border-radius:50%;color:#fff;font-size:13px;cursor:pointer;display:none;align-items:center;justify-content:center;}
+@media(min-width:769px){.stbtn{bottom:22px;right:22px;}}
+.stbtn.vis{display:flex;}
+
+/* SKEL */
+.skel{position:fixed;inset:0;background:var(--bg);z-index:500;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;transition:opacity .4s,visibility .4s;}
+.skel.hidden{opacity:0;visibility:hidden;pointer-events:none;}
+.skel-logo{font-family:'Nunito',sans-serif;font-weight:900;font-size:32px;background:linear-gradient(135deg,var(--bl),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:skp 1.2s ease-in-out infinite;}
+.skel-bar{width:150px;height:3px;background:var(--card2);border-radius:10px;overflow:hidden;}
+.sbi{height:100%;width:40%;background:linear-gradient(90deg,var(--blue),var(--cyan));animation:skb 1.2s ease-in-out infinite;}
+.skcs{display:flex;gap:8px;}
+.skc{width:90px;height:120px;background:var(--card);border-radius:var(--r);border:1px solid var(--border);animation:sks 1.4s ease infinite;}
+.skc:nth-child(2){animation-delay:.2s;opacity:.6;}.skc:nth-child(3){animation-delay:.4s;opacity:.3;}
+@keyframes skb{0%{transform:translateX(-100%)}100%{transform:translateX(350%)}}
+@keyframes skp{0%,100%{opacity:1}50%{opacity:.5}}
+@keyframes sks{0%,100%{background:var(--card)}50%{background:var(--card2)}}
+
+/* CHATBOT */
+.cb-btn{position:fixed;bottom:78px;right:14px;z-index:400;width:48px;height:48px;background:linear-gradient(135deg,var(--blue),#0052cc);border:none;border-radius:50%;cursor:pointer;font-size:22px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 18px rgba(26,120,255,.5);transition:all .25s;animation:cbP 2.5s ease-in-out infinite;}
+.cb-btn:hover{transform:scale(1.1);}
+.cb-btn.open{animation:none;background:linear-gradient(135deg,#e74c3c,#c0392b);}
+@keyframes cbP{0%,100%{box-shadow:0 4px 18px rgba(26,120,255,.5)}50%{box-shadow:0 4px 28px rgba(26,120,255,.85),0 0 0 7px rgba(26,120,255,.1)}}
+@media(min-width:769px){.cb-btn{bottom:22px;right:66px;}}
+.cb-win{position:fixed;bottom:140px;right:14px;z-index:400;width:calc(100vw - 28px);max-width:320px;background:var(--card);border:1px solid rgba(26,120,255,.3);border-radius:18px;box-shadow:0 18px 55px rgba(0,0,0,.5);display:none;flex-direction:column;overflow:hidden;animation:cbS .3s cubic-bezier(.34,1.56,.64,1);}
+.cb-win.open{display:flex;}
+@keyframes cbS{from{opacity:0;transform:translateY(18px) scale(.95)}to{opacity:1;transform:translateY(0) scale(1)}}
+@media(min-width:769px){.cb-win{bottom:78px;right:74px;}}
+.cb-head{background:linear-gradient(135deg,var(--blue),#0052cc);padding:12px 14px;display:flex;align-items:center;gap:9px;}
+.cb-av{width:32px;height:32px;background:rgba(255,255,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+.cb-hi h4{font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;margin-bottom:1px;}
+.cb-hi p{font-size:9px;opacity:.8;}
+.cb-on{width:7px;height:7px;background:#2ecc71;border-radius:50%;margin-left:auto;box-shadow:0 0 5px #2ecc71;}
+.cb-msgs{padding:12px;display:flex;flex-direction:column;gap:9px;height:250px;overflow-y:auto;scroll-behavior:smooth;}
+.cb-msg{max-width:85%;padding:9px 12px;border-radius:14px;font-size:11px;line-height:1.55;animation:msgI .2s ease;}
+@keyframes msgI{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+.cb-msg.bot{background:var(--card2);border:1px solid var(--border);border-bottom-left-radius:3px;align-self:flex-start;}
+.cb-msg.user{background:linear-gradient(135deg,var(--blue),#0052cc);color:#fff;border-bottom-right-radius:3px;align-self:flex-end;}
+.cb-msg.bot .cb-time{font-size:8px;color:var(--muted);margin-top:3px;}
+.cb-quick{padding:0 12px 8px;display:flex;flex-wrap:wrap;gap:5px;}
+.cb-q{background:rgba(26,120,255,.1);border:1px solid rgba(26,120,255,.25);color:var(--bl);border-radius:20px;padding:4px 9px;font-size:10px;cursor:pointer;font-family:inherit;}
+.cb-q:hover{background:rgba(26,120,255,.22);}
+.cb-ir{display:flex;gap:7px;padding:10px 12px;border-top:1px solid var(--border);}
+.cb-inp{flex:1;background:var(--bg2);border:1px solid var(--border);border-radius:18px;padding:8px 12px;color:var(--white);font-size:11px;font-family:inherit;outline:none;}
+.cb-inp:focus{border-color:var(--blue);}
+.cb-inp::placeholder{color:var(--muted);}
+.cb-send{background:linear-gradient(135deg,var(--blue),#0052cc);border:none;border-radius:50%;width:30px;height:30px;color:#fff;font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.cb-typing{display:flex;gap:3px;align-items:center;padding:1px 0;}
+.cb-typing span{width:5px;height:5px;background:var(--muted);border-radius:50%;animation:tD 1.2s ease-in-out infinite;}
+.cb-typing span:nth-child(2){animation-delay:.2s;}
+.cb-typing span:nth-child(3){animation-delay:.4s;}
+@keyframes tD{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-4px)}}
+
+/* CATEGORY MENU */
+.cat-menu-btn{display:flex;align-items:center;gap:7px;background:var(--blue);border:none;border-radius:10px;padding:8px 14px;color:#fff;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;flex-shrink:0;}
+.cat-menu-btn:hover{background:#1565d8;}
+.cat-menu-btn .cm-ic{font-size:16px;}
+.cat-drawer{position:fixed;top:0;left:-280px;width:280px;height:100vh;background:var(--card);border-right:1px solid var(--border);z-index:600;transition:left .3s cubic-bezier(.4,0,.2,1);padding:0;overflow-y:auto;box-shadow:4px 0 30px rgba(0,0,0,.4);}
+.cat-drawer.open{left:0;}
+.cat-drawer-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:590;display:none;backdrop-filter:blur(3px);}
+.cat-drawer-overlay.open{display:block;}
+.cd-head{background:linear-gradient(135deg,var(--blue),#0052cc);padding:20px 18px 16px;display:flex;align-items:center;justify-content:space-between;}
+.cd-head h3{font-family:'Nunito',sans-serif;font-weight:900;font-size:16px;}
+.cd-close{background:rgba(255,255,255,.2);border:none;color:#fff;width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;}
+.cd-item{display:flex;align-items:center;gap:14px;padding:14px 18px;cursor:pointer;border-bottom:1px solid var(--border);transition:background .15s;}
+.cd-item:hover{background:rgba(255,255,255,.04);}
+.cd-item:last-child{border-bottom:none;}
+.cd-icon{width:40px;height:40px;background:rgba(26,120,255,.1);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+.cd-info h4{font-size:13px;font-weight:700;margin-bottom:2px;}
+.cd-info p{font-size:10px;color:var(--muted);}
+.cd-arrow{color:var(--muted);font-size:12px;}
+
+.cd-pill{background:rgba(26,120,255,.2);color:var(--bl);font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;margin-left:auto;margin-right:6px;}
+
+
+/* SOCIAL PROOF */
+.sp-badge{position:absolute;top:36px;left:7px;z-index:2;background:rgba(13,27,42,.85);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:3px 9px;font-size:9px;color:var(--white);font-weight:600;display:flex;align-items:center;gap:4px;backdrop-filter:blur(4px);}
+.sp-dot{width:6px;height:6px;background:#2ecc71;border-radius:50%;animation:spP .8s ease-in-out infinite;}
+@keyframes spP{0%,100%{opacity:1}50%{opacity:.3}}
+.stock-badge{position:absolute;bottom:36px;left:7px;z-index:2;background:rgba(231,76,60,.9);color:#fff;font-size:9px;font-weight:700;padding:3px 8px;border-radius:20px;}
+
+/* STICKY BUY BTN MOBILE */
+.sticky-buy{position:fixed;bottom:58px;left:0;right:0;z-index:140;padding:10px 14px;background:rgba(13,27,42,.97);border-top:1px solid var(--border);display:none;gap:8px;}
+@media(max-width:768px){#page-product.active ~ .sticky-buy, .sticky-buy.visible{display:flex;}}
+.sticky-buy .sb-price{font-family:'Nunito',sans-serif;font-size:18px;font-weight:900;}
+.sticky-buy .sb-old{font-size:10px;color:var(--muted);text-decoration:line-through;}
+.sticky-buy .sb-btn{flex:1;background:linear-gradient(135deg,var(--blue),#0052cc);border:none;border-radius:12px;padding:12px;color:#fff;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;}
+
+/* SWIPE GALLERY */
+.gallery-swipe{overflow:hidden;position:relative;touch-action:pan-y;}
+.gallery-track{display:flex;transition:transform .3s ease;}
+.gallery-track img{min-width:100%;object-fit:contain;padding:10px;}
+.gallery-dots{display:flex;justify-content:center;gap:6px;margin-top:6px;}
+.gdot{width:6px;height:6px;border-radius:50%;background:var(--border);cursor:pointer;}
+.gdot.active{background:var(--blue);width:16px;border-radius:10px;}
+
+/* TESTIMONIALS */
+.testi-grid{display:grid;grid-template-columns:1fr;gap:10px;}
+@media(min-width:600px){.testi-grid{grid-template-columns:repeat(3,1fr);}}
+.tcard{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:16px;}
+.tcard-top{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.tav{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--cyan));display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:var(--bg);flex-shrink:0;}
+.tnm{font-weight:700;font-size:13px;}
+.tloc{font-size:10px;color:var(--muted);}
+.tstars{color:#ffd700;font-size:12px;margin-left:auto;}
+.ttxt{font-size:12px;color:var(--muted);line-height:1.65;font-style:italic;}
+.tprod{font-size:10px;color:var(--bl);margin-top:6px;font-weight:600;}
+
+/* FREQUENTLY BOUGHT */
+.fbt-wrap{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:14px;margin-bottom:14px;}
+.fbt-title{font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;margin-bottom:12px;}
+.fbt-items{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:10px;}
+.fbt-item{text-align:center;cursor:pointer;}
+.fbt-img{width:52px;height:52px;background:var(--card2);border-radius:8px;overflow:hidden;margin-bottom:4px;}
+.fbt-img img{width:100%;height:100%;object-fit:contain;padding:3px;}
+.fbt-nm{font-size:9px;color:var(--muted);max-width:55px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.fbt-plus{font-size:18px;color:var(--muted);}
+.fbt-total{display:flex;align-items:center;justify-content:space-between;}
+.fbt-pr{font-family:'Nunito',sans-serif;font-size:15px;font-weight:800;color:var(--cyan);}
+.fbt-btn{background:linear-gradient(135deg,var(--green),#00a876);border:none;border-radius:8px;padding:7px 14px;color:#fff;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;}
+
+/* ═══════════ ADMIN PRO ═══════════ */
+#admFab{display:none}
+#admFab:hover{transform:scale(1.08)}
+@media(min-width:769px){#admFab{bottom:22px;left:22px}}
+
+/* LOGIN */
+.adm-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:900;display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(8px)}
+.adm-overlay.hidden{display:none}
+.adm-box{background:#1e2535;border:1px solid rgba(124,58,237,.25);border-radius:20px;padding:32px 28px;max-width:400px;width:100%;box-shadow:0 24px 60px rgba(0,0,0,.6)}
+.adm-box h2{font-family:'Nunito',sans-serif;font-size:22px;font-weight:900;margin-bottom:6px;display:flex;align-items:center;gap:9px}
+.adm-box .sub{color:#64748b;font-size:12px;margin-bottom:22px}
+.adm-step{display:none}
+.adm-step.active{display:block}
+.adm-fi{width:100%;background:#0f1420;border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:11px 14px;color:#f8fafc;font-size:13px;font-family:inherit;outline:none;margin-bottom:11px;transition:border-color .2s}
+.adm-fi:focus{border-color:#7c3aed;box-shadow:0 0 0 3px rgba(124,58,237,.15)}
+.adm-fi::placeholder{color:#475569}
+.adm-btn{width:100%;background:linear-gradient(135deg,#7c3aed,#6d28d9);border:none;border-radius:10px;padding:13px;color:#fff;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;margin-bottom:9px;transition:opacity .2s}
+.adm-btn:hover{opacity:.9}
+.adm-cancel{width:100%;background:transparent;border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:11px;color:#64748b;font-size:12px;cursor:pointer;font-family:inherit;transition:all .2s}
+.adm-cancel:hover{border-color:rgba(255,255,255,.18);color:#94a3b8}
+.adm-err{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.25);border-radius:8px;padding:9px 13px;font-size:11px;color:#f87171;margin-bottom:11px;display:none}
+.adm-err.show{display:block}
+.otp-hint{background:rgba(124,58,237,.1);border:1px solid rgba(124,58,237,.2);border-radius:9px;padding:9px 13px;font-size:11px;color:#a78bfa;text-align:center;margin-bottom:14px}
+.otp-wrap{display:flex;gap:8px;justify-content:center;margin-bottom:14px}
+.otp-d{width:44px;height:52px;background:#0f1420;border:2px solid rgba(255,255,255,.1);border-radius:10px;color:#f8fafc;font-size:22px;font-weight:800;text-align:center;font-family:'Nunito',sans-serif;outline:none;transition:border-color .2s}
+.otp-d:focus{border-color:#7c3aed}
+
+/* PANEL PRINCIPAL */
+.adm-panel{position:fixed;inset:0;background:#0d1117;z-index:900;display:flex;flex-direction:column;overflow:hidden;font-family:'DM Sans',sans-serif}
+.adm-panel.hidden{display:none}
+
+/* TOPBAR */
+.adm-topbar{height:56px;background:#161b27;border-bottom:1px solid rgba(255,255,255,.06);padding:0 20px;display:flex;align-items:center;gap:14px;flex-shrink:0}
+.adm-topbar .logo-adm{font-family:'Nunito',sans-serif;font-size:17px;font-weight:900;color:#f8fafc}
+.adm-topbar .logo-adm span{color:#7c3aed}
+.adm-topbar .adm-badge{font-size:10px;color:#10b981;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.2);border-radius:20px;padding:2px 10px;margin-left:4px}
+.adm-topbar-right{margin-left:auto;display:flex;align-items:center;gap:10px}
+.adm-close{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);border-radius:8px;padding:7px 14px;color:#f87171;font-size:11px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .2s}
+.adm-close:hover{background:rgba(239,68,68,.2)}
+
+/* LAYOUT */
+.adm-layout{display:flex;flex:1;overflow:hidden;min-height:0}
+
+/* SIDEBAR */
+.adm-sidebar{width:220px;background:#161b27;border-right:1px solid rgba(255,255,255,.06);display:flex;flex-direction:column;overflow-y:auto;flex-shrink:0}
+@media(max-width:640px){.adm-sidebar{width:60px}}
+.adm-sidebar-section{padding:14px 12px 6px;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#334155}
+@media(max-width:640px){.adm-sidebar-section{display:none}}
+.adm-si{display:flex;align-items:center;gap:11px;padding:10px 14px;cursor:pointer;font-size:12px;color:#64748b;font-weight:500;border-left:3px solid transparent;transition:all .15s;margin:1px 0;border-radius:0}
+.adm-si:hover{color:#e2e8f0;background:rgba(255,255,255,.04)}
+.adm-si.active{color:#a78bfa;background:rgba(124,58,237,.1);border-left-color:#7c3aed;font-weight:600}
+.adm-si .asi{font-size:17px;flex-shrink:0;width:22px;text-align:center}
+.adm-si .si-label{white-space:nowrap;overflow:hidden}
+@media(max-width:640px){.adm-si .si-label{display:none}.adm-si{justify-content:center;padding:12px 0}.adm-si .asi{font-size:20px}}
+.adm-sidebar-bottom{margin-top:auto;padding:12px;border-top:1px solid rgba(255,255,255,.05)}
+
+/* CONTENT */
+.adm-content{flex:1;overflow-y:auto;background:#0d1117}
+.adm-tab{display:none;padding:22px 20px}
+.adm-tab.active{display:block}
+
+/* PAGE HEADER */
+.adm-ph{margin-bottom:20px}
+.adm-ph h2{font-family:'Nunito',sans-serif;font-size:22px;font-weight:900;color:#f8fafc;margin-bottom:4px}
+.adm-ph p{font-size:12px;color:#64748b}
+
+/* STATS */
+.adm-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:22px}
+@media(min-width:600px){.adm-stats{grid-template-columns:repeat(4,1fr)}}
+.adm-stat{background:#161b27;border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:16px;transition:border-color .2s}
+.adm-stat:hover{border-color:rgba(124,58,237,.3)}
+.adm-stat-icon{font-size:22px;margin-bottom:9px}
+.adm-stat-v{font-family:'Nunito',sans-serif;font-size:28px;font-weight:900;color:#f8fafc;line-height:1}
+.adm-stat-l{font-size:10px;color:#64748b;margin-top:4px;font-weight:500}
+.adm-stat-trend{font-size:10px;color:#10b981;font-weight:600;margin-top:3px}
+
+/* CARDS */
+.adm-card{background:#161b27;border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:18px;margin-bottom:14px}
+.adm-card-title{font-size:13px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.6px;margin-bottom:14px;display:flex;align-items:center;gap:7px}
+
+/* PRODUCT LIST */
+.adm-prod-list{display:flex;flex-direction:column;gap:8px}
+.adm-prow{background:#161b27;border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:13px;display:flex;align-items:center;gap:12px;transition:border-color .2s}
+.adm-prow:hover{border-color:rgba(124,58,237,.25)}
+.adm-prow.off{opacity:.38}
+.adm-pthumb{width:46px;height:46px;background:#0f1420;border-radius:10px;overflow:hidden;flex-shrink:0;border:1px solid rgba(255,255,255,.06)}
+.adm-pthumb img{width:100%;height:100%;object-fit:contain;padding:4px}
+.adm-pname{flex:1;min-width:0}
+.adm-pname strong{font-size:12px;font-weight:600;color:#e2e8f0;display:block;margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.adm-pname span{font-size:10px;color:#475569}
+.adm-prow-actions{display:flex;align-items:center;gap:6px}
+.adm-edit-btn{background:rgba(124,58,237,.12);border:1px solid rgba(124,58,237,.2);border-radius:7px;padding:5px 11px;color:#a78bfa;font-size:11px;font-weight:600;cursor:pointer;transition:all .15s;white-space:nowrap}
+.adm-edit-btn:hover{background:rgba(124,58,237,.22)}
+.adm-tog{background:none;border:1px solid rgba(255,255,255,.07);border-radius:7px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-size:15px;cursor:pointer;transition:all .15s}
+.adm-tog:hover{background:rgba(255,255,255,.06)}
+.adm-del{background:none;border:1px solid rgba(239,68,68,.15);border-radius:7px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer;transition:all .15s}
+.adm-del:hover{background:rgba(239,68,68,.1);border-color:rgba(239,68,68,.3)}
+
+/* FORM */
+.edit-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:1000;display:flex;align-items:center;justify-content:center;padding:16px;backdrop-filter:blur(6px)}
+.edit-overlay.hidden{display:none}
+.edit-box{background:#1e2535;border:1px solid rgba(124,58,237,.2);border-radius:18px;padding:24px;max-width:440px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 24px 60px rgba(0,0,0,.7)}
+.edit-box h3{font-family:'Nunito',sans-serif;font-size:17px;font-weight:800;color:#f8fafc;margin-bottom:16px}
+.edit-fl{display:block;font-size:9px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px;margin-top:12px}
+.edit-fi{width:100%;background:#0f1420;border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:9px 12px;color:#f8fafc;font-size:12px;font-family:inherit;outline:none;transition:border-color .2s}
+.edit-fi:focus{border-color:#7c3aed;box-shadow:0 0 0 3px rgba(124,58,237,.12)}
+.edit-fi::placeholder{color:#475569}
+textarea.edit-fi{resize:vertical;min-height:70px}
+.edit-btns{display:flex;gap:8px;margin-top:18px}
+.edit-save{flex:1;background:linear-gradient(135deg,#7c3aed,#6d28d9);border:none;border-radius:9px;padding:11px;color:#fff;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit}
+.edit-cancel{flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:9px;padding:11px;color:#94a3b8;font-size:12px;cursor:pointer;font-family:inherit}
+
+/* ORDERS */
+.adm-orders-list{display:flex;flex-direction:column;gap:8px}
+.adm-order-row{background:#161b27;border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:14px;display:flex;align-items:center;gap:12px}
+.adm-order-id{font-family:'Nunito',sans-serif;font-weight:800;color:#38bdf8;font-size:12px;flex-shrink:0;min-width:110px}
+.adm-order-prod{flex:1;font-size:11px;color:#64748b;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.adm-order-amt{font-family:'Nunito',sans-serif;font-weight:800;color:#f8fafc;font-size:13px;flex-shrink:0}
+.adm-order-status{font-size:9px;font-weight:700;padding:3px 9px;border-radius:20px;flex-shrink:0}
+.adm-order-status.pending{background:rgba(251,191,36,.1);color:#fbbf24;border:1px solid rgba(251,191,36,.2)}
+.adm-order-status.shipped{background:rgba(16,185,129,.1);color:#10b981;border:1px solid rgba(16,185,129,.2)}
+
+/* PROMO */
+.promo-preview{background:rgba(37,99,235,.08);border:1px solid rgba(37,99,235,.18);border-radius:9px;padding:10px 14px;font-size:12px;color:#60a5fa;margin-top:10px;font-weight:600}
+
+/* TOGGLE */
+.tgl-row{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.tgl-row:last-child{border:none}
+.tgl-row span{font-size:12px;color:#94a3b8}
+.tgl{width:42px;height:24px;background:#1e293b;border:1px solid rgba(255,255,255,.1);border-radius:20px;cursor:pointer;position:relative;transition:background .2s;flex-shrink:0}
+.tgl.on{background:#7c3aed;border-color:#7c3aed}
+.tgl::after{content:'';position:absolute;top:3px;left:3px;width:16px;height:16px;background:#fff;border-radius:50%;transition:left .2s;box-shadow:0 1px 3px rgba(0,0,0,.3)}
+.tgl.on::after{left:21px}
+
+/* QUICK ACTIONS */
+.adm-quick-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin-bottom:16px}
+@media(min-width:500px){.adm-quick-grid{grid-template-columns:repeat(4,1fr)}}
+.adm-quick-btn{background:#161b27;border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:14px 10px;text-align:center;cursor:pointer;transition:all .2s;font-family:inherit}
+.adm-quick-btn:hover{border-color:rgba(124,58,237,.35);background:rgba(124,58,237,.07)}
+.adm-quick-btn .qi{font-size:22px;margin-bottom:6px}
+.adm-quick-btn .ql{font-size:11px;font-weight:600;color:#94a3b8}
+.toggle{width:42px;height:24px;background:#1e293b;border:1px solid rgba(255,255,255,.1);border-radius:20px;cursor:pointer;position:relative;transition:background .2s}
+.toggle.on{background:var(--green)}
+.toggle::after{content:'';position:absolute;top:3px;left:3px;width:16px;height:16px;background:#fff;border-radius:50%;transition:left .2s}
+.toggle.on::after{left:21px}
+
+
+
+/* ── EDIT MODAL FIX ── */
+.adm-edit-overlay{position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:1000;display:flex;align-items:center;justify-content:center;padding:16px;backdrop-filter:blur(8px)}
+.adm-edit-overlay.hidden{display:none}
+.adm-edit-box{background:#1e2535;border:1px solid rgba(124,58,237,.25);border-radius:18px;padding:24px;max-width:440px;width:100%;max-height:88vh;overflow-y:auto;box-shadow:0 24px 60px rgba(0,0,0,.8)}
+.adm-edit-box h3{font-family:'Nunito',sans-serif;font-size:17px;font-weight:800;color:#f8fafc;margin-bottom:16px}
+.adm-fl{display:block;font-size:9px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px;margin-top:11px}
+.adm-input{width:100%;background:#0f1420;border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:9px 12px;color:#f8fafc;font-size:12px;font-family:inherit;outline:none;transition:border-color .2s}
+.adm-input:focus{border-color:#7c3aed;box-shadow:0 0 0 3px rgba(124,58,237,.12)}
+textarea.adm-input{resize:vertical;min-height:70px}
+.adm-edit-btns{display:flex;gap:8px;margin-top:18px}
+.adm-edit-save{flex:1;background:linear-gradient(135deg,#7c3aed,#6d28d9);border:none;border-radius:9px;padding:11px;color:#fff;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit}
+.adm-edit-cancel{flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:9px;padding:11px;color:#94a3b8;font-size:12px;cursor:pointer;font-family:inherit}
+
+/* ── OTP FIX ── */
+.otp-inp{width:44px;height:52px;background:#0f1420;border:2px solid rgba(255,255,255,.12);border-radius:10px;color:#f8fafc;font-size:22px;font-weight:800;text-align:center;font-family:'Nunito',sans-serif;outline:none;transition:border-color .2s;-webkit-appearance:none}
+.otp-inp:focus{border-color:#7c3aed;box-shadow:0 0 0 3px rgba(124,58,237,.2)}
+
+.admin-fab{position:fixed;bottom:80px;left:14px;z-index:500;width:48px;height:48px;background:#7c3aed;border:none;border-radius:12px;cursor:pointer;font-size:20px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(124,58,237,.6);color:#fff}
+@media(min-width:769px){.admin-fab{bottom:24px;left:24px}}
+
+/* ── MOBILE PERF ── */
+@media(max-width:480px){
+  .fo{font-size:15px;padding:8px 0}
+  .fo input{width:20px;height:20px}
+  .fgt{font-size:12px}
+  .pname{font-size:13px}
+  .pp{font-size:16px}
+  .pold{font-size:12px}
+}
+/* Touch targets minimum 44px */
+.addbtn,.cmd-btn,.cart-ic,.mni{min-height:44px;min-width:44px}
+.fo{min-height:44px}
+/* Smooth scroll */
+html{scroll-behavior:smooth}
+/* Better tap highlight */
+*{-webkit-tap-highlight-color:rgba(37,99,235,.15)}
+
+
+/* ── GLOBAL MOBILE FIX ── */
+*,*::before,*::after{box-sizing:border-box;}
+body{overflow-x:hidden;width:100%;max-width:100vw;}
+.sec{padding:20px 14px;width:100%;max-width:100%;overflow-x:hidden;}
+@media(max-width:480px){
+  .sec{padding:18px 12px;}
+  .sec-title{font-size:16px;}
+  .pcard{border-radius:10px;}
+  .pname{font-size:12px;}
+  .pp{font-size:15px;}
+  h1,h2,h3{word-break:break-word;overflow-wrap:break-word;}
+}
+
+</style>
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+  <script src="https://js.stripe.com/v3/"></script>
+</head>
+
+<body>
+<!-- CATEGORY DRAWER -->
+<div class="cat-drawer-overlay" id="catOverlay" onclick="closeCatMenu()"></div>
+<div class="cat-drawer" id="catDrawer">
+  <div class="cd-head">
+    <h3>🛍️ Nos catégories</h3>
+    <button class="cd-close" onclick="closeCatMenu()">✕</button>
+  </div>
+  <div class="cd-item" onclick="filterCat('Smartphones');closeCatMenu()"><div class="cd-icon">📱</div><div class="cd-info"><h4>Smartphones</h4><p>Redmi Note 15 Pro, Note 15</p></div><span class="cd-pill">2</span><span class="cd-arrow">›</span></div>
+  <div class="cd-item" onclick="filterCat('Tablettes');closeCatMenu()"><div class="cd-icon">📟</div><div class="cd-info"><h4>Tablettes</h4><p>Xiaomi Pad 7</p></div><span class="cd-pill">1</span><span class="cd-arrow">›</span></div>
+  <div class="cd-item" onclick="filterCat('Batteries');closeCatMenu()"><div class="cd-icon">🔋</div><div class="cd-info"><h4>Batteries & Power</h4><p>PowerBank, Chargeur, MagSafe</p></div><span class="cd-pill">3</span><span class="cd-arrow">›</span></div>
+  <div class="cd-item" onclick="filterCat('Maison');closeCatMenu()"><div class="cd-icon">🏠</div><div class="cd-info"><h4>Maison & Aspirateurs</h4><p>Robot, Balai, LED, Vapeur...</p></div><span class="cd-pill">6</span><span class="cd-arrow">›</span></div>
+  <div class="cd-item" onclick="filterCat('Robotique');closeCatMenu()"><div class="cd-icon">🤖</div><div class="cd-info"><h4>Robotique & IA</h4><p>Robot chien, Humanoïde</p></div><span class="cd-pill">2</span><span class="cd-arrow">›</span></div>
+  <div class="cd-item" onclick="filterCat('Câbles');closeCatMenu()"><div class="cd-icon">🔌</div><div class="cd-info"><h4>Câbles & Chargeurs</h4><p>USB-C 6A, Xiaomi 67W</p></div><span class="cd-pill">2</span><span class="cd-arrow">›</span></div>
+  <div class="cd-item" onclick="filterCat('Accessoires');closeCatMenu()"><div class="cd-icon">🕶️</div><div class="cd-info"><h4>Mode & Accessoires</h4><p>Lunettes rétro premium</p></div><span class="cd-pill">1</span><span class="cd-arrow">›</span></div>
+  <div class="cd-item" onclick="filterCat('');closeCatMenu()" style="background:rgba(26,120,255,.05);border-top:2px solid rgba(26,120,255,.2);"><div class="cd-icon" style="background:rgba(26,120,255,.2);">🛍️</div><div class="cd-info"><h4 style="color:var(--bl);">Tous les produits</h4><p>Voir la collection complète</p></div><span class="cd-pill" style="background:rgba(26,120,255,.3)">17</span><span class="cd-arrow">›</span></div>
+</div>
+<div class="skel" style="display:none" id="skel">
+  <div class="skel-logo">NexoraFlash ⚡</div>
+  <div class="skel-bar"><div class="sbi"></div></div>
+  <div class="skcs"><div class="skc"></div><div class="skc"></div><div class="skc"></div></div>
+</div>
+
+<!-- Newsletter popup -->
+
+
+<div class="promo" id="promoBanner">
+  🎉 Code <span class="code">NEXORA10</span> — -10% sur votre 1ère commande · Livraison gratuite dès 10€ 🚀
+  <button class="promo-x" onclick="this.parentElement.style.display='none'">✕</button>
+</div>
+
+<nav>
+  <div class="nav-in">
+    <div class="logo" onclick="showPage('home')">NexoraFlash<em>⚡</em></div>
+    <button class="cat-menu-btn" onclick="openCatMenu()"><span class="cm-ic">☰</span><span class="cat-menu-text">Catégories</span></button>
+    <ul class="nav-links">
+      <li><a onclick="showPage('home')" id="nav-home" class="active">Accueil</a></li>
+      <li><a onclick="showPage('bonsplans')" id="nav-bonsplans">🔥 Bons Plans</a></li>
+      <li><a onclick="showPage('shop')" id="nav-shop">Boutique</a></li>
+      <li><a onclick="showPage('cart')" id="nav-cart">Panier</a></li>
+      <li><a onclick="showPage('contact')" id="nav-contact">Contact</a></li>
+      <li><a onclick="showPage('cgv')" id="nav-cgv">CGV</a></li>
+    </ul>
+    <div class="nsw" id="searchWrap">
+      <div class="ns"><span style="font-size:13px">🔍</span><input type="text" placeholder="Rechercher..." id="searchInput" oninput="handleSearch(this.value)" onfocus="openSearch()" autocomplete="off"></div>
+      <div class="sdrop" id="searchDrop"></div>
+    </div>
+    <div class="cb2" onclick="showPage('cart')">🛒<div class="cn" id="cartCount">0</div></div>
+    <button class="btnp" onclick="showPage('shop')">Shop →</button>
+  </div>
+</nav>
+
+<div class="mnav" id="mobileNav">
+  <div class="mni active" id="mn-home" onclick="showPage('home')"><span class="mi">🏠</span>Accueil</div>
+  <div class="mni" id="mn-bonsplans" onclick="showPage('bonsplans')"><span class="mi">🔥</span>Bons Plans</div>
+  <div class="mni" id="mn-shop" onclick="showPage('shop')"><span class="mi">🛍️</span>Boutique</div>
+  <div class="mni" id="mn-cart" onclick="showPage('cart')"><span class="mi">🛒</span>Panier</div>
+  <div class="mni" id="mn-contact" onclick="showPage('contact')"><span class="mi">💬</span>Contact</div>
+</div>
+
+
+<!-- ACCUEIL -->
+<div class="page active" id="page-home">
+  <div class="hero">
+    <div class="hbg"></div><div class="ring"></div><div class="ring"></div><div class="ring"></div>
+    <div class="hc">
+      <div class="htag">📦 Livraison en 3 à 7 jours</div>
+      <h1>La tech & maison<br><span style="color:var(--bl)">premium au meilleur prix</span></h1>
+      <p>17 produits sélectionnés — smartphones, robots, maison connectée — livrés en 3 à 7 jours.</p>
+      <div class="hbtns">
+        <button class="btnp" style="padding:12px 26px;font-size:14px;border-radius:24px;" onclick="showPage('shop')">Voir les produits</button>
+        <button class="btns" onclick="showPage('bonsplans')">🔥 Bons Plans</button>
+      </div>
+    </div>
+  </div>
+  <div class="strip">
+    <div class="si"><span>🚀</span><span>Livraison 3–7j</span></div>
+    <div class="si"><span>🛡️</span><span>Paiement sécurisé</span></div>
+    <div class="si"><span>↩️</span><span>Retours 30j</span></div>
+    <div class="si"><span>💬</span><span>Support 7j/7</span></div>
+    <div class="si"><span>🚀</span><span>Livraison 3–7j</span></div>
+    <div class="si"><span>🎁</span><span>Code NEXORA10</span></div>
+  </div>
+  
+    
+      <div class="cat" onclick="showPage('shop')"><div class="cic">📟</div><div class="cnm">Tablettes</div><div class="cct">1 produit</div></div>
+      <div class="cat" onclick="showPage('shop')"><div class="cic">🔋</div><div class="cnm">Batteries</div><div class="cct">3 produits</div></div>
+      <div class="cat" onclick="showPage('shop')"><div class="cic">🏠</div><div class="cnm">Maison</div><div class="cct">6 produits</div></div>
+      <div class="cat" onclick="showPage('shop')"><div class="cic">🤖</div><div class="cnm">Robotique</div><div class="cct">2 produits</div></div>
+      <div class="cat" onclick="showPage('shop')"><div class="cic">✨</div><div class="cnm">Accessoires</div><div class="cct">3 produits</div></div>
+    </div>
+    <div class="sh"><div><div class="st">Nos produits vedettes ⭐</div><div class="ssb">17 articles · Prix optimisés</div></div><a class="sa" onclick="showPage('shop')">Tout voir →</a></div>
+    <div class="pgrid" id="homeGrid"></div>
+  </div>
+  
+  <!-- TESTIMONIALS -->
+  <div class="sec" style="padding-top:0;">
+    <div class="sh"><div><div class="st">Ce que disent nos clients ❤️</div><div class="ssb">Avis vérifiés · Acheteurs réels</div></div></div>
+    <div class="testi-grid">
+      <div class="tcard"><div class="tcard-top"><div class="tav">SL</div><div><div class="tnm">Sophie L.</div><div class="tloc">📍 Lyon</div></div><div class="tstars">★★★★★</div></div><div class="ttxt">"Livraison en 5 jours, produit parfaitement emballé. Le Redmi Note 15 Pro est incroyable pour ce prix !"</div><div class="tprod">✓ Xiaomi Redmi Note 15 Pro 5G</div></div>
+      <div class="tcard"><div class="tcard-top"><div class="tav">MR</div><div><div class="tnm">Marc R.</div><div class="tloc">📍 Paris</div></div><div class="tstars">★★★★★</div></div><div class="ttxt">"Le robot ILIFE est bluffant ! Navigation parfaite, auto-vide ultra pratique. NexoraFlash est devenu ma boutique tech préférée."</div><div class="tprod">✓ Aspirateur Robot ILIFE A30 PRO</div></div>
+      <div class="tcard"><div class="tcard-top"><div class="tav">CK</div><div><div class="tnm">Clara K.</div><div class="tloc">📍 Bordeaux</div></div><div class="tstars">★★★★★</div></div><div class="ttxt">"Code NEXORA10 appliqué facilement, -10% directement. Robot chien offert à mon fils pour Noël, il est fou de joie !"</div><div class="tprod">✓ Robot Chien AI RC Smart Dog</div></div>
+    </div>
+  </div>
+
+  <div style="background:linear-gradient(135deg,rgba(26,120,255,.08),rgba(0,212,255,.05));border:1px solid rgba(26,120,255,.15);border-radius:20px;padding:24px;margin:0 16px 32px;text-align:center;">
+    <div style="font-size:32px;margin-bottom:10px;">📧</div>
+    <h3 style="font-family:'Nunito',sans-serif;font-size:20px;font-weight:800;margin-bottom:6px;">Newsletter NexoraFlash</h3>
+    <p style="color:var(--muted);font-size:12px;margin-bottom:16px;">Offres exclusives, nouveautés et code -10% pour les abonnés</p>
+    <div style="display:flex;gap:8px;max-width:360px;margin:0 auto;">
+      <input class="nl-inp" type="email" id="footerEmail" placeholder="votre@email.fr" style="margin:0;">
+      <button class="btnp" style="border-radius:10px;padding:10px 16px;font-size:12px;white-space:nowrap;" onclick="subscribeFooter()">S'inscrire →</button>
+    </div>
+  </div>
+  <footer>
+    <div class="fg3">
+      <div class="fbl"><div class="logo">NexoraFlash<em style="-webkit-text-fill-color:#ffd700;font-size:12px">⚡</em></div><p>La tech et la maison de qualité au meilleur prix, livrés en 3 à 7 jours.</p><div class="fsoc"><div class="fsb">𝕏</div><div class="fsb">📘</div><div class="fsb">📸</div><div class="fsb">🎵</div></div></div>
+      <div class="fc4"><h4>Boutique</h4><ul><li><a onclick="showPage('shop')">Tous les produits</a></li><li><a onclick="showPage('bonsplans')">Bons Plans</a></li><li><a>Nouveautés</a></li></ul></div>
+      <div class="fc4"><h4>Aide</h4><ul><li><a onclick="showPage('contact')">Contact</a></li><li><a>Suivi commande</a></li><li><a>FAQ</a></li></ul></div>
+      <div class="fc4"><h4>Légal</h4><ul><li><a onclick="showPage('cgv')">CGV</a></li><li><a>Mentions légales</a></li><li><a>Confidentialité</a></li></ul></div>
+    </div>
+    <div class="fbot"><p>© 2025 NexoraFlash. Tous droits réservés.</p><div class="pays"><div class="pay">VISA</div><div class="pay">MC</div><div class="pay">PayPal</div><div class="pay">Apple Pay</div></div></div>
+  </footer>
+</div>
+
+<!-- BONS PLANS -->
+<div class="page" id="page-bonsplans">
+  <div class="phdr">
+    <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,112,67,.1);border:1px solid rgba(255,112,67,.3);border-radius:20px;padding:5px 14px;font-size:11px;color:var(--orange);font-weight:700;margin-bottom:12px;">⏱️ Offres limitées · Expire dans : <span id="bpHeaderTimer" style="font-family:'Nunito',sans-serif;font-weight:900;">--:--:--</span></div>
+    <h1>🔥 Bons Plans</h1>
+    <p id="bpCount">Chargement...</p>
+  </div>
+  <div class="sec" style="padding-top:8px;">
+    <div class="bp-grid" id="bpGrid"></div>
+  </div>
+  <footer style="margin-top:16px;">
+    <div class="fbot"><p>© 2025 NexoraFlash.</p><div class="pays"><div class="pay">VISA</div><div class="pay">MC</div><div class="pay">PayPal</div></div></div>
+  </footer>
+</div>
+
+<!-- BOUTIQUE -->
+<div class="page" id="page-shop">
+  <div class="phdr"><h1>Boutique Tech & Maison</h1><p>17 produits · Livraison 3–7 jours</p></div>
+  <div class="shop-l">
+    <div class="filters">
+      <div class="ft">Filtres</div>
+      <div class="fg"><div class="fgt">Catégorie</div>
+        <label class="fo"><input type="checkbox" checked> Smartphones</label>
+        <label class="fo"><input type="checkbox" checked> Tablettes</label>
+        <label class="fo"><input type="checkbox" checked> Batteries</label>
+        <label class="fo"><input type="checkbox" checked> Maison</label>
+        <label class="fo"><input type="checkbox" checked> Robotique</label>
+        <label class="fo"><input type="checkbox" checked> Accessoires</label>
+      </div>
+      <div class="fg"><div class="fgt">Note</div>
+        <label class="fo"><input type="radio" name="stars" checked> ★★★★☆ 4+</label>
+        <label class="fo"><input type="radio" name="stars"> ★★★☆☆ 3+</label>
+      </div>
+      <button class="btnp" style="width:100%;border-radius:8px;padding:8px;font-size:11px;" onclick="showToast('✅ Filtres appliqués')">Appliquer</button>
+    </div>
+    <div>
+      <div class="shop-top"><div class="rcnt">17 produits trouvés</div><select class="ssel"><option>Popularité</option><option>Prix ↑</option><option>Prix ↓</option><option>Mieux notés</option></select></div>
+      <div class="pgrid" id="shopGrid"></div>
+    </div>
+  </div>
+</div>
+
+<!-- PRODUIT DETAIL -->
+<div class="page" id="page-product">
+  <div class="detail">
+    <div class="gallery">
+      <div class="main-img" id="mImg"></div>
+      <div class="thumbs" id="tRow"></div>
+    </div>
+    <div class="dinfo">
+      <div class="pbadge" style="position:relative;top:auto;left:auto;display:inline-block;margin-bottom:9px;" id="dBadge">🔥</div>
+      <h1 id="dName"></h1>
+      <div class="starsb"><span class="sbig" id="dStars">★★★★★</span><span class="ssc" id="dScore">4.9</span><span style="color:var(--border)">·</span><span class="stot" id="dRevs"></span><span style="color:var(--border)">·</span><span class="sveri">✓ Vérifié</span></div>
+      <div class="d-chrono" id="dChrono" style="display:none;">
+        <span class="dc-label">⏱️ Offre expire dans</span>
+        <div><div class="dc-time">--:--:--</div></div>
+      </div>
+      <div class="dpr" id="dPr"></div>
+      <div class="saveb" id="dSave"></div>
+      <p class="ddesc" id="dDesc"></p>
+      <div class="schips" id="dSpecs"></div>
+      <div class="cmd-box" id="cmdBox" style="display:none;">
+        <h4>🤖 Article sur commande</h4>
+        <p>Cet article exceptionnel est disponible sur commande uniquement. Contactez-nous pour un devis personnalisé, délais et disponibilité.</p>
+        <button onclick="showPage('contact')">📧 Demander un devis</button>
+      </div>
+      <div id="dacts">
+        <div class="qty-row"><span class="ql">Quantité</span><div class="qctrl"><button class="qbtn" onclick="changeQty(-1)">−</button><span class="qn" id="qty">1</span><button class="qbtn" onclick="changeQty(1)">+</button></div><span class="sok">✓ En stock</span></div>
+        <div class="dacts"><button class="btn-cart" id="dAddBtn">🛒 Ajouter au panier</button><button class="btn-wl" onclick="showToast('♡ Ajouté aux favoris')">♡</button></div>
+      </div>
+      <div class="delvb">
+        <div class="delv"><span>🚀</span><span>Livraison <strong>3–7 jours ouvrés</strong></span></div>
+        <div class="delv"><span>↩️</span><span>Retours gratuits <strong>30 jours</strong></span></div>
+        <div class="delv"><span>🛡️</span><span>Garantie légale <strong>2 ans</strong></span></div>
+      </div>
+    </div>
+  </div>
+  <div class="revs">
+    <div class="rev-hdr"><div class="rev-title" id="rTitle">Avis clients</div><button class="btnp" style="padding:6px 12px;font-size:10px;" onclick="showToast('✍️ Bientôt disponible')">Laisser un avis</button></div>
+    <div class="rev-sum">
+      <div class="bsc" id="rScore">4.9</div>
+      <div><div class="sstars">★★★★★</div><div class="scnt" id="rCnt"></div></div>
+      <div class="sbars">
+        <div class="sbr"><span>5★</span><div class="sbt"><div class="sbf" style="width:82%"></div></div><span>82%</span></div>
+        <div class="sbr"><span>4★</span><div class="sbt"><div class="sbf" style="width:13%"></div></div><span>13%</span></div>
+        <div class="sbr"><span>3★</span><div class="sbt"><div class="sbf" style="width:4%"></div></div><span>4%</span></div>
+        <div class="sbr"><span>2★</span><div class="sbt"><div class="sbf" style="width:1%"></div></div><span>1%</span></div>
+        <div class="sbr"><span>1★</span><div class="sbt"><div class="sbf" style="width:0%"></div></div><span>0%</span></div>
+      </div>
+    </div>
+    <div class="rev-list" id="rList"></div>
+  </div>
+</div>
+
+<!-- PANIER -->
+<div class="page" id="page-cart">
+  <div class="phdr"><h1>Mon Panier</h1><p>Vérifiez avant de commander</p></div>
+  <div class="cwrap">
+    <div class="citems" id="cartItems"></div>
+    <div class="osum" id="cartSummary" style="display:none;">
+      <div class="osumtit">Résumé de commande</div>
+      <div class="orow"><span>Sous-total</span><span id="cartSubtotal">0€</span></div>
+      <div class="disc-row" id="discRow" style="display:none;"><span>🎁 Code NEXORA10 (-10%)</span><span id="cartDisc">-0€</span></div>
+      <div class="orow"><span>Livraison</span><span id="cartLiv">2,90€</span></div>
+      <div class="orow total"><span>Total TTC</span><span id="cartTotal">0€</span></div>
+      <div class="promo-row"><input type="text" id="promoInp" placeholder="Code promo (NEXORA10)"><button class="btnp" style="border-radius:8px;padding:8px 12px;font-size:11px;" onclick="applyPromo()">OK</button></div>
+      <button class="chkbtn" onclick="checkout()">Passer la commande →</button>
+      <div class="trust"><div class="tb">🔒 Sécurisé</div><div class="tb">↩️ 30j</div><div class="tb">🇪🇺 EU</div><div class="tb">💳 Multi-paiement</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- CONFIRMATION -->
+<div class="page" id="page-confirm">
+  <div class="conf">
+    <div class="conf-ic">✅</div>
+    <h1>Commande confirmée !</h1>
+    <p>Merci pour votre achat. Un email de confirmation avec le numéro de suivi vous sera envoyé sous 24h.</p>
+    <div class="oidbox"><div class="oidlbl">Numéro de commande</div><div class="oidval" id="orderNum">#NXF-2025-0000</div></div>
+    <div style="display:flex;gap:8px;max-width:400px;width:100%;margin-bottom:22px;justify-content:center;flex-wrap:wrap;">
+      <div style="text-align:center;"><div style="width:26px;height:26px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;margin:0 auto 5px;font-size:11px;">✓</div><p style="font-size:10px;color:var(--muted);">Reçue</p></div>
+      <div style="text-align:center;"><div style="width:26px;height:26px;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;margin:0 auto 5px;font-size:11px;">📦</div><p style="font-size:10px;color:var(--muted);">Préparation</p></div>
+      <div style="text-align:center;"><div style="width:26px;height:26px;border-radius:50%;background:var(--card2);border:2px solid var(--border);display:flex;align-items:center;justify-content:center;margin:0 auto 5px;font-size:11px;">🚚</div><p style="font-size:10px;color:var(--muted);">Livraison</p></div>
+      <div style="text-align:center;"><div style="width:26px;height:26px;border-radius:50%;background:var(--card2);border:2px solid var(--border);display:flex;align-items:center;justify-content:center;margin:0 auto 5px;font-size:11px;">🎉</div><p style="font-size:10px;color:var(--muted);">Livré !</p></div>
+    </div>
+    <button class="btnp" style="padding:12px 26px;font-size:13px;border-radius:20px;" onclick="showPage('shop')">Continuer mes achats</button>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="page" id="page-contact">
+  <div class="phdr"><h1>Contact</h1><p>On répond en moins de 24h</p></div>
+  <div class="cwrap2">
+    <div class="ci2">
+      <h2>Une question ? 👋</h2>
+      <p>Notre équipe est disponible pour toute question sur vos commandes, produits ou livraisons. Incluant les commandes spéciales (robot humanoïde).</p>
+      <div class="cmeth"><div class="cmic">📧</div><div class="cmi"><h4>Email</h4><p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="adcec2c3d9ccced9edc3c8d5c2dfcccbc1ccdec583cbdf">[email&#160;protected]</a></p></div></div>
+      <div class="cmeth"><div class="cmic">💬</div><div class="cmi"><h4>Chat en direct</h4><p>Lun–Ven, 9h–18h</p></div></div>
+      <div class="cmeth"><div class="cmic">🤖</div><div class="cmi"><h4>Commandes spéciales</h4><p>Robot humanoïde & devis pro</p></div></div>
+    </div>
+    <div class="cform">
+      <div class="cftit">Envoyer un message</div>
+      <div class="frow"><div class="fg2"><label class="fl">Prénom</label><input class="fi" type="text" placeholder="Jean"></div><div class="fg2"><label class="fl">Nom</label><input class="fi" type="text" placeholder="Dupont"></div></div>
+      <div class="fg2"><label class="fl">Email</label><input class="fi" type="email" placeholder="jean@exemple.fr"></div>
+      <div class="fg2"><label class="fl">Sujet</label><input class="fi" type="text" placeholder="Ma commande..."></div>
+      <div class="fg2"><label class="fl">Message</label><textarea class="fi" placeholder="Votre message..."></textarea></div>
+      <button class="btnp" style="width:100%;border-radius:9px;padding:12px;font-size:12px;" onclick="showToast('✅ Message envoyé ! Réponse sous 24h.')">Envoyer →</button>
+    </div>
+  </div>
+</div>
+
+<!-- CGV -->
+<div class="page" id="page-cgv">
+  <div class="cgvw">
+    <h1>CGV</h1><div class="cgvd">Mise à jour : 1er janvier 2025</div>
+    <div class="cgvhl">Ces CGV s'appliquent à toutes les commandes sur nexoraflash.fr.</div>
+    <div class="cgvs"><h2>1. Vendeur</h2><p>NexoraFlash, [Raison sociale], SIRET [XXXXX]. Email : <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c4a7abaab0a5a7b084aaa1bcabb6a5a2a8a5b7aceaa2b6">[email&#160;protected]</a></p></div>
+    <div class="cgvs"><h2>2. Produits</h2><p>Produits proposés dans la limite des stocks. Remboursement intégral si indisponible.</p></div>
+    <div class="cgvs"><h2>3. Prix & Paiement</h2><p>Prix en euros TTC. Visa, Mastercard, PayPal, Apple Pay acceptés.</p></div>
+    <div class="cgvs"><h2>4. Livraison</h2><p>Entrepôts européens · <strong>3–7 jours ouvrés</strong> · Gratuite dès 10€ (sinon 2,90€).</p></div>
+    <div class="cgvs"><h2>5. Rétractation</h2><p>14 jours à compter de la réception. Retours gratuits pour produit défectueux.</p></div>
+    <div class="cgvs"><h2>6. Garantie</h2><p>Garantie légale 2 ans. Contact : <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="04676b6a70656770446a617c6b7665626865776c2a6276">[email&#160;protected]</a></p></div>
+    <div class="cgvs"><h2>7. RGPD</h2><p>Données traitées conformément au RGPD. Jamais revendues.</p></div>
+    <div style="margin-top:20px;"><button class="btns" onclick="showPage('home')">← Accueil</button></div>
+  </div>
+</div>
+
+
+<!-- STICKY BUY MOBILE -->
+<div class="sticky-buy" id="stickyBuy">
+  <div><div class="sb-price" id="stickyPrice">--€</div><div class="sb-old" id="stickyOld">--€</div></div>
+  <button class="sb-btn" id="stickyBtn">🛒 Ajouter au panier</button>
+</div>
+<div class="toast" id="toast"></div>
+<button class="stbtn" id="stbtn" onclick="window.scrollTo(0,0)">↑</button>
+
+<!-- CHATBOT -->
+<button class="cb-btn" id="cbBtn" onclick="toggleChat()">💬</button>
+<div class="cb-win" id="cbWin">
+  <div class="cb-head"><div class="cb-av">⚡</div><div class="cb-hi"><h4>NexoraFlash Support</h4><p>Répond en quelques secondes</p></div><div class="cb-on"></div></div>
+  <div class="cb-msgs" id="cbMsgs"></div>
+  <div class="cb-quick" id="cbQuick"></div>
+  <div class="cb-ir"><input class="cb-inp" id="cbInp" type="text" placeholder="Posez votre question..." onkeydown="if(event.key==='Enter')cbSend()"><button class="cb-send" onclick="cbSend()">➤</button></div>
+</div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script src="products.js"></script>
+<script>function getImg(k){return(k&&k.startsWith("http"))?k:(typeof IMGS!=="undefined"&&IMGS[k]?IMGS[k]:"");}</script>
+
+<script>
+// ── Chrono header sync ──
+setInterval(()=>{
+  const rem = CHRONOEND - Date.now();
+  const t = formatTime(rem);
+  const bpT = document.getElementById('bpHeaderTimer');
+  if(bpT) bpT.textContent = t;
+}, 1000);
+
+// ── Newsletter footer ──
+function subscribeFooter(){
+  const em = document.getElementById('footerEmail').value;
+  if(!em || !em.includes('@')){ showToast('❌ Email invalide'); return; }
+  showToast('🎉 Inscrit ! Code NEXORA10 envoyé dans votre boîte mail');
+  document.getElementById('footerEmail').value = '';
+}
+
+// ── Category drawer ──
+function openCatMenu(){
+  document.getElementById('catDrawer').classList.add('open');
+  document.getElementById('catOverlay').classList.add('open');
+}
+function closeCatMenu(){
+  document.getElementById('catDrawer').classList.remove('open');
+  document.getElementById('catOverlay').classList.remove('open');
+}
+function filterCat(cat){
+  showPage('shop');
+  const filtered = cat ? P.filter(p => p.cat === cat && !p._disabled) : P.filter(p => !p._disabled);
+  document.getElementById('shopGrid').innerHTML = filtered.map(cardHTML).join('');
+  if(cat) showToast('🗂️ ' + cat);
+}
+
+// ── Social proof viewers ──
+function updateViewers(){
+  document.querySelectorAll('.sp-viewer').forEach(el => {
+    el.textContent = Math.floor(Math.random()*8+2) + ' pers. regardent';
+  });
+}
+setInterval(updateViewers, 5000);
+
+function addSocialProof(){
+  document.querySelectorAll('.pimg').forEach((el, i) => {
+    if(!el.querySelector('.sp-badge')){
+      const v = Math.floor(Math.random()*12+1);
+      const b = document.createElement('div');
+      b.className = 'sp-badge';
+      b.innerHTML = '<div class="sp-dot"></div><span class="sp-viewer">'+v+' pers. regardent</span>';
+      el.appendChild(b);
+    }
+    if(i%3===0 && !el.querySelector('.stock-badge')){
+      const s = Math.floor(Math.random()*8+1);
+      const sb = document.createElement('div');
+      sb.className = 'stock-badge';
+      sb.textContent = '⚡ Plus que ' + s + ' en stock';
+      el.appendChild(sb);
+    }
+  });
+}
+
+// ── Sticky buy (mobile) ──
+function showStickyBuy(p){
+  document.getElementById('stickyPrice').textContent = p.price + '€';
+  document.getElementById('stickyOld').textContent = p.fold + '€';
+  document.getElementById('stickyBuy').classList.add('visible');
+  document.getElementById('stickyBtn').onclick = function(){ addCart(p.id); showToast('🛒 Ajouté !'); };
+}
+function hideStickyBuy(){
+  const el = document.getElementById('stickyBuy');
+  if(el) el.classList.remove('visible');
+}
+</script>
+
+<!-- ═══════════ ADMIN FAB ═══════════ -->
+<button class="admin-fab" onclick="openAdminLogin()" title="Panel Admin">⚙️</button>
+
+<!-- ADMIN LOGIN -->
+<div class="adm-overlay hidden" id="admLogin">
+  <div class="adm-box">
+    <!-- Step 1: Email + Password -->
+    <div class="adm-step active" id="admStep1">
+      <h2>🔐 Admin NexoraFlash</h2>
+      <p>Accès réservé aux administrateurs</p>
+      <div class="adm-err" id="admErr1">Email ou mot de passe incorrect</div>
+      <input class="adm-fi" type="email" id="admEmail" placeholder="issa95biscuit@gmail.com">
+      <input class="adm-fi" type="password" id="admPass" placeholder="Mot de passe" onkeydown="if(event.key==='Enter')checkAdmLogin()">
+      <button class="adm-btn" onclick="checkAdmLogin()">Connexion →</button>
+      <button class="adm-cancel" onclick="closeAdminLogin()">Annuler</button>
+    </div>
+    <!-- Step 2: 2FA Code -->
+    <div class="adm-step" id="admStep2">
+      <h2>🔑 Vérification 2FA</h2>
+      <p>Entrez le code à 6 chiffres de votre application d'authentification</p>
+      <div class="otp-hint">💡 Code actuel (simulé) : <strong id="otpDisplay">------</strong></div>
+      <div class="otp-wrap">
+  <input class="otp-inp" id="otp0" maxlength="1" inputmode="numeric" oninput="otpNext(this,1)" onkeydown="otpKey(event,this,null,document.getElementById('otp1'))">
+  <input class="otp-inp" id="otp1" maxlength="1" inputmode="numeric" oninput="otpNext(this,2)" onkeydown="otpKey(event,this,document.getElementById('otp0'),document.getElementById('otp2'))">
+  <input class="otp-inp" id="otp2" maxlength="1" inputmode="numeric" oninput="otpNext(this,3)" onkeydown="otpKey(event,this,document.getElementById('otp1'),document.getElementById('otp3'))">
+  <input class="otp-inp" id="otp3" maxlength="1" inputmode="numeric" oninput="otpNext(this,4)" onkeydown="otpKey(event,this,document.getElementById('otp2'),document.getElementById('otp4'))">
+  <input class="otp-inp" id="otp4" maxlength="1" inputmode="numeric" oninput="otpNext(this,5)" onkeydown="otpKey(event,this,document.getElementById('otp3'),document.getElementById('otp5'))">
+  <input class="otp-inp" id="otp5" maxlength="1" inputmode="numeric" oninput="checkOTP()" onkeydown="otpKey(event,this,document.getElementById('otp4'),null)">
+</div>
+      <div class="adm-err" id="admErr2">Code incorrect</div>
+      <button class="adm-btn" onclick="checkOTP()">Vérifier →</button>
+      <button class="adm-cancel" onclick="backToStep1()">← Retour</button>
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div class="adm-panel hidden" id="admPanel">
+
+  <!-- TOPBAR -->
+  <div class="adm-topbar">
+    <div class="logo-adm">Nexora<span>Flash</span> <span style="font-size:13px">⚡</span></div>
+    <span class="adm-badge">● Admin connecté</span>
+    <div class="adm-topbar-right">
+      <span style="font-size:11px;color:#475569" id="admDate"></span>
+      <button class="adm-close" onclick="closeAdminPanel()">✕ Quitter</button>
+    </div>
+  </div>
+
+  <!-- LAYOUT -->
+  <div class="adm-layout">
+
+    <!-- SIDEBAR -->
+    <div class="adm-sidebar">
+      <div class="adm-sidebar-section">Principal</div>
+      <div class="adm-si active" onclick="admTab('dashboard')"><span class="asi">📊</span><span class="si-label">Dashboard</span></div>
+      <div class="adm-si" onclick="admTab('products')"><span class="asi">🛍️</span><span class="si-label">Produits</span></div>
+      <div class="adm-si" onclick="admTab('addprod')"><span class="asi">➕</span><span class="si-label">Ajouter produit</span></div>
+      <div class="adm-si" onclick="admTab('orders')"><span class="asi">📦</span><span class="si-label">Commandes</span></div>
+      <div class="adm-sidebar-section">Marketing</div>
+      <div class="adm-si" onclick="admTab('promo')"><span class="asi">🎁</span><span class="si-label">Promo & Livraison</span></div>
+      <div class="adm-si" onclick="admTab('reviews')"><span class="asi">⭐</span><span class="si-label">Avis clients</span></div>
+      <div class="adm-sidebar-section">Config</div>
+      <div class="adm-si" onclick="admTab('settings')"><span class="asi">🔧</span><span class="si-label">Paramètres</span></div>
+      <div class="adm-sidebar-bottom">
+        <div style="font-size:10px;color:#334155;text-align:center">NexoraFlash Admin v2.0</div>
+      </div>
+    </div>
+
+    <!-- CONTENU -->
+    <div class="adm-content">
+
+      <!-- ─── DASHBOARD ─── -->
+      <div class="adm-tab active" id="atab-dashboard">
+        <div class="adm-ph"><h2>📊 Dashboard</h2><p>Vue d'ensemble de votre boutique</p></div>
+
+        <div class="adm-stats">
+          <div class="adm-stat">
+            <div class="adm-stat-icon">🛍️</div>
+            <div class="adm-stat-v" id="sStat">17</div>
+            <div class="adm-stat-l">Produits actifs</div>
+            <div class="adm-stat-trend">↑ Boutique en ligne</div>
+          </div>
+          <div class="adm-stat">
+            <div class="adm-stat-icon">📦</div>
+            <div class="adm-stat-v" id="oStat">0</div>
+            <div class="adm-stat-l">Commandes session</div>
+            <div class="adm-stat-trend" id="oTrend">Aucune commande</div>
+          </div>
+          <div class="adm-stat">
+            <div class="adm-stat-icon">💶</div>
+            <div class="adm-stat-v" id="rStat">0€</div>
+            <div class="adm-stat-l">Chiffre d'affaires</div>
+            <div class="adm-stat-trend">Session en cours</div>
+          </div>
+          <div class="adm-stat">
+            <div class="adm-stat-icon">🎁</div>
+            <div class="adm-stat-v" id="pStat" style="font-size:16px;color:#a78bfa">NEXORA10</div>
+            <div class="adm-stat-l">Code promo actif</div>
+            <div class="adm-stat-trend" style="color:#a78bfa">-10% activé</div>
+          </div>
+        </div>
+
+        <div class="adm-quick-grid">
+          <div class="adm-quick-btn" onclick="admTab('addprod')"><div class="qi">➕</div><div class="ql">Nouveau produit</div></div>
+          <div class="adm-quick-btn" onclick="admTab('orders')"><div class="qi">📦</div><div class="ql">Commandes</div></div>
+          <div class="adm-quick-btn" onclick="admTab('promo')"><div class="qi">🎁</div><div class="ql">Modifier promo</div></div>
+          <div class="adm-quick-btn" onclick="exportJSON()"><div class="qi">💾</div><div class="ql">Exporter données</div></div>
+        </div>
+
+        <div class="adm-card">
+          <div class="adm-card-title">📈 Activité récente</div>
+          <div id="admActivity" style="font-size:12px;color:#475569;text-align:center;padding:16px">Aucune activité pour le moment</div>
+        </div>
+      </div>
+
+      <!-- ─── PRODUITS ─── -->
+      <div class="adm-tab" id="atab-products">
+        <div class="adm-ph">
+          <h2>🛍️ Gestion des produits</h2>
+          <p>Modifiez, activez ou supprimez vos produits</p>
+        </div>
+        <div class="adm-card" style="padding:12px;margin-bottom:12px">
+          <input class="edit-fi" type="text" placeholder="🔍 Rechercher un produit..." oninput="filterAdmProds(this.value)" style="margin:0">
+        </div>
+        <div class="adm-prod-list" id="admProdList"></div>
+      </div>
+
+      <!-- ─── AJOUTER PRODUIT ─── -->
+      <div class="adm-tab" id="atab-addprod">
+        <div class="adm-ph"><h2>➕ Ajouter un produit</h2><p>Remplissez les informations du nouveau produit</p></div>
+
+        <div style="display:grid;gap:14px">
+          <div class="adm-card">
+            <div class="adm-card-title">📝 Informations générales</div>
+            <label class="edit-fl">Nom du produit *</label>
+            <input class="edit-fi" id="npName" placeholder="Ex: Samsung Galaxy S24">
+            <label class="edit-fl">Sous-titre / specs courtes</label>
+            <input class="edit-fi" id="npShort" placeholder="Ex: 8Go/256Go · 50MP · 5G">
+            <label class="edit-fl">Description</label>
+            <textarea class="edit-fi" id="npDesc" placeholder="Description détaillée..."></textarea>
+            <label class="edit-fl">Catégorie</label>
+            <select class="edit-fi" id="npCat">
+              <option value="Smartphones">📱 Smartphones</option>
+              <option value="Tablettes">📟 Tablettes</option>
+              <option value="Batteries">🔋 Batteries & Power</option>
+              <option value="Câbles">🔌 Câbles & Chargeurs</option>
+              <option value="Maison">🏠 Maison & Aspirateurs</option>
+              <option value="Robotique">🤖 Robotique & IA</option>
+              <option value="Accessoires">✨ Accessoires</option>
+            </select>
+            <label class="edit-fl">Specs (séparées par des virgules)</label>
+            <input class="edit-fi" id="npSpecs" placeholder="Ex: 6.1 pouces, 50MP, 5000mAh">
+          </div>
+
+          <div class="adm-card">
+            <div class="adm-card-title">💶 Prix</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+              <div>
+                <label class="edit-fl">Prix de vente (€) *</label>
+                <input class="edit-fi" type="number" id="npPrice" step="0.01" placeholder="99.99">
+              </div>
+              <div>
+                <label class="edit-fl">Prix barré (€)</label>
+                <input class="edit-fi" type="number" id="npFold" step="0.01" placeholder="149.99">
+              </div>
+            </div>
+            <label class="edit-fl">Badge</label>
+            <select class="edit-fi" id="npBadge">
+              <option value="">Aucun</option>
+              <option value="new">🆕 Nouveau</option>
+              <option value="promo">🔥 Promo</option>
+              <option value="cmd">📋 Sur commande</option>
+            </select>
+            <label class="edit-fl">Texte du badge</label>
+            <input class="edit-fi" id="npBt" placeholder="Ex: Nouveau, -20%">
+          </div>
+
+          <div class="adm-card">
+            <div class="adm-card-title">📸 Image principale</div>
+            <input type="file" id="npImg" accept="image/*" onchange="previewNewProd(this)" style="display:none">
+            <div style="display:flex;align-items:center;gap:14px">
+              <div id="npPreview" onclick="document.getElementById('npImg').click()" style="width:90px;height:90px;background:#0f1420;border:2px dashed rgba(255,255,255,.1);border-radius:12px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:11px;color:#475569;text-align:center;overflow:hidden;flex-shrink:0">
+                <span>📸<br>Choisir</span>
+              </div>
+              <div>
+                <button class="adm-edit-btn" onclick="document.getElementById('npImg').click()" style="margin-bottom:8px;display:block">📁 Parcourir...</button>
+                <div style="font-size:10px;color:#475569">JPG, PNG ou WebP<br>Recommandé : 500×500px</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="adm-card">
+            <div class="adm-card-title">⚙️ Options</div>
+            <div class="tgl-row"><span>En promo (timer actif)</span><div class="tgl" id="npPromoTgl" onclick="this.classList.toggle('on')"></div></div>
+            <div class="tgl-row"><span>Sur commande uniquement</span><div class="tgl" id="npCmdTgl" onclick="this.classList.toggle('on')"></div></div>
+            <div class="tgl-row"><span>Visible dans la boutique</span><div class="tgl on" id="npVisibleTgl" onclick="this.classList.toggle('on')"></div></div>
+          </div>
+
+          <button class="adm-btn" onclick="addNewProduct()">✅ Publier le produit</button>
+          <div id="npMsg" style="display:none;padding:12px;border-radius:10px;font-size:12px;text-align:center"></div>
+        </div>
+      </div>
+
+      <!-- ─── COMMANDES ─── -->
+      <div class="adm-tab" id="atab-orders">
+        <div class="adm-ph"><h2>📦 Commandes</h2><p>Historique de la session en cours</p></div>
+        <div class="adm-card">
+          <div class="adm-card-title">Commandes reçues</div>
+          <div class="adm-orders-list" id="admOrders">
+            <div style="text-align:center;padding:28px;color:#475569;font-size:12px">
+              <div style="font-size:32px;margin-bottom:10px">📭</div>
+              Aucune commande pour le moment
+            </div>
+          </div>
+        </div>
+        <div class="adm-card" style="background:rgba(37,99,235,.05);border-color:rgba(37,99,235,.15)">
+          <div class="adm-card-title" style="color:#60a5fa">💡 Info</div>
+          <p style="font-size:11px;color:#475569;line-height:1.7">Pour un historique permanent des commandes et des paiements réels, connectez <strong style="color:#60a5fa">Stripe</strong> après la mise en ligne du site.</p>
+        </div>
+      </div>
+
+      <!-- ─── PROMO ─── -->
+      <div class="adm-tab" id="atab-promo">
+        <div class="adm-ph"><h2>🎁 Promo & Livraison</h2><p>Gérez vos codes et frais de livraison</p></div>
+        <div class="adm-card">
+          <div class="adm-card-title">Code promo</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+            <div><label class="edit-fl">Code</label><input class="edit-fi" id="aPromoCode" value="NEXORA10"></div>
+            <div><label class="edit-fl">Réduction (%)</label><input class="edit-fi" type="number" id="aPromoPct" value="10" min="1" max="90"></div>
+          </div>
+          <div class="tgl-row" style="margin-top:12px"><span>Code activé</span><div class="tgl on" id="promoTgl" onclick="this.classList.toggle('on')"></div></div>
+          <div class="tgl-row"><span>Usage unique par client</span><div class="tgl on" onclick="this.classList.toggle('on')"></div></div>
+          <div class="promo-preview" id="pprev">Aperçu : NEXORA10 — -10%</div>
+          <button class="adm-btn" style="margin-top:12px" onclick="savePromoSettings()">💾 Sauvegarder</button>
+        </div>
+        <div class="adm-card">
+          <div class="adm-card-title">🚚 Livraison</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+            <div><label class="edit-fl">Livraison gratuite dès (€)</label><input class="edit-fi" type="number" id="aFreeShip" value="10"></div>
+            <div><label class="edit-fl">Frais de port (€)</label><input class="edit-fi" type="number" id="aShipFee" value="2.90" step="0.1"></div>
+          </div>
+          <button class="adm-btn" style="margin-top:12px" onclick="saveShipSettings()">💾 Sauvegarder</button>
+        </div>
+      </div>
+
+      <!-- ─── AVIS ─── -->
+      <div class="adm-tab" id="atab-reviews">
+        <div class="adm-ph"><h2>⭐ Avis clients</h2><p>Gérez les témoignages de vos clients</p></div>
+        <div class="adm-card">
+          <div class="adm-card-title">Ajouter un avis</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+            <div><label class="edit-fl">Initiales</label><input class="edit-fi" id="rAv" placeholder="AB" maxlength="2"></div>
+            <div><label class="edit-fl">Nom</label><input class="edit-fi" id="rNm" placeholder="Jean D."></div>
+          </div>
+          <label class="edit-fl">Produit</label><select class="edit-fi" id="rProd"></select>
+          <label class="edit-fl">Note</label>
+          <select class="edit-fi" id="rStars">
+            <option>★★★★★</option><option>★★★★☆</option><option>★★★☆☆</option>
+          </select>
+          <label class="edit-fl">Commentaire</label>
+          <textarea class="edit-fi" id="rTxt" placeholder="Super produit..."></textarea>
+          <button class="adm-btn" style="margin-top:12px" onclick="addRev()">➕ Publier l'avis</button>
+        </div>
+        <div class="adm-card">
+          <div class="adm-card-title">Avis publiés</div>
+          <div id="admRevList"></div>
+        </div>
+      </div>
+
+      <!-- ─── PARAMÈTRES ─── -->
+      <div class="adm-tab" id="atab-settings">
+        <div class="adm-ph"><h2>🔧 Paramètres</h2><p>Configuration de votre espace admin</p></div>
+        <div class="adm-card">
+          <div class="adm-card-title">🔐 Sécurité</div>
+          <label class="edit-fl">Email administrateur</label>
+          <input class="edit-fi" type="email" id="sEmail" value="issa95biscuit@gmail.com">
+          <label class="edit-fl">Nouveau mot de passe</label>
+          <input class="edit-fi" type="password" id="sPass" placeholder="Laisser vide pour ne pas changer">
+          <label class="edit-fl">Code 2FA (6 chiffres)</label>
+          <input class="edit-fi" type="text" id="sOTP" value="123456" maxlength="6">
+          <button class="adm-btn" style="margin-top:12px" onclick="saveSettings()">💾 Sauvegarder</button>
+        </div>
+        <div class="adm-card">
+          <div class="adm-card-title">📢 Bannière promo</div>
+          <label class="edit-fl">Texte de la bannière</label>
+          <input class="edit-fi" id="sBanner" value="🎉 Code NEXORA10 — -10% sur votre 1ère commande · Livraison gratuite dès 10€ 🚀">
+          <div class="tgl-row" style="margin-top:10px"><span>Bannière visible</span><div class="tgl on" onclick="togBanner(this)"></div></div>
+          <button class="adm-btn" style="margin-top:12px" onclick="saveBanner()">💾 Appliquer</button>
+        </div>
+        <div class="adm-card" style="border-color:rgba(239,68,68,.2)">
+          <div class="adm-card-title" style="color:#f87171">⚠️ Zone dangereuse</div>
+          <p style="font-size:11px;color:#475569;margin-bottom:12px">Ces actions sont irréversibles.</p>
+          <button onclick="if(confirm('Réinitialiser toutes les données ?')){localStorage.clear();location.reload()}" style="background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.25);border-radius:8px;padding:9px 16px;color:#f87171;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit">🗑️ Réinitialiser les données</button>
+        </div>
+      </div>
+
+    </div><!-- /adm-content -->
+  </div><!-- /adm-layout -->
+</div><!-- /adm-panel -->
+
+<!-- PRODUCT EDIT MODAL -->
+<div class="adm-edit-overlay hidden" id="admEditOverlay">
+  <div class="adm-edit-box">
+    <h3>✏️ Modifier le produit</h3>
+    <input type="hidden" id="editProdId">
+    <label class="adm-fl">Nom du produit</label>
+    <input class="adm-input" id="editName">
+    <label class="adm-fl">Sous-titre / specs courtes</label>
+    <input class="adm-input" id="editShort">
+    <label class="adm-fl">Description</label>
+    <textarea class="adm-input" id="editDesc"></textarea>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+      <div><label class="adm-fl">Prix de vente (€)</label><input class="adm-input" type="number" id="editPrice" step="0.01"></div>
+      <div><label class="adm-fl">Prix barré (€)</label><input class="adm-input" type="number" id="editFold" step="0.01"></div>
+    </div>
+    <label class="adm-fl">Badge</label>
+    <select class="adm-input" id="editBadge">
+      <option value="">Aucun</option>
+      <option value="new">Nouveau</option>
+      <option value="promo">Promo</option>
+      <option value="cmd">Sur commande</option>
+    </select>
+    <label class="adm-fl">Texte du badge</label>
+    <input class="adm-input" id="editBt">
+    <div class="adm-edit-btns">
+      <button class="adm-edit-cancel" onclick="closeEditModal()">Annuler</button>
+      <button class="adm-edit-save" onclick="saveProductEdit()">💾 Sauvegarder</button>
+    </div>
+  </div>
+</div>
+
+
+<script>
+// ═══════════════ ADMIN SYSTEM ═══════════════
+let admOrders = [];
+let admSettings = {
+  email: 'issa95biscuit@gmail.com',
+  pass: 'nexoraflash2025',
+  otp: '123456'
+};
+
+// Load saved settings
+try {
+  const s = localStorage.getItem('nxf_adm_settings');
+  if(s) admSettings = {...admSettings, ...JSON.parse(s)};
+} catch(e){}
+
+function openAdminLogin(){
+  document.getElementById('admLogin').classList.remove('hidden');
+  document.getElementById('admStep1').classList.add('active');
+  document.getElementById('admStep2').classList.remove('active');
+  document.getElementById('admEmail').value='';
+  document.getElementById('admPass').value='';
+  document.getElementById('admErr1').classList.remove('show');
+}
+function closeAdminLogin(){ document.getElementById('admLogin').classList.add('hidden'); }
+function backToStep1(){
+  document.getElementById('admStep1').classList.add('active');
+  document.getElementById('admStep2').classList.remove('active');
+}
+
+function checkAdmLogin(){
+  const em = document.getElementById('admEmail').value.trim();
+  const pw = document.getElementById('admPass').value;
+  if(em === admSettings.email && pw === admSettings.pass){
+    document.getElementById('admErr1').classList.remove('show');
+    // Generate OTP display
+    document.getElementById('otpDisplay').textContent = admSettings.otp;
+    document.getElementById('admStep1').classList.remove('active');
+    document.getElementById('admStep2').classList.add('active');
+    document.getElementById('otp0').focus();
+    // Clear OTP fields
+    for(let i=0;i<6;i++) document.getElementById('otp'+i).value='';
+  } else {
+    document.getElementById('admErr1').classList.add('show');
+    document.getElementById('admPass').value='';
+  }
+}
+
+function otpNext(el, nextIdx){
+  if(el.value.length===1 && nextIdx<6){
+    document.getElementById('otp'+nextIdx).focus();
+  }
+}
+function otpKey(e, el, prev, next){
+  if(e.key==='Backspace' && !el.value && prev) prev.focus();
+  if(e.key==='ArrowLeft' && prev) prev.focus();
+  if(e.key==='ArrowRight' && next) next.focus();
+}
+
+function checkOTP(){
+  let code='';
+  for(let i=0;i<6;i++) code += document.getElementById('otp'+i).value;
+  if(code === admSettings.otp){
+    document.getElementById('admLogin').classList.add('hidden');
+    openAdminPanel();
+  } else {
+    document.getElementById('admErr2').classList.add('show');
+    for(let i=0;i<6;i++){document.getElementById('otp'+i).value='';} 
+    document.getElementById('otp0').focus();
+    setTimeout(()=>document.getElementById('admErr2').classList.remove('show'),2000);
+  }
+}
+
+function openAdminPanel(){
+  document.getElementById('admPanel').classList.remove('hidden');
+  admTab('dashboard');
+  renderAdmProds();
+  renderAdmStats();
+  renderAdmRevList();
+  // Populate review product select
+  const sel = document.getElementById('rProd');
+  sel.innerHTML = P.map(p=>`<option value="${p.id}">${p.name}</option>`).join('');
+}
+function closeAdminPanel(){ document.getElementById('admPanel').classList.add('hidden'); }
+
+function admTab(tab){
+  document.querySelectorAll('.adm-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.adm-si').forEach(s=>s.classList.remove('active'));
+  var el=document.getElementById('atab-'+tab);if(el)el.classList.add('active');
+  document.querySelector(`.adm-si[onclick*="${tab}"]`).classList.add('active');
+  if(tab==='orders') renderAdmOrders();
+}
+
+// ── STATS ──
+function renderAdmStats(){
+  const active = P.filter(p=>!p._disabled).length;
+  var sp=document.getElementById('sStat');if(sp)sp.textContent=active;
+  var so=document.getElementById('oStat');if(so)so.textContent=admOrders.length;
+  const rev = admOrders.reduce((s,o)=>s+o.total,0);
+  var sr=document.getElementById('rStat');if(sr)sr.textContent=rev.toFixed(2).replace('.',',')+'€';
+  var sc=document.getElementById('pStat');if(sc)sc.textContent=PROMO_CODE;
+}
+
+// ── PRODUCTS ──
+function renderAdmProds(filter){
+  filter = filter || '';
+  var list = document.getElementById('admProdList');
+  if(!list) return;
+  var filtered = P.filter(function(p){ return !filter||p.name.toLowerCase().includes(filter.toLowerCase()); });
+  if(filtered.length === 0){
+    list.innerHTML = '<div style="text-align:center;padding:28px;color:#475569;font-size:12px"><div style="font-size:32px;margin-bottom:10px">📭</div>Aucun produit trouvé</div>';
+    return;
+  }
+  list.innerHTML = filtered.map(function(p){
+    return '<div class="adm-prow '+(p._disabled?'off':'')+'">'
+      +'<div class="adm-pthumb"><img src="'+(IMGS[p.imgs[0]]||'')+'" alt=""></div>'
+      +'<div class="adm-pname"><strong>'+p.name+'</strong><span>#'+p.id+' · '+p.price+'€ · '+p.cat+'</span></div>'
+      +'<div class="adm-prow-actions">'
+      +'<button class="adm-edit-btn" onclick="openEditModal('+p.id+')">✏️ Éditer</button>'
+      +'<button class="adm-tog" onclick="toggleProd('+p.id+')" title="'+(p._disabled?'Activer':'Désactiver')+'">'+(p._disabled?'🔴':'🟢')+'</button>'
+      +'<button class="adm-del" onclick="deleteProd('+p.id+')" title="Supprimer">🗑️</button>'
+      +'</div>'
+      +'</div>';
+  }).join('');
+}
+function filterAdmProds(v){ renderAdmProds(v); }
+
+function toggleProd(id){
+  const p = P.find(x=>x.id===id);
+  if(!p) return;
+  p._disabled = !p._disabled;
+  renderAdmProds();
+  renderGrids();
+  showToast(p._disabled ? '🔴 Produit désactivé' : '🟢 Produit activé');
+}
+
+// ── EDIT MODAL ──
+function openEditModal(id){
+  const p = P.find(x=>x.id===id);
+  if(!p) return;
+  document.getElementById('editProdId').value = id;
+  document.getElementById('editName').value = p.name;
+  document.getElementById('editShort').value = p.short;
+  document.getElementById('editDesc').value = p.desc;
+  document.getElementById('editPrice').value = p.pn;
+  document.getElementById('editFold').value = p.fon;
+  document.getElementById('editBadge').value = p.badge||'';
+  document.getElementById('editBt').value = p.bt||'';
+  document.getElementById('admEditOverlay').classList.remove('hidden');
+}
+function closeEditModal(){ document.getElementById('admEditOverlay').classList.add('hidden'); }
+
+function saveProductEdit(){
+  const id = parseInt(document.getElementById('editProdId').value);
+  const p = P.find(x=>x.id===id);
+  if(!p) return;
+  p.name = document.getElementById('editName').value;
+  p.short = document.getElementById('editShort').value;
+  p.desc = document.getElementById('editDesc').value;
+  const newPrice = parseFloat(document.getElementById('editPrice').value);
+  const newFold = parseFloat(document.getElementById('editFold').value);
+  p.pn = newPrice;
+  p.fon = newFold;
+  p.price = newPrice.toFixed(2).replace('.',',');
+  p.fold = newFold.toFixed(2).replace('.',',');
+  p.badge = document.getElementById('editBadge').value;
+  p.bt = document.getElementById('editBt').value;
+  closeEditModal();
+  renderGrids();
+  renderAdmProds();
+  showToast('✅ Produit "'+p.name+'" mis à jour !');
+}
+
+// ── ORDERS ──
+function renderAdmOrders(){
+  const list = document.getElementById('admOrderList');
+  document.getElementById('orderCountLabel').textContent = `(${admOrders.length})`;
+  if(!admOrders.length){
+    list.innerHTML='<div style="text-align:center;padding:24px;color:var(--muted);font-size:12px;">Aucune commande pour le moment</div>';
+    return;
+  }
+  list.innerHTML = admOrders.map(o=>`
+    <div class="orow2">
+      <div class="oid">${o.id}</div>
+      <div class="oprod">${o.items.map(i=>i.name.substring(0,18)).join(', ')}</div>
+      <div class="oamt">${o.total.toFixed(2).replace('.',',')}€</div>
+      <span class="obadge ${o.status}">${o.status==='pending'?'En attente':o.status==='shipped'?'Expédié':'Livré'}</span>
+    </div>`).join('');
+  renderAdmStats();
+}
+
+// order logging integrated into checkout directly
+
+// ── PROMO SETTINGS ──
+document.addEventListener('DOMContentLoaded',()=>{
+  const pc = document.getElementById('aPromoCode');
+  const pp = document.getElementById('aPromoPct');
+  if(pc) pc.addEventListener('input', updatePromoPreview);
+  if(pp) pp.addEventListener('input', updatePromoPreview);
+});
+function updatePromoPreview(){
+  const code = document.getElementById('aPromoCode').value||'CODE';
+  const pct = document.getElementById('aPromoPct').value||'0';
+  document.getElementById('promoPreview').textContent = `Aperçu : ${code} — -${pct}% sur la commande`;
+}
+function savePromoSettings(){
+  const code = document.getElementById('aPromoCode').value.trim().toUpperCase();
+  const pct = parseInt(document.getElementById('aPromoPct').value);
+  if(!code||isNaN(pct)) return showToast('❌ Valeurs invalides');
+  window.PROMO_CODE = code;
+  window.PROMO_PCT = pct;
+  // Update banner
+  const banner = document.getElementById('promoBanner');
+  if(banner) banner.innerHTML = `🎉 Code <span class="code">${code}</span> — -${pct}% sur votre 1ère commande · Livraison gratuite dès ${document.getElementById('aFreeShip').value||10}€ 🚀 <button class="promo-x" onclick="this.parentElement.style.display='none'">✕</button>`;
+  showToast('✅ Code promo mis à jour : '+code+' -'+pct+'%');
+}
+function saveShipSettings(){
+  const threshold = parseFloat(document.getElementById('aFreeShip').value);
+  const fee = parseFloat(document.getElementById('aShipFee').value);
+  if(isNaN(threshold)||isNaN(fee)) return showToast('❌ Valeurs invalides');
+  window.FREE_SHIP_THRESHOLD = threshold;
+  window.SHIP_FEE = fee;
+  showToast('✅ Livraison mise à jour : gratuite dès '+threshold+'€');
+}
+
+// ── REVIEWS ──
+function addAdminReview(){
+  const av = document.getElementById('revAv').value.trim().toUpperCase();
+  const nm = document.getElementById('revNm').value.trim();
+  const prodId = parseInt(document.getElementById('rProd').value);
+  const st = document.getElementById('revStars').value;
+  const tx = document.getElementById('revTxt').value.trim();
+  if(!av||!nm||!tx) return showToast('❌ Remplissez tous les champs');
+  const p = P.find(x=>x.id===prodId);
+  if(!p) return;
+  const newRev = {av,nm,dt:new Date().toLocaleDateString('fr-FR'),st,tx};
+  p.revs.unshift(newRev);
+  document.getElementById('revAv').value='';
+  document.getElementById('revNm').value='';
+  document.getElementById('revTxt').value='';
+  renderAdmRevList();
+  showToast('✅ Avis ajouté pour '+p.name.substring(0,20)+'...');
+}
+
+function renderAdmRevList(){
+  const list = document.getElementById('admRevList');
+  const allRevs = P.flatMap(p=>p.revs.map(r=>({...r,prod:p.name,pid:p.id}))).slice(0,10);
+  list.innerHTML = allRevs.map((r,i)=>`
+    <div style="background:var(--card2);border:1px solid var(--border);border-radius:9px;padding:10px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:5px;">
+        <span style="font-size:11px;font-weight:700;">${r.nm} <span style="color:var(--muted);font-weight:400;">· ${r.prod.substring(0,22)}</span></span>
+        <div style="display:flex;align-items:center;gap:6px;">
+          <span style="color:#ffd700;font-size:10px;">${r.st}</span>
+          <button onclick="removeReview(${r.pid},${i})" style="background:rgba(231,76,60,.15);border:1px solid rgba(231,76,60,.3);border-radius:6px;padding:2px 7px;color:#e74c3c;font-size:9px;cursor:pointer;">🗑️</button>
+        </div>
+      </div>
+      <div style="font-size:11px;color:var(--muted);">${r.tx.substring(0,80)}${r.tx.length>80?'...':''}</div>
+    </div>`).join('');
+}
+
+function removeReview(pid, idx){
+  const p = P.find(x=>x.id===pid);
+  if(!p||!p.revs[idx]) return;
+  p.revs.splice(idx,1);
+  renderAdmRevList();
+  showToast('🗑️ Avis supprimé');
+}
+
+// ── SETTINGS ──
+function saveSettings(){
+  const em = document.getElementById('settEmail').value.trim();
+  const pw = document.getElementById('settPass').value;
+  const otp = document.getElementById('settOtp').value.trim();
+  if(!em) return showToast('❌ Email invalide');
+  if(!/^\d{6}$/.test(otp)) return showToast('❌ Code 2FA doit être 6 chiffres');
+  admSettings.email = em;
+  if(pw) admSettings.pass = pw;
+  admSettings.otp = otp;
+  localStorage.setItem('nxf_adm_settings', JSON.stringify(admSettings));
+  document.getElementById('settPass').value='';
+  showToast('✅ Paramètres admin sauvegardés');
+}
+
+function toggleBanner(el){
+  el.classList.toggle('on');
+  const banner = document.getElementById('promoBanner');
+  if(banner) banner.style.display = el.classList.contains('on') ? '' : 'none';
+}
+function saveBanner(){
+  const txt = document.getElementById('settBanner').value;
+  const banner = document.getElementById('promoBanner');
+  if(banner) banner.innerHTML = txt + ' <button class="promo-x" onclick="this.parentElement.style.display=\'none\'">✕</button>';
+  showToast('✅ Bannière mise à jour');
+}
+
+function exportData(){
+  const data = {
+    produits: P.map(p=>({id:p.id,nom:p.name,prix:p.price,actif:!p._disabled})),
+    commandes: admOrders,
+    exportDate: new Date().toISOString()
+  };
+  const blob = new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'nexoraflash-export-'+Date.now()+'.json';
+  a.click();
+  showToast('💾 Export téléchargé !');
+}
+
+// disabled products handled inside cardHTML
+</script>
+
+
+<script>
+// Accès admin : visible uniquement depuis l'IP autorisée
+var ADMIN_IP = '194.11.196.245';
+
+function checkAdminAccess(){
+  fetch('https://api.ipify.org?format=json')
+    .then(function(r){ return r.json(); })
+    .then(function(data){
+      if(data.ip === ADMIN_IP){
+        // IP autorisée : afficher le bouton admin
+        var fab = document.getElementById('admFab');
+        if(fab){
+          fab.style.cssText = 'display:flex;position:fixed;bottom:74px;left:13px;z-index:400;width:40px;height:40px;background:rgba(124,58,237,.85);border:none;border-radius:50%;cursor:pointer;font-size:17px;align-items:center;justify-content:center;box-shadow:0 3px 12px rgba(124,58,237,.4)';
+        }
+      }
+    })
+    .catch(function(){
+      // Si l'API est inaccessible, garder caché
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function(){
+  checkAdminAccess();
+  var d=document.getElementById('admDate');if(d){d.textContent=new Date().toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long'});}
+});
+
+// Garder aussi les codes secrets au cas où
+var _typed = '';
+document.addEventListener('keydown', function(e){
+  _typed += e.key.toUpperCase();
+  if(_typed.length > 5) _typed = _typed.slice(-5);
+  if(_typed === 'ADMIN'){
+    _typed = '';
+    openAdmLogin();
+  }
+});
+
+// 5 taps logo (backup mobile)
+var _tc = 0, _tt = null;
+document.addEventListener('DOMContentLoaded', function(){
+  var logo = document.getElementById('logoEl');
+  if(!logo) return;
+  logo.addEventListener('click', function(){
+    _tc++;
+    clearTimeout(_tt);
+    if(_tc >= 5){ _tc = 0; openAdmLogin(); }
+    else { _tt = setTimeout(function(){ _tc = 0; }, 1500); }
+  });
+});
+</script>
+
+
+<script>
+// ── AJOUT DE PRODUIT ADMIN ────────────────────────────────────────
+var npImgData = null;
+
+function previewNewProd(input){
+  if(!input.files || !input.files[0]) return;
+  var file = input.files[0];
+  var reader = new FileReader();
+  reader.onload = function(e){
+    npImgData = e.target.result;
+    var prev = document.getElementById('npPreview');
+    prev.innerHTML = '<img src="'+npImgData+'" style="width:100%;height:100%;object-fit:cover">';
+  };
+  reader.readAsDataURL(file);
+}
+
+function addNewProduct(){
+  var name = document.getElementById('npName').value.trim();
+  var short = document.getElementById('npShort').value.trim();
+  var desc = document.getElementById('npDesc').value.trim();
+  var cat = document.getElementById('npCat').value;
+  var price = parseFloat(document.getElementById('npPrice').value);
+  var fold = parseFloat(document.getElementById('npFold').value) || price * 1.3;
+  var badge = document.getElementById('npBadge').value;
+  var bt = document.getElementById('npBt').value.trim();
+  var specsRaw = document.getElementById('npSpecs').value.trim();
+  var isPromo = document.getElementById('npPromoTgl').classList.contains('on');
+  var isCmd = document.getElementById('npCmdTgl').classList.contains('on');
+  var visible = document.getElementById('npVisibleTgl').classList.contains('on');
+
+  var msg = document.getElementById('npMsg');
+
+  if(!name){ msg.style.display='block'; msg.style.background='rgba(239,68,68,.1)'; msg.style.color='#ef4444'; msg.textContent='❌ Le nom du produit est obligatoire'; return; }
+  if(isNaN(price) || price <= 0){ msg.style.display='block'; msg.style.background='rgba(239,68,68,.1)'; msg.style.color='#ef4444'; msg.textContent='❌ Prix invalide'; return; }
+
+  // Générer un nouvel ID
+  var newId = Math.max.apply(null, P.map(function(p){return p.id;})) + 1;
+
+  // Clé image
+  var imgKey = 'custom_' + newId;
+  if(npImgData){
+    IMGS[imgKey] = npImgData;
+  } else {
+    imgKey = 'n1'; // image par défaut
+  }
+
+  var specs = specsRaw ? specsRaw.split(',').map(function(s){return s.trim();}).filter(Boolean) : [];
+
+  var newProd = {
+    id: newId,
+    name: name,
+    short: short || '',
+    cat: cat,
+    price: price.toFixed(2).replace('.',','),
+    pn: price,
+    fold: fold.toFixed(2).replace('.',','),
+    fon: fold,
+    badge: badge,
+    bt: bt || badge,
+    stars: 5.0,
+    rev: 0,
+    isPromo: isPromo,
+    isCmd: isCmd,
+    _disabled: !visible,
+    imgs: [imgKey],
+    desc: desc || 'Produit de qualité premium.',
+    specs: specs,
+    revs: []
+  };
+
+  P.push(newProd);
+  renderGrids();
+  renderAdmProds();
+
+  // Reset formulaire
+  document.getElementById('npName').value = '';
+  document.getElementById('npShort').value = '';
+  document.getElementById('npDesc').value = '';
+  document.getElementById('npPrice').value = '';
+  document.getElementById('npFold').value = '';
+  document.getElementById('npBt').value = '';
+  document.getElementById('npSpecs').value = '';
+  document.getElementById('npBadge').value = '';
+  document.getElementById('npPreview').innerHTML = '<span>📸<br>Choisir<br>image</span>';
+  npImgData = null;
+
+  msg.style.display = 'block';
+  msg.style.background = 'rgba(16,185,129,.1)';
+  msg.style.color = '#10b981';
+  msg.textContent = '✅ Produit "' + name + '" ajouté avec succès ! ID #' + newId;
+
+  toast('✅ Produit ajouté : ' + name.substring(0,25));
+  setTimeout(function(){ msg.style.display='none'; }, 4000);
+}
+</script>
+
+
+<script>
+// ── SUPPRESSION PRODUIT ───────────────────────────────────────────
+function deleteProd(id){
+  var p = P.find(function(x){ return x.id === id; });
+  if(!p) return;
+  if(!confirm('Supprimer "' + p.name + '" ?')) return;
+  P = P.filter(function(x){ return x.id !== id; });
+  // Retirer du panier si présent
+  cart = cart.filter(function(x){ return x.id !== id; });
+  document.getElementById('cartN').textContent = cart.length;
+  renderGrids();
+  renderAdmProds();
+  renderAdmStats();
+  toast('🗑️ "' + p.name.substring(0,25) + '" supprimé');
+}
+</script>
+
+
+<script>
+// ── Fonctions admin manquantes ─────────────────────────────────────
+function togBanner(el){
+  var banner = document.getElementById('promoBanner');
+  if(banner) banner.style.display = el.classList.contains('on') ? 'block' : 'none';
+}
+
+function saveBanner(){
+  var txt = document.getElementById('sBanner');
+  var banner = document.getElementById('promoBanner');
+  if(txt && banner) banner.innerHTML = txt.value + ' <button class="pb-x" onclick="this.parentElement.style.display=\'none\'">✕</button>';
+  toast('✅ Bannière mise à jour');
+}
+
+function exportJSON(){
+  var data = {products: P, orders: admOrders, exported: new Date().toISOString()};
+  var blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'nexoraflash-export.json';
+  a.click();
+  toast('💾 Export téléchargé');
+}
+
+function addRev(){
+  var av = document.getElementById('rAv').value.trim();
+  var nm = document.getElementById('rNm').value.trim();
+  var prod = document.getElementById('rProd');
+  var stars = document.getElementById('rStars').value;
+  var txt = document.getElementById('rTxt').value.trim();
+  if(!av || !nm || !txt){ toast('❌ Remplissez tous les champs'); return; }
+  var prodId = prod ? parseInt(prod.value) : 1;
+  var p = P.find(function(x){ return x.id === prodId; });
+  if(p){
+    if(!p.revs) p.revs = [];
+    p.revs.unshift({av:av, nm:nm, dt:new Date().toLocaleDateString('fr-FR'), st:stars, tx:txt});
+    p.rev = (p.rev||0) + 1;
+  }
+  document.getElementById('rAv').value = '';
+  document.getElementById('rNm').value = '';
+  document.getElementById('rTxt').value = '';
+  renderAdmRevList();
+  toast('✅ Avis ajouté');
+}
+
+function renderAdmRevList(){
+  var list = document.getElementById('admRevList');
+  if(!list) return;
+  var allRevs = [];
+  P.forEach(function(p){ if(p.revs) p.revs.forEach(function(r){ allRevs.push({...r, pname:p.name}); }); });
+  if(allRevs.length === 0){
+    list.innerHTML = '<div style="text-align:center;padding:20px;color:#475569;font-size:12px">Aucun avis</div>';
+    return;
+  }
+  list.innerHTML = allRevs.slice(0,10).map(function(r){
+    return '<div style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,.05);display:flex;align-items:center;gap:10px">'
+      +'<div style="width:32px;height:32px;background:rgba(124,58,237,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0">'+r.av+'</div>'
+      +'<div style="flex:1;min-width:0"><div style="font-size:11px;font-weight:600;color:#e2e8f0">'+r.nm+'</div>'
+      +'<div style="font-size:10px;color:#475569">'+r.pname+'</div></div>'
+      +'<div style="font-size:10px;color:#fbbf24">'+r.st+'</div>'
+      +'</div>';
+  }).join('');
+}
+
+// Surcharge openAdminPanel pour compat
+function openAdminPanel(){
+  document.getElementById('admPanel').classList.remove('hidden');
+  admTab('dashboard');
+  renderAdmProds();
+  renderAdmStats();
+  renderAdmRevList();
+  var sel = document.getElementById('rProd');
+  if(sel) sel.innerHTML = P.map(function(p){ return '<option value="'+p.id+'">'+p.name+'</option>'; }).join('');
+  var d = document.getElementById('admDate');
+  if(d) d.textContent = new Date().toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long'});
+}
+</script>
+
+<script>
+
+let cart=[];
+let promoApplied=false;
+const PROMO_CODE='NEXORA10';
+const PROMO_PCT=10;
+
+function s5(n){return'★'.repeat(Math.round(n))+'☆'.repeat(5-Math.round(n));}
+
+// CHRONO tick
+setInterval(()=>{
+  const rem = CHRONOEND - Date.now();
+  const txt = formatTime(rem);
+  document.querySelectorAll('.ct').forEach(el=>el.textContent=txt);
+  document.querySelectorAll('.bp-chrono-t').forEach(el=>el.textContent=txt);
+  if(rem<=0) document.querySelectorAll('.chrono-badge,.d-chrono').forEach(el=>el.style.display='none');
+},1000);
+
+function cardHTML(p){
+  if(p._disabled) return '';
+  const promo = p.isPromo;
+  const chronoHTML = promo ? `<div class="chrono-badge">⏱️ <span class="ct">${formatTime(CHRONOEND-Date.now())}</span></div>` : '';
+  const mainImg = IMGS[p.imgs[0]]||'';
+  const addBtn = p.isCmd
+    ? `<button class="cmd-btn" onclick="event.stopPropagation();showPage('contact')">Devis →</button>`
+    : `<button class="addbtn" onclick="event.stopPropagation();addCart(${p.id})">+</button>`;
+  return `<div class="pcard" onclick="openProduct(${p.id})">
+    <div class="pimg">
+      <img src="${mainImg}" loading="lazy" decoding="async" alt="${p.name}" loading="lazy">
+      ${p.badge?`<div class="pbadge ${p.badge}">${p.bt}</div>`:''}
+      ${chronoHTML}
+    </div>
+    <div class="pinfo">
+      <div class="pname">${p.name}</div>
+      <div class="pspecs">${p.short}</div>
+      <div class="mstars"><span class="sy">${s5(p.stars)}</span><span class="sc">${p.stars} (${p.rev.toLocaleString('fr')})</span></div>
+      <div class="pftr">
+        <div><div class="pp">${p.price}€</div><div class="pold">${p.fold}€</div></div>
+        ${addBtn}
+      </div>
+    </div>
+  </div>`;
+}
+
+function bpCardHTML(p){
+  const save = Math.round((1 - p.pn/p.fon)*100);
+  return `<div class="bp-card" onclick="openProduct(${p.id})">
+    <div class="bp-top">
+      <img src="${IMGS[p.imgs[0]]}" alt="${p.name}" loading="lazy">
+      <div class="bp-save">-${save}%</div>
+    </div>
+    <div class="bp-info">
+      <div class="bp-name">${p.name}</div>
+      <div class="bp-prices"><span class="bp-new">${p.price}€</span><span class="bp-old">${p.fold}€</span></div>
+      <div class="bp-chrono">⏱️ Offre expire dans : <span class="bp-chrono-t">${formatTime(CHRONOEND-Date.now())}</span></div>
+      <button class="bp-addbtn" onclick="event.stopPropagation();addCart(${p.id})">🛒 Ajouter au panier</button>
+    </div>
+  </div>`;
+}
+
+function renderGrids(){
+  const promos = P.filter(p=>p.isPromo);
+  document.getElementById('homeGrid').innerHTML = P.slice(0,6).map(cardHTML).join('');
+  document.getElementById('shopGrid').innerHTML = P.map(cardHTML).join('');
+  document.getElementById('bpGrid').innerHTML = promos.map(bpCardHTML).join('');
+  setTimeout(addSocialProof,150);
+  document.getElementById('bpCount').textContent = promos.length + ' offres';
+}
+
+function openProduct(id){
+  try{sessionStorage.setItem('nxf_product',String(id));}catch(e){}
+  window.location.href='produit.html?id='+id;
+}
+
+function selThumb(el,k){
+  document.querySelectorAll('.thumb').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('mImg').innerHTML=`<img src="${IMGS[k]}" alt="">`;
+}
+
+function addCart(id,ev){
+  if(ev)ev.stopPropagation();
+  var p=P.find(x=>x.id===id);if(!p||p.isCmd)return;
+  var c=JSON.parse(localStorage.getItem('nxf_cart')||'[]');
+  var ex=c.find(x=>x.id===id);if(ex){ex.qty=(ex.qty||1)+1;}else{c.push({id:id,qty:1});}
+  localStorage.setItem('nxf_cart',JSON.stringify(c));
+  var t=c.reduce((s,x)=>s+(x.qty||1),0);
+  var el=document.getElementById('cartCount');if(el)el.textContent=t;
+  showToast('Ajouté au panier !');
+}
+
+function applyPromo(){
+  const inp=document.getElementById('promoInp');
+  const val=inp.value.trim().toUpperCase();
+  if(localStorage.getItem('nxf_promo_used')){
+    inp.classList.add('invalid');
+    showToast('❌ Code déjà utilisé sur ce compte');
+    return;
+  }
+  if(val===PROMO_CODE){
+    promoApplied=true;
+    inp.classList.add('valid');
+    inp.classList.remove('invalid');
+    showToast('🎉 Code NEXORA10 appliqué ! -10%');
+    renderCartSummary();
+  } else {
+    inp.classList.add('invalid');
+    inp.classList.remove('valid');
+    showToast('❌ Code invalide');
+  }
+}
+
+function renderCart(){
+  const ci=document.getElementById('cartItems');
+  if(!cart.length){
+    ci.innerHTML=`<div class="empty-c"><div class="empty-ic">🛒</div><h3>Panier vide</h3><p>Ajoutez des produits depuis la boutique</p><button class="btnp" onclick="showPage('shop')">Explorer →</button></div>`;
+    document.getElementById('cartSummary').style.display='none';
+    return;
+  }
+  document.getElementById('cartSummary').style.display='block';
+  let total=0;
+  ci.innerHTML=cart.map((p,i)=>{total+=p.pn;return`<div class="citem">
+    <div class="cimg"><img src="${IMGS[p.imgs[0]]}" alt="${p.name}"></div>
+    <div class="cinfo"><div class="cnm">${p.name}</div><div class="csb">${p.short}</div></div>
+    <div class="crgt"><div class="cpr">${p.price}€</div><button class="crm" onclick="rmCart(${i})">🗑️</button></div>
+  </div>`;}). join('');
+  renderCartSummary();
+}
+
+function renderCartSummary(){
+  let total=cart.reduce((s,p)=>s+p.pn,0);
+  const liv=total>=10?0:2.9;
+  let disc=0;
+  if(promoApplied){disc=total*PROMO_PCT/100;}
+  const tf=total-disc+liv;
+  document.getElementById('cartSubtotal').textContent=total.toFixed(2).replace('.',',')+'€';
+  document.getElementById('cartLiv').textContent=liv>=10?'Gratuite':'2,90€';
+  document.getElementById('cartLiv').style.color=total>=10?'var(--green)':'var(--white)';
+  const discRow=document.getElementById('discRow');
+  if(promoApplied){discRow.style.display='flex';document.getElementById('cartDisc').textContent='-'+disc.toFixed(2).replace('.',',')+'€';}
+  else discRow.style.display='none';
+  document.getElementById('cartTotal').textContent=tf.toFixed(2).replace('.',',')+'€';
+}
+
+function rmCart(id){
+  var c=JSON.parse(localStorage.getItem('nxf_cart')||'[]').filter(x=>x.id!==id);
+  localStorage.setItem('nxf_cart',JSON.stringify(c));
+  var t=c.reduce((s,x)=>s+(x.qty||1),0);
+  var el=document.getElementById('cartCount');if(el)el.textContent=t;
+  renderCart();
+}
+function changeQty(d){const e=document.getElementById('qty');let v=parseInt(e.textContent)+d;if(v<1)v=1;e.textContent=v;}
+
+function handleSearch(val){
+  const w=document.getElementById('searchWrap'),d=document.getElementById('searchDrop');
+  if(!val.trim()){closeSearch();return;}
+  w.classList.add('open');
+  const r=P.filter(p=>p.name.toLowerCase().includes(val.toLowerCase())||p.cat.toLowerCase().includes(val.toLowerCase())).slice(0,5);
+  d.innerHTML=r.length?r.map(p=>`<div class="sri" onclick="openProduct(${p.id})"><img src="${IMGS[p.imgs[0]]}" alt=""><span class="sri-nm">${p.name}</span><span class="sri-pr">${p.price}€</span></div>`).join(''):`<div class="no-res">Aucun résultat pour "${val}"</div>`;
+}
+function openSearch(){if(document.getElementById('searchInput').value)document.getElementById('searchWrap').classList.add('open');}
+function closeSearch(){document.getElementById('searchWrap').classList.remove('open');}
+document.addEventListener('click',e=>{if(!document.getElementById('searchWrap').contains(e.target))closeSearch();});
+
+function showPage(pg){
+  if(pg!=='product') hideStickyBuy();
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('active'));
+  document.querySelectorAll('.mni').forEach(a=>a.classList.remove('active'));
+  document.getElementById('page-'+pg).classList.add('active');
+  const n=document.getElementById('nav-'+pg);if(n)n.classList.add('active');
+  const mn=document.getElementById('mn-'+pg);if(mn)mn.classList.add('active');
+  window.scrollTo(0,0);
+  if(pg==='cart')renderCart();
+  closeSearch();
+}
+
+function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2600);}
+window.addEventListener('scroll',()=>{document.getElementById('stbtn').classList.toggle('vis',scrollY>300);});
+
+// Newsletter
+function closeNL(){document.getElementById('nlOverlay').classList.add('hidden');}
+function subscribeNL(){
+  const em=document.getElementById('nlEmail').value;
+  if(!em||!em.includes('@')){showToast('❌ Email invalide');return;}
+  closeNL();
+  showToast('🎉 Bienvenue ! Code NEXORA10 dans votre boîte mail');
+}
+setTimeout(()=>{
+  if(!sessionStorage.getItem('nl_shown')){
+    document.getElementById('nlOverlay').classList.remove('hidden');
+    sessionStorage.setItem('nl_shown','1');
+  }
+},4000);
+
+// CHATBOT
+const FAQ=[
+  {keys:["livraison","délai","combien","quand","recevoir","expédition"],q:"📦 Délais ?",a:"Délai <strong>3–7 jours ouvrés</strong>. Email de suivi envoyé dès expédition. 🚀"},
+  {keys:["gratuit","frais","port"],q:"🆓 Livraison gratuite ?",a:"<strong>Gratuite dès 10€</strong> d'achat, sinon 2,90€. 😊"},
+  {keys:["retour","remboursement","renvoyer","échange"],q:"↩️ Retours ?",a:"<strong>30 jours</strong> pour retourner. Retours gratuits si défectueux. Remboursement sous 5 jours. ✅"},
+  {keys:["paiement","carte","paypal","apple pay","sécurisé"],q:"💳 Paiement ?",a:"Visa, Mastercard, PayPal, Apple Pay. Paiements <strong>100% sécurisés</strong> 🔒"},
+  {keys:["promo","code","nexora10","réduction","remise"],q:"🎁 Code promo ?",a:"Code <strong style='color:#ffd700'>NEXORA10</strong> = <strong>-10%</strong> sur votre 1ère commande ! 🎉"},
+  {keys:["commande","suivi","tracking","où est"],q:"📍 Suivi commande ?",a:"Email de suivi envoyé dans les 24h après confirmation. 📧"},
+  {keys:["garantie","sav","problème","défectueux","panne"],q:"🛡️ Garantie ?",a:"<strong>2 ans</strong> de garantie légale. Email : contact@nexoraflash.fr 🙏"},
+  {keys:["robot","humanoïde","avatar","commande","devis"],q:"🤖 Robot humanoïde ?",a:"Article disponible sur commande. Contactez-nous pour un devis : <strong>contact@nexoraflash.fr</strong> 🤖"},
+];
+const QB=["📦 Livraison","↩️ Retours","💳 Paiement","🎁 Code promo","🛡️ Garantie"];
+let chatOpen=false,chatInit=false,typEl=null;
+function toggleChat(){
+  chatOpen=!chatOpen;
+  const w=document.getElementById('cbWin'),b=document.getElementById('cbBtn');
+  w.classList.toggle('open',chatOpen);b.classList.toggle('open',chatOpen);
+  b.textContent=chatOpen?'✕':'💬';
+  if(chatOpen&&!chatInit){initChat();chatInit=true;}
+  if(chatOpen)setTimeout(()=>document.getElementById('cbInp').focus(),300);
+}
+function initChat(){addBot("Bonjour ! 👋 Je suis l'assistant NexoraFlash. Comment puis-je vous aider ?",true);renderQB();}
+function renderQB(){document.getElementById('cbQuick').innerHTML=QB.map(l=>`<button class="cb-q" onclick="quickAsk('${l}')">${l}</button>`).join('');}
+function quickAsk(l){addUser(l);document.getElementById('cbQuick').innerHTML='';typing(()=>{addBot(findAns(l.toLowerCase()));setTimeout(renderQB,400);});}
+function cbSend(){const inp=document.getElementById('cbInp');const v=inp.value.trim();if(!v)return;addUser(v);inp.value='';document.getElementById('cbQuick').innerHTML='';typing(()=>{addBot(findAns(v.toLowerCase()));setTimeout(renderQB,400);});}
+function findAns(t){for(const f of FAQ)if(f.keys.some(k=>t.includes(k)))return f.a;return "Je ne suis pas sûr 😅<br>Contactez-nous : <strong>contact@nexoraflash.fr</strong>";}
+function addUser(t){const m=document.createElement('div');m.className='cb-msg user';m.textContent=t;document.getElementById('cbMsgs').appendChild(m);scrollCB();}
+function addBot(h,noT){const now=new Date().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'});const m=document.createElement('div');m.className='cb-msg bot';m.innerHTML=h+(noT?'':`<div class="cb-time">NexoraFlash · ${now}</div>`);document.getElementById('cbMsgs').appendChild(m);scrollCB();}
+function scrollCB(){const m=document.getElementById('cbMsgs');m.scrollTop=m.scrollHeight;}
+function typing(cb){const m=document.getElementById('cbMsgs');typEl=document.createElement('div');typEl.className='cb-msg bot';typEl.innerHTML='<div class="cb-typing"><span></span><span></span><span></span></div>';m.appendChild(typEl);scrollCB();setTimeout(()=>{if(typEl){typEl.remove();typEl=null;}cb();},700+Math.random()*300);}
+
+window.addEventListener('load',function(){
+  var sk=document.getElementById('skel');if(sk)sk.style.display='none';
+  var nl=document.getElementById('nlOverlay');if(nl)nl.style.display='none';
+  renderGrids();
+  updateCartCount();
+});
+
 </script>
 </body>
 </html>
