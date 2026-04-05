@@ -723,8 +723,20 @@ body{overflow-x:hidden;width:100%;max-width:100vw;}
 
 </style>
 
+<style>
+:root{--bg:#f5f6f8;--surface:#fff;--border:#e2e5ea;--accent:#1a56db;--text:#0f172a;--text2:#475569;--radius:14px;}
+body{background:var(--bg);font-family:'DM Sans',sans-serif;}
+.page.active{animation:fadeIn .3s ease;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+#page-product .dimg-wrap img{border-radius:12px;object-fit:contain!important;}
+.chip{background:#f1f5f9;border:1px solid #e2e8f0;color:#334155;border-radius:6px;padding:4px 10px;font-size:12px;font-weight:600;}
+.stickyBuy,.sticky-buy{background:rgba(255,255,255,.97)!important;backdrop-filter:blur(10px)!important;border-top:1px solid #e2e5ea!important;}
+</style>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
   <script src="https://js.stripe.com/v3/"></script>
-  <script src="https://www.paypal.com/sdk/js?client-id=YOUR_PAYPAL_CLIENT_ID&currency=EUR&locale=fr_FR&components=buttons" defer></script>
+  <script src="https://www.paypal.com/sdk/js?client-id=AaVE5T9pO9vDYB7T-nexoraflash&currency=EUR&locale=fr_FR&components=buttons&disable-funding=credit,card" defer></script>
+
 </head>
 
 <body>
@@ -760,7 +772,7 @@ body{overflow-x:hidden;width:100%;max-width:100vw;}
 
 <nav>
   <div class="nav-in">
-    <div class="logo" onclick="showPage('home')">NexoraFlash<em>⚡</em></div>
+    <div class="logo" onclick="window.location.href='index.html'" style="cursor:pointer" onclick="showPage('home')">NexoraFlash<em>⚡</em></div>
     <button class="cat-menu-btn" onclick="openCatMenu()"><span class="cm-ic">☰</span><span class="cat-menu-text">Catégories</span></button>
     <ul class="nav-links">
       <li><a onclick="showPage('home')" id="nav-home" class="active">Accueil</a></li>
@@ -839,27 +851,17 @@ body{overflow-x:hidden;width:100%;max-width:100vw;}
     <div class="rev-list" id="rList"></div>
   </div>
 </div>
-<!-- STICKY BUY MOBILE -->
-<div class="sticky-buy" id="stickyBuy">
-  <div><div class="sb-price" id="stickyPrice">--€</div><div class="sb-old" id="stickyOld">--€</div></div>
-  <button class="sb-btn" id="stickyBtn">🛒 Ajouter au panier</button>
-</div>
-<div class="toast" id="toast"></div>
-<button class="stbtn" id="stbtn" onclick="window.scrollTo(0,0)">↑</button>
-
-<!-- CHATBOT -->
-<button class="cb-btn" id="cbBtn" onclick="toggleChat()">💬</button>
-<div class="cb-win" id="cbWin">
-  <div class="cb-head"><div class="cb-av">⚡</div><div class="cb-hi"><h4>NexoraFlash Support</h4><p>Répond en quelques secondes</p></div><div class="cb-on"></div></div>
-  <div class="cb-msgs" id="cbMsgs"></div>
-  <div class="cb-quick" id="cbQuick"></div>
-  <div class="cb-ir"><input class="cb-inp" id="cbInp" type="text" placeholder="Posez votre question..." onkeydown="if(event.key==='Enter')cbSend()"><button class="cb-send" onclick="cbSend()">➤</button></div>
-</div>
-
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
 <script src="products.js"></script>
 <script>
-function getImg(k){return(k&&k.startsWith('http'))?k:(typeof IMGS!=='undefined'&&IMGS[k]?IMGS[k]:'');}
+
+function updateCartCount(){
+  var c=JSON.parse(localStorage.getItem('nxf_cart')||'[]');
+  var t=c.reduce(function(s,x){return s+(x.qty||1);},0);
+  var el=document.getElementById('cartCount');if(el)el.textContent=t;
+}
+
+function getImg(k){return(k&&(k.startsWith('http')||k.startsWith('data')))?k:(typeof IMGS!=='undefined'&&IMGS[k]?IMGS[k]:'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=400&q=80');}
 
 
 let cart=[];
@@ -930,12 +932,14 @@ function renderGrids(){
 }
 
 function openProduct(id){
-  var p=P.find(x=>x.id===id)||P[0];if(!p)return;
+  var p=P.find(function(x){return x.id===id;})||P[0];if(!p)return;
   window._curP=p;
   var e;
-  e=document.getElementById('mImg');if(e)e.innerHTML='<img src="'+getImg(p.imgs[0])+'" alt="'+p.name+'" style="width:100%;height:100%;object-fit:contain;">';
-  e=document.getElementById('tRow');if(e)e.innerHTML=p.imgs.map(function(k,i){return '<div class="thumb '+(i===0?'active':'')+'" onclick="selThumb(this,\''+k+'\')"><img src="'+getImg(k)+'" alt="" loading="lazy"></div>';}).join('');
-  e=document.getElementById('dBadge');if(e)e.textContent=p.badge?p.bt:'Top vente';
+  e=document.getElementById('mImg');
+  if(e)e.innerHTML='<img src="'+getImg(p.imgs[0])+'" alt="'+p.name+'" style="width:100%;height:100%;object-fit:contain;border-radius:12px;">';
+  e=document.getElementById('tRow');
+  if(e)e.innerHTML=p.imgs.map(function(k,i){return '<div class="thumb '+(i===0?'active':'')+'" onclick="selThumb(this,\''+k+'\')"><img src="'+getImg(k)+'" alt="" loading="lazy" style="width:100%;height:100%;object-fit:contain;"></div>';}).join('');
+  e=document.getElementById('dBadge');if(e)e.textContent=p.bt||'Top';
   e=document.getElementById('dName');if(e)e.textContent=p.name;
   e=document.getElementById('dStars');if(e)e.textContent=s5(p.stars);
   e=document.getElementById('dScore');if(e)e.textContent=p.stars;
@@ -949,16 +953,19 @@ function openProduct(id){
   var cmdBox=document.getElementById('cmdBox'),dacts=document.getElementById('dacts');
   if(p.isCmd){if(cmdBox)cmdBox.style.display='block';if(dacts)dacts.style.display='none';}
   else{if(cmdBox)cmdBox.style.display='none';if(dacts)dacts.style.display='flex';
-    var btn=document.getElementById('dAddBtn');if(btn)btn.onclick=function(){addCartProd(p.id);};}
+    var btn=document.getElementById('dAddBtn');
+    if(btn)btn.onclick=function(){addCartProd(p.id);};}
   e=document.getElementById('rScore');if(e)e.textContent=p.stars;
   e=document.getElementById('rCnt');if(e)e.textContent='Basé sur '+p.rev.toLocaleString('fr')+' avis';
   e=document.getElementById('rTitle');if(e)e.textContent='Avis ('+p.rev.toLocaleString('fr')+')';
-  e=document.getElementById('rList');if(e)e.innerHTML=(p.revs||[]).map(function(r){return '<div class="rcard"><div class="rtop"><div class="rav">'+r.av+'</div><div><div class="rnm">'+r.nm+'</div><div class="rdt">'+r.dt+'</div></div><div class="rstar">'+r.st+'</div></div><div class="rtxt">'+r.tx+'</div></div>';}).join('');
+  e=document.getElementById('rList');
+  if(e)e.innerHTML=(p.revs||[]).map(function(r){return '<div class="rcard"><div class="rtop"><div class="rav">'+r.av+'</div><div><div class="rnm">'+r.nm+'</div><div class="rdt">'+r.dt+'</div></div><div class="rstar">'+r.st+'</div></div><div class="rtxt">'+r.tx+'</div></div>';}).join('');
   document.title=p.name+' — NexoraFlash';
   var sp=document.getElementById('stickyPrice');if(sp)sp.textContent=p.price+'€';
   var so=document.getElementById('stickyOld');if(so)so.textContent=p.fold+'€';
   var sb=document.getElementById('stickyBuy');if(sb&&!p.isCmd)sb.classList.add('visible');
-  var sbtn=document.getElementById('stickyBtn');if(sbtn)sbtn.onclick=function(){addCartProd(p.id);showToast('Ajouté !');};
+  var sbtn=document.getElementById('stickyBtn');
+  if(sbtn)sbtn.onclick=function(){openCheckout();};
 }
 
 function selThumb(el,k){
@@ -968,11 +975,12 @@ function selThumb(el,k){
 }
 
 function addCartProd(id){
-  var p=P.find(x=>x.id===id);if(!p||p.isCmd)return;
+  var p=P.find(function(x){return x.id===id;});if(!p||p.isCmd)return;
   var c=JSON.parse(localStorage.getItem('nxf_cart')||'[]');
-  var ex=c.find(x=>x.id===id);if(ex){ex.qty=(ex.qty||1)+1;}else{c.push({id:id,qty:1});}
+  var ex=c.find(function(x){return x.id===id;});
+  if(ex){ex.qty=(ex.qty||1)+1;}else{c.push({id:id,qty:1});}
   localStorage.setItem('nxf_cart',JSON.stringify(c));
-  var t=c.reduce((s,x)=>s+(x.qty||1),0);
+  var t=c.reduce(function(s,x){return s+(x.qty||1);},0);
   var el=document.getElementById('cartCount');if(el)el.textContent=t;
   showToast('Ajouté au panier !');
 }
@@ -1043,7 +1051,7 @@ function checkout(){
   cart=[];promoApplied=false;
   document.getElementById('cartCount').textContent=0;
   if(typeof renderAdmStats!=='undefined')renderAdmStats();
-  openPay();
+  openCheckout();
 }
 function changeQty(d){const e=document.getElementById('qty');let v=parseInt(e.textContent)+d;if(v<1)v=1;e.textContent=v;}
 
@@ -1129,6 +1137,7 @@ window.addEventListener('load',function(){
   updateCartCount();
   window.scrollTo(0,0);
   document.documentElement.scrollTop=0;
+  document.body.scrollTop=0;
 });
 
 </script>
@@ -1753,102 +1762,174 @@ function openAdminPanel(){
 }
 </script>
 
-<!-- MODAL PAIEMENT -->
-<div id="payOverlay" onclick="closePay()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:600;"></div>
-<div id="payModal" style="display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:min(460px,95vw);max-height:90vh;overflow-y:auto;background:#fff;border-radius:16px;z-index:601;padding:24px;box-shadow:0 20px 60px rgba(0,0,0,.2);">
-  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;">
-    <h3 style="font-size:17px;font-weight:700;color:#111;">Paiement sécurisé</h3>
-    <button onclick="closePay()" style="width:32px;height:32px;border-radius:50%;background:#f3f4f6;border:none;font-size:18px;cursor:pointer;color:#555;">×</button>
+<!-- OVERLAY CHECKOUT -->
+<div id="coOverlay" onclick="closeCheckout()" style="display:none;position:fixed;inset:0;background:rgba(15,23,42,.6);z-index:600;backdrop-filter:blur(4px);"></div>
+<div id="coModal" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#fff;border-radius:24px 24px 0 0;z-index:601;padding:24px 20px 36px;max-height:92vh;overflow-y:auto;box-shadow:0 -8px 40px rgba(0,0,0,.2);">
+
+  <!-- Handle -->
+  <div style="width:40px;height:4px;background:#e2e8f0;border-radius:2px;margin:0 auto 20px;"></div>
+
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+    <div style="font-size:18px;font-weight:800;color:#0f172a;">Paiement sécurisé 🔒</div>
+    <button onclick="closeCheckout()" style="width:32px;height:32px;border-radius:50%;background:#f1f5f9;border:none;font-size:18px;cursor:pointer;color:#64748b;">×</button>
   </div>
-  <div id="paySummary" style="background:#f8fafc;border-radius:10px;padding:12px 14px;margin-bottom:16px;font-size:14px;color:#333;"></div>
+
+  <!-- Récap produit -->
+  <div id="coSummary" style="background:#f8fafc;border-radius:12px;padding:14px;margin-bottom:20px;border:1px solid #e2e8f0;"></div>
 
   <!-- PayPal -->
-  <div id="paypal-button-container" style="margin-bottom:16px;min-height:45px;"></div>
-
-  <div style="text-align:center;font-size:12px;color:#aaa;margin:12px 0;display:flex;align-items:center;gap:8px;"><div style="flex:1;height:1px;background:#e5e7eb;"></div>ou carte bancaire<div style="flex:1;height:1px;background:#e5e7eb;"></div></div>
-
-  <!-- Stripe -->
-  <input id="sName" type="text" placeholder="Nom complet" style="width:100%;height:42px;border:1.5px solid #e5e7eb;border-radius:8px;padding:0 12px;font-size:14px;margin-bottom:10px;box-sizing:border-box;font-family:inherit;color:#111;">
-  <input id="sEmail" type="email" placeholder="Email" style="width:100%;height:42px;border:1.5px solid #e5e7eb;border-radius:8px;padding:0 12px;font-size:14px;margin-bottom:10px;box-sizing:border-box;font-family:inherit;color:#111;">
-  <div id="stripe-card-el" style="border:1.5px solid #e5e7eb;border-radius:8px;padding:12px;margin-bottom:10px;background:#fff;min-height:42px;"></div>
-  <div id="stripe-err" style="color:#ef4444;font-size:12px;margin-bottom:10px;min-height:16px;"></div>
-  <button onclick="payStripe()" id="stripePayBtn" style="width:100%;padding:13px;background:#1a56db;color:#fff;border-radius:10px;font-size:15px;font-weight:700;border:none;cursor:pointer;margin-bottom:14px;">Payer par carte</button>
-
-  <!-- Crypto Solana -->
-  <div style="border:1.5px solid #e5e7eb;border-radius:10px;padding:14px;margin-bottom:14px;">
-    <div style="font-size:13px;font-weight:700;color:#333;margin-bottom:8px;">Crypto · USDC / USDT sur Solana</div>
-    <div style="font-size:12px;color:#666;margin-bottom:8px;">Envoyez le montant exact en USDC ou USDT (réseau Solana)</div>
-    <div id="cryptoAmount" style="font-size:16px;font-weight:700;color:#9945FF;margin-bottom:8px;"></div>
-    <div style="background:#f3f4f6;border-radius:8px;padding:8px 10px;font-size:11px;font-family:monospace;word-break:break-all;color:#333;margin-bottom:8px;" id="solanaAddr">VOTRE_ADRESSE_SOLANA_ICI</div>
-    <button onclick="copySolana()" style="width:100%;padding:9px;background:#9945FF;color:#fff;border-radius:8px;font-size:13px;font-weight:600;border:none;cursor:pointer;">Copier l'adresse Solana</button>
-    <div style="font-size:11px;color:#aaa;margin-top:8px;text-align:center;">Réseau : Solana · USDC ou USDT uniquement · Envoyez le montant exact</div>
+  <div style="margin-bottom:16px;">
+    <div style="font-size:12px;font-weight:600;color:#94a3b8;text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px;">Payer avec</div>
+    <div id="paypal-button-container"></div>
   </div>
 
-  <div style="text-align:center;font-size:11px;color:#aaa;">Sécurisé par <b style="color:#635bff">Stripe</b> · <b style="color:#003087">PayPal</b> · <b style="color:#9945FF">Solana</b></div>
+  <!-- Divider -->
+  <div style="display:flex;align-items:center;gap:10px;margin:16px 0;">
+    <div style="flex:1;height:1px;background:#e2e8f0;"></div>
+    <span style="font-size:12px;color:#94a3b8;font-weight:500;">ou carte bancaire</span>
+    <div style="flex:1;height:1px;background:#e2e8f0;"></div>
+  </div>
+
+  <!-- Stripe -->
+  <div style="margin-bottom:12px;">
+    <input id="coName" type="text" placeholder="Nom sur la carte" autocomplete="name"
+      style="width:100%;height:44px;border:1.5px solid #e2e8f0;border-radius:10px;padding:0 14px;font-size:14px;color:#0f172a;background:#fff;box-sizing:border-box;font-family:inherit;margin-bottom:10px;outline:none;"
+      onfocus="this.style.borderColor='#1a56db'" onblur="this.style.borderColor='#e2e8f0'">
+    <input id="coEmail" type="email" placeholder="Email de confirmation" autocomplete="email"
+      style="width:100%;height:44px;border:1.5px solid #e2e8f0;border-radius:10px;padding:0 14px;font-size:14px;color:#0f172a;background:#fff;box-sizing:border-box;font-family:inherit;margin-bottom:10px;outline:none;"
+      onfocus="this.style.borderColor='#1a56db'" onblur="this.style.borderColor='#e2e8f0'">
+    <div id="stripe-el" style="border:1.5px solid #e2e8f0;border-radius:10px;padding:13px 14px;background:#fff;margin-bottom:6px;min-height:44px;"></div>
+    <div id="stripe-err" style="color:#ef4444;font-size:12px;min-height:18px;margin-bottom:8px;"></div>
+  </div>
+
+  <button id="stripeBtn" onclick="payStripe()"
+    style="width:100%;padding:15px;background:#1a56db;color:#fff;border-radius:12px;font-size:16px;font-weight:700;border:none;cursor:pointer;letter-spacing:-.01em;margin-bottom:14px;transition:background .15s;"
+    onmouseover="this.style.background='#1447c0'" onmouseout="this.style.background='#1a56db'">
+    Payer par carte
+  </button>
+
+  <!-- Crypto Solana -->
+  <details style="border:1.5px solid #e2e8f0;border-radius:12px;padding:14px;margin-bottom:14px;cursor:pointer;">
+    <summary style="font-size:14px;font-weight:700;color:#0f172a;list-style:none;display:flex;align-items:center;gap:8px;">
+      <span style="font-size:20px;">⬡</span> Payer en crypto (USDC/USDT Solana)
+    </summary>
+    <div style="margin-top:14px;">
+      <div style="font-size:13px;color:#475569;margin-bottom:10px;">Envoyez exactement <strong id="cryptoAmt" style="color:#9945FF;"></strong> en USDC ou USDT sur le réseau Solana.</div>
+      <div style="background:#f8fafc;border-radius:8px;padding:10px 12px;font-size:11px;font-family:monospace;word-break:break-all;color:#334155;border:1px solid #e2e8f0;margin-bottom:10px;" id="solAddr">VOTRE_ADRESSE_SOLANA</div>
+      <button onclick="copySol()" style="width:100%;padding:10px;background:#9945FF;color:#fff;border-radius:8px;font-size:13px;font-weight:600;border:none;cursor:pointer;">Copier l'adresse Solana</button>
+      <div style="font-size:11px;color:#94a3b8;margin-top:8px;text-align:center;">Réseau Solana uniquement · Envoyez le montant exact</div>
+    </div>
+  </details>
+
+  <div style="text-align:center;font-size:11px;color:#94a3b8;">
+    Sécurisé par <b style="color:#635bff">Stripe</b> · <b style="color:#003087">PayPal</b> · <b style="color:#9945FF">Solana</b> · SSL 256-bit
+  </div>
 </div>
 
 <script>
-var _stripe=null,_card=null,_stripeInit=false;
-var SOLANA_ADDR='VOTRE_ADRESSE_SOLANA_ICI';
+var _s=null,_c=null,_sInit=false;
+var SOLANA='VOTRE_ADRESSE_SOLANA_ICI';
+var STRIPE_KEY='pk_test_51TAFg5PRll0Oj2Lr3A0ZqPKtHyOHmVtXmNTU7x4SUTPzba49i6IsmYOqG5SQGjpiYRzyjkoMiSPwmxIKMDE9vci0009ohoMjs9';
 
-function openPay(){
+function openCheckout(){
   var p=window._curP;if(!p)return;
-  document.getElementById('payOverlay').style.display='block';
-  document.getElementById('payModal').style.display='block';
-  var s=document.getElementById('paySummary');
-  if(s)s.innerHTML='<div style="display:flex;justify-content:space-between;align-items:center;"><span style="font-weight:600;">'+p.name.substring(0,35)+'...</span><span style="color:#1a56db;font-weight:700;font-size:16px;">'+p.price+'€</span></div>';
-  var ca=document.getElementById('cryptoAmount');
-  if(ca)ca.textContent=p.price+' USDC / USDT';
-  if(!_stripeInit&&typeof Stripe!='undefined'){
+  document.getElementById('coOverlay').style.display='block';
+  document.getElementById('coModal').style.display='block';
+  document.body.style.overflow='hidden';
+  // Récap
+  var s=document.getElementById('coSummary');
+  if(s)s.innerHTML='<div style="display:flex;align-items:center;gap:12px;"><img src="'+getImg(p.imgs[0])+'" style="width:56px;height:56px;border-radius:8px;object-fit:contain;background:#f1f5f9;"><div style="flex:1;"><div style="font-weight:700;font-size:14px;color:#0f172a;">'+p.name.substring(0,40)+'</div><div style="color:#94a3b8;font-size:12px;">Livraison 3-7 jours offerte</div></div><div style="font-size:20px;font-weight:800;color:#1a56db;">'+p.price+'€</div></div>';
+  var ca=document.getElementById('cryptoAmt');if(ca)ca.textContent=p.price+' USDC';
+  // Init Stripe
+  if(!_sInit&&typeof Stripe!='undefined'){
     try{
-      _stripe=Stripe('pk_test_VOTRE_CLE_STRIPE_TEST');
-      _card=_stripe.elements().create('card',{style:{base:{fontSize:'14px',color:'#111',fontFamily:'inherit'}}});
-      _card.mount('#stripe-card-el');
-      _card.on('change',function(e){var el=document.getElementById('stripe-err');if(el)el.textContent=e.error?e.error.message:'';});
-      _stripeInit=true;
-    }catch(e){console.log('Stripe:',e);}
+      _s=Stripe(STRIPE_KEY);
+      _c=_s.elements({locale:'fr'}).create('card',{
+        style:{base:{fontSize:'14px',color:'#0f172a',fontFamily:'DM Sans,sans-serif',
+          '::placeholder':{color:'#94a3b8'}},invalid:{color:'#ef4444'}}
+      });
+      _c.mount('#stripe-el');
+      _c.on('change',function(e){
+        var el=document.getElementById('stripe-err');
+        if(el)el.textContent=e.error?e.error.message:'';
+      });
+      _sInit=true;
+    }catch(e){console.log('Stripe init:',e);}
   }
+  // Init PayPal
   if(typeof paypal!='undefined'){
     var c=document.getElementById('paypal-button-container');
     if(c&&!c.hasChildNodes()){
       try{
         paypal.Buttons({
-          style:{layout:'vertical',color:'gold',shape:'rect',label:'paypal'},
-          createOrder:function(d,a){return a.order.create({purchase_units:[{amount:{value:String(p.pn),currency_code:'EUR'},description:p.name}]});},
-          onApprove:function(d,a){return a.order.capture().then(function(det){closePay();showToast('PayPal confirmé ! Merci '+det.payer.name.given_name);});},
-          onError:function(err){showToast('Erreur PayPal, réessayez.');}
+          style:{layout:'horizontal',color:'gold',shape:'rect',label:'paypal',height:44},
+          createOrder:function(d,a){
+            return a.order.create({purchase_units:[{
+              amount:{value:String(p.pn.toFixed(2)),currency_code:'EUR'},
+              description:p.name.substring(0,127)
+            }]});
+          },
+          onApprove:function(d,a){
+            return a.order.capture().then(function(det){
+              closeCheckout();
+              showToast('PayPal confirmé ! Merci '+det.payer.name.given_name+' !');
+            });
+          },
+          onError:function(e){showToast('Erreur PayPal, réessayez.');}
         }).render('#paypal-button-container');
       }catch(e){console.log('PayPal:',e);}
     }
   }
 }
 
-function closePay(){
-  document.getElementById('payOverlay').style.display='none';
-  document.getElementById('payModal').style.display='none';
+function closeCheckout(){
+  document.getElementById('coOverlay').style.display='none';
+  document.getElementById('coModal').style.display='none';
+  document.body.style.overflow='';
 }
 
 async function payStripe(){
-  if(!_stripe||!_card){showToast('Stripe non disponible');return;}
-  var name=document.getElementById('sName').value.trim();
-  var email=document.getElementById('sEmail').value.trim();
-  if(!name||!email){showToast('Remplissez nom et email');return;}
-  var btn=document.getElementById('stripePayBtn');
-  btn.textContent='Traitement...';btn.disabled=true;
-  var r=await _stripe.createPaymentMethod({type:'card',card:_card,billing_details:{name:name,email:email}});
-  if(r.error){
-    document.getElementById('stripe-err').textContent=r.error.message;
-    btn.textContent='Payer par carte';btn.disabled=false;
-  }else{
-    closePay();
-    showToast('Commande confirmée ! Email envoyé.');
+  if(!_s||!_c){showToast('Stripe non disponible');return;}
+  var name=document.getElementById('coName').value.trim();
+  var email=document.getElementById('coEmail').value.trim();
+  if(!name){showToast('Entrez votre nom');return;}
+  if(!email||!email.includes('@')){showToast('Email invalide');return;}
+  var btn=document.getElementById('stripeBtn');
+  btn.textContent='Traitement...';btn.disabled=true;btn.style.background='#94a3b8';
+  try{
+    var r=await _s.createPaymentMethod({type:'card',card:_c,billing_details:{name:name,email:email}});
+    if(r.error){
+      document.getElementById('stripe-err').textContent=r.error.message;
+      btn.textContent='Payer par carte';btn.disabled=false;btn.style.background='#1a56db';
+    }else{
+      // En production: envoyer r.paymentMethod.id à ton backend
+      closeCheckout();
+      showToast('Commande confirmée ! Email envoyé à '+email);
+    }
+  }catch(e){
+    btn.textContent='Payer par carte';btn.disabled=false;btn.style.background='#1a56db';
+    showToast('Erreur, réessayez.');
   }
 }
 
-function copySolana(){
-  try{navigator.clipboard.writeText(SOLANA_ADDR);}catch(e){}
+function copySol(){
+  try{navigator.clipboard.writeText(SOLANA);}catch(e){}
   showToast('Adresse Solana copiée !');
 }
 </script>
+
+
+<div class="sticky-buy" id="stickyBuy" style="position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,.97);border-top:1px solid #e2e8f0;padding:12px 20px;display:flex;align-items:center;gap:12px;z-index:290;transform:translateY(100%);transition:transform .3s;backdrop-filter:blur(10px);">
+  <div>
+    <div style="font-size:18px;font-weight:700;" id="stickyPrice">--€</div>
+    <div style="font-size:12px;color:#94a3b8;text-decoration:line-through;" id="stickyOld">--€</div>
+  </div>
+  <button id="stickyBtn" onclick="openCheckout()" style="flex:1;max-width:260px;padding:13px 20px;background:#1a56db;color:#fff;border-radius:12px;font-size:15px;font-weight:700;border:none;cursor:pointer;">
+    Ajouter au panier
+  </button>
+</div>
+<style>
+.sticky-buy.visible{transform:translateY(0)!important;}
+</style>
 </body>
 </html>
