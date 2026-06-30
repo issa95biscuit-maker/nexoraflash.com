@@ -1957,6 +1957,124 @@ function openAdminPanel(){
   var d = document.getElementById('admDate');
   if(d) d.textContent = new Date().toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long'});
 }
+
+// ── STRIPE CHECKOUT (PANIER) ──
+var STRIPE_KEY_IDX='pk_test_51TAFg5PRll0Oj2Lr3A0ZqPKtHyOHmVtXmNTU7x4SUTPzba49i6IsmYOqG5SQGjpiYRzyjkoMiSPwmxIKMDE9vci0009ohoMjs9';
+var _si=null,_ci=null,_siInit=false;
+
+function _getCartTotal(){
+  var total=cart.reduce(function(s,p){return s+p.pn;},0);
+  var liv=total>=10?0:2.9;
+  var disc=promoApplied?(total*(typeof PROMO_PCT!=='undefined'?PROMO_PCT:10)/100):0;
+  return parseFloat((total-disc+liv).toFixed(2));
+}
+
+function checkout(){
+  if(!cart.length){showToast('Votre panier est vide');return;}
+  var tot=_getCartTotal();
+  var s=document.getElementById('idxCoSummary');
+  if(s){
+    var lines=cart.slice(0,3).map(function(p){
+      return '<div style="display:flex;justify-content:space-between;font-size:13px;color:#334155;padding:2px 0;">'
+        +'<span>'+p.name.substring(0,32)+(p.name.length>32?'…':'')+'</span>'
+        +'<span style="font-weight:600;">'+p.price+'€</span></div>';
+    }).join('');
+    if(cart.length>3)lines+='<div style="font-size:11px;color:#94a3b8;margin-top:4px;">+' +(cart.length-3)+' autres articles</div>';
+    s.innerHTML=lines+'<div style="margin-top:10px;padding-top:10px;border-top:1px solid #e2e8f0;display:flex;justify-content:space-between;font-size:16px;font-weight:800;color:#1a56db;">'
+      +'<span>Total</span><span>'+tot.toFixed(2).replace('.',',')+' €</span></div>';
+  }
+  document.getElementById('idxCoOverlay').style.display='block';
+  document.getElementById('idxCoModal').style.display='block';
+  document.body.style.overflow='hidden';
+  if(!_siInit&&typeof Stripe!='undefined'){
+    try{
+      _si=Stripe(STRIPE_KEY_IDX);
+      _ci=_si.elements({locale:'fr'}).create('card',{
+        style:{base:{fontSize:'14px',color:'#0f172a',fontFamily:'DM Sans,system-ui,sans-serif','::placeholder':{color:'#94a3b8'}},invalid:{color:'#ef4444'}}
+      });
+      _ci.mount('#idxStripeEl');
+      _ci.on('change',function(e){
+        var el=document.getElementById('idxStripeErr');
+        if(el)el.textContent=e.error?e.error.message:'';
+      });
+      _siInit=true;
+    }catch(e){console.log('Stripe init:',e);}
+  }
+}
+
+function closeIdxCheckout(){
+  document.getElementById('idxCoOverlay').style.display='none';
+  document.getElementById('idxCoModal').style.display='none';
+  document.body.style.overflow='';
+}
+
+async function payStripeIdx(){
+  if(!_si||!_ci){showToast('Stripe non disponible');return;}
+  var name=document.getElementById('idxCoName').value.trim();
+  var email=document.getElementById('idxCoEmail').value.trim();
+  if(!name){showToast('Entrez votre nom');return;}
+  if(!email||!email.includes('@')){showToast('Email invalide');return;}
+  var btn=document.getElementById('idxStripeBtn');
+  btn.textContent='Traitement...';btn.disabled=true;btn.style.background='#94a3b8';
+  try{
+    var amount=_getCartTotal();
+    if(amount<=0){showToast('Panier vide');btn.textContent='Payer par carte';btn.disabled=false;btn.style.background='#1a56db';return;}
+    var piRes=await fetch('/api/create-payment-intent',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({amount:amount,currency:'eur',metadata:{items:String(cart.length),email:email}})
+    });
+    var piData=await piRes.json();
+    if(piData.error){
+      document.getElementById('idxStripeErr').textContent=piData.error;
+      btn.textContent='Payer par carte';btn.disabled=false;btn.style.background='#1a56db';
+      return;
+    }
+    var result=await _si.confirmCardPayment(piData.clientSecret,{
+      payment_method:{card:_ci,billing_details:{name:name,email:email}}
+    });
+    if(result.error){
+      document.getElementById('idxStripeErr').textContent=result.error.message;
+      btn.textContent='Payer par carte';btn.disabled=false;btn.style.background='#1a56db';
+    }else{
+      closeIdxCheckout();
+      cart=[];localStorage.setItem('nxf_cart','[]');
+      if(typeof renderCart==='function')renderCart();
+      if(typeof updateCartCount==='function')updateCartCount();
+      showToast('✅ Paiement confirmé ! Merci '+name+' !');
+    }
+  }catch(e){
+    btn.textContent='Payer par carte';btn.disabled=false;btn.style.background='#1a56db';
+    document.getElementById('idxStripeErr').textContent='Erreur réseau, réessayez.';
+  }
+}
 </script>
+<!-- OVERLAY CHECKOUT PANIER -->
+<div id="idxCoOverlay" onclick="closeIdxCheckout()" style="display:none;position:fixed;inset:0;background:rgba(15,23,42,.65);z-index:600;backdrop-filter:blur(4px);"></div>
+<div id="idxCoModal" style="display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:min(480px,96vw);max-height:90vh;overflow-y:auto;background:#fff;border-radius:20px;z-index:601;padding:24px;box-shadow:0 25px 60px rgba(0,0,0,.3);">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+    <h3 style="font-size:18px;font-weight:800;color:#0f172a;margin:0;">💳 Paiement sécurisé</h3>
+    <button onclick="closeIdxCheckout()" style="width:32px;height:32px;border-radius:50%;background:#f1f5f9;border:none;font-size:18px;cursor:pointer;color:#64748b;line-height:1;">×</button>
+  </div>
+  <div id="idxCoSummary" style="background:#f8fafc;border-radius:12px;padding:14px;margin-bottom:16px;"></div>
+  <div style="margin-bottom:12px;">
+    <input id="idxCoName" type="text" placeholder="Nom complet" autocomplete="name"
+      style="width:100%;padding:12px 14px;border:1.5px solid #e2e8f0;border-radius:10px;font-size:14px;margin-bottom:8px;box-sizing:border-box;outline:none;font-family:inherit;">
+    <input id="idxCoEmail" type="email" placeholder="Adresse email" autocomplete="email"
+      style="width:100%;padding:12px 14px;border:1.5px solid #e2e8f0;border-radius:10px;font-size:14px;box-sizing:border-box;outline:none;font-family:inherit;">
+  </div>
+  <div style="margin-bottom:14px;">
+    <div id="idxStripeEl" style="border:1.5px solid #e2e8f0;border-radius:10px;padding:13px 14px;background:#fff;min-height:44px;"></div>
+    <div id="idxStripeErr" style="color:#ef4444;font-size:12px;min-height:18px;margin-top:4px;"></div>
+  </div>
+  <button id="idxStripeBtn" onclick="payStripeIdx()"
+    style="width:100%;padding:15px;background:#1a56db;color:#fff;border-radius:12px;font-size:16px;font-weight:700;border:none;cursor:pointer;letter-spacing:.3px;">
+    Payer par carte
+  </button>
+  <div style="text-align:center;margin-top:12px;font-size:11px;color:#94a3b8;">
+    🔒 Paiement sécurisé via <b style="color:#635bff">Stripe</b> · SSL 256-bit
+  </div>
+</div>
+
 </body>
 </html>

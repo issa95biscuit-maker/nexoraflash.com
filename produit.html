@@ -1897,18 +1897,36 @@ async function payStripe(){
   var btn=document.getElementById('stripeBtn');
   btn.textContent='Traitement...';btn.disabled=true;btn.style.background='#94a3b8';
   try{
-    var r=await _s.createPaymentMethod({type:'card',card:_c,billing_details:{name:name,email:email}});
-    if(r.error){
-      document.getElementById('stripe-err').textContent=r.error.message;
+    var p=window._curP;
+    var qty=parseInt((document.getElementById('qty')||{}).textContent||'1')||1;
+    var amount=p?parseFloat((p.pn*qty).toFixed(2)):0;
+    if(amount<=0){document.getElementById('stripe-err').textContent='Montant invalide';btn.textContent='Payer par carte';btn.disabled=false;btn.style.background='#1a56db';return;}
+    // 1. Créer le PaymentIntent côté serveur
+    var piRes=await fetch('/api/create-payment-intent',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({amount:amount,currency:'eur',metadata:{productId:String(p.id),productName:p.name.substring(0,40),email:email}})
+    });
+    var piData=await piRes.json();
+    if(piData.error){
+      document.getElementById('stripe-err').textContent=piData.error;
+      btn.textContent='Payer par carte';btn.disabled=false;btn.style.background='#1a56db';
+      return;
+    }
+    // 2. Confirmer le paiement avec l'élément carte
+    var result=await _s.confirmCardPayment(piData.clientSecret,{
+      payment_method:{card:_c,billing_details:{name:name,email:email}}
+    });
+    if(result.error){
+      document.getElementById('stripe-err').textContent=result.error.message;
       btn.textContent='Payer par carte';btn.disabled=false;btn.style.background='#1a56db';
     }else{
-      // En production: envoyer r.paymentMethod.id à ton backend
       closeCheckout();
-      showToast('Commande confirmée ! Email envoyé à '+email);
+      showToast('✅ Paiement confirmé ! Merci '+name+' !');
     }
   }catch(e){
     btn.textContent='Payer par carte';btn.disabled=false;btn.style.background='#1a56db';
-    showToast('Erreur, réessayez.');
+    document.getElementById('stripe-err').textContent='Erreur réseau, réessayez.';
   }
 }
 
